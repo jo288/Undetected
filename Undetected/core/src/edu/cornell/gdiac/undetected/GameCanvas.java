@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.*;
 
+import com.badlogic.gdx.physics.box2d.*;
 import edu.cornell.gdiac.mesh.*;
 
 /**
@@ -44,7 +45,7 @@ public class GameCanvas {
 	private BitmapFont displayFont;
 	/** Glyph layout to compute the size */
 	private GlyphLayout displayLayout;
-		
+
 	// Constants only needed locally.
 	/** Reverse the y-direction so that it is consistent with SpriteBatch */
 	private static final Vector3 UP_REVERSED = new Vector3(0,-1,0);
@@ -84,13 +85,13 @@ public class GameCanvas {
 	private static final String SHADER_U_VIEWP = "unVP";
 	private static final String SHADER_U_WORLD = "unWorld";
 	private static final String SHADER_U_TINT = "unTint";
-	
-	// Instance attributes	
+
+	// Instance attributes
 	/** Value to cache window width (if we are currently full screen) */
 	int width;
 	/** Value to cache window height (if we are currently full screen) */
 	int height;
-	
+
 	/** Draws Sprite objects to the background and foreground (e.g. font) */
 	protected SpriteBatch spriteBatch;
 	/** Draws 3D objects in the intermediate levels between background and foreground */
@@ -121,7 +122,7 @@ public class GameCanvas {
 	private Matrix4 world;
 	/** Temporary Matrix (for Calculations) */
 	private Matrix4 tmpMat;
-	
+
 	/** Temporary Vectors */
 	private Vector3 tmp0;
 	private Vector3 tmp1;
@@ -129,7 +130,7 @@ public class GameCanvas {
 
 	/**
 	 * Creates a new GameCanvas determined by the application configuration.
-	 * 
+	 *
 	 * Width, height, and fullscreen are taken from the LWGJApplicationConfig
 	 * object used to start the application.  This constructor initializes all
 	 * of the necessary graphics objects.
@@ -139,9 +140,9 @@ public class GameCanvas {
 		active  = false;
 		shading = false;
 		eyepan  = 0.0f;
-		
-		
-		// Compile shader and assign texture slot		
+
+
+		// Compile shader and assign texture slot
 		program = new ShaderProgram(Gdx.files.internal(SHADER_VERTEX),Gdx.files.internal(SHADER_FRAGMT));
 		program.begin();
 		//gl20.glEnable(GL20.GL_BLEND);
@@ -154,14 +155,14 @@ public class GameCanvas {
 		spriteCam = new OrthographicCamera(getWidth(),getHeight());
 		spriteCam.setToOrtho(false);
 		spriteBatch.setProjectionMatrix(spriteCam.combined);
-		
+
 		// Initialize the perspective camera objects
 		eye = new Vector3();
 		target = new Vector3();
 		world = new Matrix4();
 		view  = new Matrix4();
 		proj  = new Matrix4();
-		
+
 		// Initialize the cache objects
 		tmpMat = new Matrix4();
 		tmp0  = new Vector3();
@@ -169,7 +170,7 @@ public class GameCanvas {
 		tmp2d = new Vector2();
 		model = null;
 	}
-	
+
 	/**
      * Eliminate any resources that should be garbage collected manually.
      */
@@ -178,13 +179,13 @@ public class GameCanvas {
 			Gdx.app.error("GameCanvas", "Cannot dispose while drawing active", new IllegalStateException());
 			return;
 		}
-		
+
 		// Dispose what requires a manual deletion.
 		spriteBatch.dispose();
     	spriteBatch = null;
     	program.dispose();
     	program = null;
-    	
+
     	// Everything else is just garbage collected.
     }
 
@@ -198,13 +199,13 @@ public class GameCanvas {
 	public int getWidth() {
 		return Gdx.graphics.getWidth();
 	}
-	
+
 	/**
 	 * Changes the width of this canvas
 	 *
 	 * This method raises an IllegalStateException if called while drawing is
 	 * active (e.g. in-between a begin-end pair).
-	 * 
+	 *
 	 * This method has no effect if the resolution is full screen.  In that case, the
 	 * resolution was fixed at application startup.  However, the value is cached, should
 	 * we later switch to windowed mode.
@@ -222,7 +223,7 @@ public class GameCanvas {
 		}
 		resize();
 	}
-	
+
 	/**
 	 * Returns the height of this canvas
 	 *
@@ -233,7 +234,7 @@ public class GameCanvas {
 	public int getHeight() {
 		return Gdx.graphics.getHeight();
 	}
-	
+
 	/**
 	 * Changes the height of this canvas
 	 *
@@ -253,11 +254,11 @@ public class GameCanvas {
 		}
 		this.height = height;
 		if (!isFullscreen()) {
-			Gdx.graphics.setWindowedMode(getWidth(), height);	
+			Gdx.graphics.setWindowedMode(getWidth(), height);
 		}
 		resize();
 	}
-	
+
 	/**
 	 * Returns the dimensions of this canvas
 	 *
@@ -266,7 +267,7 @@ public class GameCanvas {
 	public Vector2 getSize() {
 		return new Vector2(width,height);
 	}
-	
+
 	/**
 	 * Changes the width and height of this canvas
 	 *
@@ -292,16 +293,16 @@ public class GameCanvas {
 		}
 		resize();
 	}
-	
+
 	/**
 	 * Returns whether this canvas is currently fullscreen.
 	 *
 	 * @return whether this canvas is currently fullscreen.
-	 */	 
+	 */
 	public boolean isFullscreen() {
-		return Gdx.graphics.isFullscreen(); 
+		return Gdx.graphics.isFullscreen();
 	}
-	
+
 	/**
 	 * Sets whether or not this canvas should change to fullscreen.
 	 *
@@ -313,7 +314,7 @@ public class GameCanvas {
 	 * active (e.g. in-between a begin-end pair).
 	 *
 	 * @param fullscreen Whether this canvas should change to fullscreen.
-	 */	 
+	 */
 	public void setFullscreen(boolean value) {
 		if (active) {
 			Gdx.app.error("GameCanvas", "Cannot alter property while drawing active", new IllegalStateException());
@@ -338,7 +339,7 @@ public class GameCanvas {
 	public float getEyePan() {
 		return eyepan;
 	}
-	
+
 	/**
 	 * Returns the font used to display messages.
 	 *
@@ -347,7 +348,7 @@ public class GameCanvas {
 	public BitmapFont getFont() {
 		return displayFont;
 	}
-	
+
 	/**
 	 * Sets the font used to display messages.
 	 *
@@ -357,7 +358,7 @@ public class GameCanvas {
 		displayFont = font;
 		displayLayout = (font != null ? new GlyphLayout() : null);
 	}
-	
+
 	/**
 	 * Returns the background texture for this canvas.
 	 *
@@ -368,7 +369,7 @@ public class GameCanvas {
 	public Texture getBackground() {
 		return background;
 	}
-	
+
 	/**
 	 * Sets the background texture for this canvas.
 	 *
@@ -392,7 +393,7 @@ public class GameCanvas {
 	public void setEyePan(float value) {
 		eyepan = value;
 	}
-	
+
 	/**
 	 * Resets the SpriteBatch camera when this canvas is resized.
 	 *
@@ -404,7 +405,7 @@ public class GameCanvas {
 		spriteCam.setToOrtho(false,getWidth(),getHeight());
 		spriteBatch.setProjectionMatrix(spriteCam.combined);
 	}
-	
+
 	/**
 	 * Begins a drawing pass with no set camera.
 	 *
@@ -415,7 +416,7 @@ public class GameCanvas {
 		// We are drawing
 		active = true;
 		shading = false;
-		
+
 		// Clear the screen and depth buffer
 		setDepthState(DepthState.DEFAULT);
 		gl20.glClearColor(0, 0, 0, 0);
@@ -426,7 +427,7 @@ public class GameCanvas {
 		drawBackground();
 
 	}
-	
+
 	/**
 	 * Begins a drawing pass with the camera focused at postion (x,y)
 	 *
@@ -440,7 +441,7 @@ public class GameCanvas {
 	public void begin(float x, float y) {
 		// We are drawing
 		active = true;
-		
+
 		// Clear the screen and depth buffer
 		setDepthState(DepthState.DEFAULT);
 		gl20.glClearColor(0, 0, 0, 0);
@@ -463,7 +464,7 @@ public class GameCanvas {
 			target.set(x, y, 0);
 			eye.set(target).add(0, NEAR_DIST, -EYE_DIST);
 		}
-		
+
 		// Position the camera
 		view.setToLookAt(eye,target,UP_REVERSED);
 		setToPerspectiveFOV(proj, FOV, (float)getWidth() / (float)getHeight(), NEAR_DIST, FAR_DIST);
@@ -478,7 +479,7 @@ public class GameCanvas {
 		program.begin();
 		program.setUniformMatrix(SHADER_U_VIEWP, tmpMat);
 	}
-	
+
 	/**
 	 * Ends a drawing sequence, flushing textures to the graphics card.
 	 */
@@ -502,7 +503,7 @@ public class GameCanvas {
 		setDepthState(DepthState.NONE);
 		setBlendState(BlendState.OPAQUE);
 		setCullState(CullState.COUNTER_CLOCKWISE);
-		
+
 		// Only use of spritebatch in game.
 		spriteBatch.begin();
 		spriteBatch.draw(background, 0, 0, getWidth(), getHeight());
@@ -529,22 +530,22 @@ public class GameCanvas {
 			this.model = model;
 			model.getTexture().bind(0);
 		}
-		
+
 		// Very primitive culling code
 		tmp0.set(target).sub(x, y, 0);
 		if(Math.abs(tmp0.x) > CLIP_X || Math.abs(tmp0.y) > CLIP_Y) return;
-		
+
 		// World transform components
 		world.setToTranslation(x,y,z);
 		world.rotateRad(0, 0, 1, angle); // z-rotation
 		world.scale(TILE_SIZE, TILE_SIZE, TILE_DEPTH);
-		
+
 		// Set world transform
 		program.setUniformMatrix(SHADER_U_WORLD, world);
 		program.setUniformf(SHADER_U_TINT, model.getColor());
 		model.getMesh().render(program, GL20.GL_TRIANGLES);
 	}
-	
+
 	/**
 	 * Draws a ship model to the screen.
 	 *
@@ -553,7 +554,7 @@ public class GameCanvas {
 	 * @param y The ship y-coordinate in world coordinates
 	 * @param z The ship z-coordinate (for falling animation)
 	 * @param angle The ship angle for rotation in plane
-	 */	 
+	 */
 	public void drawShip(TexturedMesh model, float x, float y, float z, float angle) {
 		if (!active) {
 			Gdx.app.error("GameCanvas", "Cannot draw without active begin()", new IllegalStateException());
@@ -568,7 +569,7 @@ public class GameCanvas {
 			this.model = model;
 			model.getTexture().bind(0);
 		}
-		
+
 		// World transform components
 		world.setToTranslation(x, y, SHIP_FALL_TRANS + z);
 		world.rotateRad(1,0,0,SHIP_FALL_X_SKEW*z);
@@ -580,13 +581,13 @@ public class GameCanvas {
 		// Very primitive culling code
 		tmp0.set(target).sub(world.getTranslation(tmp1));
 		if(Math.abs(tmp0.x) > CLIP_X || Math.abs(tmp0.y) > CLIP_Y) return;
-		
+
 		// Set world transform
 		program.setUniformMatrix(SHADER_U_WORLD, world);
 		program.setUniformf(SHADER_U_TINT, model.getColor());
 		model.getMesh().render(program, GL20.GL_TRIANGLES);
 	}
-	
+
 	/**
 	 * Draws the ship exhaust to the screen.
 	 *
@@ -598,7 +599,7 @@ public class GameCanvas {
 	 * @param y The ship y-coordinate in world coordinates
 	 * @param z The ship z-coordinate (for falling animation)
 	 * @param angle The ship angle for rotation in plane
-	 */	 
+	 */
 	public void drawFire(TexturedMesh model, float x, float y, float z, float angle) {
 		if (!active) {
 			Gdx.app.error("GameCanvas", "Cannot draw without active begin()", new IllegalStateException());
@@ -613,11 +614,11 @@ public class GameCanvas {
 			setDepthState(DepthState.READ);
 			setBlendState(BlendState.ADDITIVE);
 			setCullState(CullState.CLOCKWISE);
-			
+
 			this.model = model;
 			model.getTexture().bind(0);
 		}
-		
+
 		// World transform components
 		world.setToTranslation(x, y, SHIP_FALL_TRANS + z);
 		world.rotateRad(1,0,0,SHIP_FALL_X_SKEW*z);
@@ -629,13 +630,13 @@ public class GameCanvas {
 		// Very primitive culling code
 		tmp0.set(target).sub(world.getTranslation(tmp1));
 		if(Math.abs(tmp0.x) > CLIP_X || Math.abs(tmp0.y) > CLIP_Y) return;
-		
+
 		// Set world transform
 		program.setUniformMatrix(SHADER_U_WORLD, world);
 		program.setUniformf(SHADER_U_TINT, model.getColor());
 		model.getMesh().render(program, GL20.GL_TRIANGLES);
 	}
-	
+
 	/**
 	 * Draws a photon to the screen.
 	 *
@@ -645,7 +646,7 @@ public class GameCanvas {
 	 * @param vx The photon x-velocity
 	 * @param vy The photon y-velocity
 	 * @param r  The distance from the photon to its source (for decay)
-	 */	 
+	 */
 	public void drawPhoton(TexturedMesh model, float x, float y, float vx, float vy, float r) {
 		if (!active) {
 			Gdx.app.error("GameCanvas", "Cannot draw without active begin()", new IllegalStateException());
@@ -660,7 +661,7 @@ public class GameCanvas {
 			setDepthState(DepthState.READ);
 			setBlendState(BlendState.ADDITIVE);
 			setCullState(CullState.CLOCKWISE);
-			
+
 			this.model = model;
 			model.getTexture().bind(0);
 		}
@@ -683,7 +684,7 @@ public class GameCanvas {
 		program.setUniformf(SHADER_U_TINT, model.getColor());
 		model.getMesh().render(program, GL20.GL_TRIANGLES);
 	}
-	
+
 	/**
 	 * Draws a message at the center of the screen
 	 *
@@ -707,11 +708,11 @@ public class GameCanvas {
 			program.end();
 			shading = false;
 		}
-		
+
 		setDepthState(DepthState.NONE);
 		setBlendState(BlendState.ALPHA_BLEND);
 		setCullState(CullState.COUNTER_CLOCKWISE);
-		
+
 		displayLayout.setText(displayFont,message);
 		spriteBatch.begin();
 		float x = (getWidth()  - displayLayout.width) / 2.0f;
@@ -745,13 +746,13 @@ public class GameCanvas {
 			program.end();
 			shading = false;
 		}
-		
+
 		setDepthState(DepthState.NONE);
 		setBlendState(BlendState.ALPHA_BLEND);
 		setCullState(CullState.COUNTER_CLOCKWISE);
-		
+
 		float x, y;
-		
+
 		spriteBatch.begin();
 		displayFont.setColor(color);
 
@@ -759,15 +760,15 @@ public class GameCanvas {
 		x = (getWidth()  - displayLayout.width) / 2.0f;
 		y = displayLayout.height+(getHeight() + displayLayout.height) / 2.0f;
 		displayFont.draw(spriteBatch, displayLayout, x, y);
-		
+
 		displayLayout.setText(displayFont,mess2);
 		x = (getWidth() - displayLayout.width) / 2.0f;
 		y = -displayLayout.height+(getHeight() + displayLayout.height) / 2.0f;
-		displayFont.draw(spriteBatch, displayLayout, x, y);		
+		displayFont.draw(spriteBatch, displayLayout, x, y);
 		spriteBatch.end();
 	}
 
-	
+
 	/**
 	 * Sets the given matrix to a FOV perspective.
 	 *
@@ -775,7 +776,7 @@ public class GameCanvas {
 	 *
 	 *        /
 	 *       /_
-	 *      /  \  <-  FOV 
+	 *      /  \  <-  FOV
 	 * EYE /____|_____
      *
 	 * Let ys = cot(fov)
@@ -822,7 +823,7 @@ public class GameCanvas {
 
 		return out;
 	}
-	
+
 	/**
 	 * Sets the mode for blending colors on-screen.
 	 *
@@ -834,8 +835,8 @@ public class GameCanvas {
 		int blendDst = 0;
 		int blendModAlpha = 0;
 		int blendSrcAlpha = 0;
-		int blendDstAlpha = 0;	
-		
+		int blendDstAlpha = 0;
+
 		switch (state) {
 		case ALPHA_BLEND:
 			blendMod = GL20.GL_FUNC_ADD;
@@ -870,11 +871,11 @@ public class GameCanvas {
 			blendDstAlpha = GL20.GL_ZERO;
 			break;
 		}
-		
+
 		gl20.glBlendEquationSeparate(blendMod, blendModAlpha);
 		gl20.glBlendFuncSeparate(blendSrc, blendDst, blendSrcAlpha, blendDstAlpha);
 	}
-	
+
 	/**
 	 * Sets the mode for culling unwanted polygons based on depth.
 	 *
@@ -884,7 +885,7 @@ public class GameCanvas {
 		boolean shouldRead  = true;
 		boolean shouldWrite = true;
 		int depthFunc = 0;
-		
+
 		switch (state) {
 		case NONE:
 			shouldRead  = false;
@@ -907,7 +908,7 @@ public class GameCanvas {
 			depthFunc = GL20.GL_LEQUAL;
 			break;
 		}
-		
+
         if (shouldRead || shouldWrite) {
         	gl20.glEnable(GL20.GL_DEPTH_TEST);
         	gl20.glDepthMask(shouldWrite);
@@ -916,7 +917,7 @@ public class GameCanvas {
         	gl20.glDisable(GL20.GL_DEPTH_TEST);
         }
 	}
-	
+
 	/**
 	 * Sets the mode for culling unwanted polygons based on facing.
 	 *
@@ -926,7 +927,7 @@ public class GameCanvas {
 		boolean cull = true;
     	int mode = 0;
     	int face = 0;
-    	
+
     	switch (state) {
     	case NONE:
             cull = false;
@@ -953,7 +954,7 @@ public class GameCanvas {
         }
 
 	}
-		
+
 	/**
 	 * Enumeration of supported blend states.
 	 *

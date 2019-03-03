@@ -16,25 +16,31 @@
  */
 package edu.cornell.gdiac.undetected;
 
-import static com.badlogic.gdx.Gdx.gl20;
-import static com.badlogic.gdx.graphics.GL20.GL_BLEND;
-
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.audio.*;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.FileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.VertexAttributes.*;
-import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.graphics.g2d.freetype.*;
-import com.badlogic.gdx.assets.*;
-import com.badlogic.gdx.assets.loaders.FileHandleResolver;
-import com.badlogic.gdx.assets.loaders.resolvers.*;
-import com.badlogic.gdx.utils.*;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Mesh;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.VertexAttribute;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
+import com.badlogic.gdx.utils.Array;
+import edu.cornell.gdiac.mesh.MeshLoader;
+import edu.cornell.gdiac.mesh.TexturedMesh;
+import edu.cornell.gdiac.util.XBox360Controller;
 
-import edu.cornell.gdiac.mesh.*;
-import edu.cornell.gdiac.util.*;
+import static com.badlogic.gdx.Gdx.gl20;
+import static com.badlogic.gdx.graphics.GL20.GL_BLEND;
 
 /**
  * Primary class for controlling the game.
@@ -249,7 +255,7 @@ public class GameEngine implements Screen {
 	 */
 	private boolean didReset() {
 		if (xbox != null && xbox.getGuide()) {
-        	Gdx.app.exit();			
+        	Gdx.app.exit();
 		}
 		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
         	Gdx.app.exit();
@@ -305,13 +311,13 @@ public class GameEngine implements Screen {
         	}
       	}
 	}
-	
+
 	/**
 	 * Draws the game board while we are still loading
 	 */
 	public void drawLoad() {
         canvas.setEyePan(gameLoad);
-        
+
         if (ships != null) {
 	        canvas.begin(ships.getPlayer().getX(), ships.getPlayer().getY());
     	    // Perform the three required passes
@@ -321,12 +327,12 @@ public class GameEngine implements Screen {
 	        photons.draw(canvas);
 	    } else {
 	        canvas.begin();
-	    }	
+	    }
 
 		canvas.drawMessage(MESSG_LOAD, Color.WHITE);
         canvas.end();
     }
-    
+
     /**
      * The primary update loop of the game; called while it is running.
      */
@@ -356,7 +362,7 @@ public class GameEngine implements Screen {
 			}
         }
     }
-    
+
     /**
      * Called to draw when we are playing the game.
      */
@@ -392,23 +398,23 @@ public class GameEngine implements Screen {
         }
         canvas.end();
 	}
-	
+
 	/**
-	 * Called when the Application is resized. 
-	 * 
+	 * Called when the Application is resized.
+	 *
 	 * This can happen at any point during a non-paused state
 	 */
 	public void resize(int width, int height) {
 		canvas.resize();
 	}
-	
-	/** 
+
+	/**
 	 * Called when the Application is paused.
-	 * 
+	 *
 	 * This is usually when it's not active or visible on screen.
 	 */
 	public void pause() { }
-	
+
 	/**
 	 * Called when the Application is resumed from a paused state.
 	 *
@@ -418,49 +424,49 @@ public class GameEngine implements Screen {
 
 
 	// HELPER FUNCTIONS
-	
+
 	/**
 	 * (Pre)loads all assets for this level
 	 *
 	 * This method add all of the important assets to the asset manager.  However,
-	 * it does not block until the assets are loaded.  This allows us to draw a 
+	 * it does not block until the assets are loaded.  This allows us to draw a
 	 * loading screen while we still wait.
 	 */
     private void load() {
 		manager = new AssetManager();
 		manager.setLoader(Mesh.class, new MeshLoader(new InternalFileHandleResolver()));
 		assets = new Array<String>();
-		
+
 		// We have to force the canvas to fully load (so we can draw something)
 		initializeCanvas();
-		
+
 		MeshLoader.MeshParameter parameter = new MeshLoader.MeshParameter();
 		parameter.attribs = new VertexAttribute[2];
 		parameter.attribs[0] = new VertexAttribute(Usage.Position, 3, "vPosition");
 		parameter.attribs[1] = new VertexAttribute(Usage.TextureCoordinates, 2, "vUV");
 
 		// Board tile
-		manager.load(TILE_MODEL,Mesh.class,parameter);
+		manager.load(TILE_MODEL, Mesh.class,parameter);
 		assets.add(TILE_MODEL);
-		manager.load(TILE_TEXTURE,Texture.class);
+		manager.load(TILE_TEXTURE, Texture.class);
 		assets.add(TILE_TEXTURE);
 
 		// Ship information
-		manager.load(SHIP_MODEL,Mesh.class,parameter);
+		manager.load(SHIP_MODEL, Mesh.class,parameter);
 		assets.add(SHIP_MODEL);
-		manager.load(FIRE_MODEL,Mesh.class,parameter);
+		manager.load(FIRE_MODEL, Mesh.class,parameter);
 		assets.add(FIRE_MODEL);
-		manager.load(ENEMY_TEXTURE,Texture.class);
+		manager.load(ENEMY_TEXTURE, Texture.class);
 		assets.add(ENEMY_TEXTURE);
-		manager.load(PLAYER_TEXTURE,Texture.class);
+		manager.load(PLAYER_TEXTURE, Texture.class);
 		assets.add(PLAYER_TEXTURE);
-		manager.load(FIRE_TEXTURE,Texture.class);
+		manager.load(FIRE_TEXTURE, Texture.class);
 		assets.add(FIRE_TEXTURE);
 
 		// Photon information
-		manager.load(PHOTON_MODEL,Mesh.class,parameter);
+		manager.load(PHOTON_MODEL, Mesh.class,parameter);
 		assets.add(PHOTON_MODEL);
-		manager.load(PHOTON_TEXTURE,Texture.class);
+		manager.load(PHOTON_TEXTURE, Texture.class);
 		assets.add(PHOTON_TEXTURE);
 
         // Sound controller manages its own material
@@ -476,7 +482,7 @@ public class GameEngine implements Screen {
 	 */
     private void initializeCanvas() {
 		// Load the background.
-		manager.load(BCKGD_TEXTURE,Texture.class);
+		manager.load(BCKGD_TEXTURE, Texture.class);
 		assets.add(BCKGD_TEXTURE);
 		
 		// Provide basic font support
@@ -497,7 +503,7 @@ public class GameEngine implements Screen {
 			canvas.setBackground(texture);
 		}
 		if (manager.isLoaded(FONT_FILE)) {
-			canvas.setFont(manager.get(FONT_FILE,BitmapFont.class));
+			canvas.setFont(manager.get(FONT_FILE, BitmapFont.class));
 		}
     }
     
@@ -532,7 +538,7 @@ public class GameEngine implements Screen {
 	private TexturedMesh createMesh(String model, String texture) {
 		if (manager.isLoaded(model) && manager.isLoaded(texture)) {
 			TexturedMesh mesh = new TexturedMesh(manager.get(model, Mesh.class));
-			Texture mtext = manager.get(texture,Texture.class);
+			Texture mtext = manager.get(texture, Texture.class);
 			mesh.setTexture(mtext);
 			return mesh;
 		}
