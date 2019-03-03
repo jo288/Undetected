@@ -17,7 +17,15 @@
         "goal": { 
          	"file":		"textures/helicopter.png",
          	"wrap":		false,
-         }
+         },
+		"defaultDude": {
+			"file": 	"textures/dude.png",
+			"wrap": 	false,
+		},
+		"boxDude": {
+			"file": 	"textures/boxdude.png",
+			"wrap": 	false,
+		}
   	},
   	"fonts": {
   		"display": {

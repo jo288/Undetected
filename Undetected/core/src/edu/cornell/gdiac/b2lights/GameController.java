@@ -72,7 +72,7 @@ public class GameController implements Screen, ContactListener {
 	 * we have an AssetState that determines the current loading state.  If the
 	 * assets are already loaded, this method will do nothing.
 	 * 
-	 * @param manager Reference to global asset manager.
+	 * //@param manager Reference to global asset manager.
 	 */	
 	public void preLoadContent() {
 		if (assetState != AssetState.EMPTY) {
@@ -95,7 +95,7 @@ public class GameController implements Screen, ContactListener {
 	 * we have an AssetState that determines the current loading state.  If the
 	 * assets are already loaded, this method will do nothing.
 	 * 
-	 * @param manager Reference to global asset manager.
+	 * //@param manager Reference to global asset manager.
 	 */
 	public void loadContent() {
 		if (assetState != AssetState.LOADING) {
@@ -114,7 +114,7 @@ public class GameController implements Screen, ContactListener {
 	 * This method erases the static variables.  It also deletes the associated textures 
 	 * from the asset manager. If no assets are loaded, this method does nothing.
 	 * 
-	 * @param manager Reference to global asset manager.
+	 * //@param manager Reference to global asset manager.
 	 */
 	public void unloadContent() {
 		JsonAssetManager.getInstance().unloadDirectory();
@@ -212,7 +212,7 @@ public class GameController implements Screen, ContactListener {
 	 *
 	 * The canvas is shared across all controllers
 	 *
-	 * @param the canvas associated with this controller
+	 * //@param the canvas associated with this controller
 	 */
 	public ObstacleCanvas getCanvas() {
 		return canvas;
@@ -224,7 +224,7 @@ public class GameController implements Screen, ContactListener {
 	 * The canvas is shared across all controllers.  Setting this value will compute
 	 * the drawing scale from the canvas size.
 	 *
-	 * @param value the canvas associated with this controller
+	 * //@param value the canvas associated with this controller
 	 */
 	public void setCanvas(ObstacleCanvas canvas) {
 		this.canvas = canvas;
@@ -283,7 +283,7 @@ public class GameController implements Screen, ContactListener {
 	 * to switch to a new game mode.  If not, the update proceeds
 	 * normally.
 	 *
-	 * @param delta Number of seconds since last animation frame
+	 * //@param delta Number of seconds since last animation frame
 	 * 
 	 * @return whether to process the update loop
 	 */
@@ -326,27 +326,34 @@ public class GameController implements Screen, ContactListener {
 	 * This method is called after input is read, but before collisions are resolved.
 	 * The very last thing that it should do is apply forces to the appropriate objects.
 	 *
-	 * @param delta Number of seconds since last animation frame
+	 * //@param delta Number of seconds since last animation frame
 	 */
 	public void update(float dt) {
 		// Process actions in object model
 		DudeModel avatar = level.getAvatar();
 		InputController input = InputController.getInstance();
-		
+
+		/*
 		if (input.didForward()) {
 			level.activateNextLight();
 		} else if (input.didBack()){
 			level.activatePrevLight();
+		}*/
+
+		if(input.didAction()&&avatar.getHasBox()){
+			avatar.dropBox();
+		} else if(input.didAction()&&!avatar.getHasBox()){
+			avatar.pickupBox();
 		}
 		
 		// Rotate the avatar to face the direction of movement
 		angleCache.set(input.getHorizontal(),input.getVertical());
-		if (angleCache.len2() > 0.0f) {
-			float angle = angleCache.angle();
-			// Convert to radians with up as 0
-			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-			avatar.setAngle(angle);
-		}
+//		if (angleCache.len2() > 0.0f) {
+//			float angle = angleCache.angle();
+//			// Convert to radians with up as 0
+//			angle = (float)Math.PI*(angle-90.0f)/180.0f;
+//			avatar.setAngle(angle);
+//		}
 		angleCache.scl(avatar.getForce());
 		avatar.setMovement(angleCache.x,angleCache.y);
 		avatar.applyForce();
@@ -363,7 +370,7 @@ public class GameController implements Screen, ContactListener {
 	 *
 	 * The method draws all objects in the order that they were added.
 	 *
-	 * @param canvas The drawing context
+	 * //@param canvas The drawing context
 	 */
 	public void draw(float delta) {
 		canvas.clear();

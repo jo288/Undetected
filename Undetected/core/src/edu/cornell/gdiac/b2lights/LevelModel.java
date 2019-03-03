@@ -257,13 +257,14 @@ public class LevelModel {
 		timeStep = 1.0f/maxFPS;
 		maxSteps = 1.0f + maxFPS/minFPS;
 		maxTimePerFrame = timeStep*maxSteps;
-		
+
+		/*
 		// Create the lighting if appropriate
 		if (levelFormat.has("lighting")) {
 			initLighting(levelFormat.get("lighting"));
 		}
 		createPointLights(levelFormat.get("pointlights"));
-		createConeLights(levelFormat.get("conelights"));
+		createConeLights(levelFormat.get("conelights"));*/
 		
 		// Add level goal
 		goalDoor = new ExitModel();

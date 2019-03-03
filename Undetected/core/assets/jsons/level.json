@@ -81,7 +81,7 @@
         "restitution":    0.0,
       	"force": 		 80.0,
       	"damping": 		 10.0,
-      	"maxspeed": 	  5.0,
+      	"maxspeed": 	  15.0,
       	"collideBits":	"0001",
       	"excludeBits":	"0000",
       	"startframe":       0,

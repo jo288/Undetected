@@ -31,7 +31,7 @@ import edu.cornell.gdiac.physics.obstacle.*;
  * Note that the constructor does very little.  The true initialization happens
  * by reading the JSON value.
  */
-public class DudeModel extends WheelObstacle {
+public class DudeModel extends CharacterModel {
 	// Physics constants
 	/** The factor to multiply by the input */
 	private float force;
@@ -43,6 +43,10 @@ public class DudeModel extends WheelObstacle {
 	// Box interactions
 	/** Whether player has a box */
 	private boolean hasBox;
+
+	// Character states
+	/** Whether player is alive */
+	private boolean isAlive;
 	
 	/** The current horizontal movement of the character */
 	private Vector2 movement = new Vector2();
@@ -53,6 +57,11 @@ public class DudeModel extends WheelObstacle {
 	private int walkCool;
 	/** The standard number of frames to wait until we can walk again */
 	private int walkLimit;
+
+	/** Texture of character */
+	private TextureRegion defaultCharTexture;
+	/** Texture of character with box */
+	private TextureRegion boxCharTexture;
 
 	/** FilmStrip pointer to the texture region */
 	private FilmStrip filmstrip;
@@ -194,6 +203,32 @@ public class DudeModel extends WheelObstacle {
 		walkLimit = value;
 	}
 
+	/**
+	 * Returns whether player has a box
+	 *
+	 * @return true if player has a box
+	 */
+	public boolean getHasBox(){
+		return hasBox;
+	}
+
+	/**
+	 * Returns whether player is alive
+	 *
+	 * @return true if player is alive
+	 */
+	public boolean getIsAlive(){
+		return isAlive;
+	}
+
+	/**
+	 * Sets whether player is alive
+	 *
+	 * @param isAlive true if player is alive
+	 */
+	public void setIsAlive(boolean isAlive){
+		this.isAlive = isAlive;
+	}
 	
 	/**
 	 * Creates a new dude with degenerate settings
@@ -214,7 +249,8 @@ public class DudeModel extends WheelObstacle {
 		if (hasBox)
 			return false;
 		hasBox = true;
-		//TODO: change sprite
+		//change sprite
+		setTexture(boxCharTexture);
 		return true;
 	}
 
@@ -227,10 +263,11 @@ public class DudeModel extends WheelObstacle {
 		if (!hasBox)
 			return false;
 		hasBox = false;
-		//TODO: change sprite
+		//change sprite
+		setTexture(defaultCharTexture);
 		return true;
 	}
-	
+
 	/**
 	 * Initializes the dude via the given JSON value
 	 *
@@ -278,8 +315,17 @@ public class DudeModel extends WheelObstacle {
 		int opacity = json.get("debugopacity").asInt();
 		debugColor.mul(opacity/255.0f);
 		setDebugColor(debugColor);
-		
+
+
 		// Now get the texture from the AssetManager singleton
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("defaultDude", TextureRegion.class);
+		defaultCharTexture = texture;
+		setTexture(texture);
+
+		texture = JsonAssetManager.getInstance().getEntry("boxDude", TextureRegion.class);
+		boxCharTexture = texture;
+
+		/*
 		String key = json.get("texture").asString();
 		TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
 		try {
@@ -288,6 +334,7 @@ public class DudeModel extends WheelObstacle {
 			filmstrip = null;
 		}
 		setTexture(texture);
+		*/
 	}
 
 	/**
@@ -319,7 +366,7 @@ public class DudeModel extends WheelObstacle {
 	 *
 	 * We use this method to reset cooldowns.
 	 *
-	 * @param delta Number of seconds since last animation frame
+	 * //@param delta Number of seconds since last animation frame
 	 */
 	public void update(float dt) {
 		// Animate if necessary
