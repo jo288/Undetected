@@ -1,0 +1,28 @@
+{
+    "textures": {
+    	"earth": {
+    		"file":		"textures/earthtile.png",
+    		"wrap":		true,
+    	},
+    	"dude": {      
+    		"file": 	"textures/walking.png",
+    		"wrap":  	false,
+    		"strip":	{
+    			"size":		4,
+    			"rows":		1,
+    			"cols":		4,
+    			"first":	0
+    		}
+    	},
+        "goal": { 
+         	"file":		"textures/helicopter.png",
+         	"wrap":		false,
+         }
+  	},
+  	"fonts": {
+  		"display": {
+  			"file": 	"fonts/MarkerFelt.ttf",
+  			"size": 	64
+  		},
+  	},
+}

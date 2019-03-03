@@ -21,7 +21,7 @@ allprojects {
 
     version = '1.0'
     ext {
-        appName = "Undetected"
+        appName = "B2Lights"
         gdxVersion = '1.9.9'
         roboVMVersion = '2.3.5'
         box2DLightsVersion = '1.4'
@@ -61,8 +61,6 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils:0.13.4"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:0.13.4"
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
