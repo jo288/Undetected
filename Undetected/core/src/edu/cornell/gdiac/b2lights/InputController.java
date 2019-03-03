@@ -56,6 +56,9 @@ public class InputController {
 	/** Whether the exit button was pressed. */
 	private boolean exitPressed;
 	private boolean exitPrevious;
+	/** Whether the action button was pressed. */
+	private boolean actionPressed;
+	private boolean actionPrevious;
 	
 	/** How much did we move horizontally? */
 	private float horizontal;
@@ -131,6 +134,16 @@ public class InputController {
 	public boolean didExit() {
 		return exitPressed && !exitPrevious;
 	}
+
+	/**
+	 * Returns true if the action button was pressed.
+	 *
+	 * @return true if the action button was pressed.
+	 */
+	public boolean didAction() {
+		return actionPressed && !actionPrevious;
+	}
+
 	
 	/**
 	 * Creates a new input controller
@@ -154,6 +167,7 @@ public class InputController {
 		exitPrevious = exitPressed;
 		nextPrevious = nextPressed;
 		prevPrevious = prevPressed;
+		actionPrevious = actionPressed;
 
 		// Check to see if a GamePad is connected
 		if (xbox.isConnected()) {
@@ -171,8 +185,8 @@ public class InputController {
 	 * the drawing scale to convert screen coordinates to world coordinates.  The
 	 * bounds are for the crosshair.  They cannot go outside of this zone.
 	 *
-	 * @param bounds The input bounds for the crosshair.  
-	 * @param scale  The drawing scale
+	 * //@param bounds The input bounds for the crosshair.
+	 * //@param scale  The drawing scale
 	 */
 	private void readGamepad() {
 		resetPressed = xbox.getStart();
@@ -180,6 +194,7 @@ public class InputController {
 		nextPressed  = xbox.getRB();
 		prevPressed  = xbox.getLB();
 		debugPressed  = xbox.getY();
+		actionPressed = xbox.getA();
 
 		// Increase animation frame, but only if trying to move
 		horizontal = xbox.getLeftX();
@@ -202,6 +217,7 @@ public class InputController {
 		prevPressed = (secondary && prevPressed) || (Gdx.input.isKeyPressed(Input.Keys.P));
 		nextPressed = (secondary && nextPressed) || (Gdx.input.isKeyPressed(Input.Keys.N));
 		exitPressed  = (secondary && exitPressed) || (Gdx.input.isKeyPressed(Input.Keys.ESCAPE));
+		actionPressed = (secondary && actionPressed) || (Gdx.input.isKeyPressed(Input.Keys.SPACE));
 		
 		// Directional controls
 		horizontal = (secondary ? horizontal : 0.0f);

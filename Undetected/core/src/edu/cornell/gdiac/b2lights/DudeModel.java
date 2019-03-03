@@ -39,6 +39,10 @@ public class DudeModel extends WheelObstacle {
 	private float damping; 
 	/** The maximum character speed */
 	private float maxspeed;
+
+	// Box interactions
+	/** Whether player has a box */
+	private boolean hasBox;
 	
 	/** The current horizontal movement of the character */
 	private Vector2 movement = new Vector2();
@@ -199,6 +203,32 @@ public class DudeModel extends WheelObstacle {
 	public DudeModel() {
 		super(0,0,1.0f);
 		setFixedRotation(false);
+	}
+
+	/**
+	 * Pick up a box if the player doesn't have a box right now
+	 *
+	 * @return true if player picked up a box, false if not
+	 */
+	public boolean pickupBox(){
+		if (hasBox)
+			return false;
+		hasBox = true;
+		//TODO: change sprite
+		return true;
+	}
+
+	/**
+	 * Drop a box if the player is holding a box
+	 *
+	 * @return true if player dropped a box, false if not
+	 */
+	public boolean dropBox(){
+		if (!hasBox)
+			return false;
+		hasBox = false;
+		//TODO: change sprite
+		return true;
 	}
 	
 	/**
