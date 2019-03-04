@@ -13,7 +13,7 @@ import edu.cornell.gdiac.physics.obstacle.*;
 import javax.xml.soap.Text;
 
 public class Laser extends BoxObstacle {
-    private static final float LAZER_HEIGHT = 5f;
+    private static final float LAZER_HEIGHT = 5.6f;
     private static final float LAZER_WIDTH = 0.01f;
     private float x_pos;
     private float y_pos;

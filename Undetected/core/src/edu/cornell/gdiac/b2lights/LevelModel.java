@@ -337,12 +337,20 @@ public class LevelModel {
 		activate(box);
 
 		// Create Test Lazer
-		Laser testlaser = new Laser(7, 3);
+		Laser testlaser = new Laser(9, 3.38f);
 		testlaser.setName("laser");
 		testlaser.initialize();
 		testlaser.setDrawScale(scale);
 		activate(testlaser);
 	}
+
+	public void placeBox(DudeModel player) {
+        MoveableBox box = new MoveableBox(player.getX()+1,player.getY());
+        box.setName("box");
+        box.initialize();
+        box.setDrawScale(scale);
+        activate(box);
+    }
 	
 	/**
 	 * Creates the ambient lighting for the level

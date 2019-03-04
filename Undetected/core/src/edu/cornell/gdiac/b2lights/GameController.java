@@ -349,6 +349,7 @@ public class GameController implements Screen, ContactListener {
 
 		if(input.didAction()&&avatar.getHasBox()){
 			avatar.dropBox();
+			level.placeBox(avatar);
 		} else if(input.didAction()&&!avatar.getHasBox() && avatarBoxCollision){
 			avatar.pickupBox();
 			avatar.setBoxHeld(avatar.getBoxInContact());
