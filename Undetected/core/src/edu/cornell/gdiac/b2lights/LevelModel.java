@@ -263,8 +263,8 @@ public class LevelModel {
 		if (levelFormat.has("lighting")) {
 			initLighting(levelFormat.get("lighting"));
 		}
-		createPointLights(levelFormat.get("pointlights"));
-		createConeLights(levelFormat.get("conelights"));
+//		createPointLights(levelFormat.get("pointlights"));
+//		createConeLights(levelFormat.get("conelights"));
 		
 		// Add level goal
 		goalDoor = new ExitModel();

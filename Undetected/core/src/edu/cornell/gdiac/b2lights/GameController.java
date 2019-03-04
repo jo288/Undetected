@@ -351,12 +351,6 @@ public class GameController implements Screen, ContactListener {
 		} else if(input.didAction()&&!avatar.getHasBox() && avatarBoxCollision){
 			avatar.pickupBox();
 		}
-
-//		if (input.getHoldSpace() == 1) {
-//			level.setObstMovable(true);
-//		} else if (input.getHoldSpace() == 0){
-//			level.setObstMovable(false);
-//		}
 		
 		// Rotate the avatar to face the direction of movement
 		angleCache.set(input.getHorizontal(),input.getVertical());
