@@ -23,7 +23,7 @@
 			"wrap": 	false,
 		},
 		"box": {
-			"file": 	"textures/box.png",
+			"file": 	"textures/crate01.png",
 			"wrap": 	false,
 		},
 		"laser": {
