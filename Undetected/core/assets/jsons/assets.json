@@ -26,6 +26,14 @@
 			"file": 	"textures/dude.png",
 			"wrap": 	false,
 		},
+		"box": {
+			"file": 	"textures/crate01.png",
+			"wrap": 	false,
+		},
+		"laser": {
+			"file": 	"textures/laser.png",
+			"wrap": 	false,
+		},
 		"boxDude": {
 			"file": 	"textures/boxdude.png",
 			"wrap": 	false,
