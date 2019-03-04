@@ -29,6 +29,7 @@
 package edu.cornell.gdiac.b2lights;
 
 import box2dLight.*;
+import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.*;
@@ -155,7 +156,36 @@ public class LevelModel {
 	public ExitModel getExit() {
 		return goalDoor;
 	}
-	
+
+	/**
+	 * Returns an array of all the lasers
+	 *
+	 * @return an array of the lasers
+	 */
+	public Array<Laser> getLaser() {
+		Array<Laser> lasers = new Array<Laser>();
+		for (Obstacle o : objects) {
+			if (o.getName() == "laser") {
+				lasers.add((Laser)o);
+			}
+		}
+		return lasers;
+	}
+
+	/**
+	 * Returns a reference to the exit door
+	 *
+	 * @return a reference to the exit door
+	 */
+	public Obstacle getBox() {
+		for (Obstacle o : objects) {
+			if (o.getName() == "box") {
+				return o;
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * Returns whether this level is currently in debug node
 	 *
@@ -260,9 +290,9 @@ public class LevelModel {
 
 
 		// Create the lighting if appropriate
-		if (levelFormat.has("lighting")) {
-			initLighting(levelFormat.get("lighting"));
-		}
+//		if (levelFormat.has("lighting")) {
+//			initLighting(levelFormat.get("lighting"));
+//		}
 //		createPointLights(levelFormat.get("pointlights"));
 //		createConeLights(levelFormat.get("conelights"));
 		
@@ -301,12 +331,14 @@ public class LevelModel {
 
 		// Create Test Box
 		MoveableBox box = new MoveableBox(5,2);
+		box.setName("box");
 		box.initialize();
 		box.setDrawScale(scale);
 		activate(box);
 
 		// Create Test Lazer
 		Laser testlaser = new Laser(7, 3);
+		testlaser.setName("laser");
 		testlaser.initialize();
 		testlaser.setDrawScale(scale);
 		activate(testlaser);
@@ -504,7 +536,23 @@ public class LevelModel {
 		objects.add(obj);
 		obj.activatePhysics(world);
 	}
-	
+
+	/**
+	 * Searches through game objects to destroy and deactivate an obstacle
+	 *
+	 * param obj The object to destroy
+	 */
+	protected void deactivate(Obstacle obj, Body bod) {
+		for (Obstacle o : objects) {
+			if (o == obj) {
+				o.deactivatePhysics(world);
+				objects.remove(o);
+				bod.setUserData(null);
+				bod = null;
+			}
+		}
+	}
+
 	/**
 	 * Returns true if the object is in bounds.
 	 *

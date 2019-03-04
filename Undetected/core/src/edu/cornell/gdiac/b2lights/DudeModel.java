@@ -43,6 +43,8 @@ public class DudeModel extends CharacterModel {
 	// Box interactions
 	/** Whether player has a box */
 	private boolean hasBox;
+	private Obstacle boxContact;
+	private Obstacle boxHeld;
 
 	// Character states
 	/** Whether player is alive */
@@ -251,6 +253,7 @@ public class DudeModel extends CharacterModel {
 		hasBox = true;
 		//change sprite
 		setTexture(boxCharTexture);
+//		setBoxHeld(box);
 		return true;
 	}
 
@@ -265,7 +268,29 @@ public class DudeModel extends CharacterModel {
 		hasBox = false;
 		//change sprite
 		setTexture(defaultCharTexture);
+		boxHeld = null;
 		return true;
+	}
+
+	public void setBoxInContact(Obstacle box) {
+		boxContact = box;
+	}
+
+	public Obstacle getBoxInContact() {
+		return boxContact;
+	}
+
+	public void setBoxHeld(Obstacle box) {
+		if (!hasBox) {
+			boxHeld = box;
+		}
+	}
+
+	public Obstacle getBoxHeld() {
+		if (hasBox) {
+			return boxHeld;
+		}
+		return null;
 	}
 
 	/**

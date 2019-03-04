@@ -4,10 +4,6 @@
     		"file":		"textures/earthtile.png",
     		"wrap":		true,
     	},
-		"box": {
-			"file":		"textures/box.png",
-			"wrap":		true,
-		},
     	"dude": {      
     		"file": 	"textures/walking.png",
     		"wrap":  	false,
@@ -27,12 +23,12 @@
 			"wrap": 	false,
 		},
 		"box": {
-			"file": 	"textures/crate01.png",
+			"file": 	"textures/box.png",
 			"wrap": 	false,
 		},
 		"laser": {
 			"file": 	"textures/laser.png",
-			"wrap": 	false,
+			"wrap": 	true,
 		},
 		"boxDude": {
 			"file": 	"textures/boxdude.png",

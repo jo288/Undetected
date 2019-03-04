@@ -16,6 +16,7 @@ public class MoveableBox extends BoxObstacle{
     private static final float BOX_SIZE = 1;
     private boolean held = false;
     private TextureRegion boxTexture;
+    private boolean flaggedForDelete;
 
     public MoveableBox(float x, float y) {
         super(x, y, BOX_SIZE, BOX_SIZE);
@@ -31,6 +32,14 @@ public class MoveableBox extends BoxObstacle{
 
     public void setHeld(boolean value) {
         held = value;
+    }
+
+    public void setFlaggedForDelete () {
+        flaggedForDelete = true;
+    }
+
+    public boolean isFlaggedForDelete () {
+        return flaggedForDelete;
     }
 
     public void initialize(){

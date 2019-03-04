@@ -252,6 +252,7 @@ public class GameController implements Screen, ContactListener {
 
 		setComplete(false);
 		setFailure(false);
+		sensorFixtures = new ObjectSet<Fixture>();
 	}
 	
 	/**
@@ -350,6 +351,10 @@ public class GameController implements Screen, ContactListener {
 			avatar.dropBox();
 		} else if(input.didAction()&&!avatar.getHasBox() && avatarBoxCollision){
 			avatar.pickupBox();
+			avatar.setBoxHeld(avatar.getBoxInContact());
+//			level.deactivate(bd1);
+            level.objects.remove(avatar.getBoxInContact());
+            avatar.getBoxInContact().setSensor(true);
 		}
 		
 		// Rotate the avatar to face the direction of movement
@@ -499,12 +504,26 @@ public class GameController implements Screen, ContactListener {
 
 			if((bd1==avatar && bd2 instanceof MoveableBox ) || (bd1 instanceof MoveableBox && bd2==avatar)){
 				avatarBoxCollision = true;
+				if (bd1 instanceof  MoveableBox) {
+				    avatar.setBoxInContact(bd1);
+                } else if (bd2 instanceof  MoveableBox) {
+				    avatar.setBoxInContact(bd2);
+                }
 			}
 			if((bd1==avatar && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2==avatar)){
 				avatarLaserCollision = true;
 				setFailure(true);
 			}
-			
+
+//			Array<Laser> lasers = level.getLaser();
+//
+//			for (Laser laser : lasers) {
+//				if ((bd1 == avatar && bd2 == laser) ||
+//					(bd1 == laser && bd2 == avatar)) {
+//					System.out.println("ALARM");
+//				}
+//			}
+
 			// Check for win condition
 			if ((bd1 == avatar && bd2 == door  ) ||
 				(bd1 == door   && bd2 == avatar)) {
@@ -534,8 +553,10 @@ public class GameController implements Screen, ContactListener {
 
 		if((bd1 == avatar && bd2 instanceof MoveableBox) || (bd1 instanceof MoveableBox && bd2==avatar)){
 			avatarBoxCollision = false;
+            avatar.setBoxInContact(null);
 		}
 	}
+
 	/** Unused ContactListener method */
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	/** Unused ContactListener method */
