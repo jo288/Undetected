@@ -147,6 +147,10 @@ public class GameController implements Screen, ContactListener {
 
 	/** Mark set to handle more sophisticated collision callbacks */
 	protected ObjectSet<Fixture> sensorFixtures;
+	/** Whether the player collided with a box */
+	protected boolean avatarBoxCollision;
+	/** Whether the player collided with a laser */
+	protected boolean avatarLaserCollision;
 
 	/**
 	 * Returns true if the level is completed.
@@ -243,6 +247,8 @@ public class GameController implements Screen, ContactListener {
 		failed = false;
 		active = false;
 		countdown = -1;
+		avatarBoxCollision = false;
+		avatarLaserCollision = false;
 
 		setComplete(false);
 		setFailure(false);
@@ -342,7 +348,7 @@ public class GameController implements Screen, ContactListener {
 
 		if(input.didAction()&&avatar.getHasBox()){
 			avatar.dropBox();
-		} else if(input.didAction()&&!avatar.getHasBox()){
+		} else if(input.didAction()&&!avatar.getHasBox() && avatarBoxCollision){
 			avatar.pickupBox();
 		}
 
@@ -496,6 +502,14 @@ public class GameController implements Screen, ContactListener {
 
 			DudeModel avatar = level.getAvatar();
 			ExitModel door   = level.getExit();
+
+			if((bd1==avatar && bd2 instanceof MoveableBox ) || (bd1 instanceof MoveableBox && bd2==avatar)){
+				avatarBoxCollision = true;
+			}
+			if((bd1==avatar && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2==avatar)){
+				avatarLaserCollision = true;
+				setFailure(true);
+			}
 			
 			// Check for win condition
 			if ((bd1 == avatar && bd2 == door  ) ||
@@ -509,7 +523,25 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	/** Unused ContactListener method */
-	public void endContact(Contact contact) {}
+	public void endContact(Contact contact) {
+		Fixture fix1 = contact.getFixtureA();
+		Fixture fix2 = contact.getFixtureB();
+
+		Body body1 = fix1.getBody();
+		Body body2 = fix2.getBody();
+
+		Object fd1 = fix1.getUserData();
+		Object fd2 = fix2.getUserData();
+
+		Obstacle bd1 = (Obstacle)body1.getUserData();
+		Obstacle bd2 = (Obstacle)body2.getUserData();
+
+		DudeModel avatar = level.getAvatar();
+
+		if((bd1 == avatar && bd2 instanceof MoveableBox) || (bd1 instanceof MoveableBox && bd2==avatar)){
+			avatarBoxCollision = false;
+		}
+	}
 	/** Unused ContactListener method */
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	/** Unused ContactListener method */
