@@ -31,6 +31,9 @@ package edu.cornell.gdiac.b2lights;
 import box2dLight.*;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.PolygonRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
@@ -65,9 +68,12 @@ public class LevelModel {
 
 	/** Whether or not the level is in debug more (showing off physics) */	
 	private boolean debug;
-	
+
 	/** All the objects in the world. */
 	protected PooledList<Obstacle> objects  = new PooledList<Obstacle>();
+
+	BoxObstacle boxTest;
+	BoxObstacle laser;
 
 	// LET THE TIGHT COUPLING BEGIN
 	/** The Box2D world */
@@ -225,6 +231,31 @@ public class LevelModel {
 	}
 
 	/**
+	 * Sets the box to movable
+	 *
+	 * @param boolean to set a box to movable or not
+	 */
+	public void setObstMovable(boolean move) {
+		if (move) {
+			boxTest.setBodyType(BodyDef.BodyType.DynamicBody);
+		} else {
+			boxTest.setBodyType(BodyDef.BodyType.StaticBody);
+		}
+	}
+
+	/**
+	 * Returns if laser senses something
+	 *
+	 * @param boolean to set a box to movable or not
+	 */
+	public boolean laserSense(BoxObstacle las) {
+		if (las.isSensor()) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * Creates a new LevelModel
 	 * 
 	 * The level is empty and there is no active physics world.  You must read
@@ -297,6 +328,40 @@ public class LevelModel {
 	    avatar.setDrawScale(scale);
 		activate(avatar);
 		attachLights(avatar);
+
+
+//		AssetManager manager = new AssetManager();
+//		manager.load("textures/box.png", Texture.class);
+//		TextureRegion boxText = createTexture(manager, "textures/box.png", true);
+
+		boxTest = new BoxObstacle(5, 2, 1, 1);
+		boxTest.setName("box");
+		boxTest.setDensity(1.0f);
+		boxTest.setDrawScale(scale);
+		boxTest.setBodyType(BodyDef.BodyType.StaticBody);
+		boxTest.setFixedRotation(true);
+		boxTest.setLinearDamping(15f);
+//		boxTest.setTexture(boxText);
+		activate(boxTest);
+
+		laser = new BoxObstacle(8, 2, 0.1f, 5);
+		laser.setName("laser");
+		laser.setBodyType(BodyDef.BodyType.StaticBody);
+//		laser.setTexture(boxText);
+		laser.setSensor(true);
+		activate(laser);
+	}
+
+	protected TextureRegion createTexture(AssetManager manager, String file, boolean repeat) {
+		if (manager.isLoaded(file)) {
+			TextureRegion region = new TextureRegion(manager.get(file, Texture.class));
+			region.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+			if (repeat) {
+				region.getTexture().setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+			}
+			return region;
+		}
+		return null;
 	}
 	
 	/**

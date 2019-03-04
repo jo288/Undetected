@@ -64,6 +64,7 @@ public class InputController {
 	private float horizontal;
 	/** How much did we move vertically? */
 	private float vertical;
+	private float holdSpace;
 	
 	/** An X-Box controller (if it is connected) */
 	XBox360Controller xbox;
@@ -136,6 +137,17 @@ public class InputController {
 	}
 
 	/**
+	 * Returns whether the space key is being held down or not.
+	 *
+	 * 1 = yes, 0 = no
+	 *
+	 * @return state of space key.
+	 */
+//	public float getHoldSpace() {
+//		return holdSpace;
+//	}
+
+	/**
 	 * Returns true if the action button was pressed.
 	 *
 	 * @return true if the action button was pressed.
@@ -143,7 +155,6 @@ public class InputController {
 	public boolean didAction() {
 		return actionPressed && !actionPrevious;
 	}
-
 	
 	/**
 	 * Creates a new input controller
@@ -185,8 +196,8 @@ public class InputController {
 	 * the drawing scale to convert screen coordinates to world coordinates.  The
 	 * bounds are for the crosshair.  They cannot go outside of this zone.
 	 *
-	 * //@param bounds The input bounds for the crosshair.
-	 * //@param scale  The drawing scale
+	 * @param bounds The input bounds for the crosshair.  
+	 * @param scale  The drawing scale
 	 */
 	private void readGamepad() {
 		resetPressed = xbox.getStart();
@@ -218,7 +229,7 @@ public class InputController {
 		nextPressed = (secondary && nextPressed) || (Gdx.input.isKeyPressed(Input.Keys.N));
 		exitPressed  = (secondary && exitPressed) || (Gdx.input.isKeyPressed(Input.Keys.ESCAPE));
 		actionPressed = (secondary && actionPressed) || (Gdx.input.isKeyPressed(Input.Keys.SPACE));
-		
+
 		// Directional controls
 		horizontal = (secondary ? horizontal : 0.0f);
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
@@ -227,6 +238,10 @@ public class InputController {
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 			horizontal -= 1.0f;
 		}
+
+//		if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+//			holdSpace += 1.0f;
+//		}
 		
 		vertical = (secondary ? vertical : 0.0f);
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {

@@ -4,6 +4,10 @@
     		"file":		"textures/earthtile.png",
     		"wrap":		true,
     	},
+		"box": {
+			"file":		"textures/box.png",
+			"wrap":		true,
+		},
     	"dude": {      
     		"file": 	"textures/walking.png",
     		"wrap":  	false,
