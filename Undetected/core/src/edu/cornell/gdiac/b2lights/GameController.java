@@ -278,6 +278,7 @@ public class GameController implements Screen, ContactListener {
 		
 		setComplete(false);
 		setFailure(false);
+		hasObjective = false;
 		countdown = -1;
 		
 		// Reload the json each time
