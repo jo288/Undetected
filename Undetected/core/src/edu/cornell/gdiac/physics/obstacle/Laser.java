@@ -18,8 +18,13 @@ public class Laser extends BoxObstacle {
     private float x_pos;
     private float y_pos;
     private boolean isOn;
+    /** how many seconds remaining until this laser turns off */
+    private int time_to_live;
+    /** the maximum time this laser can stay on for */
+    private static final int LIFESPAN = 4;
     private Fixture sensorFixture;
     private PolygonShape sensorShape;
+
 
 
     public Laser(float x, float y) {
@@ -47,6 +52,8 @@ public class Laser extends BoxObstacle {
         return "laser" + x_pos + y_pos;
     }
 
+    public void setTimeToLive(int t){time_to_live = t;}
+
     public void initialize() {
         TextureRegion texture = JsonAssetManager.getInstance().getEntry("laser", TextureRegion.class);
         setTexture(texture);
@@ -68,11 +75,18 @@ public class Laser extends BoxObstacle {
         Timer.schedule(new Timer.Task(){
                            @Override
                            public void run() {
-                               isOn = !isOn;
+                               if(time_to_live==0){
+                                   isOn = false;
+                                   time_to_live = LIFESPAN;
+                               }
+                               else{
+                                   isOn = true;
+                               }
+                               time_to_live--;
                            }
                        }
                 , 0        //    (delay)
-                , 2     //    (seconds)
+                , 1     //    (seconds)
         );
     }
 

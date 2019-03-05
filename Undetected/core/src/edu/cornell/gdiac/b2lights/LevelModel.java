@@ -29,7 +29,10 @@
 package edu.cornell.gdiac.b2lights;
 
 import box2dLight.*;
+
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.*;
@@ -337,12 +340,22 @@ public class LevelModel {
 		activate(box);
 
 		// Create Test Lazer
-		Laser testlaser = new Laser(9, 3.38f);
+		/*Laser testlaser = new Laser(9, 3.38f);
 		testlaser.setName("laser");
 		testlaser.initialize();
 		testlaser.setDrawScale(scale);
 		activate(testlaser);
-		testlaser.start();
+		testlaser.start();*/
+		float x = 10.5f;
+        for(int i=0; i<3; i++){
+            Laser laser = new Laser(x+i, 3.38f);
+            laser.setName("laser");
+            laser.initialize();
+            laser.setTimeToLive(i+1);
+            laser.setDrawScale(scale);
+            activate(laser);
+            laser.start();
+        }
 	}
 
 	public void placeBox(DudeModel player) {
