@@ -505,6 +505,7 @@ public class GameController implements Screen, ContactListener {
 
 			if((bd1==avatar && bd2 instanceof MoveableBox ) || (bd1 instanceof MoveableBox && bd2==avatar)){
 				avatarBoxCollision = true;
+				System.out.println("Box in contact");
 				if (bd1 instanceof  MoveableBox) {
 				    avatar.setBoxInContact(bd1);
                 } else if (bd2 instanceof  MoveableBox) {
@@ -512,8 +513,15 @@ public class GameController implements Screen, ContactListener {
                 }
 			}
 			if((bd1==avatar && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2==avatar)){
-				avatarLaserCollision = true;
-				setFailure(true);
+				if(bd1 instanceof Laser) {
+					if (((Laser) bd1).isTurnedOn()) {
+						avatarLaserCollision = true;
+						setFailure(true);
+					}
+					else{
+						avatarLaserCollision = false;
+					}
+				}
 			}
 
 //			Array<Laser> lasers = level.getLaser();

@@ -17,6 +17,7 @@ public class Laser extends BoxObstacle {
     private static final float LAZER_WIDTH = 0.01f;
     private float x_pos;
     private float y_pos;
+    private boolean isOn;
     private Fixture sensorFixture;
     private PolygonShape sensorShape;
 
@@ -61,5 +62,31 @@ public class Laser extends BoxObstacle {
 //
 //        sensorFixture = body.createFixture(sensorDef);
 //        sensorFixture.setUserData(getSensorName());
+    }
+
+    public void start(){
+        Timer.schedule(new Timer.Task(){
+                           @Override
+                           public void run() {
+                               isOn = !isOn;
+                           }
+                       }
+                , 0        //    (delay)
+                , 2     //    (seconds)
+        );
+    }
+
+    public boolean isTurnedOn(){return isOn;}
+
+    @Override
+    public void draw(ObstacleCanvas canvas){
+        if(isOn){
+            super.draw(canvas);
+        }
+        else{
+            //draw transparent texture instead
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.x,getAngle(),1,1, true);
+
+        }
     }
 }

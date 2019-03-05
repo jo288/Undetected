@@ -414,7 +414,26 @@ public class ObstacleCanvas {
     	spriteBatch.setColor(Color.WHITE);
 		spriteBatch.draw(image, x,  y);
 	}
-	
+
+	/**Draws transparent texture*/
+	public void draw(TextureRegion region, Color tint, float ox, float oy,
+					 float x, float y, float angle, float sx, float sy, boolean transparent) {
+		if (active != DrawPass.STANDARD) {
+			Gdx.app.error("GameCanvas", "Cannot draw without active begin()", new IllegalStateException());
+			return;
+		}
+
+		// BUG: The draw command for texture regions does not work properly.
+		// There is a workaround, but it will break if the bug is fixed.
+		// For now, it is better to set the affine transform directly.
+		computeTransform(ox,oy,x,y,angle,sx,sy);
+		if(!transparent)
+			spriteBatch.setColor(tint);
+		else{
+			spriteBatch.setColor(255, 255, 255, 0);
+		}
+		spriteBatch.draw(region, region.getRegionWidth(), region.getRegionHeight(), local);
+	}
 	/**
 	 * Draws the tinted texture at the given position.
 	 *

@@ -342,6 +342,7 @@ public class LevelModel {
 		testlaser.initialize();
 		testlaser.setDrawScale(scale);
 		activate(testlaser);
+		testlaser.start();
 	}
 
 	public void placeBox(DudeModel player) {
