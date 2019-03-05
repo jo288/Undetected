@@ -32,6 +32,7 @@ import box2dLight.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
@@ -66,12 +67,16 @@ public class LevelModel {
 	private DudeModel avatar;
 	/** Reference to the goalDoor (for collision detection) */
 	private ExitModel goalDoor;
+	/** Reference to the objective (for collision detection) */
+	private ObjectiveModel objective;
 
 	/** Whether or not the level is in debug more (showing off physics) */	
 	private boolean debug;
 	
 	/** All the objects in the world. */
 	protected PooledList<Obstacle> objects  = new PooledList<Obstacle>();
+	/** Objects to be destroyed*/
+	protected LinkedList<Obstacle> destroyed = new LinkedList<Obstacle>();
 
 	// LET THE TIGHT COUPLING BEGIN
 	/** The Box2D world */
@@ -158,6 +163,15 @@ public class LevelModel {
 	 */
 	public ExitModel getExit() {
 		return goalDoor;
+	}
+
+	/**
+	 * Returns a reference to the objective
+	 *
+	 * @return a reference to the objective
+	 */
+	public ObjectiveModel getObjective() {
+		return objective;
 	}
 
 	/**
@@ -304,6 +318,11 @@ public class LevelModel {
 		goalDoor.initialize(levelFormat.get("exit"));
 		goalDoor.setDrawScale(scale);
 		activate(goalDoor);
+
+		objective = new ObjectiveModel();
+		objective.initialize(levelFormat.get("key"));
+		objective.setDrawScale(scale);
+		activate(objective);
 
 	    JsonValue bounds = levelFormat.getChild("exterior");
 	    while (bounds != null) {
@@ -571,6 +590,7 @@ public class LevelModel {
 	protected void deactivate(Obstacle obj, Body bod) {
 		for (Obstacle o : objects) {
 			if (o == obj) {
+//				world.destroyBody(bod);
 				o.deactivatePhysics(world);
 				objects.remove(o);
 				bod.setUserData(null);
@@ -578,6 +598,27 @@ public class LevelModel {
 			}
 		}
 	}
+
+	/**
+	 * Queue the object to the to-be-destroyed object queue
+	 */
+	protected void queueDestroyed(Obstacle obj){
+        if (!destroyed.contains(obj))
+	        destroyed.add(obj);
+	}
+
+    /**
+     * Destroy the objects in the to-be-destroyed queue
+     */
+    protected void destroyObjects(){
+        for (Obstacle o : destroyed){
+//            if(o.getBody()!=null)
+//                world.destroyBody(o.getBody());
+            o.deactivatePhysics(world);
+            o.dispose();
+            objects.remove(o);
+        }
+    }
 
 	/**
 	 * Returns true if the object is in bounds.
@@ -609,6 +650,7 @@ public class LevelModel {
 			}
 			avatar.update(dt);
 			goalDoor.update(dt);
+			destroyObjects();
 			return true;
 		}
 		return false;

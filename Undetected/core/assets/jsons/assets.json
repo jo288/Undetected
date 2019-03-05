@@ -33,7 +33,11 @@
 		"boxDude": {
 			"file": 	"textures/boxdude.png",
 			"wrap": 	false,
-		}
+		},
+		"key": 		{
+			"file": 	"textures/key.png",
+			"wrap": 	false,
+		},
   	},
   	"fonts": {
   		"display": {

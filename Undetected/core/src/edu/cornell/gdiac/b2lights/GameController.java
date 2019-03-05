@@ -143,6 +143,8 @@ public class GameController implements Screen, ContactListener {
 	private boolean failed;
 	/** Countdown active for winning or losing */
 	private int countdown;
+	/** Whether the player reached the objective or not */
+	private boolean hasObjective;
 
 
 	/** Mark set to handle more sophisticated collision callbacks */
@@ -249,6 +251,7 @@ public class GameController implements Screen, ContactListener {
 		countdown = -1;
 		avatarBoxCollision = false;
 		avatarLaserCollision = false;
+		hasObjective = false;
 
 		setComplete(false);
 		setFailure(false);
@@ -354,7 +357,8 @@ public class GameController implements Screen, ContactListener {
 			avatar.pickupBox();
 			avatar.setBoxHeld(avatar.getBoxInContact());
 //			level.deactivate(bd1);
-            level.objects.remove(avatar.getBoxInContact());
+//            level.objects.remove(avatar.getBoxInContact());
+			level.queueDestroyed(avatar.getBoxInContact());
             avatar.getBoxInContact().setSensor(true);
 		}
 		
@@ -502,6 +506,7 @@ public class GameController implements Screen, ContactListener {
 
 			DudeModel avatar = level.getAvatar();
 			ExitModel door   = level.getExit();
+			ObjectiveModel objective = level.getObjective();
 
 			if((bd1==avatar && bd2 instanceof MoveableBox ) || (bd1 instanceof MoveableBox && bd2==avatar)){
 				avatarBoxCollision = true;
@@ -524,18 +529,16 @@ public class GameController implements Screen, ContactListener {
 				}
 			}
 
-//			Array<Laser> lasers = level.getLaser();
-//
-//			for (Laser laser : lasers) {
-//				if ((bd1 == avatar && bd2 == laser) ||
-//					(bd1 == laser && bd2 == avatar)) {
-//					System.out.println("ALARM");
-//				}
-//			}
+			// Check for objective
+			if ((bd1 == avatar && bd2 == objective) || (bd1 == objective && bd2== avatar)){
+				hasObjective = true;
+				level.queueDestroyed(objective);
+			}
+
 
 			// Check for win condition
-			if ((bd1 == avatar && bd2 == door  ) ||
-				(bd1 == door   && bd2 == avatar)) {
+			if ((bd1 == avatar && bd2 == door && hasObjective ) ||
+				(bd1 == door   && bd2 == avatar && hasObjective)) {
 				setComplete(true);
 			}
 		} catch (Exception e) {

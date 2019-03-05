@@ -92,7 +92,7 @@
        	"debugopacity":	192,
     },
     "exit": {
-        "pos":          [ 1.5, 10.35],
+        "pos":          [ 1.5, 1.5],
         "size":         [ 1.25, 1.25],
         "bodytype":    	"static",
         "density":  	  0.0,
@@ -104,6 +104,19 @@
        	"debugcolor":   "yellow",
        	"debugopacity":  200
     },
+	"key": {
+		"pos":          [ 1.5, 10.35],
+		"size":         [ 1.25, 1.25],
+		"bodytype":    	"static",
+		"density":  	  0.0,
+		"friction":       0.0,
+		"restitution":    0.0,
+		"collideBits":	"0010",
+		"excludeBits":	"0000",
+		"texture":      "key",
+		"debugcolor":   "yellow",
+		"debugopacity":  200
+	},
     "exterior": {
         "wall1": {
             "vertices": 16,
