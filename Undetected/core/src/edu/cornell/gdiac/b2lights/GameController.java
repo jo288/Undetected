@@ -528,6 +528,15 @@ public class GameController implements Screen, ContactListener {
 						avatarLaserCollision = false;
 					}
 				}
+				else{
+					if (((Laser) bd2).isTurnedOn()) {
+						avatarLaserCollision = true;
+						setFailure(true);
+					}
+					else{
+						avatarLaserCollision = false;
+					}
+				}
 			}
 
 			// Check for objective
