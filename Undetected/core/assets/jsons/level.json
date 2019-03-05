@@ -74,7 +74,8 @@
 	}, 
     "avatar": {
         "pos":        	[ 1.5, 1.5],
-        "radius":      	0.4,
+        "width":      	1.0,
+		"height": 		1.0,
         "bodytype":    	"dynamic",
         "density":        1.0,
         "friction":       0.0,

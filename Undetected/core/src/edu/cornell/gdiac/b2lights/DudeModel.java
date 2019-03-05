@@ -238,7 +238,17 @@ public class DudeModel extends CharacterModel {
 	 * The main purpose of this constructor is to set the initial capsule orientation.
 	 */
 	public DudeModel() {
-		super(0,0,1.0f);
+		super(1,1,1,1);
+		setFixedRotation(false);
+	}
+
+	/**
+	 * Creates a new dude with degenerate settings
+	 *
+	 * The main purpose of this constructor is to set the initial capsule orientation.
+	 */
+	public DudeModel(float x, float y,float width, float height) {
+		super(x,y,width, height);
 		setFixedRotation(false);
 	}
 
@@ -304,9 +314,12 @@ public class DudeModel extends CharacterModel {
 	public void initialize(JsonValue json) {
 		setName(json.name());
 		float[] pos  = json.get("pos").asFloatArray();
-		float radius = json.get("radius").asFloat();
+		float width = json.get("width").asFloat();
+		float height = json.get("height").asFloat();
 		setPosition(pos[0],pos[1]);
-		setRadius(radius);
+		setWidth(width);
+		setHeight(height);
+		setFixedRotation(true);
 		
 		// Technically, we should do error checking here.
 		// A JSON field might accidentally be missing

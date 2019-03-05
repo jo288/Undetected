@@ -327,6 +327,8 @@ public class LevelModel {
 	    avatar = new DudeModel();
 	    JsonValue avdata = levelFormat.get("avatar");
 	    avatar.initialize(avdata);
+	    avatar.setWidth(avatar.getTexture().getRegionWidth()/scale.x);
+		avatar.setHeight(avatar.getTexture().getRegionHeight()/scale.y);
 	    avatar.setDrawScale(scale);
 		activate(avatar);
 		attachLights(avatar);
@@ -336,6 +338,8 @@ public class LevelModel {
 		MoveableBox box = new MoveableBox(5,2);
 		box.setName("box");
 		box.initialize();
+		box.setWidth(box.getTexture().getRegionWidth()/scale.x);
+		box.setHeight(box.getTexture().getRegionHeight()/scale.y);
 		box.setDrawScale(scale);
 		activate(box);
 
