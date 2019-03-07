@@ -21,7 +21,7 @@ public class Laser extends BoxObstacle {
     /** how many seconds remaining until this laser turns off */
     private int time_to_live;
     /** the maximum time this laser can stay on for */
-    private static final int LIFESPAN = 3;
+    private static final int LIFESPAN = 4;
     private Fixture sensorFixture;
     private PolygonShape sensorShape;
 
@@ -95,6 +95,7 @@ public class Laser extends BoxObstacle {
     @Override
     public void draw(ObstacleCanvas canvas){
         if(isOn){
+            //canvas.setBlendState(ObstacleCanvas.BlendState.ALPHA_BLEND);
             super.draw(canvas);
         }
         else{

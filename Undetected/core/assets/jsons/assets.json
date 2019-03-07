@@ -1,9 +1,13 @@
 {
     "textures": {
     	"earth": {
-    		"file":		"textures/earthtile.png",
+    		"file":		"textures/wall2.png",
     		"wrap":		true,
     	},
+		"floor": {
+			"file": 	"textures/tile_light.png",
+			"wrap": 	true,
+		},
     	"dude": {      
     		"file": 	"textures/walking.png",
     		"wrap":  	false,

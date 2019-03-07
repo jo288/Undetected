@@ -254,5 +254,19 @@
             "debugcolor":   "yellow",
             "debugopacity":  200
   		},
+		"maze8": {
+			"pos":          [  10.0f, 8.0f],
+			"size":         [ 0.5f,  2.5f],
+			"pad":       	[ 0.1f, 0.1f],
+			"bodytype":     "static",
+			"density":        0.0,
+			"friction":       0.4,
+			"restitution":    0.1,
+			"collideBits":	"1000",
+			"excludeBits":	"0000",
+			"texture":      "earth",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		}
   	}
  }
