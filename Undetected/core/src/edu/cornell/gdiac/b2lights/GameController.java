@@ -365,12 +365,13 @@ public class GameController implements Screen, ContactListener {
 		
 		// Rotate the avatar to face the direction of movement
 		angleCache.set(input.getHorizontal(),input.getVertical());
-//		if (angleCache.len2() > 0.0f) {
-//			float angle = angleCache.angle();
-//			// Convert to radians with up as 0
-//			angle = (float)Math.PI*(angle-90.0f)/180.0f;
+		if (angleCache.len2() > 0.0f) {
+			float angle = angleCache.angle();
+			// Convert to radians with up as 0
+			angle = (float)Math.PI*(angle-90.0f)/180.0f;
 //			avatar.setAngle(angle);
-//		}
+			avatar.setDirection(angle);
+		}
 		angleCache.scl(avatar.getForce());
 		avatar.setMovement(angleCache.x,angleCache.y);
 		avatar.applyForce();

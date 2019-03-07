@@ -73,6 +73,9 @@ public class DudeModel extends CharacterModel {
 	/** Cache for internal force calculations */
 	private Vector2 forceCache = new Vector2();
 
+	/** Direction of character */
+	private float direction;
+
 	/**
 	 * Returns the directional movement of this character.
 	 * 
@@ -106,6 +109,10 @@ public class DudeModel extends CharacterModel {
 	public void setMovement(float dx, float dy) {
 		movement.set(dx,dy); 
 	}
+
+	public float getDirection(){ return direction; }
+
+	public void setDirection(float dir){ direction = dir; }
 
 	/**
 	 * Returns how much force to apply to get the dude moving
@@ -319,7 +326,7 @@ public class DudeModel extends CharacterModel {
 		setPosition(pos[0],pos[1]);
 		setWidth(width);
 		setHeight(height);
-		setFixedRotation(true);
+		setFixedRotation(false);
 		
 		// Technically, we should do error checking here.
 		// A JSON field might accidentally be missing

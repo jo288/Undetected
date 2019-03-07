@@ -36,6 +36,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
@@ -382,7 +383,9 @@ public class LevelModel {
 	}
 
 	public void placeBox(DudeModel player) {
-        MoveableBox box = new MoveableBox(player.getX()+1,player.getY());
+		float dir = player.getDirection();
+		//TODO: CHANGE THIS WHEN WE IMPLEMENT GRIDS
+        MoveableBox box = new MoveableBox(player.getX()-(float)Math.sin(dir),player.getY()+(float)Math.cos(dir));
         box.setName("box");
         box.initialize();
         box.setDrawScale(scale);
@@ -690,14 +693,27 @@ public class LevelModel {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		canvas.clear();
+
+		// Draw floor tile TODO: DELETE THIS WHEN GRIDS ARE IMPLEMENTED
+		TextureRegion floorTile = (JsonAssetManager.getInstance().getEntry("floor", TextureRegion.class));
+		int tilex = canvas.getWidth()/floorTile.getRegionWidth();
+		int tiley = canvas.getHeight()/floorTile.getRegionHeight();
 		
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin();
+
+		//TODO: DELETE THIS WHEN GRIDS ARE IMPLEMENTED
+		for (int i=0;i<tilex; i++){
+			for (int j=0; j<tiley; j++){
+				canvas.draw(floorTile, Color.WHITE, 0, 0, floorTile.getRegionWidth()*i, floorTile.getRegionWidth()*j, 0, 1, 1);
+			}
+		}
+
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
 		}
 		canvas.end();
-		
+
 		// Now draw the shadows
 		if (rayhandler != null && activeLight != -1) {
 			rayhandler.render();
