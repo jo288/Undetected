@@ -344,6 +344,8 @@ public class GameController implements Screen, ContactListener {
 		DudeModel avatar = level.getAvatar();
 		InputController input = InputController.getInstance();
 
+		// LASER CHECK
+
 		/*
 		if (input.didForward()) {
 			level.activateNextLight();
@@ -357,8 +359,6 @@ public class GameController implements Screen, ContactListener {
 		} else if(input.didAction()&&!avatar.getHasBox() && avatarBoxCollision){
 			avatar.pickupBox();
 			avatar.setBoxHeld(avatar.getBoxInContact());
-//			level.deactivate(bd1);
-//            level.objects.remove(avatar.getBoxInContact());
 			level.queueDestroyed(avatar.getBoxInContact());
             avatar.getBoxInContact().setSensor(true);
 		}
@@ -512,7 +512,7 @@ public class GameController implements Screen, ContactListener {
 
 			if((bd1==avatar && bd2 instanceof MoveableBox ) || (bd1 instanceof MoveableBox && bd2==avatar)){
 				avatarBoxCollision = true;
-				System.out.println("Box in contact");
+//				System.out.println("Box in contact");
 				if (bd1 instanceof  MoveableBox) {
 				    avatar.setBoxInContact(bd1);
                 } else if (bd2 instanceof  MoveableBox) {

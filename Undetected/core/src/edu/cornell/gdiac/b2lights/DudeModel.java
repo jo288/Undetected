@@ -326,7 +326,7 @@ public class DudeModel extends CharacterModel {
 		setPosition(pos[0],pos[1]);
 		setWidth(width);
 		setHeight(height);
-		setFixedRotation(false);
+		setFixedRotation(true);
 		
 		// Technically, we should do error checking here.
 		// A JSON field might accidentally be missing
