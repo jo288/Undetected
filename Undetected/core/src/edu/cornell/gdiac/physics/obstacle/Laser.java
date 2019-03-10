@@ -31,14 +31,14 @@ public class Laser extends BoxObstacle {
         super(x, y, LAZER_WIDTH, LAZER_HEIGHT);
         x_pos = x;
         y_pos = y;
-        setSensor(true);
+        //setSensor(true);
     }
 
     public Laser() {
         super(LAZER_WIDTH, LAZER_HEIGHT);
         x_pos = 0;
         y_pos = 0;
-        setSensor(true);
+        //setSensor(true);
     }
 
     /**

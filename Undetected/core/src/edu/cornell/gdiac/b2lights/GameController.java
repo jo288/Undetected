@@ -519,26 +519,6 @@ public class GameController implements Screen, ContactListener {
 				    avatar.setBoxInContact(bd2);
                 }
 			}
-			if((bd1==avatar && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2==avatar)){
-				if(bd1 instanceof Laser) {
-					if (((Laser) bd1).isTurnedOn()) {
-						avatarLaserCollision = true;
-						setFailure(true);
-					}
-					else{
-						avatarLaserCollision = false;
-					}
-				}
-				else{
-					if (((Laser) bd2).isTurnedOn()) {
-						avatarLaserCollision = true;
-						setFailure(true);
-					}
-					else{
-						avatarLaserCollision = false;
-					}
-				}
-			}
 
 			// Check for objective
 			if ((bd1 == avatar && bd2 == objective) || (bd1 == objective && bd2== avatar)){
@@ -578,10 +558,53 @@ public class GameController implements Screen, ContactListener {
 			avatarBoxCollision = false;
             avatar.setBoxInContact(null);
 		}
+		if((bd1 == avatar && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2==avatar)){
+			avatarLaserCollision = false;
+		}
 	}
 
 	/** Unused ContactListener method */
-	public void postSolve(Contact contact, ContactImpulse impulse) {}
+	public void postSolve(Contact contact, ContactImpulse impulse) {
+
+	}
 	/** Unused ContactListener method */
-	public void preSolve(Contact contact, Manifold oldManifold) {}
+	public void preSolve(Contact contact, Manifold oldManifold) {
+		Fixture fix1 = contact.getFixtureA();
+		Fixture fix2 = contact.getFixtureB();
+
+		Body body1 = fix1.getBody();
+		Body body2 = fix2.getBody();
+
+		Object fd1 = fix1.getUserData();
+		Object fd2 = fix2.getUserData();
+
+		Obstacle bd1 = (Obstacle)body1.getUserData();
+		Obstacle bd2 = (Obstacle)body2.getUserData();
+		DudeModel avatar = level.getAvatar();
+		if((bd1 == avatar && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2==avatar)){
+			contact.setEnabled(false);
+			if(bd1 instanceof Laser) {
+				if (((Laser) bd1).isTurnedOn()) {
+					avatarLaserCollision = true;
+					if(!failed){
+						setFailure(true);
+					}
+				}
+				else{
+					avatarLaserCollision =false;
+				}
+			}
+			else{
+				if (((Laser) bd2).isTurnedOn()) {
+					avatarLaserCollision = true;
+					if(!failed){
+						setFailure(true);
+					}
+				}
+				else{
+					avatarLaserCollision =false;
+				}
+			}
+		}
+	}
 }
