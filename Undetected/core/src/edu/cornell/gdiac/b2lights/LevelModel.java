@@ -396,25 +396,6 @@ public class LevelModel {
 			activate(box);
 		}
 
-		// Create Test Lazer
-		/*Laser testlaser = new Laser(9, 3.38f);
-		testlaser.setName("laser");
-		testlaser.initialize();
-		testlaser.setDrawScale(scale);
-		activate(testlaser);
-		testlaser.start();*/
-
-//		float x = 10.5f;
-//        for(int i=0; i<3; i++){
-//            Laser laser = new Laser(x+i, 3.38f);
-//            laser.setName("laser");
-//            laser.initialize();
-//            laser.setTimeToLive(i+1);
-//            laser.setDrawScale(scale);
-//            activate(laser);
-//            laser.start();
-//        }
-
 		JsonValue laserdata = levelFormat.getChild("lasers");
 		while (laserdata!=null){
 			Laser l = new Laser();

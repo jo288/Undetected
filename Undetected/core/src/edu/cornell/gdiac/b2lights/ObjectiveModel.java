@@ -106,6 +106,7 @@ public class ObjectiveModel extends BoxObstacle {
 		String key = json.get("texture").asString();
 		TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
 		setTexture(texture);
+		setOrigin(origin.x,0);
 	}
 	/**
 	 * Draws the physics object.

@@ -266,12 +266,26 @@ public class Board {
 		canvas.draw(tileTexture, Color.WHITE, 0, 0,
 				TILE_WIDTH * x, TILE_WIDTH * y, 0, TILE_WIDTH/tileTexture.getRegionWidth(), TILE_WIDTH/tileTexture.getRegionHeight());
 	}
-	
-	// METHODS FOR LAB 2
 
 	// CONVERSION METHODS (OPTIONAL)
 	// Use these methods to convert between tile coordinates (int) and
 	// world coordinates (float).
+
+	/**
+	 * Returns the board cell index for a screen position.
+	 *
+	 * While all positions are 2-dimensional, the dimensions to
+	 * the board are symmetric. This allows us to use the same
+	 * method to convert an x coordinate or a y coordinate to
+	 * a cell index.
+	 *
+	 * @param f Screen position coordinate
+	 *
+	 * @return the board cell index for a screen position.
+	 */
+	public int physicsToBoard(float f) {
+		return (int)(f - 0.5f);
+	}
 
 	/**
 	 * Returns the board cell index for a screen position.
@@ -294,6 +308,22 @@ public class Board {
 	 *
 	 * While all positions are 2-dimensional, the dimensions to
  	 * the board are symmetric. This allows us to use the same
+	 * method to convert an x coordinate or a y coordinate to
+	 * a cell index.
+	 *
+	 * @param n Tile cell index
+	 *
+	 * @return the screen position coordinate for a board cell index.
+	 */
+	public float boardToPhysics(int n) {
+		return (float) (n + 0.5f);
+	}
+
+	/**
+	 * Returns the screen position coordinate for a board cell index.
+	 *
+	 * While all positions are 2-dimensional, the dimensions to
+	 * the board are symmetric. This allows us to use the same
 	 * method to convert an x coordinate or a y coordinate to
 	 * a cell index.
 	 *
