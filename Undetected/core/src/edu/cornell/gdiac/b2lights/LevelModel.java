@@ -382,25 +382,18 @@ public class LevelModel {
 
 		// Create Test Box
 		JsonValue boxesdata = levelFormat.get("boxes");
-		JsonValue boxdata = boxesdata.child();
-		while (boxdata!=null){
+		int[] boxPositions = boxesdata.get("pos").asIntArray();
+		for(int i=0;i<boxPositions.length;i+=2){
 			MoveableBox box = new MoveableBox();
-			box.initialize(boxdata);
+			box.initialize(boxesdata);
 			if (box.getTexture().getRegionWidth()<tSize)
 				box.setWidth(box.getTexture().getRegionWidth()/scale.x);
 			if (box.getTexture().getRegionHeight()<tSize)
 				box.setHeight(box.getTexture().getRegionHeight()/scale.y);
+			box.setPosition(boxPositions[i]+0.5f,boxPositions[i+1]+0.5f);
 			box.setDrawScale(scale);
 			activate(box);
-			boxdata = boxdata.next();
 		}
-
-//		MoveableBox box = new MoveableBox(5,2);
-//		box.initialize();
-//		box.setWidth(box.getTexture().getRegionWidth()/scale.x);
-//		box.setHeight(box.getTexture().getRegionHeight()/scale.y);
-//		box.setDrawScale(scale);
-//		activate(box);
 
 		// Create Test Lazer
 		/*Laser testlaser = new Laser(9, 3.38f);
@@ -423,12 +416,12 @@ public class LevelModel {
 
 	public void placeBox(DudeModel player) {
 		float dir = player.getDirection();
-		//TODO: CHANGE THIS WHEN WE IMPLEMENT GRIDS
-        MoveableBox box = new MoveableBox(player.getX()-(float)Math.sin(dir),player.getY()+(float)Math.cos(dir));
-        box.setName("box");
-        box.initialize();
-        box.setDrawScale(scale);
-        activate(box);
+//        MoveableBox box = new MoveableBox(player.getX()-(float)Math.sin(dir),player.getY()+(float)Math.cos(dir));
+//        box.setName("box");
+//        box.initialize();
+//        box.setDrawScale(scale);
+//        activate(box);
+
     }
 	
 	/**

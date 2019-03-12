@@ -1,5 +1,4 @@
 {
-	"physicsSize":  	[20.0,15.0],
 	"graphicSize":    	[ 800, 600],
 	"boardSize": 		[  20,	15],
 	"tileSize": 		32,
@@ -107,8 +106,7 @@
        	"debugopacity":  200
     },
 	"boxes": {
-		"box1": {
-			"pos":          [ 4,4],
+			"pos":          [ 4,4,10,10],
 			"size":         [ 1,1],
 			"bodytype":    	"static",
 			"density":  	  1.0,
@@ -119,7 +117,6 @@
 			"texture":      "box",
 			"debugcolor":   "yellow",
 			"debugopacity":  200
-		}
 	},
 	"key": {
 		"pos":          [ 1.5, 10.35],
