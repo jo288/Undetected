@@ -13,7 +13,7 @@ import edu.cornell.gdiac.physics.obstacle.*;
 import javax.xml.soap.Text;
 
 public class MoveableBox extends BoxObstacle{
-    private static final float BOX_SIZE = 0.5f;
+    private static final float BOX_SIZE = 0.3f;
     private boolean held = false;
     private TextureRegion boxTexture;
     private boolean flaggedForDelete;

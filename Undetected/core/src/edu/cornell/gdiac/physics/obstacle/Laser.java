@@ -58,17 +58,6 @@ public class Laser extends BoxObstacle {
         TextureRegion texture = JsonAssetManager.getInstance().getEntry("laser", TextureRegion.class);
         setTexture(texture);
         this.setBodyType(BodyDef.BodyType.StaticBody);
-
-//        Vector2 sensorCenter = new Vector2(x_pos, LAZER_HEIGHT/2);
-//        FixtureDef sensorDef = new FixtureDef();
-//        sensorDef.density = 0f;
-//        sensorDef.isSensor = true;
-//        sensorShape = new PolygonShape();
-//        sensorShape.setAsBox(LAZER_WIDTH, LAZER_HEIGHT, sensorCenter, 0.0f);
-//        sensorDef.shape = sensorShape;
-//
-//        sensorFixture = body.createFixture(sensorDef);
-//        sensorFixture.setUserData(getSensorName());
     }
 
     public void start(){

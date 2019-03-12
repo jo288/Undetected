@@ -363,13 +363,6 @@ public class LevelModel {
 		box.setDrawScale(scale);
 		activate(box);
 
-		// Create Test Lazer
-		/*Laser testlaser = new Laser(9, 3.38f);
-		testlaser.setName("laser");
-		testlaser.initialize();
-		testlaser.setDrawScale(scale);
-		activate(testlaser);
-		testlaser.start();*/
 		float x = 10.5f;
         for(int i=0; i<3; i++){
             Laser laser = new Laser(x+i, 3.38f);
@@ -385,7 +378,7 @@ public class LevelModel {
 	public void placeBox(DudeModel player) {
 		float dir = player.getDirection();
 		//TODO: CHANGE THIS WHEN WE IMPLEMENT GRIDS
-        MoveableBox box = new MoveableBox(player.getX()-(float)Math.sin(dir),player.getY()+(float)Math.cos(dir));
+        MoveableBox box = new MoveableBox(player.getX()-(float)Math.sin(dir)/2,player.getY()+(float)Math.cos(dir)/2);
         box.setName("box");
         box.initialize();
         box.setDrawScale(scale);
