@@ -35,7 +35,13 @@ public class BoxObstacle extends SimpleObstacle {
 	private Fixture geometry;
 	/** Cache of the polygon vertices (for resizing) */
 	protected float[] vertices;
-	
+	public static float tileOffset;
+
+
+
+	public static void setTileOffset(float value) { tileOffset = value;}
+	public static float getTileOffset() { return tileOffset;}
+
 	/** 
 	 * Returns the dimensions of this box
 	 *

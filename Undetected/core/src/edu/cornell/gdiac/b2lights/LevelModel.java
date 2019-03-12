@@ -305,10 +305,11 @@ public class LevelModel {
 	 * @param levelFormat	the JSON tree defining the level
 	 */
 	public void populate(JsonValue levelFormat) {
-		float[] pSize = levelFormat.get("physicsSize").asFloatArray();
+//		float[] pSize = levelFormat.get("physicsSize").asFloatArray();
 		int[] gSize = levelFormat.get("graphicSize").asIntArray();
 		int[] bSize = levelFormat.get("boardSize").asIntArray();
 		int tSize = levelFormat.get("tileSize").asInt();
+		float[] pSize = {((float)gSize[0])/(float)tSize,((float)gSize[1])/(float)tSize};
 
 
 		
@@ -366,11 +367,12 @@ public class LevelModel {
 	    }
 	    */
 
+		BoxObstacle.setTileOffset(tSize/2f);
+
 		// Create the dude and attach light sources
 	    avatar = new DudeModel();
 	    JsonValue avdata = levelFormat.get("avatar");
 	    avatar.initialize(avdata);
-	    avatar.setHeightOffset(tSize/2f);
 	    avatar.setWidth(avatar.getTexture().getRegionWidth()/scale.x);
 		avatar.setHeight(avatar.getTexture().getRegionHeight()/scale.y);
 	    avatar.setDrawScale(scale);
@@ -379,24 +381,26 @@ public class LevelModel {
 
 
 		// Create Test Box
-//		JsonValue boxesdata = levelFormat.get("boxes");
-//		JsonValue boxdata = boxesdata.child();
-//		while (boxdata!=null){
-//			MoveableBox box = new MoveableBox();
-//			box.initialize(boxdata);
-//			box.setWidth(box.getTexture().getRegionWidth()/scale.x);
-//			box.setHeight(box.getTexture().getRegionHeight()/scale.y);
-//			box.setDrawScale(scale);
-//			activate(box);
-//			boxdata = boxdata.next();
-//		}
+		JsonValue boxesdata = levelFormat.get("boxes");
+		JsonValue boxdata = boxesdata.child();
+		while (boxdata!=null){
+			MoveableBox box = new MoveableBox();
+			box.initialize(boxdata);
+			if (box.getTexture().getRegionWidth()<tSize)
+				box.setWidth(box.getTexture().getRegionWidth()/scale.x);
+			if (box.getTexture().getRegionHeight()<tSize)
+				box.setHeight(box.getTexture().getRegionHeight()/scale.y);
+			box.setDrawScale(scale);
+			activate(box);
+			boxdata = boxdata.next();
+		}
 
-		MoveableBox box = new MoveableBox(5,2);
-		box.initialize();
-		box.setWidth(box.getTexture().getRegionWidth()/scale.x);
-		box.setHeight(box.getTexture().getRegionHeight()/scale.y);
-		box.setDrawScale(scale);
-		activate(box);
+//		MoveableBox box = new MoveableBox(5,2);
+//		box.initialize();
+//		box.setWidth(box.getTexture().getRegionWidth()/scale.x);
+//		box.setHeight(box.getTexture().getRegionHeight()/scale.y);
+//		box.setDrawScale(scale);
+//		activate(box);
 
 		// Create Test Lazer
 		/*Laser testlaser = new Laser(9, 3.38f);

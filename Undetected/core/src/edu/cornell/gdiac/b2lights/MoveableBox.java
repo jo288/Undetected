@@ -53,8 +53,7 @@ public class MoveableBox extends BoxObstacle{
         setName(json.name());
         int[] pos  = json.get("pos").asIntArray();
         int[] size = json.get("size").asIntArray();
-        setPosition(pos[0],pos[1]);
-//        setDimension(size[0],size[1]);
+        setPosition(pos[0]+0.5f,pos[1]+0.5f);
         setWidth(size[0]);
         setHeight(size[1]);
 
@@ -91,6 +90,17 @@ public class MoveableBox extends BoxObstacle{
         TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
         setTexture(texture);
         setOrigin(origin.x, 0);
+    }
+
+    /**
+     * Draws the physics object.
+     *
+     * @param canvas Drawing context
+     */
+    public void draw(ObstacleCanvas canvas) {
+        if (texture != null) {
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+        }
     }
 
 }

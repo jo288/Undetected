@@ -64,7 +64,6 @@ public class DudeModel extends CharacterModel {
 	private TextureRegion defaultCharTexture;
 	/** Texture of character with box */
 	private TextureRegion boxCharTexture;
-	private float heightOffset;
 
 	/** FilmStrip pointer to the texture region */
 	private FilmStrip filmstrip;
@@ -154,8 +153,6 @@ public class DudeModel extends CharacterModel {
 	public void setDamping(float value) {
 		damping = value;
 	}
-
-	public void setHeightOffset(float value) { heightOffset = value; }
 	
 	/**
 	 * Returns the upper limit on dude left-right movement.  
@@ -328,7 +325,7 @@ public class DudeModel extends CharacterModel {
 		int width = json.get("width").asInt();
 		int height = json.get("height").asInt();
 		int[] pos = json.get("tilepos").asIntArray();
-		setPosition(pos[0],pos[1]);
+		setPosition(pos[0]+0.5f,pos[1]+0.5f);
 		setWidth(width);
 		setHeight(height);
 		setFixedRotation(true);
@@ -446,7 +443,7 @@ public class DudeModel extends CharacterModel {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		if (texture != null) {
-			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-heightOffset,getAngle(),1.0f,1.0f);
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getTileOffset(),getAngle(),1.0f,1.0f);
 		}
 	}
 }
