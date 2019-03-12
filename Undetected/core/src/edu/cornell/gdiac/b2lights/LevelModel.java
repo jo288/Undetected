@@ -421,7 +421,9 @@ public class LevelModel {
 //        box.initialize();
 //        box.setDrawScale(scale);
 //        activate(box);
-
+		Obstacle b = player.getBoxHeld();
+		b.setPosition(player.getX()-(float)Math.sin(dir),player.getY()+(float)Math.cos(dir));
+		queueEnabled(b);
     }
 	
 	/**
@@ -661,6 +663,7 @@ public class LevelModel {
 	 */
 	protected void disableObjects(){
 		for (Obstacle o : disabled){
+			o.setActive(false);
 			objects.remove(o);
 		}
 	}
@@ -669,8 +672,10 @@ public class LevelModel {
 	 * Enable the objects in the enabled queue
 	 */
 	protected void enableObjects(){
-		for (Obstacle o : enabled){
+		for (Obstacle o : enabled) {
+			o.setActive(true);
 			objects.add(o);
+			enabled.remove(o);
 		}
 	}
 
@@ -705,6 +710,8 @@ public class LevelModel {
 			avatar.update(dt);
 			goalDoor.update(dt);
 			destroyObjects();
+			disableObjects();
+			enableObjects();
 			return true;
 		}
 		return false;

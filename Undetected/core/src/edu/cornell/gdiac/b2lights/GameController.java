@@ -352,13 +352,12 @@ public class GameController implements Screen, ContactListener {
 		}*/
 
 		if(input.didAction()&&avatar.getHasBox()){
-			avatar.dropBox();
 			level.placeBox(avatar);
+			avatar.dropBox();
 		} else if(input.didAction()&&!avatar.getHasBox() && avatarBoxCollision){
-			avatar.pickupBox();
 			avatar.setBoxHeld(avatar.getBoxInContact());
-			level.queueDestroyed(avatar.getBoxInContact());
-            avatar.getBoxInContact().setSensor(true);
+			avatar.pickupBox();
+			level.queueDisabled(avatar.getBoxInContact());
 		}
 		
 		// Rotate the avatar to face the direction of movement
@@ -513,8 +512,10 @@ public class GameController implements Screen, ContactListener {
 //				System.out.println("Box in contact");
 				if (bd1 instanceof  MoveableBox) {
 				    avatar.setBoxInContact(bd1);
+				    System.out.println("boxincontact");
                 } else if (bd2 instanceof  MoveableBox) {
 				    avatar.setBoxInContact(bd2);
+					System.out.println("boxincontact");
                 }
 			}
 

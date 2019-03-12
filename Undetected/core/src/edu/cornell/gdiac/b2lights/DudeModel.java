@@ -299,18 +299,9 @@ public class DudeModel extends CharacterModel {
 		return boxContact;
 	}
 
-	public void setBoxHeld(Obstacle box) {
-		if (!hasBox) {
-			boxHeld = box;
-		}
-	}
+	public void setBoxHeld(Obstacle box) { boxHeld = box; }
 
-	public Obstacle getBoxHeld() {
-		if (hasBox) {
-			return boxHeld;
-		}
-		return null;
-	}
+	public Obstacle getBoxHeld() { return boxHeld; }
 
 	/**
 	 * Initializes the dude via the given JSON value
