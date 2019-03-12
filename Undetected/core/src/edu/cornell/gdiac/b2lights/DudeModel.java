@@ -313,9 +313,9 @@ public class DudeModel extends CharacterModel {
 	 */
 	public void initialize(JsonValue json) {
 		setName(json.name());
-		int width = json.get("width").asInt();
-		int height = json.get("height").asInt();
-		int[] pos = json.get("tilepos").asIntArray();
+		float width = json.get("width").asFloat();
+		float height = json.get("height").asFloat();
+		float[] pos = json.get("pos").asFloatArray();
 		setPosition(pos[0]+0.5f,pos[1]+0.5f);
 		setWidth(width);
 		setHeight(height);
@@ -434,7 +434,7 @@ public class DudeModel extends CharacterModel {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		if (texture != null) {
-			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getTileOffset(),getAngle(),1.0f,1.0f);
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.0f,1.0f);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"graphicSize":    	[ 800, 600],
-	"boardSize": 		[  20,	15],
+	"boardSize": 		[  24,	18],
 	"tileSize": 		32,
 	"fpsRange":		  	[  20,  60],
 	"lighting": {
@@ -74,7 +74,7 @@
 		}
 	}, 
     "avatar": {
-		"tilepos": 		[   3,	 3],
+		"pos": 			[   3,	 3],
         "width":      	1,
 		"height": 		1,
         "bodytype":    	"dynamic",
@@ -93,8 +93,8 @@
        	"debugopacity":	192,
     },
     "exit": {
-        "pos":          [ 1.5, 1.5],
-        "size":         [ 1.25, 1.25],
+        "pos":          [ 2, 1],
+        "size":         [ 2, 1],
         "bodytype":    	"static",
         "density":  	  0.0,
         "friction":       0.0,
@@ -119,8 +119,8 @@
 			"debugopacity":  200
 	},
 	"key": {
-		"pos":          [ 1.5, 10.35],
-		"size":         [ 1.25, 1.25],
+		"pos":          [ 1,10],
+		"size":         [ 1, 1],
 		"bodytype":    	"static",
 		"density":  	  0.0,
 		"friction":       0.0,

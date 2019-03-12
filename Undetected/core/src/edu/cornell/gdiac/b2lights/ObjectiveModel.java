@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.utils.JsonValue;
 import edu.cornell.gdiac.physics.obstacle.BoxObstacle;
+import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.JsonAssetManager;
 
 import java.lang.reflect.Field;
@@ -70,7 +71,7 @@ public class ObjectiveModel extends BoxObstacle {
 		setName(json.name());
 		float[] pos  = json.get("pos").asFloatArray();
 		float[] size = json.get("size").asFloatArray();
-		setPosition(pos[0],pos[1]);
+		setPosition(pos[0]+0.5f*(size[0]%2),pos[1]+0.5f*(size[1]%2));
 		setDimension(size[0],size[1]);
 		
 		// Technically, we should do error checking here.
@@ -105,5 +106,15 @@ public class ObjectiveModel extends BoxObstacle {
 		String key = json.get("texture").asString();
 		TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
 		setTexture(texture);
+	}
+	/**
+	 * Draws the physics object.
+	 *
+	 * @param canvas Drawing context
+	 */
+	public void draw(ObstacleCanvas canvas) {
+		if (texture != null) {
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+		}
 	}
 }

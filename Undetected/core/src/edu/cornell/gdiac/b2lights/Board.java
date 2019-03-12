@@ -85,7 +85,6 @@ public class Board {
 			tiles[ii] = new TileState();
 		}
 		resetTiles();
-		tiles[0].isValid = false;
 	}
 	
 	/**
@@ -256,7 +255,7 @@ public class Board {
 		//		TILE_WIDTH * (x + 0.5f), TILE_WIDTH * (y + 0.5f), 0, 1.0f, 1.0f);
 
 		canvas.draw(tileTexture, Color.WHITE, 0, 0,
-				TILE_WIDTH * x, TILE_WIDTH * y, 0, 1.0f, 1.0f);
+				TILE_WIDTH * x, TILE_WIDTH * y, 0, TILE_WIDTH/tileTexture.getRegionWidth(), TILE_WIDTH/tileTexture.getRegionHeight());
 	}
 	
 	// METHODS FOR LAB 2

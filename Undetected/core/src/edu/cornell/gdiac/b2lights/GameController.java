@@ -512,10 +512,8 @@ public class GameController implements Screen, ContactListener {
 //				System.out.println("Box in contact");
 				if (bd1 instanceof  MoveableBox) {
 				    avatar.setBoxInContact(bd1);
-				    System.out.println("boxincontact");
                 } else if (bd2 instanceof  MoveableBox) {
 				    avatar.setBoxInContact(bd2);
-					System.out.println("boxincontact");
                 }
 			}
 

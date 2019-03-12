@@ -52,7 +52,7 @@ public class MoveableBox extends BoxObstacle{
     public void initialize(JsonValue json){
         setName(json.name());
 //        int[] pos  = json.get("pos").asIntArray();
-        int[] size = json.get("size").asIntArray();
+        float[] size = json.get("size").asFloatArray();
 //        setPosition(pos[0]+0.5f,pos[1]+0.5f);
         setWidth(size[0]);
         setHeight(size[1]);

@@ -310,8 +310,7 @@ public class LevelModel {
 		int[] bSize = levelFormat.get("boardSize").asIntArray();
 		int tSize = levelFormat.get("tileSize").asInt();
 		float[] pSize = {((float)gSize[0])/(float)tSize,((float)gSize[1])/(float)tSize};
-
-
+		BoxObstacle.setTileOffset(tSize/2f);
 		
 		world = new World(Vector2.Zero,false);
 		board = new Board(bSize[0],bSize[1],tSize);
@@ -339,15 +338,23 @@ public class LevelModel {
 		// Add level goal
 		goalDoor = new ExitModel();
 		goalDoor.initialize(levelFormat.get("exit"));
+		if (goalDoor.getTexture().getRegionWidth()<tSize)
+			goalDoor.setWidth(goalDoor.getTexture().getRegionWidth()/scale.x);
+		if (goalDoor.getTexture().getRegionHeight()<tSize)
+			goalDoor.setHeight(goalDoor.getTexture().getRegionHeight()/scale.y);
 		goalDoor.setDrawScale(scale);
 		activate(goalDoor);
 
 		objective = new ObjectiveModel();
 		objective.initialize(levelFormat.get("key"));
+		if (objective.getTexture().getRegionWidth()<tSize)
+			objective.setWidth(objective.getTexture().getRegionWidth()/scale.x);
+		if (objective.getTexture().getRegionHeight()<tSize)
+			objective.setHeight(objective.getTexture().getRegionHeight()/scale.y);
 		objective.setDrawScale(scale);
 		activate(objective);
 
-		/*
+
 	    JsonValue bounds = levelFormat.getChild("exterior");
 	    while (bounds != null) {
 	    	ExteriorModel obj = new ExteriorModel();
@@ -356,7 +363,7 @@ public class LevelModel {
 	        activate(obj);
 	        bounds = bounds.next();
 	    }
-	    
+
 	    JsonValue walls = levelFormat.getChild("interior");
 	    while (walls != null) {
 	    	InteriorModel obj = new InteriorModel();
@@ -365,16 +372,17 @@ public class LevelModel {
 	        activate(obj);
 	        walls = walls.next();
 	    }
-	    */
 
-		BoxObstacle.setTileOffset(tSize/2f);
+
 
 		// Create the dude and attach light sources
 	    avatar = new DudeModel();
 	    JsonValue avdata = levelFormat.get("avatar");
 	    avatar.initialize(avdata);
-	    avatar.setWidth(avatar.getTexture().getRegionWidth()/scale.x);
-		avatar.setHeight(avatar.getTexture().getRegionHeight()/scale.y);
+		if (avatar.getTexture().getRegionWidth()<tSize)
+			avatar.setWidth(avatar.getTexture().getRegionWidth()/scale.x);
+		if (avatar.getTexture().getRegionHeight()<tSize)
+			avatar.setHeight(avatar.getTexture().getRegionHeight()/scale.y);
 	    avatar.setDrawScale(scale);
 		activate(avatar);
 		attachLights(avatar);
@@ -416,11 +424,6 @@ public class LevelModel {
 
 	public void placeBox(DudeModel player) {
 		float dir = player.getDirection();
-//        MoveableBox box = new MoveableBox(player.getX()-(float)Math.sin(dir),player.getY()+(float)Math.cos(dir));
-//        box.setName("box");
-//        box.initialize();
-//        box.setDrawScale(scale);
-//        activate(box);
 		Obstacle b = player.getBoxHeld();
 		b.setPosition(player.getX()-(float)Math.sin(dir),player.getY()+(float)Math.cos(dir));
 		queueEnabled(b);
