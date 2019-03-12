@@ -581,11 +581,11 @@ public class GameController implements Screen, ContactListener {
 		Obstacle bd1 = (Obstacle)body1.getUserData();
 		Obstacle bd2 = (Obstacle)body2.getUserData();
 		DudeModel avatar = level.getAvatar();
-		if(((bd1 == avatar && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2==avatar)) ||
+		if (((bd1 == avatar && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2==avatar)) ||
 				((bd1 instanceof MoveableBox && bd2 instanceof Laser) ||
 						(bd1 instanceof Laser && bd2 instanceof MoveableBox))){
 			contact.setEnabled(false);
-			if(bd1 instanceof Laser) {
+			if (bd1 instanceof Laser) {
 				if (((Laser) bd1).isTurnedOn()) {
 					avatarLaserCollision = true;
 					if(!failed){
