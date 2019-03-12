@@ -86,6 +86,15 @@ public class Board {
 		}
 		resetTiles();
 	}
+
+	/**
+	 * Sets invalid tiles.
+	 */
+	public void setInvalidTiles(int[] invalidTiles) {
+		for(int i=0;i<invalidTiles.length;i+=2){
+			getTileState(invalidTiles[i],invalidTiles[i+1]).isValid = false;
+		}
+	}
 	
 	/**
 	 * Resets the values of all the tiles on screen.

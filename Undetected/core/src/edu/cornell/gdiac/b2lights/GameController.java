@@ -344,12 +344,12 @@ public class GameController implements Screen, ContactListener {
 
 		// LASER CHECK
 
-		/*
+
 		if (input.didForward()) {
 			level.activateNextLight();
 		} else if (input.didBack()){
 			level.activatePrevLight();
-		}*/
+		}
 
 		if(input.didAction()&&avatar.getHasBox()){
 			level.placeBox(avatar);

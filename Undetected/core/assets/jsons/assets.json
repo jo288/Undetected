@@ -1,9 +1,17 @@
 {
     "textures": {
     	"earth": {
-    		"file":		"textures/wall2_backup.png",
+    		"file":		"textures/wallvertical.png",
     		"wrap":		true,
     	},
+		"wallvertical": {
+			"file":		"textures/wallvertical.png",
+			"wrap":		false,
+		},
+		"wallhorizontal": {
+			"file":		"textures/wallhorizontal.png",
+			"wrap":		false,
+		},
 		"floor": {
 			"file": 	"textures/tile_light.png",
 			"wrap": 	true,
@@ -27,7 +35,7 @@
 			"wrap": 	false,
 		},
 		"box": {
-			"file": 	"textures/box.png",
+			"file": 	"textures/box32.png",
 			"wrap": 	false,
 		},
 		"laser": {

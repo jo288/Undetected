@@ -314,8 +314,9 @@ public class LevelModel {
 		
 		world = new World(Vector2.Zero,false);
 		board = new Board(bSize[0],bSize[1],tSize);
-		TextureRegion floorTile = (JsonAssetManager.getInstance().getEntry("floor", TextureRegion.class));
-		board.setTileTexture(floorTile);
+		board.setTileTexture(JsonAssetManager.getInstance().getEntry("floor", TextureRegion.class));
+		int[] invalidTiles = levelFormat.get("invalidTiles").asIntArray();
+		board.setInvalidTiles(invalidTiles);
 		bounds = new Rectangle(0,0,pSize[0],pSize[1]);
 		scale.x = gSize[0]/pSize[0];
 		scale.y = gSize[1]/pSize[1];
@@ -329,11 +330,11 @@ public class LevelModel {
 
 
 		// Create the lighting if appropriate
-//		if (levelFormat.has("lighting")) {
-//			initLighting(levelFormat.get("lighting"));
-//		}
-//		createPointLights(levelFormat.get("pointlights"));
-//		createConeLights(levelFormat.get("conelights"));
+		if (levelFormat.has("lighting")) {
+			initLighting(levelFormat.get("lighting"));
+		}
+		createPointLights(levelFormat.get("pointlights"));
+		createConeLights(levelFormat.get("conelights"));
 		
 		// Add level goal
 		goalDoor = new ExitModel();
@@ -355,25 +356,17 @@ public class LevelModel {
 		activate(objective);
 
 
-	    JsonValue bounds = levelFormat.getChild("exterior");
-	    while (bounds != null) {
-	    	ExteriorModel obj = new ExteriorModel();
-	    	obj.initialize(bounds);
-	    	obj.setDrawScale(scale);
-	        activate(obj);
-	        bounds = bounds.next();
-	    }
+		JsonValue bounds = levelFormat.get("exteriorwall");
+		ExteriorWall ew = new ExteriorWall();
+		ew.initialize(bounds);
+		ew.setDrawScale(scale);
+		activate(ew);
 
-	    JsonValue walls = levelFormat.getChild("interior");
-	    while (walls != null) {
-	    	InteriorModel obj = new InteriorModel();
-	    	obj.initialize(walls);
-	    	obj.setDrawScale(scale);
-	        activate(obj);
-	        walls = walls.next();
-	    }
-
-
+		JsonValue walls = levelFormat.get("interiorwall");
+		InteriorWall iw = new InteriorWall();
+		iw.initialize(walls);
+		iw.setDrawScale(scale);
+		activate(iw);
 
 		// Create the dude and attach light sources
 	    avatar = new DudeModel();
@@ -410,16 +403,29 @@ public class LevelModel {
 		testlaser.setDrawScale(scale);
 		activate(testlaser);
 		testlaser.start();*/
-		float x = 10.5f;
-        for(int i=0; i<3; i++){
-            Laser laser = new Laser(x+i, 3.38f);
-            laser.setName("laser");
-            laser.initialize();
-            laser.setTimeToLive(i+1);
-            laser.setDrawScale(scale);
-            activate(laser);
-            laser.start();
-        }
+
+//		float x = 10.5f;
+//        for(int i=0; i<3; i++){
+//            Laser laser = new Laser(x+i, 3.38f);
+//            laser.setName("laser");
+//            laser.initialize();
+//            laser.setTimeToLive(i+1);
+//            laser.setDrawScale(scale);
+//            activate(laser);
+//            laser.start();
+//        }
+
+		JsonValue laserdata = levelFormat.getChild("lasers");
+		while (laserdata!=null){
+			Laser l = new Laser();
+			l.initialize(laserdata);
+			if (l.getTexture().getRegionWidth()<tSize)
+				l.setWidth(l.getTexture().getRegionWidth()/scale.x);
+			l.setDrawScale(scale);
+			activate(l);
+			l.start();
+			laserdata = laserdata.next();
+		}
 	}
 
 	public void placeBox(DudeModel player) {

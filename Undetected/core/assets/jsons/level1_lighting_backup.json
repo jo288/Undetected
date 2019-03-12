@@ -4,7 +4,7 @@
 	"tileSize": 		32,
 	"fpsRange":		  	[  20,  60],
 	"lighting": {
-		"color":	  	[0.8, 0.8, 0.8, 0.8],
+		"color":	  	[0.25, 0.25, 0.25, 0.25],
 		"gamma":		true,
 		"diffuse":		true,
 		"blur":			3
