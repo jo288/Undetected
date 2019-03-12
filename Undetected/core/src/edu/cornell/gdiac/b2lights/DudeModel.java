@@ -64,6 +64,7 @@ public class DudeModel extends CharacterModel {
 	private TextureRegion defaultCharTexture;
 	/** Texture of character with box */
 	private TextureRegion boxCharTexture;
+	private float heightOffset;
 
 	/** FilmStrip pointer to the texture region */
 	private FilmStrip filmstrip;
@@ -153,6 +154,8 @@ public class DudeModel extends CharacterModel {
 	public void setDamping(float value) {
 		damping = value;
 	}
+
+	public void setHeightOffset(float value) { heightOffset = value; }
 	
 	/**
 	 * Returns the upper limit on dude left-right movement.  
@@ -270,6 +273,7 @@ public class DudeModel extends CharacterModel {
 		hasBox = true;
 		//change sprite
 		setTexture(boxCharTexture);
+		setOrigin(origin.x,0);
 //		setBoxHeld(box);
 		return true;
 	}
@@ -285,6 +289,7 @@ public class DudeModel extends CharacterModel {
 		hasBox = false;
 		//change sprite
 		setTexture(defaultCharTexture);
+		setOrigin(origin.x,0);
 		boxHeld = null;
 		return true;
 	}
@@ -320,9 +325,9 @@ public class DudeModel extends CharacterModel {
 	 */
 	public void initialize(JsonValue json) {
 		setName(json.name());
-		float[] pos  = json.get("pos").asFloatArray();
-		float width = json.get("width").asFloat();
-		float height = json.get("height").asFloat();
+		int width = json.get("width").asInt();
+		int height = json.get("height").asInt();
+		int[] pos = json.get("tilepos").asIntArray();
 		setPosition(pos[0],pos[1]);
 		setWidth(width);
 		setHeight(height);
@@ -366,6 +371,7 @@ public class DudeModel extends CharacterModel {
 		TextureRegion texture = JsonAssetManager.getInstance().getEntry("defaultDude", TextureRegion.class);
 		defaultCharTexture = texture;
 		setTexture(texture);
+		setOrigin(origin.x,0);
 
 		texture = JsonAssetManager.getInstance().getEntry("boxDude", TextureRegion.class);
 		boxCharTexture = texture;
@@ -440,7 +446,7 @@ public class DudeModel extends CharacterModel {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		if (texture != null) {
-			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y,getAngle(),1.0f,1.0f);
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-heightOffset,getAngle(),1.0f,1.0f);
 		}
 	}
 }

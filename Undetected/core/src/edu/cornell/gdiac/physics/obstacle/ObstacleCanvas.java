@@ -329,7 +329,7 @@ public class ObstacleCanvas {
 	public void clear() {
     	// Clear the screen
 //		Gdx.gl.glClearColor(0.39f, 0.58f, 0.93f, 1.0f);  // Homage to the XNA years
-		Gdx.gl.glClearColor(0.64f, 0.64f, 0.69f, 1.0f);  // Homage to the XNA years
+		Gdx.gl.glClearColor(0f, 0f, 0f, 1.0f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 

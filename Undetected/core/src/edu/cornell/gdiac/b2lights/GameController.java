@@ -15,9 +15,7 @@
  */
 package edu.cornell.gdiac.b2lights;
 
-import box2dLight.*;
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -282,7 +280,7 @@ public class GameController implements Screen, ContactListener {
 		countdown = -1;
 		
 		// Reload the json each time
-		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/level.json"));
+		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/level1.json"));
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 	}

@@ -766,6 +766,10 @@ public abstract class SimpleObstacle extends Obstacle {
 		texture = value;
 		origin.set(texture.getRegionWidth()/2.0f, texture.getRegionHeight()/2.0f);
 	}
+
+	public void setOrigin(float ox, float oy){
+		origin.set(ox,oy);
+	}
 	
 	/**
 	 * Draws the physics object.
@@ -875,7 +879,7 @@ public abstract class SimpleObstacle extends Obstacle {
 	 * primary purpose is to adjust changes to the fixture, which have to take place 
 	 * after collision.
 	 *
-	 * @param dt Timing values from parent loop
+	 * @param delta Timing values from parent loop
 	 */
 	public void update(float delta) {
 		// Recreate the fixture object if dimensions changed.

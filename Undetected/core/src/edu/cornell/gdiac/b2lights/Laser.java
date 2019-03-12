@@ -1,4 +1,4 @@
-package edu.cornell.gdiac.physics.obstacle;
+package edu.cornell.gdiac.b2lights;
 
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.*;

@@ -30,10 +30,7 @@ package edu.cornell.gdiac.b2lights;
 
 import box2dLight.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -58,6 +55,7 @@ import edu.cornell.gdiac.physics.obstacle.*;
  * and setters.  The getters allow the GameController class to modify the level elements.
  */
 public class LevelModel {
+
 	/** Number of velocity iterations for the constrain solvers */
 	public static final int WORLD_VELOC = 6;
 	/** Number of position iterations for the constrain solvers */
@@ -78,6 +76,10 @@ public class LevelModel {
 	protected PooledList<Obstacle> objects  = new PooledList<Obstacle>();
 	/** Objects to be destroyed*/
 	protected LinkedList<Obstacle> destroyed = new LinkedList<Obstacle>();
+	/** Objects temporarily disabled*/
+	protected LinkedList<Obstacle> disabled = new LinkedList<Obstacle>();
+	/** Objects to be enabled*/
+	protected LinkedList<Obstacle> enabled = new LinkedList<Obstacle>();
 
 	// LET THE TIGHT COUPLING BEGIN
 	/** The Box2D world */
@@ -86,6 +88,8 @@ public class LevelModel {
 	protected Rectangle bounds;
 	/** The world scale */
 	protected Vector2 scale;
+	/** The Board */
+	protected Board board;
 
 	/** The camera defining the RayHandler view; scale is in physics coordinates */
 	protected OrthographicCamera raycamera;
@@ -137,6 +141,15 @@ public class LevelModel {
 	 */
 	public World getWorld() {
 		return world;
+	}
+
+	/**
+	 * Returns a reference to the Board
+	 *
+	 * @return a reference to the Board
+	 */
+	public Board getBoard() {
+		return board;
 	}
 	
 	/**
@@ -283,6 +296,7 @@ public class LevelModel {
 		bounds = new Rectangle(0,0,1,1);
 		scale = new Vector2(1,1);
 		debug  = false;
+		board = null;
 	}
 	
 	/**
@@ -293,8 +307,15 @@ public class LevelModel {
 	public void populate(JsonValue levelFormat) {
 		float[] pSize = levelFormat.get("physicsSize").asFloatArray();
 		int[] gSize = levelFormat.get("graphicSize").asIntArray();
+		int[] bSize = levelFormat.get("boardSize").asIntArray();
+		int tSize = levelFormat.get("tileSize").asInt();
+
+
 		
 		world = new World(Vector2.Zero,false);
+		board = new Board(bSize[0],bSize[1],tSize);
+		TextureRegion floorTile = (JsonAssetManager.getInstance().getEntry("floor", TextureRegion.class));
+		board.setTileTexture(floorTile);
 		bounds = new Rectangle(0,0,pSize[0],pSize[1]);
 		scale.x = gSize[0]/pSize[0];
 		scale.y = gSize[1]/pSize[1];
@@ -325,6 +346,7 @@ public class LevelModel {
 		objective.setDrawScale(scale);
 		activate(objective);
 
+		/*
 	    JsonValue bounds = levelFormat.getChild("exterior");
 	    while (bounds != null) {
 	    	ExteriorModel obj = new ExteriorModel();
@@ -342,11 +364,13 @@ public class LevelModel {
 	        activate(obj);
 	        walls = walls.next();
 	    }
+	    */
 
 		// Create the dude and attach light sources
 	    avatar = new DudeModel();
 	    JsonValue avdata = levelFormat.get("avatar");
 	    avatar.initialize(avdata);
+	    avatar.setHeightOffset(tSize/2f);
 	    avatar.setWidth(avatar.getTexture().getRegionWidth()/scale.x);
 		avatar.setHeight(avatar.getTexture().getRegionHeight()/scale.y);
 	    avatar.setDrawScale(scale);
@@ -355,8 +379,19 @@ public class LevelModel {
 
 
 		// Create Test Box
+//		JsonValue boxesdata = levelFormat.get("boxes");
+//		JsonValue boxdata = boxesdata.child();
+//		while (boxdata!=null){
+//			MoveableBox box = new MoveableBox();
+//			box.initialize(boxdata);
+//			box.setWidth(box.getTexture().getRegionWidth()/scale.x);
+//			box.setHeight(box.getTexture().getRegionHeight()/scale.y);
+//			box.setDrawScale(scale);
+//			activate(box);
+//			boxdata = boxdata.next();
+//		}
+
 		MoveableBox box = new MoveableBox(5,2);
-		box.setName("box");
 		box.initialize();
 		box.setWidth(box.getTexture().getRegionWidth()/scale.x);
 		box.setHeight(box.getTexture().getRegionHeight()/scale.y);
@@ -586,28 +621,29 @@ public class LevelModel {
 	}
 
 	/**
-	 * Searches through game objects to destroy and deactivate an obstacle
-	 *
-	 * param obj The object to destroy
-	 */
-	protected void deactivate(Obstacle obj, Body bod) {
-		for (Obstacle o : objects) {
-			if (o == obj) {
-//				world.destroyBody(bod);
-				o.deactivatePhysics(world);
-				objects.remove(o);
-				bod.setUserData(null);
-				bod = null;
-			}
-		}
-	}
-
-	/**
 	 * Queue the object to the to-be-destroyed object queue
 	 */
 	protected void queueDestroyed(Obstacle obj){
         if (!destroyed.contains(obj))
 	        destroyed.add(obj);
+	}
+
+	/**
+	 * Queue the object to the disabled object queue
+	 */
+	protected void queueDisabled(Obstacle obj){
+		if (!disabled.contains(obj))
+			disabled.add(obj);
+	}
+
+	/**
+	 * Queue the object to the disabled object queue
+	 */
+	protected void queueEnabled(Obstacle obj){
+		if (disabled.contains(obj))
+			disabled.remove(obj);
+		if (!enabled.contains(obj))
+			enabled.add(obj);
 	}
 
     /**
@@ -622,6 +658,24 @@ public class LevelModel {
             objects.remove(o);
         }
     }
+
+	/**
+	 * Disable the objects in the disabled queue
+	 */
+	protected void disableObjects(){
+		for (Obstacle o : disabled){
+			objects.remove(o);
+		}
+	}
+
+	/**
+	 * Enable the objects in the enabled queue
+	 */
+	protected void enableObjects(){
+		for (Obstacle o : enabled){
+			objects.add(o);
+		}
+	}
 
 	/**
 	 * Returns true if the object is in bounds.
@@ -693,21 +747,11 @@ public class LevelModel {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		canvas.clear();
-
-		// Draw floor tile TODO: DELETE THIS WHEN GRIDS ARE IMPLEMENTED
-		TextureRegion floorTile = (JsonAssetManager.getInstance().getEntry("floor", TextureRegion.class));
-		int tilex = canvas.getWidth()/floorTile.getRegionWidth();
-		int tiley = canvas.getHeight()/floorTile.getRegionHeight();
 		
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin();
 
-		//TODO: DELETE THIS WHEN GRIDS ARE IMPLEMENTED
-		for (int i=0;i<tilex; i++){
-			for (int j=0; j<tiley; j++){
-				canvas.draw(floorTile, Color.WHITE, 0, 0, floorTile.getRegionWidth()*i, floorTile.getRegionWidth()*j, 0, 1, 1);
-			}
-		}
+		board.draw(canvas);
 
 		for(Obstacle obj : objects) {
 			obj.draw(canvas);
@@ -775,4 +819,5 @@ public class LevelModel {
 		}
 		return value;
 	}
+
 }
