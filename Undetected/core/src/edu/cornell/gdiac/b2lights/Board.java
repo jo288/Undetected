@@ -60,7 +60,7 @@ public class Board {
 
 	// Instance attributes
 	/** The dimensions of a single tile */
-	private int   TILE_WIDTH = 64; // MUST BE 2X VALUE IN GAMECANVAS
+	private int   TILE_WIDTH = 2; // MUST BE 2X VALUE IN GAMECANVAS
 	/** The board width (in number of tiles) */
 	private int width;
 	/** The board height (in number of tiles) */
@@ -149,7 +149,7 @@ public class Board {
 	 * @return the size of the tile texture.
 	 */
 	public int getTileSize() {
-		return TILE_WIDTH;
+		return 1;
 	}
 
 	// Drawing information	
@@ -302,6 +302,10 @@ public class Board {
 	public int screenToBoard(float f) {
 		return (int)(f / getTileSize());
 	}
+
+	public int tileRow(float y) {return (int)(y / getTileSize());}
+
+	public int tileColumn(float x) {return (int)(x / getTileSize());}
 
 	/**
 	 * Returns the screen position coordinate for a board cell index.

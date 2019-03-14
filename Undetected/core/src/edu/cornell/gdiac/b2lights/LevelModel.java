@@ -412,7 +412,11 @@ public class LevelModel {
 	public void placeBox(DudeModel player) {
 		float dir = player.getDirection();
 		Obstacle b = player.getBoxHeld();
-		b.setPosition(player.getX()-(float)Math.sin(dir),player.getY()+(float)Math.cos(dir));
+		System.out.println(board.getTileSize());
+		System.out.println(player.getX()-(float)Math.sin(dir));
+		System.out.println(player.getY()+(float)Math.cos(dir));
+		b.setPosition((board.getTileSize() * board.screenToBoard(player.getX()-(float)Math.sin(dir)) + 0.5f),
+				(board.getTileSize() * board.screenToBoard(player.getY()+(float)Math.cos(dir))) + 0.5f);
 		queueEnabled(b);
     }
 	
@@ -581,13 +585,17 @@ public class LevelModel {
 			light.remove();
 		}
 		lights.clear();
-		
+
 		if (rayhandler != null) {
 			rayhandler.dispose();
 			rayhandler = null;
 		}
 		
 		for(Obstacle obj : objects) {
+			if (avatar.getHasBox()) {
+				avatar.dropBox();
+				objects.add(avatar.getLastBoxHeld());
+			}
 			obj.deactivatePhysics(world);
 			obj.dispose();
 		}
