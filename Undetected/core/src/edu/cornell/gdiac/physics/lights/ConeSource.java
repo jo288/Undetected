@@ -120,6 +120,9 @@ public class ConeSource extends ConeLight implements LightSource {
 	}
 
 	@Override
+	public float getDistance(){ return distance; }
+
+	@Override
 	public Filter getContactFilter() {
 		return collisions;
 	}
