@@ -22,8 +22,12 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
 
 import java.lang.reflect.*;
+
+import edu.cornell.gdiac.physics.lights.ConeSource;
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.obstacle.*;
+
+import static edu.cornell.gdiac.b2lights.LevelModel.bitStringToComplement;
 
 /**
  * Player avatar for the plaform game.
@@ -70,7 +74,10 @@ public class GuardModel extends CharacterModel {
     private Vector2 forceCache = new Vector2();
 
     /** Direction of character */
-    private float direction;
+    private Vector2 direction;
+
+    /** Line of sight of guard */
+    private ConeSource light;
 
     /**
      * Returns the directional movement of this character.
@@ -154,9 +161,32 @@ public class GuardModel extends CharacterModel {
         movement.set(dx,dy);
     }
 
-    public float getDirection(){ return direction; }
+    public Vector2 getDirection(){ return direction; }
 
-    public void setDirection(float dir){ direction = dir; }
+    public void setDirection(float angle){
+        super.setAngle(angle);
+        if(Math.abs(angle- (-Math.PI/2))<0.05){
+            direction = new Vector2(1,0);
+        }
+        else if(angle==0){
+            direction = new Vector2(0, 1);
+        }
+        else if(Math.abs(angle-Math.PI/2)<0.05){
+            direction = new Vector2(-1, 0);
+        }
+        else{
+            direction = new Vector2(0, -1);
+        }
+    }
+    public void setDirection(Vector2 dir){ direction = dir; }
+    public void setDirection(float x, float y) { direction = new Vector2(x, y);}
+
+    /**
+     * Returns the guard's light
+     */
+    public ConeSource getLight(){
+        return light;
+    }
 
     /**
      * Returns how much force to apply to get the dude moving
@@ -263,6 +293,7 @@ public class GuardModel extends CharacterModel {
      */
     public GuardModel() {
         super(1,1,1,1);
+        direction = new Vector2(0, 1);
         setFixedRotation(false);
     }
 
@@ -310,7 +341,7 @@ public class GuardModel extends CharacterModel {
 
         // Create the collision filter (used for light penetration)
         short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
-        short excludeBits = LevelModel.bitStringToComplement(json.get("excludeBits").asString());
+        short excludeBits = bitStringToComplement(json.get("excludeBits").asString());
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
@@ -340,6 +371,7 @@ public class GuardModel extends CharacterModel {
         boxCharTexture = texture;
     }
 
+
     /**
      * Applies the force to the body of this dude
      *
@@ -362,6 +394,13 @@ public class GuardModel extends CharacterModel {
         } else {
             animate = false;
         }
+    }
+
+    /**
+     * adds a light to this guard
+     */
+    public void addLight(ConeSource light){
+        this.light = light;
     }
 
     /**
