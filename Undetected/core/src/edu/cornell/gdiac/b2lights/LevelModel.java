@@ -30,6 +30,7 @@ package edu.cornell.gdiac.b2lights;
 
 import box2dLight.*;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import com.badlogic.gdx.Gdx;
@@ -68,6 +69,8 @@ public class LevelModel {
 	private ExitModel goalDoor;
 	/** Reference to the objective (for collision detection) */
 	private ObjectiveModel objective;
+	/** Reference to all the guards (for line-of-sight checks) */
+	private ArrayList<GuardModel> guards;
 
 	/** Whether or not the level is in debug more (showing off physics) */	
 	private boolean debug;
@@ -96,7 +99,7 @@ public class LevelModel {
 	/** The rayhandler for storing lights, and drawing them (SIGH) */
 	protected RayHandler rayhandler;
 	/** All of the active lights that we loaded from the JSON file */
-	private Array<LightSource> lights = new Array<LightSource>();
+	private Array<ConeSource> lights = new Array<ConeSource>();
 	/** The current light source being used.  If -1, there are no shadows */
 	private int activeLight;
 	
@@ -169,6 +172,11 @@ public class LevelModel {
 	public DudeModel getAvatar() {
 		return avatar;
 	}
+
+	/**
+	 * Returns a reference to all the guards
+	 */
+	public ArrayList<GuardModel> getGuards() { return guards; }
 
 	/**
 	 * Returns a reference to the exit door
@@ -333,7 +341,7 @@ public class LevelModel {
 		if (levelFormat.has("lighting")) {
 			initLighting(levelFormat.get("lighting"));
 		}
-		createPointLights(levelFormat.get("pointlights"));
+		//createPointLights(levelFormat.get("pointlights"));
 		createConeLights(levelFormat.get("conelights"));
 		
 		// Add level goal
@@ -378,8 +386,21 @@ public class LevelModel {
 			avatar.setHeight(avatar.getTexture().getRegionHeight()/scale.y);
 	    avatar.setDrawScale(scale);
 		activate(avatar);
-		attachLights(avatar);
 
+		//create guard
+		guards = new ArrayList<GuardModel>();
+		GuardModel guard = new GuardModel();
+		JsonValue gddata = levelFormat.get("guard");
+		guard.initialize(gddata);
+		if (guard.getTexture().getRegionWidth()<tSize)
+			guard.setWidth(guard.getTexture().getRegionWidth()/scale.x);
+		if (guard.getTexture().getRegionHeight()<tSize)
+			guard.setHeight(guard.getTexture().getRegionHeight()/scale.y);
+		guard.setDrawScale(scale);
+		activate(guard);
+		guard.addLight(lights.get(0));
+		attachLights(guard);
+		this.guards.add(guard);
 
 		// Create Test Box
 		JsonValue boxesdata = levelFormat.get("boxes");
@@ -458,7 +479,7 @@ public class LevelModel {
 	 *
 	 * @param  json	the JSON tree defining the list of point lights
 	 */
-	private void createPointLights(JsonValue json) {
+	/*private void createPointLights(JsonValue json) {
 		JsonValue light = json.child();
 	    while (light != null) {
 	    	float[] color = light.get("color").asFloatArray();
@@ -478,7 +499,7 @@ public class LevelModel {
 			lights.add(point);
 	        light = light.next();
 	    }
-	}
+	}*/
 
 	/**
 	 * Creates the cone lights for the level
@@ -526,9 +547,9 @@ public class LevelModel {
 	 *
 	 * The activeLight is set to be the first element of lights, assuming it is not empty.
 	 */
-	public void attachLights(DudeModel avatar) {
+	public void attachLights(GuardModel guard) {
 		for(LightSource light : lights) {
-			light.attachToBody(avatar.getBody(), light.getX(), light.getY(), light.getDirection());
+			light.attachToBody(guard.getBody(), light.getX(), light.getY(), light.getDirection());
 		}
 		if (lights.size > 0) {
 			activeLight = 0;

@@ -25,6 +25,9 @@ import edu.cornell.gdiac.util.*;
 
 import edu.cornell.gdiac.physics.obstacle.*;
 
+import java.security.Guard;
+import java.util.ArrayList;
+
 /**
  * Gameplay controller for the game.
  *
@@ -48,6 +51,8 @@ public class GameController implements Screen, ContactListener {
 		/** Assets are complete */
 		COMPLETE
 	}
+
+	private LightController lightController;
 	
 	/** The reader to process JSON files */
 	private JsonReader jsonReader;
@@ -55,7 +60,7 @@ public class GameController implements Screen, ContactListener {
 	private JsonValue  assetDirectory;
 	/** The JSON defining the level model */
 	private JsonValue  levelFormat;
-	
+
 	/** The font for giving messages to the player */
 	protected BitmapFont displayFont;
 	
@@ -243,6 +248,7 @@ public class GameController implements Screen, ContactListener {
 	public GameController() {
 		jsonReader = new JsonReader();
 		level = new LevelModel();
+		lightController = new LightController(level);
 		complete = false;
 		failed = false;
 		active = false;
@@ -307,6 +313,15 @@ public class GameController implements Screen, ContactListener {
 		if (input.didDebug()) {
 			level.setDebug(!level.getDebug());
 		}
+
+		GuardModel guard = level.getGuards().get(0);
+		float degree = guard.getLight().getConeDegree();
+		if(input.increaseView()){
+			guard.getLight().setConeDegree(degree+0.5f);
+		}
+		else if(input.decreaseView()){
+			guard.getLight().setConeDegree(degree-0.5f);
+		}
 		
 		// Handle resets
 		if (input.didReset()) {
@@ -340,16 +355,16 @@ public class GameController implements Screen, ContactListener {
 	public void update(float dt) {
 		// Process actions in object model
 		DudeModel avatar = level.getAvatar();
+		ArrayList<GuardModel> guards = level.getGuards();
 		InputController input = InputController.getInstance();
 
 		// LASER CHECK
 
-
-		if (input.didForward()) {
+		/*if (input.didForward()) {
 			level.activateNextLight();
 		} else if (input.didBack()){
 			level.activatePrevLight();
-		}
+		}*/
 
 		if(input.didAction()&&avatar.getHasBox()){
 			level.placeBox(avatar);
@@ -373,8 +388,24 @@ public class GameController implements Screen, ContactListener {
 		avatar.setMovement(angleCache.x,angleCache.y);
 		avatar.applyForce();
 
+		//only used if we are manually controlling one guard for demo purposes
+		GuardModel guard = guards.get(0);
+		Vector2 guardAngle = new Vector2(input.getHorizontalG(),input.getVerticalG());
+		if (guardAngle.len2() > 0.0f) {
+			float angle = guardAngle.angle();
+			// Convert to radians with up as 0
+			angle = (float)Math.PI*(angle-90.0f)/180.0f;
+			guard.setDirection(angle);
+		}
+		guardAngle.scl(guard.getForce());
+		guard.setMovement(guardAngle.x,guardAngle.y);
+		guard.applyForce();
+
 		// Turn the physics engine crank.
 		level.update(dt);
+		if(lightController.detect() && !failed){
+			setFailure(true);
+		}
 	}
 	
 	/**

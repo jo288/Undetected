@@ -59,11 +59,19 @@ public class InputController {
 	/** Whether the action button was pressed. */
 	private boolean actionPressed;
 	private boolean actionPrevious;
+	/** Whether hot key for changing guard's line of sight was pressed */
+	private boolean incViewPressed;
+	private boolean decViewPressed;
 	
 	/** How much did we move horizontally? */
 	private float horizontal;
 	/** How much did we move vertically? */
 	private float vertical;
+
+	/**manual controls for guard*/
+	private float horizontalG;
+	private float verticalG;
+
 	private float holdSpace;
 	
 	/** An X-Box controller (if it is connected) */
@@ -91,6 +99,15 @@ public class InputController {
 		return vertical;
 	}
 
+	/**
+	 * Returns amount of horizontal movement for guard
+	 */
+	public float getHorizontalG() { return horizontalG; }
+
+	/**
+	 * Returns amount of vertical movement for guard
+	 */
+	public float getVerticalG() { return verticalG; }
 	/**
 	 * Returns true if the reset button was pressed.
 	 *
@@ -155,6 +172,13 @@ public class InputController {
 	public boolean didAction() {
 		return actionPressed && !actionPrevious;
 	}
+
+	/**
+	 * Returns true if Z is pressed (for increasing guard's field of view
+	 */
+	public boolean increaseView(){ return incViewPressed;}
+	public boolean decreaseView(){ return decViewPressed;}
+
 	
 	/**
 	 * Creates a new input controller
@@ -229,14 +253,23 @@ public class InputController {
 		nextPressed = (secondary && nextPressed) || (Gdx.input.isKeyPressed(Input.Keys.N));
 		exitPressed  = (secondary && exitPressed) || (Gdx.input.isKeyPressed(Input.Keys.ESCAPE));
 		actionPressed = (secondary && actionPressed) || (Gdx.input.isKeyPressed(Input.Keys.SPACE));
+		incViewPressed = (secondary && incViewPressed) || (Gdx.input.isKeyPressed(Input.Keys.Z));
+		decViewPressed = (secondary && actionPressed) || (Gdx.input.isKeyPressed(Input.Keys.X));
 
 		// Directional controls
 		horizontal = (secondary ? horizontal : 0.0f);
+		horizontalG = (secondary ? horizontalG: 0.0f);
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 			horizontal += 1.0f;
 		}
+		if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+			horizontalG += 1.0f;
+		}
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 			horizontal -= 1.0f;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+			horizontalG -= 1.0f;
 		}
 
 //		if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
@@ -244,11 +277,19 @@ public class InputController {
 //		}
 		
 		vertical = (secondary ? vertical : 0.0f);
+		verticalG = (secondary ? verticalG : 0.0f);
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 			vertical += 1.0f;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+			verticalG += 1.0f;
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 			vertical -= 1.0f;
 		}
+		if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+			verticalG -= 1.0f;
+		}
+
 	}
 }
