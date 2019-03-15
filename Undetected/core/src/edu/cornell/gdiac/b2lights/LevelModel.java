@@ -412,9 +412,6 @@ public class LevelModel {
 	public void placeBox(DudeModel player) {
 		float dir = player.getDirection();
 		Obstacle b = player.getBoxHeld();
-		System.out.println(board.getTileSize());
-		System.out.println(player.getX()-(float)Math.sin(dir));
-		System.out.println(player.getY()+(float)Math.cos(dir));
 		b.setPosition((board.getTileSize() * board.screenToBoard(player.getX()-(float)Math.sin(dir)) + 0.5f),
 				(board.getTileSize() * board.screenToBoard(player.getY()+(float)Math.cos(dir))) + 0.5f);
 		queueEnabled(b);
