@@ -1171,9 +1171,9 @@ public class ObstacleCanvas {
 	 * @param sy 	The y-axis scaling factor
 	 */
 	private void computeTransform(float ox, float oy, float x, float y, float angle, float sx, float sy) {
-		local.setToTranslation(x,y);
+		local.setToTranslation((int)x,(int)y);
 		local.rotate(180.0f*angle/(float)Math.PI);
 		local.scale(sx,sy);
-		local.translate(-ox,-oy);
+		local.translate((int)-ox,(int)-oy);
 	}
 }

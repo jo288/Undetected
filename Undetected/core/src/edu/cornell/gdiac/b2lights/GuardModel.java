@@ -62,8 +62,6 @@ public class GuardModel extends CharacterModel {
 
     /** Texture of character */
     private TextureRegion defaultCharTexture;
-    /** Texture of character with box */
-    private TextureRegion boxCharTexture;
 
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
@@ -366,9 +364,6 @@ public class GuardModel extends CharacterModel {
         defaultCharTexture = texture;
         setTexture(texture);
         setOrigin(origin.x,0);
-
-        texture = JsonAssetManager.getInstance().getEntry("boxDude", TextureRegion.class);
-        boxCharTexture = texture;
     }
 
 
@@ -437,7 +432,7 @@ public class GuardModel extends CharacterModel {
      */
     public void draw(ObstacleCanvas canvas) {
         if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.0f,1.0f);
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,0f,1.0f,1.0f);
         }
     }
 }

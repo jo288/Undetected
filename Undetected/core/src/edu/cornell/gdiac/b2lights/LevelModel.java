@@ -709,6 +709,43 @@ public class LevelModel {
 		boolean vert  = (bounds.y <= obj.getY() && obj.getY() <= bounds.y+bounds.height);
 		return horiz && vert;
 	}
+
+	/**
+	 * Add object information to the board
+	 *
+	 */
+	private void updateBoard(){
+		board.resetTiles();
+		for(Obstacle o: objects){
+			if(o instanceof ExteriorWall){
+				for (int i=0;i<((ExteriorWall) o).getPositions().size;i+=2){
+					board.setOccupiedTiles(((ExteriorWall) o).getPositions().get(i),
+							((ExteriorWall) o).getPositions().get(i+1),1);
+				}
+			}
+
+			if(o instanceof InteriorWall){
+				for (int i=0;i<((InteriorWall) o).getPositions().size;i+=2){
+					board.setOccupiedTiles(((InteriorWall) o).getPositions().get(i),
+							((InteriorWall) o).getPositions().get(i+1),1);
+				}
+			}
+			if(o instanceof DudeModel){
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),3);
+			}
+			if(o instanceof MoveableBox){
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),5);
+			}
+			if(o instanceof Laser){
+				for(int i=(int)o.getY(); i<(int)(o.getY()+((Laser) o).getHeight());i++){
+					board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(i),4);
+				}
+			}
+			if(o instanceof GuardModel){
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),2);
+			}
+		}
+	}
 	
 	/**
 	 * Updates all of the models in the level.
@@ -728,6 +765,9 @@ public class LevelModel {
 			destroyObjects();
 			disableObjects();
 			enableObjects();
+			updateBoard();
+			//Test for displaying board states
+			board.update();
 			return true;
 		}
 		return false;

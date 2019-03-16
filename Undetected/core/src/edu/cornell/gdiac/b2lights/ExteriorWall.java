@@ -16,9 +16,12 @@ public class ExteriorWall extends Obstacle{
     protected Array<Obstacle> bodies;
     protected Array<TextureRegion> textures;
 
+    private Array<Integer> positions;
+
     public ExteriorWall(){
         bodies = new Array<Obstacle>();
         textures = new Array<TextureRegion>();
+        positions = new Array<Integer>();
     }
 
     private class WallBlock extends BoxObstacle{
@@ -91,7 +94,13 @@ public class ExteriorWall extends Obstacle{
                 wb.walltype = types[i/2];
             wb.setWallTexture(textures.get(wb.walltype));
             bodies.add(wb);
+            this.positions.add(positions[i]);
+            this.positions.add(positions[i+1]);
         }
+    }
+
+    public Array<Integer> getPositions(){
+        return positions;
     }
 
     @Override

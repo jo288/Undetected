@@ -50,7 +50,7 @@ public class LightController {
             ConeSource light = guard.getLight();
             lightPos = light.getPosition();
             float range = ((ConeSource)light).getDistance();
-            System.out.println("range "+range);
+//            System.out.println("range "+range);
             //a vector from the guard to the player
             Vector2 guard_to_player = playerPos.sub(guard.getPosition());
 
@@ -59,7 +59,7 @@ public class LightController {
             float player_guard_angle = guard_to_player.angle(guard.getDirection());
             player_guard_angle = player_guard_angle < 0 ? player_guard_angle+=360:player_guard_angle;
             player_guard_angle = player_guard_angle > 180? 360-player_guard_angle:player_guard_angle;
-            System.out.println(player_guard_angle);
+//            System.out.println(player_guard_angle);
 
             //if player is within the cone light region, raycast from guard to player
             if(dist_to_player<=range && player_guard_angle <= light.getConeDegree()){

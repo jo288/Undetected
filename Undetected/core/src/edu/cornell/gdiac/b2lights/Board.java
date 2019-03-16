@@ -45,6 +45,14 @@ public class Board {
 		public boolean isValid = false;
 		/** Is this tile occupied? */
 		public boolean isOccupied = false;
+		/** Type of object at this tile
+		 * 0: Nothing
+		 * 1: Wall
+		 * 2: Guard
+		 * 3: Player Character
+		 * 4: Laser
+		 * 5: Box */
+		public int occupant = 0;
 		/** Is this a goal tile (used for pathfinding)? */
 		public boolean goal = false;
 		/** Has this tile been visited (used for pathfinding)? */
@@ -95,6 +103,14 @@ public class Board {
 			getTileState(invalidTiles[i],invalidTiles[i+1]).isValid = false;
 		}
 	}
+
+	/**
+	 * Sets occupant of tiles
+	 */
+	public void setOccupiedTiles(int x, int y, int oType) {
+		getTileState(x,y).isOccupied = true;
+		getTileState(x,y).occupant = oType;
+	}
 	
 	/**
 	 * Resets the values of all the tiles on screen.
@@ -107,6 +123,7 @@ public class Board {
 				tile.goal = false;
 				tile.visited = false;
 				tile.isOccupied = false;
+				tile.occupant = 0;
 			}
 		}
 	}
@@ -219,7 +236,14 @@ public class Board {
 	 * All we do is animate falling tiles.
 	 */
 	public void update() {
-
+		for(int i=height-1;i>=0;i--){
+			for(int j=0;j<width;j++){
+				System.out.print(getTileState(j,i).occupant);
+			}
+			System.out.println();
+		}
+		System.out.println();
+		System.out.println();
 	}
 
 	/**

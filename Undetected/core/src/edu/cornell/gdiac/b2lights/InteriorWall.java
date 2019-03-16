@@ -20,10 +20,12 @@ public class InteriorWall extends Obstacle{
     /** A complex physics object has multiple bodies */
     protected Array<Obstacle> bodies;
     protected Array<TextureRegion> textures;
+    protected Array<Integer> positions;
 
     public InteriorWall(){
         bodies = new Array<Obstacle>();
         textures = new Array<TextureRegion>();
+        positions = new Array<Integer>();
     }
 
     private class WallBlock extends BoxObstacle{
@@ -96,8 +98,15 @@ public class InteriorWall extends Obstacle{
                 wb.walltype = types[i/2];
             wb.setWallTexture(textures.get(wb.walltype));
             bodies.add(wb);
+            this.positions.add(positions[i]);
+            this.positions.add(positions[i+1]);
         }
     }
+
+    public Array<Integer> getPositions(){
+        return positions;
+    }
+
 
     @Override
     public void setDrawScale(Vector2 value) {
