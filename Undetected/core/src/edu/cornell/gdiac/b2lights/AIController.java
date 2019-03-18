@@ -125,7 +125,7 @@ public class AIController {
 
         if (i == 2) {
             guard.setDirection(0);
-            guard.setMovement(0, 52);
+            guard.setMovement(0, 50);
             guard.applyForce();
         } else if (i == 0) {
             guard.setMovement(0,0);
@@ -139,7 +139,7 @@ public class AIController {
             guard.applyForce();
         } else if (i == -2){
             guard.setDirection((float) Math.PI);
-            guard.setMovement(0,-52);
+            guard.setMovement(0,-50);
             guard.applyForce();
         }
     }
