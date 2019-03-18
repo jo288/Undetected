@@ -410,14 +410,30 @@ public class LevelModel {
 		guard.setDrawScale(scale);
 		activate(guard);
 		guard.addLight(lights.get(0));
-		attachLights(guard);
+		attachLights(guard, lights.get(0));
 
-		// Testing AIControll
+		// create 2nd guard
+		GuardModel guard2 = new GuardModel();
+		JsonValue gddata2 = levelFormat.get("guard2");
+		guard2.initialize(gddata2);
+		if (guard2.getTexture().getRegionWidth()<tSize)
+			guard2.setWidth(guard2.getTexture().getRegionWidth()/scale.x);
+		if (guard2.getTexture().getRegionHeight()<tSize)
+			guard2.setHeight(guard2.getTexture().getRegionHeight()/scale.y);
+		guard2.setDrawScale(scale);
+		activate(guard2);
+		guard2.addLight(lights.get(1));
+		attachLights(guard2, lights.get(1));
+
+		// Testing AIController
 		AIController ai = new AIController(board, guard);
+		AIController ai2 = new AIController(board, guard2);
 		controls.add(ai);
+		controls.add(ai2);
 		ai.initialize(gddata);
-		ai.setPatrol();
+		ai.initialize(gddata2);
 		this.guards.add(guard);
+		this.guards.add(guard2);
 
 		// Create Test Box
 		JsonValue boxesdata = levelFormat.get("boxes");
@@ -567,10 +583,12 @@ public class LevelModel {
 	 *
 	 * The activeLight is set to be the first element of lights, assuming it is not empty.
 	 */
-	public void attachLights(GuardModel guard) {
-		for(LightSource light : lights) {
-			light.attachToBody(guard.getBody(), light.getX(), light.getY(), light.getDirection());
-		}
+	public void attachLights(GuardModel guard, LightSource light) {
+//		for(LightSource light : lights) {
+//			light.attachToBody(guard.getBody(), light.getX(), light.getY(), light.getDirection());
+//		}
+		light.setActive(true);
+		light.attachToBody(guard.getBody(), light.getX(), light.getY(), light.getDirection());
 		if (lights.size > 0) {
 			activeLight = 0;
 			lights.get(0).setActive(true);
@@ -738,7 +756,7 @@ public class LevelModel {
 	 *
 	 */
 	private void updateBoard(){
-		board.resetTiles();
+		board.resetOccupants();
 		for(Obstacle o: objects){
 			if(o instanceof ExteriorWall){
 				for (int i=0;i<((ExteriorWall) o).getPositions().size;i+=2){
@@ -754,7 +772,8 @@ public class LevelModel {
 				}
 			}
 			if(o instanceof DudeModel){
-				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),3);
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()+((DudeModel) o).getWidth()/2),
+						board.physicsToBoard(o.getY()+((DudeModel) o).getHeight()/2),3);
 			}
 			if(o instanceof MoveableBox){
 				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),5);
@@ -762,12 +781,13 @@ public class LevelModel {
 			if(o instanceof Laser){
 				//TODO: TEMPORARY FIX, CHANGE LATER WHEN LASERS ARE FIXED
 				//for(int i=(int)o.getY(); i<(int)(o.getY()+((Laser) o).getHeight());i++){
-				for(int i=(int)o.getY()-2; i<(int)(o.getY()+((Laser) o).getHeight())-2;i++){
+				for(int i=(int)o.getY(); i<(int)(o.getY()+((Laser) o).getHeight());i++){
 					board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(i),4);
 				}
 			}
 			if(o instanceof GuardModel){
-				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),2);
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()+((GuardModel) o).getWidth()/2),
+						board.physicsToBoard(o.getY()+((GuardModel) o).getHeight()/2),2);
 			}
 		}
 	}
@@ -796,8 +816,9 @@ public class LevelModel {
 			//Test for displaying board states
 			board.update();
 			AIController ai = controls.get(0);
-
+			AIController ai2 = controls.get(1);
 			ai.update();
+			ai2.update();
 			return true;
 		}
 		return false;

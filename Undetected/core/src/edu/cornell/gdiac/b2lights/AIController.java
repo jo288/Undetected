@@ -65,7 +65,7 @@ public class AIController {
 
     /** Sets the tile the Guard is protecting*/
     public void setProtect(float x, float y) {
-        currentGoal = new Vector2(board.physicsToBoard(x), board.physicsToBoard(y));
+        currentGoal = new Vector2(board.physicsToBoard(x+guard.getWidth()/2), board.physicsToBoard(y+guard.getHeight()/2));
     }
 
     /** Main function to update the guard's velocity */
@@ -96,15 +96,14 @@ public class AIController {
             case ALERT:
                 // Set Goal tile to be the object, and find it
                 if (item != null) {
-                    int obx = board.physicsToBoard(item.getX());
-                    int oby = board.physicsToBoard(item.getY());
+                    int obx = board.physicsToBoard(item.getX()+guard.getWidth()/2);
+                    int oby = board.physicsToBoard(item.getY()+guard.getHeight()/2);
                     board.setGoal(obx, oby);
                     currentGoal = new Vector2(obx, oby);
                 } else {
                     board.setGoal((int) currentGoal.x, (int) currentGoal.y);
                 }
                 System.out.println(currentGoal);
-
                 pathFind();
                 board.resetTiles();
                 break;
@@ -119,9 +118,14 @@ public class AIController {
         int guardx = board.physicsToBoard(guard.getX());
         int guardy = board.physicsToBoard(guard.getY());
         int i = bfs(guardx, guardy);
+
+        /** I MADE THE VALUE 51 INSTEAD OF 50 BECAUSE THE GUARD KEPT GETTING STUCK BY
+         *  A SINGLE PIXEL ON CORNERS
+         */
+
         if (i == 2) {
             guard.setDirection(0);
-            guard.setMovement(0, 50);
+            guard.setMovement(0, 52);
             guard.applyForce();
         } else if (i == 0) {
             guard.setMovement(0,0);
@@ -135,7 +139,7 @@ public class AIController {
             guard.applyForce();
         } else if (i == -2){
             guard.setDirection((float) Math.PI);
-            guard.setMovement(0,-50);
+            guard.setMovement(0,-52);
             guard.applyForce();
         }
     }
@@ -220,9 +224,9 @@ public class AIController {
             int j = i*2;
             path[i] = new Vector2(paths[j], paths[j+1]);
         }
-        state = FSMState.PATROL;
-        currentGoal = path[0];
-        pathIndex = 0;
+//        state = FSMState.PATROL;
+//        currentGoal = path[0];
+//        pathIndex = 0;
     }
 
     /** Returns the Manhattan Distance of two points */
