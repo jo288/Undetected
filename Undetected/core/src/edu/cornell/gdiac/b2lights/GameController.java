@@ -313,6 +313,13 @@ public class GameController implements Screen, ContactListener {
 		if (input.didDebug()) {
 			level.setDebug(!level.getDebug());
 		}
+		//the camera zoom and translations are not working properly ...
+		/*if(input.zoomIn()){
+			canvas.getCamera().zoom-=0.01;
+		}
+		else if(input.zoomOut()){
+			canvas.getCamera().zoom+=0.01;
+		}*/
 
 		GuardModel guard = level.getGuards().get(0);
 		float degree = guard.getLight().getConeDegree();
@@ -373,7 +380,13 @@ public class GameController implements Screen, ContactListener {
 			avatar.pickupBox();
 			level.queueDisabled(avatar.getBoxInContact());
 		}
-		
+		//camera follow player
+		//canvas.getCamera().translate(input.getHorizontal(), input.getVertical());
+		int cx = (int)canvas.getCamera().position.x;
+		int cy = (int)canvas.getCamera().position.y;
+		//level.rayhandler.useCustomViewport(cx,cy,800,600);
+		//level.raycamera.translate(input.getHorizontal(), input.getVertical());
+		//level.raycamera.update();
 		// Rotate the avatar to face the direction of movement
 		angleCache.set(input.getHorizontal(),input.getVertical());
 		if (angleCache.len2() > 0.0f) {
@@ -421,7 +434,7 @@ public class GameController implements Screen, ContactListener {
 		canvas.clear();
 		
 		level.draw(canvas);
-				
+
 		// Final message
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);

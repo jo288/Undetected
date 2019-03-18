@@ -62,6 +62,14 @@ public class InputController {
 	/** Whether hot key for changing guard's line of sight was pressed */
 	private boolean incViewPressed;
 	private boolean decViewPressed;
+	/**Whether hot keys for translating camera was pressed */
+	private boolean cameraUp;
+	private boolean cameraLeft;
+	private boolean cameraDown;
+	private boolean cameraRight;
+	private boolean zoomIn;
+	private boolean zoomOut;
+
 	
 	/** How much did we move horizontally? */
 	private float horizontal;
@@ -179,6 +187,12 @@ public class InputController {
 	public boolean increaseView(){ return incViewPressed;}
 	public boolean decreaseView(){ return decViewPressed;}
 
+	public boolean moveCamUp(){ return cameraUp;}
+	public boolean moveCamRight(){ return cameraRight;}
+	public boolean moveCamDown(){ return cameraDown;}
+	public boolean moveCamKLeft(){ return cameraLeft; }
+	public boolean zoomIn(){ return zoomIn;}
+	public boolean zoomOut(){return zoomOut;}
 	
 	/**
 	 * Creates a new input controller
@@ -254,7 +268,13 @@ public class InputController {
 		exitPressed  = (secondary && exitPressed) || (Gdx.input.isKeyPressed(Input.Keys.ESCAPE));
 		actionPressed = (secondary && actionPressed) || (Gdx.input.isKeyPressed(Input.Keys.SPACE));
 		incViewPressed = (secondary && incViewPressed) || (Gdx.input.isKeyPressed(Input.Keys.Z));
-		decViewPressed = (secondary && actionPressed) || (Gdx.input.isKeyPressed(Input.Keys.X));
+		decViewPressed = (secondary && decViewPressed) || (Gdx.input.isKeyPressed(Input.Keys.X));
+		cameraUp = (secondary && cameraUp) || (Gdx.input.isKeyPressed(Input.Keys.I));
+		cameraLeft = (secondary && cameraLeft) || (Gdx.input.isKeyPressed(Input.Keys.J));
+		cameraDown = (secondary && cameraDown) || (Gdx.input.isKeyPressed(Input.Keys.K));
+		cameraRight = (secondary && actionPressed) || (Gdx.input.isKeyPressed(Input.Keys.L));
+		zoomIn = (secondary && zoomIn) || (Gdx.input.isKeyPressed(Input.Keys.NUM_1));
+		zoomOut = (secondary && zoomOut) || (Gdx.input.isKeyPressed(Input.Keys.NUM_2));
 
 		// Directional controls
 		horizontal = (secondary ? horizontal : 0.0f);

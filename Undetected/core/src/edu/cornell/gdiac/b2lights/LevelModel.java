@@ -532,6 +532,7 @@ public class LevelModel {
 			// Create a filter to exclude see through items
 			Filter f = new Filter();
 			f.maskBits = bitStringToComplement(light.getString("excludeBits"));
+			System.out.println("Dude mask bits "+f.maskBits);
 			cone.setContactFilter(f);
 			cone.setActive(false); // TURN ON LATER
 			lights.add(cone);

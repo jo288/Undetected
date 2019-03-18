@@ -16,6 +16,7 @@ public class LightController {
     LevelModel level;
     static float dist_to_player;
     static Vector2 lightPos;
+    static short maskBits;
     private static List<Body> intersected = new ArrayList<Body>();
     private static List<Vector2> contact_points = new ArrayList<Vector2>();
     final RayCastCallback ray = new RayCastCallback() {
@@ -24,14 +25,12 @@ public class LightController {
                                             Vector2 normal, float fraction) {
             Body b = fixture.getBody();
             Object o = b.getUserData();
-            DudeModel avatar = level.getAvatar();
-            intersected.add(fixture.getBody());
-            contact_points.add(point);
+            if((maskBits & fixture.getFilterData().categoryBits) !=0){
+                intersected.add(fixture.getBody());
+                contact_points.add(point);
+            }
             if(!(o instanceof DudeModel) &&point.dst(lightPos)<dist_to_player){
                 return 0;
-            }
-            if(o instanceof DudeModel && (Obstacle)(o)==level.getAvatar()){
-                return fraction;
             }
             return 1;
         }
@@ -48,9 +47,9 @@ public class LightController {
         for(GuardModel guard: guards){
             Vector2 playerPos = new Vector2(player.getX(), player.getY());
             ConeSource light = guard.getLight();
+            maskBits = light.getContactFilter().maskBits;
             lightPos = light.getPosition();
             float range = ((ConeSource)light).getDistance();
-//            System.out.println("range "+range);
             //a vector from the guard to the player
             Vector2 guard_to_player = playerPos.sub(guard.getPosition());
 
@@ -59,12 +58,10 @@ public class LightController {
             float player_guard_angle = guard_to_player.angle(guard.getDirection());
             player_guard_angle = player_guard_angle < 0 ? player_guard_angle+=360:player_guard_angle;
             player_guard_angle = player_guard_angle > 180? 360-player_guard_angle:player_guard_angle;
-//            System.out.println(player_guard_angle);
 
             //if player is within the cone light region, raycast from guard to player
             if(dist_to_player<=range && player_guard_angle <= light.getConeDegree()){
                 level.getWorld().rayCast(ray, light.getPosition(), player.getPosition());
-
                 for(int i=0; i<intersected.size(); i++){
                     Object b = intersected.get(i).getUserData();
                     if(!(b instanceof DudeModel && (Obstacle)b==player)){
@@ -80,6 +77,7 @@ public class LightController {
             clearIntersectionData();
             return false;
         }
+        clearIntersectionData();
         return false;
     }
 
