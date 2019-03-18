@@ -228,7 +228,7 @@ public class Board {
 	 */
 	public boolean isSafeAt(int x, int y) {
 		return x >= 0 && y >= 0 && x < width && y < height
-				&& getTileState(x, y).isValid;
+				&& getTileState(x, y).isValid && (getTileState(x,y).occupant == 0);
 	}
 
 	// GAME LOOP
@@ -240,14 +240,14 @@ public class Board {
 	 * All we do is animate falling tiles.
 	 */
 	public void update() {
-		for(int i=height-1;i>=0;i--){
-			for(int j=0;j<width;j++){
-				System.out.print(getTileState(j,i).occupant);
-			}
-			System.out.println();
-		}
-		System.out.println();
-		System.out.println();
+//		for(int i=height-1;i>=0;i--){
+//			for(int j=0;j<width;j++){
+//				System.out.print(getTileState(j,i).occupant);
+//			}
+//			System.out.println();
+//		}
+//		System.out.println();
+//		System.out.println();
 	}
 
 	/**
@@ -434,6 +434,14 @@ public class Board {
 			return;
 		}
 		getTileState(x, y).visited = true;
+	}
+
+	/**
+	Returns the occupant of the tile
+	 */
+	public int getOccupant(int x, int y) {
+		TileState tile = getTileState(x,y);
+		return tile.occupant;
 	}
 
 	/**

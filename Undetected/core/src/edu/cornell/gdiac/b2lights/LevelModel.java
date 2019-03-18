@@ -71,6 +71,10 @@ public class LevelModel {
 	private ObjectiveModel objective;
 	/** Reference to all the guards (for line-of-sight checks) */
 	private ArrayList<GuardModel> guards;
+	/** Guard AI */
+	private ArrayList<AIController> controls;
+	/** Only update AI every time tick is 60 */
+	private int tick = 0;
 
 	/** Whether or not the level is in debug more (showing off physics) */	
 	private boolean debug;
@@ -389,6 +393,7 @@ public class LevelModel {
 
 		//create guard
 		guards = new ArrayList<GuardModel>();
+		controls = new ArrayList<>();
 		GuardModel guard = new GuardModel();
 		JsonValue gddata = levelFormat.get("guard");
 		guard.initialize(gddata);
@@ -400,6 +405,16 @@ public class LevelModel {
 		activate(guard);
 		guard.addLight(lights.get(0));
 		attachLights(guard);
+
+		// Testing AIControll
+		guard.setX(6.53f);
+		guard.setY(1.53f);
+		AIController ai = new AIController(board, guard);
+		controls.add(ai);
+		Vector2 start = new Vector2(6.53f,1.53f);
+		Vector2 end = new Vector2(6.53f, 6.53f);
+		ai.setLinearPath(start, end);
+		ai.setPatrol();
 		this.guards.add(guard);
 
 		// Create Test Box
@@ -776,6 +791,11 @@ public class LevelModel {
 			updateBoard();
 			//Test for displaying board states
 			board.update();
+			GuardModel guard = guards.get(0);
+			AIController ai = controls.get(0);
+
+			System.out.println(guard.getX() +"," + guard.getY());
+			ai.update();
 			return true;
 		}
 		return false;
