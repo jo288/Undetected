@@ -407,13 +407,9 @@ public class LevelModel {
 		attachLights(guard);
 
 		// Testing AIControll
-		guard.setX(6.53f);
-		guard.setY(1.53f);
 		AIController ai = new AIController(board, guard);
 		controls.add(ai);
-		Vector2 start = new Vector2(6.53f,1.53f);
-		Vector2 end = new Vector2(6.53f, 6.53f);
-		ai.setLinearPath(start, end);
+		ai.initialize(gddata);
 		ai.setPatrol();
 		this.guards.add(guard);
 

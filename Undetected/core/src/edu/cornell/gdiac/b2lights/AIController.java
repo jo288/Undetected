@@ -1,5 +1,6 @@
 package edu.cornell.gdiac.b2lights;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.JsonValue;
 import edu.cornell.gdiac.physics.obstacle.Obstacle;
 
 import java.util.*;
@@ -25,7 +26,6 @@ public class AIController {
 
     /** The current position the guard is trying to reach in x,y screen coordinates */
     private Vector2 currentGoal;
-
 
     /** Possible States of a Guard, sleeping, patrolling, in alert */
     private static enum FSMState {
@@ -187,6 +187,19 @@ public class AIController {
             String s = this.x+" "+this.y;
             return s;
         }
+    }
+
+    /** Initializes path values */
+    public void initialize(JsonValue json) {
+        float[] paths = json.get("path").asFloatArray();
+        path = new Vector2[paths.length/2];
+        for (int i = 0; i < paths.length/2; i++) {
+            int j = i*2;
+            path[i] = new Vector2(paths[j], paths[j+1]);
+        }
+        state = FSMState.PATROL;
+        currentGoal = path[0];
+        pathIndex = 0;
     }
 
     /** Returns the Manhattan Distance of two points */
