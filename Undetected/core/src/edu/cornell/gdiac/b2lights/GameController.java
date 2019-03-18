@@ -148,6 +148,7 @@ public class GameController implements Screen, ContactListener {
 	private int countdown;
 	/** Whether the player reached the objective or not */
 	private boolean hasObjective;
+	private boolean setAngle = false;
 
 
 	/** Mark set to handle more sophisticated collision callbacks */
@@ -289,6 +290,8 @@ public class GameController implements Screen, ContactListener {
 		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/level1.json"));
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
+
+		setAngle = false;
 	}
 	
 	/**
@@ -412,6 +415,23 @@ public class GameController implements Screen, ContactListener {
 		guardAngle.scl(guard.getForce());
 		guard.setMovement(guardAngle.x,guardAngle.y);
 		guard.applyForce();
+
+		if (setAngle) {
+		    float refAngle = (float) (Math.PI/2 + Math.atan((guard.getY()-avatar.getY())/(guard.getX()-avatar.getX())));
+		    guard.setBodyType(BodyDef.BodyType.StaticBody);
+		    if ((guard.getY()-avatar.getY() >= 0) && (guard.getX()-avatar.getX() >= 0)) {
+		        guard.setDirection(refAngle);
+            }
+		    else if ((guard.getY()-avatar.getY() >= 0) && (guard.getX()-avatar.getX() <= 0)) {
+                guard.setDirection((float)(Math.PI + refAngle));
+            }
+            else if ((guard.getY()-avatar.getY() <= 0) && (guard.getX()-avatar.getX() <= 0)) {
+                guard.setDirection((float)(Math.PI + refAngle));
+            }
+            else {
+                guard.setDirection((float)(2*Math.PI + refAngle));
+            }
+        }
 
 		// Turn the physics engine crank.
 		level.update(dt);
@@ -548,7 +568,13 @@ public class GameController implements Screen, ContactListener {
 
 			DudeModel avatar = level.getAvatar();
 			ExitModel door   = level.getExit();
+			ArrayList<GuardModel> guards = level.getGuards();
 			ObjectiveModel objective = level.getObjective();
+
+            if((guards.contains(bd1) && bd2==avatar ) || (bd1 == avatar && guards.contains(bd2))){
+                setAngle = true;
+                setFailure(true);
+            }
 
 			if((bd1==avatar && bd2 instanceof MoveableBox ) || (bd1 instanceof MoveableBox && bd2==avatar)){
 				avatarBoxCollision = true;

@@ -375,6 +375,7 @@ public class GuardModel extends CharacterModel {
         if (getMovement().len2() > 0f) {
             forceCache.set(getMovement());
             body.applyForce(forceCache,getPosition(),true);
+//            body.setLinearVelocity(forceCache.x/16.8f, forceCache.y/16.8f);
             animate = true;
         } else {
             animate = false;
