@@ -74,8 +74,8 @@ public class LightController {
                 clearIntersectionData();
                 return true;
             }
-            clearIntersectionData();
-            return false;
+            /*clearIntersectionData();
+            return false;*/
         }
         clearIntersectionData();
         return false;
