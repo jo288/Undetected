@@ -16,6 +16,8 @@
 
 import box2dLight.*;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 /**
@@ -159,4 +161,18 @@ public class ConeSource extends ConeLight implements LightSource {
 		collisions.maskBits = maskBits;
 		super.setContactFilter(collisions);
 	}
-}
+
+	@Override
+	protected void updateBody() {
+		if (body == null || staticLight) return;
+
+		final Vector2 vec = body.getPosition();
+		float angle = body.getAngle();
+		final float cos = MathUtils.cos(angle);
+		final float sin = MathUtils.sin(angle);
+		final float dX = bodyOffsetX * cos - bodyOffsetY * sin;
+		final float dY = bodyOffsetX * sin + bodyOffsetY * cos;
+		start.x = vec.x + dX;
+		start.y = vec.y + dY;
+		//setDirection(bodyAngleOffset + angle * MathUtils.radiansToDegrees);
+	}}

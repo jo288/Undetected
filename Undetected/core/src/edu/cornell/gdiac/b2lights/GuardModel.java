@@ -162,19 +162,9 @@ public class GuardModel extends CharacterModel {
     public Vector2 getDirection(){ return direction; }
 
     public void setDirection(float angle){
-        super.setAngle(angle);
-        if(Math.abs(angle- (-Math.PI/2))<0.05){
-            direction = new Vector2(1,0);
-        }
-        else if(angle==0){
-            direction = new Vector2(0, 1);
-        }
-        else if(Math.abs(angle-Math.PI/2)<0.05){
-            direction = new Vector2(-1, 0);
-        }
-        else{
-            direction = new Vector2(0, -1);
-        }
+        float adjustedAng = angle+(float)Math.PI/2.0f;
+        this.light.setDirection(adjustedAng*MathUtils.radiansToDegrees);
+        direction = new Vector2((float)Math.cos(adjustedAng), (float)Math.sin(adjustedAng));
     }
     public void setDirection(Vector2 dir){ direction = dir; }
     public void setDirection(float x, float y) { direction = new Vector2(x, y);}
