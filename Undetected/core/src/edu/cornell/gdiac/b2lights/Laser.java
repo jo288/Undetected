@@ -26,7 +26,6 @@ public class Laser extends BoxObstacle {
     private PolygonShape sensorShape;
 
 
-
     public Laser(float x, float y) {
         super(x, y, LAZER_WIDTH, LAZER_HEIGHT);
         x_pos = x;

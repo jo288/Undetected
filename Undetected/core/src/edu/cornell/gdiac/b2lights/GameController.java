@@ -658,8 +658,12 @@ public class GameController implements Screen, ContactListener {
 			if (bd1 instanceof Laser) {
 				if (((Laser) bd1).isTurnedOn()) {
 					avatarLaserCollision = true;
-					if(!failed){
-						setFailure(true);
+//					if(!failed){
+//						setFailure(true);
+//					}
+					for (AIController ai : level.getControl()) {
+						ai.setAlarmed();
+						ai.setProtect(bd2);
 					}
 				}
 				else{
@@ -669,8 +673,12 @@ public class GameController implements Screen, ContactListener {
 			else{
 				if (((Laser) bd2).isTurnedOn()) {
 					avatarLaserCollision = true;
-					if(!failed){
-						setFailure(true);
+//					if(!failed){
+//						setFailure(true);
+//					}
+					for (AIController ai : level.getControl()) {
+						ai.setAlarmed();
+						ai.setProtect(bd1);
 					}
 				}
 				else{

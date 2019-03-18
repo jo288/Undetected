@@ -182,6 +182,12 @@ public class LevelModel {
 	 */
 	public ArrayList<GuardModel> getGuards() { return guards; }
 
+    /**
+     * Returns a reference to all AI
+     *
+     */
+	public ArrayList<AIController> getControl() {return controls; }
+
 	/**
 	 * Returns a reference to the exit door
 	 * 
@@ -446,7 +452,7 @@ public class LevelModel {
 		Obstacle b = player.getBoxHeld();
 		float bx = (board.getTileSize() * board.screenToBoard(player.getX()-(float)Math.sin(dir)) + 0.5f);
 		float by = (board.getTileSize() * board.screenToBoard(player.getY()+(float)Math.cos(dir)) + 0.5f);
-		int o = board.getOccupantAt(board.physicsToBoard(bx),board.physicsToBoard(by));
+		int o = board.getOccupantAt(board.physicsToBoard(bx), board.physicsToBoard(by));
 		if (o==0||o==3||o==4) {
 			b.setPosition(bx, by);
 			avatar.dropBox();
@@ -785,12 +791,13 @@ public class LevelModel {
 			disableObjects();
 			enableObjects();
 			updateBoard();
+
+            System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
 			//Test for displaying board states
 			board.update();
 			GuardModel guard = guards.get(0);
 			AIController ai = controls.get(0);
 
-			System.out.println(guard.getX() +"," + guard.getY());
 			ai.update();
 			return true;
 		}

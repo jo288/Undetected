@@ -228,7 +228,7 @@ public class Board {
 	 */
 	public boolean isSafeAt(int x, int y) {
 		return x >= 0 && y >= 0 && x < width && y < height
-				&& getTileState(x, y).isValid && (getTileState(x,y).occupant == 0);
+				&& getTileState(x, y).isValid && (getTileState(x,y).occupant == 0 || getTileState(x,y).occupant == 4 || getTileState(x,y).occupant == 3 ) ;
 	}
 
 	// GAME LOOP
