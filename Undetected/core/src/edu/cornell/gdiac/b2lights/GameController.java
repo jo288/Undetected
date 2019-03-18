@@ -368,6 +368,7 @@ public class GameController implements Screen, ContactListener {
 		ArrayList<GuardModel> guards = level.getGuards();
 		InputController input = InputController.getInstance();
 
+
 		// LASER CHECK
 
 		/*if (input.didForward()) {

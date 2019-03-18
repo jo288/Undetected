@@ -119,7 +119,11 @@ public class AIController {
         int guardx = board.physicsToBoard(guard.getX());
         int guardy = board.physicsToBoard(guard.getY());
         int i = bfs(guardx, guardy);
-        if (i == 0) {
+        if (i == 2) {
+            guard.setDirection(0);
+            guard.setMovement(0, 50);
+            guard.applyForce();
+        } else if (i == 0) {
             guard.setMovement(0,0);
         } else if (i == 1) {
             guard.setDirection(-(float) Math.PI/2);
@@ -128,10 +132,6 @@ public class AIController {
         } else if (i == -1) {
             guard.setDirection((float) Math.PI/2);
             guard.setMovement(-50,0);
-            guard.applyForce();
-        } else if (i == 2) {
-            guard.setDirection(0);
-            guard.setMovement(0,50);
             guard.applyForce();
         } else if (i == -2){
             guard.setDirection((float) Math.PI);

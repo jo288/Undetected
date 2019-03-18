@@ -795,7 +795,6 @@ public class LevelModel {
             System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
 			//Test for displaying board states
 			board.update();
-			GuardModel guard = guards.get(0);
 			AIController ai = controls.get(0);
 
 			ai.update();
