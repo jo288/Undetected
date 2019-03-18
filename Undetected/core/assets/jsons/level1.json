@@ -60,7 +60,7 @@
 			"facing":		  90,
 			"rays":			 512,
 			"soft":			false,
-      		"excludeBits":	"0001"
+      		"excludeBits":	"10001"
 		},
 		"side": {
 			"color":		[1.0, 1.0, 1.0, 1.0],
@@ -70,7 +70,7 @@
 			"facing":		   0,
 			"rays":			 512,
 			"soft":			false,
-      		"excludeBits":	"0001"
+      		"excludeBits":	"10001"
 		}
 	}, 
     "avatar": {
@@ -103,7 +103,7 @@
 		"force": 		 80.0,
 		"damping": 		 10.0,
 		"maxspeed": 	  5.0,
-		"collideBits":	"0001",
+		"collideBits":	"0100",
 		"excludeBits":	"0000",
 		"startframe":       0,
 		"walklimit":		4,
@@ -119,7 +119,7 @@
         "density":  	  0.0,
         "friction":       0.0,
         "restitution":    0.0,
-      	"collideBits":	"0001",
+      	"collideBits":	"10000",
       	"excludeBits":	"0000",
         "texture":      "goal",
        	"debugcolor":   "yellow",
@@ -207,7 +207,7 @@
 		"density":        0.0,
 		"friction":       0.2,
 		"restitution":    0.1,
-		"collideBits":	"0100",
+		"collideBits":	"1000",
 		"excludeBits":	"0000",
 		"texture":      "earth",
 		"debugcolor":   "yellow",
@@ -220,7 +220,7 @@
 		"density":        0.0,
 		"friction":       0.2,
 		"restitution":    0.1,
-		"collideBits":	"0100",
+		"collideBits":	"1000",
 		"excludeBits":	"0000",
 		"texture":      "earth",
 		"debugcolor":   "yellow",

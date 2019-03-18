@@ -133,7 +133,14 @@ public class AIController {
      *          2 if character needs to move up
      */
     private int bfs (int startX, int startY) {
-        PriorityQueue<Node> queue = new PriorityQueue<>(Comparator.comparing((Node n) -> n.priority));
+        PriorityQueue<Node> queue = new PriorityQueue<Node>(
+                new Comparator<Node>(){
+                    @Override
+                    public int compare(Node n1, Node n2){
+                        return n1.priority - n2.priority;
+                    }
+                }
+        );
         Node start = new Node(startX, startY, 0);
         queue.add(start);
         int debug = 0;

@@ -393,7 +393,7 @@ public class LevelModel {
 
 		//create guard
 		guards = new ArrayList<GuardModel>();
-		controls = new ArrayList<>();
+		controls = new ArrayList<AIController>();
 		GuardModel guard = new GuardModel();
 		JsonValue gddata = levelFormat.get("guard");
 		guard.initialize(gddata);
