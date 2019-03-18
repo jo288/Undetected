@@ -63,6 +63,11 @@ public class AIController {
         this.item = item;
     }
 
+    /** Sets the tile the Guard is protecting*/
+    public void setProtect(float x, float y) {
+        currentGoal = new Vector2(board.physicsToBoard(x), board.physicsToBoard(y));
+    }
+
     /** Main function to update the guard's velocity */
     public void update(){
         switch (state) {
@@ -90,11 +95,16 @@ public class AIController {
                 break;
             case ALERT:
                 // Set Goal tile to be the object, and find it
-                int obx = board.physicsToBoard(item.getX());
-                int oby = board.physicsToBoard(item.getY());
-                board.setGoal(obx, oby);
-                currentGoal = new Vector2(item.getX(), item.getY());
+                if (item != null) {
+                    int obx = board.physicsToBoard(item.getX());
+                    int oby = board.physicsToBoard(item.getY());
+                    board.setGoal(obx, oby);
+                    currentGoal = new Vector2(obx, oby);
+                } else {
+                    board.setGoal((int) currentGoal.x, (int) currentGoal.y);
+                }
                 System.out.println(currentGoal);
+
                 pathFind();
                 board.resetTiles();
                 break;
