@@ -310,7 +310,7 @@ public class GuardModel extends CharacterModel {
         float[] pos = json.get("pos").asFloatArray();
         setPosition(pos[0]+0.5f,pos[1]+0.5f);
         setWidth(width);
-        setHeight(height);
+        setHeight(height-0.05f);
         setFixedRotation(true);
         setActive(false);
         setAlarmed(false);
