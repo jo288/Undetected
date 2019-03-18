@@ -7,7 +7,7 @@
 		"color":	  	[0.8, 0.8, 0.8, 0.8],
 		"gamma":		true,
 		"diffuse":		true,
-		"blur":			3
+		"blur":			2
 	},
 	"pointlights": {
 		"standard": {
@@ -127,8 +127,8 @@
 	"boxes": {
 			"pos":          [ 4,4,10,10],
 			"size":         [ 1,1],
-			"bodytype":    	"static",
-			"density":  	  1.0,
+			"bodytype":    	"kinematic",
+			"density":  	  999999999.0,
 			"friction":       0.0,
 			"restitution":    0.0,
 			"collideBits":	"0010",

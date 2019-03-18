@@ -56,6 +56,7 @@ public class MoveableBox extends BoxObstacle{
 //        setPosition(pos[0]+0.5f,pos[1]+0.5f);
         setWidth(size[0]);
         setHeight(size[1]);
+        setFixedRotation(true);
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing

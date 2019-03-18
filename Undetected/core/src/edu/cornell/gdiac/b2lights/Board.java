@@ -42,7 +42,7 @@ public class Board {
 	 */
 	private static class TileState{
 		/** Is this a valid tile? */
-		public boolean isValid = false;
+		public boolean isValid = true;
 		/** Is this tile occupied? */
 		public boolean isOccupied = false;
 		/** Type of object at this tile
@@ -95,6 +95,10 @@ public class Board {
 		resetTiles();
 	}
 
+	public int getOccupantAt(int x, int y){
+		return getTileState(x,y).occupant;
+	}
+
 	/**
 	 * Sets invalid tiles.
 	 */
@@ -119,7 +123,7 @@ public class Board {
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 				TileState tile = getTileState(x, y);
-				tile.isValid = true;
+//				tile.isValid = true;
 				tile.goal = false;
 				tile.visited = false;
 				tile.isOccupied = false;

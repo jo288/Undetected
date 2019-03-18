@@ -433,9 +433,14 @@ public class LevelModel {
 	public void placeBox(DudeModel player) {
 		float dir = player.getDirection();
 		Obstacle b = player.getBoxHeld();
-		b.setPosition((board.getTileSize() * board.screenToBoard(player.getX()-(float)Math.sin(dir)) + 0.5f),
-				(board.getTileSize() * board.screenToBoard(player.getY()+(float)Math.cos(dir))) + 0.5f);
-		queueEnabled(b);
+		float bx = (board.getTileSize() * board.screenToBoard(player.getX()-(float)Math.sin(dir)) + 0.5f);
+		float by = (board.getTileSize() * board.screenToBoard(player.getY()+(float)Math.cos(dir)) + 0.5f);
+		int o = board.getOccupantAt(board.physicsToBoard(bx),board.physicsToBoard(by));
+		if (o==0||o==3||o==4) {
+			b.setPosition(bx, by);
+			avatar.dropBox();
+			queueEnabled(b);
+		}
     }
 	
 	/**
@@ -737,7 +742,9 @@ public class LevelModel {
 				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),5);
 			}
 			if(o instanceof Laser){
-				for(int i=(int)o.getY(); i<(int)(o.getY()+((Laser) o).getHeight());i++){
+				//TODO: TEMPORARY FIX, CHANGE LATER WHEN LASERS ARE FIXED
+				//for(int i=(int)o.getY(); i<(int)(o.getY()+((Laser) o).getHeight());i++){
+				for(int i=(int)o.getY()-2; i<(int)(o.getY()+((Laser) o).getHeight())-2;i++){
 					board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(i),4);
 				}
 			}

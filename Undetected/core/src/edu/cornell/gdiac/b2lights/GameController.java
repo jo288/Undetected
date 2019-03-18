@@ -368,7 +368,6 @@ public class GameController implements Screen, ContactListener {
 
 		if(input.didAction()&&avatar.getHasBox()){
 			level.placeBox(avatar);
-			avatar.dropBox();
 		} else if(input.didAction()&&!avatar.getHasBox() && avatarBoxCollision){
 			avatar.setBoxHeld(avatar.getBoxInContact());
 			avatar.pickupBox();
@@ -554,6 +553,9 @@ public class GameController implements Screen, ContactListener {
 				level.queueDestroyed(objective);
 			}
 
+			if((bd1 instanceof MoveableBox && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2 instanceof MoveableBox)){
+				System.out.println("laserbox");
+			}
 
 			// Check for win condition
 			if ((bd1 == avatar && bd2 == door && hasObjective ) ||
@@ -609,9 +611,10 @@ public class GameController implements Screen, ContactListener {
 		Obstacle bd1 = (Obstacle)body1.getUserData();
 		Obstacle bd2 = (Obstacle)body2.getUserData();
 		DudeModel avatar = level.getAvatar();
+
 		if (((bd1 == avatar && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2==avatar)) ||
-				((bd1 instanceof BoxObstacle && bd2 instanceof Laser) ||
-						(bd1 instanceof Laser && bd2 instanceof BoxObstacle))){
+				((bd1 instanceof MoveableBox && bd2 instanceof Laser) ||
+						(bd1 instanceof Laser && bd2 instanceof MoveableBox))){
 			contact.setEnabled(false);
 			if (bd1 instanceof Laser) {
 				if (((Laser) bd1).isTurnedOn()) {
@@ -632,7 +635,7 @@ public class GameController implements Screen, ContactListener {
 					}
 				}
 				else{
-					avatarLaserCollision =false;
+					avatarLaserCollision = false;
 				}
 			}
 		}
