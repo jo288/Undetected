@@ -54,11 +54,14 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	private static final String BACKGROUND_FILE = "textures/loading.png";
 	private static final String PROGRESS_FILE = "textures/progressbar.png";
 	private static final String PLAY_BTN_FILE = "textures/play.png";
+	private static final String PAUSE_BTN_FILE = "textures/pause_temp.png";
 	
 	/** Background texture for start-up */
 	private Texture background;
 	/** Play button to display when done */
 	private Texture playButton;
+	/** Play button to display when done */
+	private Texture pauseButton;
 	/** Texture atlas to support a progress bar */
 	private Texture statusBar;
 	
@@ -196,6 +199,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 
 		// Load the next two images immediately.
 		playButton = null;
+		pauseButton = null;
 		background = new Texture(BACKGROUND_FILE);
 		statusBar  = new Texture(PROGRESS_FILE);
 		
@@ -242,6 +246,10 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 		 if (playButton != null) {
 			 playButton.dispose();
 			 playButton = null;
+		 }
+		 if (pauseButton != null) {
+		 	pauseButton.dispose();
+		 	pauseButton = null;
 		 }
 	}
 	

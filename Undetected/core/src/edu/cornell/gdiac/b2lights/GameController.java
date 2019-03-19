@@ -144,6 +144,8 @@ public class GameController implements Screen, ContactListener {
 	private boolean complete;
 	/** Whether we have failed at this world (and need a reset) */
 	private boolean failed;
+	/** Whether the level is paused or not */
+	private boolean paused;
 	/** Countdown active for winning or losing */
 	private int countdown;
 	/** Whether the player reached the objective or not */
@@ -368,6 +370,9 @@ public class GameController implements Screen, ContactListener {
 		ArrayList<GuardModel> guards = level.getGuards();
 		InputController input = InputController.getInstance();
 
+		if (input.didPause() && !paused) {
+			pause();
+		}
 
 		// LASER CHECK
 
@@ -468,6 +473,14 @@ public class GameController implements Screen, ContactListener {
 			canvas.drawTextCentered("FAILURE!", displayFont, 0.0f);
 			canvas.end();
 		}
+
+		if (paused) {
+			Texture pauseButton = new Texture(assetDirectory.get("textures").get("pause").getString("file"));
+			canvas.begin();
+			canvas.draw(pauseButton, new Color(Color.GRAY), pauseButton.getWidth()/2, pauseButton.getHeight()/2,
+					canvas.getWidth()/2, canvas.getHeight()/2, 0, 0.3f, 0.3f);
+			canvas.end();
+		}
 	}
 	
 	/**
@@ -493,10 +506,20 @@ public class GameController implements Screen, ContactListener {
 	 */
 	public void render(float delta) {
 		if (active) {
-			if (preUpdate(delta)) {
-				update(delta);
+			if (!paused) {
+				if (preUpdate(delta)) {
+					update(delta);
+				}
+				draw(delta);
 			}
-			draw(delta);
+			else {
+				InputController input = InputController.getInstance();
+				input.readInput();
+				if (input.didPause()) {
+					resume();
+				}
+				draw(delta);
+			}
 		}
 	}
 
@@ -507,7 +530,7 @@ public class GameController implements Screen, ContactListener {
 	 * also paused before it is destroyed.
 	 */
 	public void pause() {
-		// TODO Auto-generated method stub
+		paused = true;
 	}
 
 	/**
@@ -516,7 +539,7 @@ public class GameController implements Screen, ContactListener {
 	 * This is usually when it regains focus.
 	 */
 	public void resume() {
-		// TODO Auto-generated method stub
+		paused = false;
 	}
 	
 	/**

@@ -48,8 +48,8 @@ public class InputController {
 	private boolean nextPressed;
 	private boolean nextPrevious;
 	/** Whether the button to step back worlds was pressed. */
-	private boolean prevPressed;
-	private boolean prevPrevious;
+	private boolean pausePressed;
+	private boolean pausePrevious;
 	/** Whether the debug toggle was pressed. */
 	private boolean debugPressed;
 	private boolean debugPrevious;
@@ -139,8 +139,8 @@ public class InputController {
 	 *
 	 * @return true if the player wants to go to the previous level.
 	 */
-	public boolean didBack() {
-		return prevPressed && !prevPrevious;
+	public boolean didPause() {
+		return pausePressed && !pausePrevious;
 	}
 	
 	/**
@@ -215,7 +215,7 @@ public class InputController {
 		debugPrevious  = debugPressed;
 		exitPrevious = exitPressed;
 		nextPrevious = nextPressed;
-		prevPrevious = prevPressed;
+		pausePrevious = pausePressed;
 		actionPrevious = actionPressed;
 
 		// Check to see if a GamePad is connected
@@ -241,7 +241,7 @@ public class InputController {
 		resetPressed = xbox.getStart();
 		exitPressed  = xbox.getBack();
 		nextPressed  = xbox.getRB();
-		prevPressed  = xbox.getLB();
+		pausePressed  = xbox.getLB();
 		debugPressed  = xbox.getY();
 		actionPressed = xbox.getA();
 
@@ -263,7 +263,7 @@ public class InputController {
 		// Give priority to gamepad results
 		resetPressed = (secondary && resetPressed) || (Gdx.input.isKeyPressed(Input.Keys.R));
 		debugPressed = (secondary && debugPressed) || (Gdx.input.isKeyPressed(Input.Keys.D));
-		prevPressed = (secondary && prevPressed) || (Gdx.input.isKeyPressed(Input.Keys.P));
+		pausePressed = (secondary && pausePressed) || (Gdx.input.isKeyPressed(Input.Keys.P));
 		nextPressed = (secondary && nextPressed) || (Gdx.input.isKeyPressed(Input.Keys.N));
 		exitPressed  = (secondary && exitPressed) || (Gdx.input.isKeyPressed(Input.Keys.ESCAPE));
 		actionPressed = (secondary && actionPressed) || (Gdx.input.isKeyPressed(Input.Keys.SPACE));

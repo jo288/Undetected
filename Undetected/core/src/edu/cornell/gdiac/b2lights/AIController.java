@@ -96,8 +96,8 @@ public class AIController {
             case ALERT:
                 // Set Goal tile to be the object, and find it
                 if (item != null) {
-                    int obx = board.physicsToBoard(item.getX()+guard.getWidth()/2);
-                    int oby = board.physicsToBoard(item.getY()+guard.getHeight()/2);
+                    int obx = board.physicsToBoard(item.getX());
+                    int oby = board.physicsToBoard(item.getY());
                     board.setGoal(obx, oby);
                     currentGoal = new Vector2(obx, oby);
                 } else {
