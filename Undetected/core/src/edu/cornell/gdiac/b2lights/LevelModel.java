@@ -462,7 +462,7 @@ public class LevelModel {
 				l.setWidth(l.getTexture().getRegionWidth()/scale.x);
 			l.setDrawScale(scale);
 			activate(l);
-			l.start();
+//			l.start();
 			laserdata = laserdata.next();
 		}
 	}
@@ -820,6 +820,9 @@ public class LevelModel {
 			}
 			avatar.update(dt);
 			goalDoor.update(dt);
+			for(Laser l: lasers){
+				l.update(dt);
+			}
 			destroyObjects();
 			disableObjects();
 			enableObjects();
@@ -827,7 +830,7 @@ public class LevelModel {
 
             System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
 			//Test for displaying board states
-			board.update();
+			//board.update();
 			AIController ai = controls.get(0);
 			AIController ai2 = controls.get(1);
 			ai.update();

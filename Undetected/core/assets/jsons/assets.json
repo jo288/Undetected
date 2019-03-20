@@ -26,6 +26,16 @@
     			"first":	0
     		}
     	},
+		"laserAnimation": {
+			"file": 	"textures/laseranimation.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		6,
+				"rows":		1,
+				"cols":		6,
+				"first":	0
+			}
+		},
         "goal": { 
          	"file":		"textures/helicopter.png",
          	"wrap":		false,

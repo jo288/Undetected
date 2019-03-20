@@ -22,10 +22,13 @@ public class Laser extends BoxObstacle {
     /** how many seconds remaining until this laser turns off */
     private int time_to_live;
     /** the maximum time this laser can stay on for */
-    private static final int LIFESPAN = 4;
+    private static final int LIFESPAN = 240;
     private Fixture sensorFixture;
     private PolygonShape sensorShape;
 
+    /** FilmStrip pointer to the texture region */
+    private FilmStrip filmstrip;
+    int animateCool;
 
     public Laser(float x, float y) {
         super(x, y, LAZER_WIDTH, LAZER_HEIGHT);
@@ -69,7 +72,7 @@ public class Laser extends BoxObstacle {
         setHeight(size[1]);
 
         setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
-        setTimeToLive(json.get("timetolive").asInt());
+        setTimeToLive(json.get("timetolive").asInt()*60);
 
         // Create the collision filter (used for light penetration)
         short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
@@ -97,6 +100,17 @@ public class Laser extends BoxObstacle {
         TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
         setTexture(texture);
         setOrigin(origin.x, 0);
+
+
+
+		texture = JsonAssetManager.getInstance().getEntry("laserAnimation", TextureRegion.class);
+		try {
+//			filmstrip = (FilmStrip)texture;
+			filmstrip = new FilmStrip(texture.getTexture(), 1,6);
+		} catch (Exception e) {
+			filmstrip = null;
+		}
+//		setTexture(texture);
     }
 
     public void pause() {
@@ -106,6 +120,66 @@ public class Laser extends BoxObstacle {
         } else {
             time_to_live = -1;
         }
+    }
+
+    /**
+     * Updates the object's physics state (NOT GAME LOGIC).
+     *
+     * We use this method to reset cooldowns.
+     *
+     * //@param delta Number of seconds since last animation frame
+     */
+    public void update(float dt) {
+
+        if (time_to_live == 0) {
+            isOn = false;
+            time_to_live = LIFESPAN;
+        } else if (time_to_live<=60){
+            isOn = false;
+        } else {
+            isOn = true;
+        }
+        time_to_live--;
+
+        //Animate
+        if (time_to_live <= 8) {
+            if (filmstrip != null) {
+//                int next = (filmstrip.getFrame()+1) % filmstrip.getSize();
+                filmstrip.setFrame(5-time_to_live/2);
+            }
+        }else if (time_to_live>=60 && time_to_live<=68){
+            if (filmstrip != null) {
+//                int next = (filmstrip.getFrame()+5) % filmstrip.getSize();
+//                filmstrip.setFrame(next);
+                filmstrip.setFrame((time_to_live-59)/2);
+            }
+        }
+        else if (time_to_live<60) {
+            filmstrip.setFrame(0);
+        }
+        else {
+            filmstrip.setFrame(5);
+        }
+
+        /*
+        // Animate if necessary
+        if (animate && animateCool == 0) {
+            if (filmstrip != null) {
+                int next = (filmstrip.getFrame()+1) % filmstrip.getSize();
+                filmstrip.setFrame(next);
+            }
+            animateCool = 6;
+        } else if (walkCool > 0) {
+            walkCool--;
+        } else if (!animate) {
+            if (filmstrip != null) {
+                filmstrip.setFrame(0);
+            }
+            animateCool = 0;
+        }
+
+        super.update(dt);
+        */
     }
 
     public void resume() {
@@ -136,6 +210,7 @@ public class Laser extends BoxObstacle {
 
     @Override
     public void draw(ObstacleCanvas canvas){
+        canvas.draw(filmstrip,Color.WHITE,16,origin.y,getX()*drawScale.x,getY()*drawScale.y+getHeight()/2*drawScale.y,0,1,1);
         if(isOn){
             //canvas.setBlendState(ObstacleCanvas.BlendState.ALPHA_BLEND);
             canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,getHeight()+0.5f);
