@@ -28,7 +28,7 @@ public class InteriorWall extends Obstacle{
         positions = new Array<Integer>();
     }
 
-    private class WallBlock extends BoxObstacle{
+    public class WallBlock extends BoxObstacle{
         /** 0:horiontal, 1:vertical, 2:left-bottom corner, 3: right-bottom corner, 4: left-top corner, 5: right-top corner */
         public int walltype = 0;
 

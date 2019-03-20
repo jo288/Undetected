@@ -310,7 +310,7 @@ public class GuardModel extends CharacterModel {
         float[] pos = json.get("pos").asFloatArray();
         setPosition(pos[0]+0.5f,pos[1]+0.5f);
         setWidth(width);
-        setHeight(height-0.05f);
+        setHeight(height/2);
         setFixedRotation(true);
         setActive(false);
         setAlarmed(false);
@@ -350,7 +350,8 @@ public class GuardModel extends CharacterModel {
 
 
         // Now get the texture from the AssetManager singleton
-        TextureRegion texture = JsonAssetManager.getInstance().getEntry("defaultDude", TextureRegion.class);
+        String key = json.get("texture").asString();
+        TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
         defaultCharTexture = texture;
         setTexture(texture);
         setOrigin(origin.x,0);
@@ -423,7 +424,7 @@ public class GuardModel extends CharacterModel {
      */
     public void draw(ObstacleCanvas canvas) {
         if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,0f,1.0f,1.0f);
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,0f,0.15f,0.15f);
         }
     }
 }

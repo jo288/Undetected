@@ -5,15 +5,15 @@
     		"wrap":		true,
     	},
 		"wallvertical": {
-			"file":		"textures/wallvertical.png",
+			"file":		"textures/BG_Wall_Vertical.png",
 			"wrap":		false,
 		},
 		"wallhorizontal": {
-			"file":		"textures/wallhorizontal.png",
+			"file":		"textures/BG_Wall_Mid.png",
 			"wrap":		false,
 		},
 		"floor": {
-			"file": 	"textures/tile_light.png",
+			"file": 	"textures/BG_Tile.png",
 			"wrap": 	true,
 		},
     	"dude": {      
@@ -31,11 +31,15 @@
          	"wrap":		false,
          },
 		"defaultDude": {
-			"file": 	"textures/dude.png",
+			"file": 	"textures/Player.png",
+			"wrap": 	false,
+		},
+		"guard": {
+			"file": 	"textures/guardsprite.png",
 			"wrap": 	false,
 		},
 		"box": {
-			"file": 	"textures/box32.png",
+			"file": 	"textures/BG_Box3.png",
 			"wrap": 	false,
 		},
 		"laser": {
@@ -50,10 +54,10 @@
 			"file": 	"textures/key.png",
 			"wrap": 	false,
 		},
-//		"pause":	{
-//			"file":		"textures/temp_pause.png",
-//			"wrap": 	false,
-//		},
+		"pause":	{
+			"file":		"textures/temp_pause.png",
+			"wrap": 	false,
+		},
   	},
   	"fonts": {
   		"display": {

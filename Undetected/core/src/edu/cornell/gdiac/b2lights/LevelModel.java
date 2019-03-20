@@ -374,13 +374,19 @@ public class LevelModel {
 		ExteriorWall ew = new ExteriorWall();
 		ew.initialize(bounds);
 		ew.setDrawScale(scale);
-		activate(ew);
+		for (Obstacle o: ew.bodies){
+			activate(o);
+		}
+//		activate(ew);
 
 		JsonValue walls = levelFormat.get("interiorwall");
 		InteriorWall iw = new InteriorWall();
 		iw.initialize(walls);
 		iw.setDrawScale(scale);
-		activate(iw);
+		for (Obstacle o: iw.bodies){
+			activate(o);
+		}
+//		activate(iw);
 
 		// Create the dude and attach light sources
 	    avatar = new DudeModel();
@@ -756,18 +762,27 @@ public class LevelModel {
 	private void updateBoard(){
 		board.resetOccupants();
 		for(Obstacle o: objects){
-			if(o instanceof ExteriorWall){
-				for (int i=0;i<((ExteriorWall) o).getPositions().size;i+=2){
-					board.setOccupiedTiles(((ExteriorWall) o).getPositions().get(i),
-							((ExteriorWall) o).getPositions().get(i+1),1);
-				}
-			}
+//			if(o instanceof ExteriorWall){
+//				for (int i=0;i<((ExteriorWall) o).getPositions().size;i+=2){
+//					board.setOccupiedTiles(((ExteriorWall) o).getPositions().get(i),
+//							((ExteriorWall) o).getPositions().get(i+1),1);
+//				}
+//			}
+//
+//			if(o instanceof InteriorWall){
+//				for (int i=0;i<((InteriorWall) o).getPositions().size;i+=2){
+//					board.setOccupiedTiles(((InteriorWall) o).getPositions().get(i),
+//							((InteriorWall) o).getPositions().get(i+1),1);
+//				}
+//			}
 
-			if(o instanceof InteriorWall){
-				for (int i=0;i<((InteriorWall) o).getPositions().size;i+=2){
-					board.setOccupiedTiles(((InteriorWall) o).getPositions().get(i),
-							((InteriorWall) o).getPositions().get(i+1),1);
-				}
+			if(o instanceof ExteriorWall.WallBlock){
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()),
+						board.physicsToBoard(o.getY()),1);
+			}
+			if(o instanceof InteriorWall.WallBlock){
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()),
+						board.physicsToBoard(o.getY()),1);
 			}
 			if(o instanceof DudeModel){
 				board.setOccupiedTiles(board.physicsToBoard(o.getX()+((DudeModel) o).getWidth()/2),
@@ -817,6 +832,7 @@ public class LevelModel {
 			AIController ai2 = controls.get(1);
 			ai.update();
 			ai2.update();
+
 			return true;
 		}
 		return false;
@@ -856,6 +872,8 @@ public class LevelModel {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		canvas.clear();
+
+		objects.sort((Obstacle o1, Obstacle o2) -> Float.compare(o2.getY(),o1.getY()));
 		
 		// Draw the sprites first (will be hidden by shadows)
 		canvas.begin();

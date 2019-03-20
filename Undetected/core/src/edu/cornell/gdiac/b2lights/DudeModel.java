@@ -328,7 +328,7 @@ public class DudeModel extends CharacterModel {
 		float[] pos = json.get("pos").asFloatArray();
 		setPosition(pos[0]+0.5f,pos[1]+0.5f);
 		setWidth(width);
-		setHeight(height-0.05f);
+		setHeight(height/2);
 		setFixedRotation(true);
 		
 		// Technically, we should do error checking here.
