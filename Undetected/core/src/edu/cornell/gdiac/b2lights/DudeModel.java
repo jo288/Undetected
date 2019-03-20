@@ -368,6 +368,7 @@ public class DudeModel extends CharacterModel {
 		// Now get the texture from the AssetManager singleton
 		TextureRegion texture = JsonAssetManager.getInstance().getEntry("defaultDude", TextureRegion.class);
 		defaultCharTexture = texture;
+		texture.getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
 		setTexture(texture);
 		setOrigin(origin.x,0);
 

@@ -352,7 +352,7 @@ public class GuardModel extends CharacterModel {
         // Now get the texture from the AssetManager singleton
         String key = json.get("texture").asString();
         TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
-        defaultCharTexture = texture;
+//        texture.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
         setTexture(texture);
         setOrigin(origin.x,0);
     }
