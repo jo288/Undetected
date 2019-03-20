@@ -18,6 +18,7 @@ public class Laser extends BoxObstacle {
     private float x_pos;
     private float y_pos;
     private boolean isOn;
+    private int time_store;
     /** how many seconds remaining until this laser turns off */
     private int time_to_live;
     /** the maximum time this laser can stay on for */
@@ -98,15 +99,29 @@ public class Laser extends BoxObstacle {
         setOrigin(origin.x, 0);
     }
 
+    public void pause() {
+        time_store = time_to_live;
+        if (isOn) {
+            time_to_live = Integer.MAX_VALUE;
+        } else {
+            time_to_live = -1;
+        }
+    }
+
+    public void resume() {
+        time_to_live = time_store;
+    }
+
     public void start(){
-        Timer.schedule(new Timer.Task(){
+        Timer.schedule(new Timer.Task() {
                            @Override
                            public void run() {
-                               if(time_to_live==0){
+                               if (time_to_live == 0) {
                                    isOn = false;
                                    time_to_live = LIFESPAN;
-                               }
-                               else{
+                               } else if (time_to_live <= -1) {
+                                   isOn = false;
+                               } else {
                                    isOn = true;
                                }
                                time_to_live--;

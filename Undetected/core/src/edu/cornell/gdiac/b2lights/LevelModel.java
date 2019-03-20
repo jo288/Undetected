@@ -69,6 +69,8 @@ public class LevelModel {
 	private ExitModel goalDoor;
 	/** Reference to the objective (for collision detection) */
 	private ObjectiveModel objective;
+	/** Reference to all the lasers */
+	private ArrayList<Laser> lasers;
 	/** Reference to all the guards (for line-of-sight checks) */
 	private ArrayList<GuardModel> guards;
 	/** Guard AI */
@@ -211,13 +213,7 @@ public class LevelModel {
 	 *
 	 * @return an array of the lasers
 	 */
-	public Array<Laser> getLaser() {
-		Array<Laser> lasers = new Array<Laser>();
-		for (Obstacle o : objects) {
-			if (o.getName() == "laser") {
-				lasers.add((Laser)o);
-			}
-		}
+	public ArrayList<Laser> getLasers() {
 		return lasers;
 	}
 
@@ -450,9 +446,11 @@ public class LevelModel {
 			activate(box);
 		}
 
+		lasers = new ArrayList<Laser>();
 		JsonValue laserdata = levelFormat.getChild("lasers");
 		while (laserdata!=null){
 			Laser l = new Laser();
+			lasers.add(l);
 			l.initialize(laserdata);
 			if (l.getTexture().getRegionWidth()<tSize)
 				l.setWidth(l.getTexture().getRegionWidth()/scale.x);

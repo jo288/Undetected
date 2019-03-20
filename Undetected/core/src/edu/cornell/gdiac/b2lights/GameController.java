@@ -531,6 +531,10 @@ public class GameController implements Screen, ContactListener {
 	 */
 	public void pause() {
 		paused = true;
+		ArrayList<Laser> lasers = level.getLasers();
+		for (Laser l : lasers) {
+			l.pause();
+		}
 	}
 
 	/**
@@ -540,6 +544,10 @@ public class GameController implements Screen, ContactListener {
 	 */
 	public void resume() {
 		paused = false;
+		ArrayList<Laser> lasers = level.getLasers();
+		for (Laser l : lasers) {
+			l.resume();
+		}
 	}
 	
 	/**
