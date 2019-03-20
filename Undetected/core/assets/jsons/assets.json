@@ -50,10 +50,10 @@
 			"file": 	"textures/key.png",
 			"wrap": 	false,
 		},
-		"pause":	{
-			"file":		"textures/temp_pause.png",
-			"wrap": 	false,
-		},
+//		"pause":	{
+//			"file":		"textures/temp_pause.png",
+//			"wrap": 	false,
+//		},
   	},
   	"fonts": {
   		"display": {
