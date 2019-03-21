@@ -16,6 +16,7 @@
 package edu.cornell.gdiac.b2lights;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -292,8 +293,52 @@ public class GameController implements Screen, ContactListener {
 		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/level1.json"));
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
-
+		resetCamera();
 		setAngle = false;
+	}
+
+
+	public void cameraPan(InputController input){
+		float playerX = level.getAvatar().getX();
+		float playerY = level.getAvatar().getY();
+		//pan the canvas camera
+		OrthographicCamera cam = canvas.getCamera();
+		int cx = canvas.getWidth()/2;
+		int cy = canvas.getHeight()/2;
+		//cam.translate(input.getHorizontal(), input.getVertical());
+		float vw = cam.viewportWidth;
+		float vh = cam.viewportHeight;
+		float effectiveVW = vw * cam.zoom;
+		float effectiveVH = vh * cam.zoom;
+		float dx = (vw - effectiveVW)/2;
+		float dy = (vh - effectiveVH)/2;
+		float sx = vw / level.bounds.width;
+		float sy = vh / level.bounds.height;
+		//cam.position.set(playerX*sx, playerY*sy, 0);
+		cam.position.x = MathUtils.clamp(playerX*sx, cx-dx, cx + dx);
+		cam.position.y = MathUtils.clamp(playerY*sy, cy-dy, cy+dy);
+
+		//pan the rayhandler camera
+		OrthographicCamera rcam = level.raycamera;
+		float rcx = level.bounds.width/2;
+		float rcy = level.bounds.height/2;
+		float reffectiveVW = level.bounds.width*rcam.zoom;
+		float reffectiveVH = level.bounds.height*rcam.zoom;
+		float rdx = (level.bounds.width - reffectiveVW)/2;
+		float rdy = (level.bounds.height - reffectiveVH)/2;
+		rcam.position.set(playerX, playerY , 0);
+		rcam.position.x = MathUtils.clamp(rcam.position.x, rcx-rdx, rcx + rdx);
+		rcam.position.y = MathUtils.clamp(rcam.position.y, rcy-rdy, rcy + rdy);
+		rcam.update();
+		level.rayhandler.setCombinedMatrix(rcam);
+		level.rayhandler.updateAndRender();
+	}
+
+	public void resetCamera(){
+		float cx = canvas.getCamera().position.x;
+		float cy = canvas.getCamera().position.y;
+		canvas.getCamera().translate(canvas.getWidth()/2-cx, canvas.getHeight()/2-cy);
+		canvas.getCamera().zoom=1;
 	}
 	
 	/**
@@ -318,13 +363,22 @@ public class GameController implements Screen, ContactListener {
 		if (input.didDebug()) {
 			level.setDebug(!level.getDebug());
 		}
-		//the camera zoom and translations are not working properly ...
-		/*if(input.zoomIn()){
-			canvas.getCamera().zoom-=0.01;
+		cameraPan(input);
+		if(input.zoomIn()){
+			canvas.getCamera().zoom = MathUtils.clamp(canvas.getCamera().zoom-0.01f, 0.4f, 1f);
+			level.raycamera.zoom = MathUtils.clamp(level.raycamera.zoom-0.01f, 0.4f, 1f);
+			level.raycamera.update();
+			level.rayhandler.setCombinedMatrix(level.raycamera);
+			level.rayhandler.updateAndRender();
 		}
 		else if(input.zoomOut()){
-			canvas.getCamera().zoom+=0.01;
-		}*/
+			canvas.getCamera().zoom = MathUtils.clamp(canvas.getCamera().zoom+0.01f, 1f, 1.2f);
+			level.raycamera.zoom = MathUtils.clamp(level.raycamera.zoom+0.01f, 1f, 1.2f);
+
+			level.raycamera.update();
+			level.rayhandler.setCombinedMatrix(level.raycamera);
+			level.rayhandler.updateAndRender();
+		}
 
 		GuardModel guard = level.getGuards().get(0);
 		float degree = guard.getLight().getConeDegree();

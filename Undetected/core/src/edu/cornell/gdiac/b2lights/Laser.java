@@ -217,7 +217,7 @@ public class Laser extends BoxObstacle {
         }
         else{
             //draw transparent texture instead
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1,getHeight()+0.5f, 0.2f);
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1,getHeight()+0.5f, 0.0f);
 
         }
     }
