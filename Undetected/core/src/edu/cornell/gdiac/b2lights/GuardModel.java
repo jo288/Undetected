@@ -49,6 +49,8 @@ public class GuardModel extends CharacterModel {
     private boolean isActive;
     /** Whether Guard is Alarmed */
     private boolean isAlarmed;
+    /** Whether the guard has been collided with */
+    private boolean isCollided;
 
     /** The current horizontal movement of the character */
     private Vector2 movement = new Vector2();
@@ -167,7 +169,25 @@ public class GuardModel extends CharacterModel {
         direction = new Vector2((float)Math.cos(adjustedAng), (float)Math.sin(adjustedAng));
     }
     public void setDirection(Vector2 dir){ direction = dir; }
+
     public void setDirection(float x, float y) { direction = new Vector2(x, y);}
+
+    public void collidedAvatar(DudeModel avatar) {
+        float refAngle = (float) (Math.PI/2 + Math.atan((this.getY()-avatar.getY())/(this.getX()-avatar.getX())));
+        this.setBodyType(BodyDef.BodyType.StaticBody);
+        if ((this.getY()-avatar.getY() >= 0) && (this.getX()-avatar.getX() >= 0)) {
+            this.setDirection(refAngle);
+        }
+        else if ((this.getY()-avatar.getY() >= 0) && (this.getX()-avatar.getX() <= 0)) {
+            this.setDirection((float)(Math.PI + refAngle));
+        }
+        else if ((this.getY()-avatar.getY() <= 0) && (this.getX()-avatar.getX() <= 0)) {
+            this.setDirection((float)(Math.PI + refAngle));
+        }
+        else {
+            this.setDirection((float)(2*Math.PI + refAngle));
+        }
+    }
 
     /**
      * Returns the guard's light

@@ -151,7 +151,7 @@ public class GameController implements Screen, ContactListener {
 	private int countdown;
 	/** Whether the player reached the objective or not */
 	private boolean hasObjective;
-	private boolean setAngle = false;
+	private GuardModel guardCollided = null;
 
 
 	/** Mark set to handle more sophisticated collision callbacks */
@@ -294,7 +294,8 @@ public class GameController implements Screen, ContactListener {
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 		resetCamera();
-		setAngle = false;
+
+		guardCollided = null;
 	}
 
 
@@ -476,22 +477,9 @@ public class GameController implements Screen, ContactListener {
 		guard.setMovement(guardAngle.x,guardAngle.y);
 		guard.applyForce();
 
-		if (setAngle) {
-		    float refAngle = (float) (Math.PI/2 + Math.atan((guard.getY()-avatar.getY())/(guard.getX()-avatar.getX())));
-		    guard.setBodyType(BodyDef.BodyType.StaticBody);
-		    if ((guard.getY()-avatar.getY() >= 0) && (guard.getX()-avatar.getX() >= 0)) {
-		        guard.setDirection(refAngle);
-            }
-		    else if ((guard.getY()-avatar.getY() >= 0) && (guard.getX()-avatar.getX() <= 0)) {
-                guard.setDirection((float)(Math.PI + refAngle));
-            }
-            else if ((guard.getY()-avatar.getY() <= 0) && (guard.getX()-avatar.getX() <= 0)) {
-                guard.setDirection((float)(Math.PI + refAngle));
-            }
-            else {
-                guard.setDirection((float)(2*Math.PI + refAngle));
-            }
-        }
+		if (guardCollided != null) {
+			guardCollided.collidedAvatar(avatar);
+		}
 
 		// Turn the physics engine crank.
 		level.update(dt);
@@ -658,7 +646,13 @@ public class GameController implements Screen, ContactListener {
 			ObjectiveModel objective = level.getObjective();
 
             if((guards.contains(bd1) && bd2==avatar ) || (bd1 == avatar && guards.contains(bd2))){
-                setAngle = true;
+				if (guards.contains(bd1)) {
+					GuardModel guard = guards.get(guards.indexOf(bd1));
+					guardCollided = guard;
+				} else if (guards.contains(bd2)) {
+					GuardModel guard = guards.get(guards.indexOf(bd2));
+					guardCollided = guard;
+				}
                 setFailure(true);
             }
 
