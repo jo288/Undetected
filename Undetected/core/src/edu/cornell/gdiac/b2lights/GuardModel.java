@@ -79,6 +79,9 @@ public class GuardModel extends CharacterModel {
     /** Line of sight of guard */
     private ConeSource light;
 
+    /** How close the player needs to be near this guard for the guard to sense him */
+    private float sensitiveRadius;
+
     /**
      * Returns the directional movement of this character.
      *
@@ -171,6 +174,10 @@ public class GuardModel extends CharacterModel {
     public void setDirection(Vector2 dir){ direction = dir; }
 
     public void setDirection(float x, float y) { direction = new Vector2(x, y);}
+
+    public float getSensitiveRadius(){return sensitiveRadius;}
+
+    public void setSensitiveRadius(float radius){ this.sensitiveRadius = radius;}
 
     public void collidedAvatar(DudeModel avatar) {
         float refAngle = (float) (Math.PI/2 + Math.atan((this.getY()-avatar.getY())/(this.getX()-avatar.getX())));
@@ -346,6 +353,7 @@ public class GuardModel extends CharacterModel {
         setMaxSpeed(json.get("maxspeed").asFloat());
         setStartFrame(json.get("startframe").asInt());
         setWalkLimit(json.get("walklimit").asInt());
+        setSensitiveRadius(json.get("sensitiveRadius").asFloat());
 
         // Create the collision filter (used for light penetration)
         short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());

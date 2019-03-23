@@ -56,7 +56,7 @@ public class LightController {
             dist_to_player = Vector2.len(guard_to_player.x, guard_to_player.y);
             //the angle between the player and the guard
             float player_guard_angle = guard_to_player.angle(guard.getDirection());
-            player_guard_angle = player_guard_angle < 0 ? player_guard_angle+=360:player_guard_angle;
+            player_guard_angle = player_guard_angle < 0 ? player_guard_angle+360:player_guard_angle;
             player_guard_angle = player_guard_angle > 180? 360-player_guard_angle:player_guard_angle;
 
             //if player is within the cone light region, raycast from guard to player
@@ -74,8 +74,23 @@ public class LightController {
                 clearIntersectionData();
                 return true;
             }
-            /*clearIntersectionData();
-            return false;*/
+
+            //player is not in guard's cone light, but within their sensitive radius
+            else if(dist_to_player<=guard.getSensitiveRadius()){
+                level.getWorld().rayCast(ray, guard.getPosition(), player.getPosition());
+                for(int i=0; i<intersected.size(); i++){
+                    Object b = intersected.get(i).getUserData();
+                    if(!(b instanceof DudeModel && (Obstacle)b==player)){
+                        if(guard.getPosition().dst(contact_points.get(i))<dist_to_player){
+                            clearIntersectionData();
+                            return false;
+                        }
+                    }
+                }
+                clearIntersectionData();
+                guard.collidedAvatar(player);
+                return true;
+            }
         }
         clearIntersectionData();
         return false;
