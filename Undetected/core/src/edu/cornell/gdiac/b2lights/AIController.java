@@ -27,8 +27,11 @@ public class AIController {
     /** The current position the guard is trying to reach in x,y screen coordinates */
     private Vector2 currentGoal;
 
+    /** Int that keeps track of whether the guard should update its movement */
+    private int prev;
+
     /** Possible States of a Guard, sleeping, patrolling, in alert */
-    private static enum FSMState {
+    private enum FSMState {
         SLEEP,
         PATROL,
         ALERT
@@ -47,6 +50,13 @@ public class AIController {
         path[0] = start;
         path[1] = end;
         currentGoal = start;
+        pathIndex = 0;
+    }
+
+    /** Sets the path for the guard to be a generic array. The guard moves from array index 0 --> 1 --> 2 ... -> 0*/
+    public void setPath(Vector2[] path) {
+        this.path = path;
+        currentGoal = path[0];
         pathIndex = 0;
     }
 
@@ -117,21 +127,23 @@ public class AIController {
     private void pathFind () {
         int guardx = board.physicsToBoard(guard.getX());
         int guardy = board.physicsToBoard(guard.getY());
-        int i = bfs(guardx, guardy);
+        int i;
 
-        /** I MADE THE VALUE 51 INSTEAD OF 50 BECAUSE THE GUARD KEPT GETTING STUCK BY
-         *  A SINGLE PIXEL ON CORNERS
-         */
+        if (!isGrid(guard)) {
+            i = prev;
+        } else {
+            i = bfs(guardx, guardy);
+        }
 
-        if (i == 2) {
-            guard.setDirection(0);
-            guard.setMovement(0, 50);
-            guard.applyForce();
-        } else if (i == 0) {
+        if (i == 0) {
             guard.setMovement(0,0);
         } else if (i == 1) {
             guard.setDirection(-(float) Math.PI/2);
             guard.setMovement(50,0);
+            guard.applyForce();
+        } else if (i == 2) {
+            guard.setDirection(0);
+            guard.setMovement(0, 50);
             guard.applyForce();
         } else if (i == -1) {
             guard.setDirection((float) Math.PI/2);
@@ -168,7 +180,10 @@ public class AIController {
             debug++;
             Node n = queue.poll();
             board.setVisited(n.x, n.y);
-            if (board.isGoal(n.x, n.y)) return n.act;
+            if (board.isGoal(n.x, n.y)) {
+                prev = n.act;
+                return n.act;
+            }
             if (board.isSafeAt(n.x+1, n.y) && (board.getOccupant(n.x+1,n.y) == 0 || board.getOccupant(n.x+1,n.y) == 4 || board.getOccupant(n.x+1,n.y) == 3) && !board.isVisited(n.x+1, n.y))  {
                 int act = n.act == 0 ? 1 : n.act;
                 Node n1 = new Node(n.x+1, n.y, act);
@@ -210,10 +225,21 @@ public class AIController {
             int goaly = board.physicsToBoard(currentGoal.y);
             this.priority = manDist(x,y,goalx,goaly);
         }
+
+        // Debug
         public String toString(){
             String s = this.x+" "+this.y;
             return s;
         }
+    }
+
+    /** Checks if Guard is currently on a valid tile I.E. guards can only walk on the center of tiles.*/
+    public boolean isGrid(GuardModel guard) {
+        float gX = guard.getX() * 10;
+        float gY = guard.getY() * 10;
+        int bX = (int) (gX);
+        int bY = (int) (gY);
+        return (bX%10 == 5 && bY%10 == 5);
     }
 
     /** Initializes path values */
@@ -224,9 +250,15 @@ public class AIController {
             int j = i*2;
             path[i] = new Vector2(paths[j], paths[j+1]);
         }
-//        state = FSMState.PATROL;
-//        currentGoal = path[0];
-//        pathIndex = 0;
+        String status = json.get("status").asString();
+        if (status.equals("sleep")) {
+            state = FSMState.SLEEP;
+        }
+        if (status.equals("patrol")) {
+            state = FSMState.PATROL;
+            currentGoal = path[0];
+            pathIndex = 0;
+        }
     }
 
     /** Returns the Manhattan Distance of two points */

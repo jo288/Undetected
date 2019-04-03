@@ -40,6 +40,7 @@ import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.physics.box2d.*;
 
+import com.sun.media.sound.AiffFileReader;
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.lights.*;
 import edu.cornell.gdiac.physics.obstacle.*;
@@ -399,8 +400,9 @@ public class LevelModel {
 	    avatar.setDrawScale(scale);
 		activate(avatar);
 
-		//create guard
+		//Guard List
 		guards = new ArrayList<GuardModel>();
+		//AIController List
 		controls = new ArrayList<AIController>();
 		GuardModel guard = new GuardModel();
 		JsonValue gddata = levelFormat.get("guard");
@@ -828,14 +830,12 @@ public class LevelModel {
 			enableObjects();
 			updateBoard();
 
-            System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
+            // System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
 			//Test for displaying board states
 			//board.update();
-			AIController ai = controls.get(0);
-			AIController ai2 = controls.get(1);
-			ai.update();
-			ai2.update();
-
+			for (AIController ai : controls) {
+				ai.update();
+			}
 			return true;
 		}
 		return false;
