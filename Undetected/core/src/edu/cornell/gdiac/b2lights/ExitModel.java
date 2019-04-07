@@ -33,7 +33,7 @@ public class ExitModel extends BoxObstacle {
 	 */	
 	public ExitModel() {
 		super(0,0,1,1);
-		setSensor(true);
+		setSensor(false);
 	}
 	
 	/**
@@ -85,6 +85,11 @@ public class ExitModel extends BoxObstacle {
 		setTexture(texture);
 		setOrigin(origin.x,0);
 	}
+
+	public void open() {
+		setSensor(true);
+	}
+
 	/**
 	 * Draws the physics object.
 	 *

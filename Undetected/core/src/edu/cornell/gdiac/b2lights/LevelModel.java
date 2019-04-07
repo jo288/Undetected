@@ -378,7 +378,6 @@ public class LevelModel {
 		for (Obstacle o: ew.bodies){
 			activate(o);
 		}
-//		activate(ew);
 
 		JsonValue walls = levelFormat.get("interiorwall");
 		InteriorWall iw = new InteriorWall();
@@ -387,7 +386,6 @@ public class LevelModel {
 		for (Obstacle o: iw.bodies){
 			activate(o);
 		}
-//		activate(iw);
 
 		// Create the dude and attach light sources
 	    avatar = new DudeModel();
