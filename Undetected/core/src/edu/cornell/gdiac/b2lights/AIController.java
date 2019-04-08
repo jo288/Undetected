@@ -113,7 +113,7 @@ public class AIController {
                 } else {
                     board.setGoal((int) currentGoal.x, (int) currentGoal.y);
                 }
-                System.out.println(currentGoal);
+                // System.out.println(currentGoal);
                 pathFind();
                 board.resetTiles();
                 break;
@@ -175,9 +175,7 @@ public class AIController {
         );
         Node start = new Node(startX, startY, 0);
         queue.add(start);
-        int debug = 0;
         while (!queue.isEmpty()) {
-            debug++;
             Node n = queue.poll();
             board.setVisited(n.x, n.y);
             if (board.isGoal(n.x, n.y)) {

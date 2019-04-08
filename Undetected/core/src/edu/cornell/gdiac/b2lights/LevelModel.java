@@ -40,7 +40,7 @@ import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.physics.box2d.*;
 
-import com.sun.media.sound.AiffFileReader;
+// import com.sun.media.sound.AiffFileReader;
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.lights.*;
 import edu.cornell.gdiac.physics.obstacle.*;
@@ -830,7 +830,7 @@ public class LevelModel {
 
             // System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
 			//Test for displaying board states
-			//board.update();
+			board.update();
 			for (AIController ai : controls) {
 				ai.update();
 			}
