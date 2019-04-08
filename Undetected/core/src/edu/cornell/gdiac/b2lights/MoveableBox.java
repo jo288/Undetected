@@ -13,6 +13,11 @@ import edu.cornell.gdiac.physics.obstacle.*;
 import javax.xml.soap.Text;
 
 public class MoveableBox extends BoxObstacle{
+    /** Collide Bit */
+    public static final String COLLIDE_BIT = "0010";
+    /** Default Width of Player */
+    public static final String EXCLUDE_BIT = "0000";
+
     private static final float BOX_SIZE = 0.5f;
     private boolean held = false;
     private TextureRegion boxTexture;
@@ -51,23 +56,23 @@ public class MoveableBox extends BoxObstacle{
 
     public void initialize(JsonValue json){
         setName(json.name());
-//        int[] pos  = json.get("pos").asIntArray();
-        float[] size = json.get("size").asFloatArray();
-//        setPosition(pos[0]+0.5f,pos[1]+0.5f);
-        setWidth(size[0]);
-        setHeight(size[1]);
+        int[] pos  = json.get("pos").asIntArray();
+//        float[] size = json.get("size").asFloatArray();
+        setPosition(pos[0]+0.5f,pos[1]+0.5f);
+        setWidth(1);
+        setHeight(1);
         setFixedRotation(true);
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
-        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
-        setDensity(json.get("density").asFloat());
-        setFriction(json.get("friction").asFloat());
-        setRestitution(json.get("restitution").asFloat());
+        setBodyType(BodyDef.BodyType.DynamicBody);
+        setDensity(999999999.0f);
+        setFriction(0);
+        setRestitution(0);
 
         // Create the collision filter (used for light penetration)
-        short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
-        short excludeBits = LevelModel.bitStringToComplement(json.get("excludeBits").asString());
+        short collideBits = LevelModel.bitStringToShort(COLLIDE_BIT);
+        short excludeBits = LevelModel.bitStringToComplement(EXCLUDE_BIT);
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
@@ -76,13 +81,12 @@ public class MoveableBox extends BoxObstacle{
         // Reflection is best way to convert name to color
         Color debugColor;
         try {
-            String cname = json.get("debugcolor").asString().toUpperCase();
-            Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField(cname);
+            Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField("YELLOW");
             debugColor = new Color((Color)field.get(null));
         } catch (Exception e) {
             debugColor = null; // Not defined
         }
-        int opacity = json.get("debugopacity").asInt();
+        int opacity = 200;
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
 

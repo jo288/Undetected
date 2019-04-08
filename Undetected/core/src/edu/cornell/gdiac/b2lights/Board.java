@@ -112,8 +112,10 @@ public class Board {
 	 * Sets occupant of tiles
 	 */
 	public void setOccupiedTiles(int x, int y, int oType) {
-		getTileState(x,y).isOccupied = true;
-		getTileState(x,y).occupant = oType;
+		if (isSafeAt(x,y)) {
+			getTileState(x, y).isOccupied = true;
+			getTileState(x, y).occupant = oType;
+		}
 	}
 	
 	/**

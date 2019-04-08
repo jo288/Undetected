@@ -61,6 +61,8 @@ public class LevelModel {
 	public static final int WORLD_VELOC = 6;
 	/** Number of position iterations for the constrain solvers */
 	public static final int WORLD_POSIT = 2;
+	/** Exclude bits for raycasting */
+	public static final String LIGHT_EXCLUDEBITS = "10001";
 
 	// Physics objects for the game
 	/** Reference to the character avatar */
@@ -348,7 +350,7 @@ public class LevelModel {
 			initLighting(levelFormat.get("lighting"));
 		}
 		//createPointLights(levelFormat.get("pointlights"));
-		createConeLights(levelFormat.get("conelights"));
+		createConeLights(levelFormat.get("lights"));
 		
 		// Add level goal
 		goalDoor = new ExitModel();
@@ -361,7 +363,7 @@ public class LevelModel {
 		activate(goalDoor);
 
 		objective = new ObjectiveModel();
-		objective.initialize(levelFormat.get("key"));
+		objective.initialize(levelFormat.get("objective"));
 		if (objective.getTexture().getRegionWidth()<tSize)
 			objective.setWidth(objective.getTexture().getRegionWidth()/scale.x);
 		if (objective.getTexture().getRegionHeight()<tSize)
@@ -394,63 +396,63 @@ public class LevelModel {
 	    avatar.initialize(avdata);
 		if (avatar.getTexture().getRegionWidth()<tSize)
 			avatar.setWidth(avatar.getTexture().getRegionWidth()/scale.x);
-		if (avatar.getTexture().getRegionHeight()<tSize)
-			avatar.setHeight(avatar.getTexture().getRegionHeight()/scale.y);
 	    avatar.setDrawScale(scale);
 		activate(avatar);
 
 		//create guard
 		guards = new ArrayList<GuardModel>();
 		controls = new ArrayList<AIController>();
-		GuardModel guard = new GuardModel();
-		JsonValue gddata = levelFormat.get("guard");
-		guard.initialize(gddata);
-		if (guard.getTexture().getRegionWidth()<tSize)
-			guard.setWidth(guard.getTexture().getRegionWidth()/scale.x);
-		if (guard.getTexture().getRegionHeight()<tSize)
-			guard.setHeight(guard.getTexture().getRegionHeight()/scale.y);
-		guard.setDrawScale(scale);
-		activate(guard);
-		guard.addLight(lights.get(0));
-		attachLights(guard, lights.get(0));
+		GuardModel guard;
+		AIController ai;
+		JsonValue guardData = levelFormat.getChild("guards");
+		int ii = 0;
+		while (guardData!=null){
+			guard = new GuardModel();
+			guard.initialize(guardData);
+			if (guard.getTexture().getRegionWidth()<tSize)
+				guard.setWidth(guard.getTexture().getRegionWidth()/scale.x);
+			if (guard.getTexture().getRegionHeight()<tSize)
+				guard.setHeight(guard.getTexture().getRegionHeight()/scale.y);
+			guard.setDrawScale(scale);
+			activate(guard);
+			guard.addLight(lights.get(guardData.get("lightIndex").asInt()));
+			attachLights(guard, lights.get(guardData.get("lightIndex").asInt()));
 
-		// create 2nd guard
-		GuardModel guard2 = new GuardModel();
-		JsonValue gddata2 = levelFormat.get("guard2");
-		guard2.initialize(gddata2);
-		if (guard2.getTexture().getRegionWidth()<tSize)
-			guard2.setWidth(guard2.getTexture().getRegionWidth()/scale.x);
-		if (guard2.getTexture().getRegionHeight()<tSize)
-			guard2.setHeight(guard2.getTexture().getRegionHeight()/scale.y);
-		guard2.setDrawScale(scale);
-		activate(guard2);
-		guard2.addLight(lights.get(1));
-		attachLights(guard2, lights.get(1));
+			// Testing AIController
+			ai = new AIController(board, guard);
+			controls.add(ai);
+			ai.initialize(guardData);
+			this.guards.add(guard);
 
-		// Testing AIController
-		AIController ai = new AIController(board, guard);
-		AIController ai2 = new AIController(board, guard2);
-		controls.add(ai);
-		controls.add(ai2);
-		ai.initialize(gddata);
-		ai.initialize(gddata2);
-		this.guards.add(guard);
-		this.guards.add(guard2);
+			guardData = guardData.next();
+		}
 
 		// Create Test Box
 		JsonValue boxesdata = levelFormat.get("boxes");
-		int[] boxPositions = boxesdata.get("pos").asIntArray();
-		for(int i=0;i<boxPositions.length;i+=2){
+		JsonValue boxdata = levelFormat.getChild("boxes");
+		while (boxdata!=null){
 			MoveableBox box = new MoveableBox();
-			box.initialize(boxesdata);
+			box.initialize(boxdata);
 			if (box.getTexture().getRegionWidth()<tSize)
 				box.setWidth(box.getTexture().getRegionWidth()/scale.x);
 			if (box.getTexture().getRegionHeight()<tSize)
 				box.setHeight(box.getTexture().getRegionHeight()/scale.y);
-			box.setPosition(boxPositions[i]+0.5f,boxPositions[i+1]+0.5f);
 			box.setDrawScale(scale);
 			activate(box);
+			boxdata = boxdata.next();
 		}
+//		int[] boxPositions = boxesdata.get("pos").asIntArray();
+//		for(int i=0;i<boxPositions.length;i+=2){
+//			MoveableBox box = new MoveableBox();
+//			box.initialize(boxesdata);
+//			if (box.getTexture().getRegionWidth()<tSize)
+//				box.setWidth(box.getTexture().getRegionWidth()/scale.x);
+//			if (box.getTexture().getRegionHeight()<tSize)
+//				box.setHeight(box.getTexture().getRegionHeight()/scale.y);
+//			box.setPosition(boxPositions[i]+0.5f,boxPositions[i+1]+0.5f);
+//			box.setDrawScale(scale);
+//			activate(box);
+//		}
 
 		lasers = new ArrayList<Laser>();
 		JsonValue laserdata = levelFormat.getChild("lasers");
@@ -556,19 +558,23 @@ public class LevelModel {
 		JsonValue light = json.child();
 	    while (light != null) {
 	    	float[] color = light.get("color").asFloatArray();
-	    	float[] pos = light.get("pos").asFloatArray();
+			//float[] pos = light.get("pos").asFloatArray();
+			float[] pos = {0,0};
 	    	float dist  = light.getFloat("distance");
-	    	float face  = light.getFloat("facing");
+	    	//float face  = light.getFloat("facing");
+			float face = 90;
 	    	float angle = light.getFloat("angle");
-	    	int rays = light.getInt("rays");
+	    	//int rays = light.getInt("rays");
+			int rays = 512;
 	    	
 			ConeSource cone = new ConeSource(rayhandler, rays, Color.WHITE, dist, pos[0], pos[1], face, angle);
 			cone.setColor(color[0],color[1],color[2],color[3]);
-			cone.setSoft(light.getBoolean("soft"));
+			//cone.setSoft(light.getBoolean("soft"));
+			cone.setSoft(false);
 			
 			// Create a filter to exclude see through items
 			Filter f = new Filter();
-			f.maskBits = bitStringToComplement(light.getString("excludeBits"));
+			f.maskBits = bitStringToComplement(LIGHT_EXCLUDEBITS);
 			System.out.println("Dude mask bits "+f.maskBits);
 			cone.setContactFilter(f);
 			cone.setActive(false); // TURN ON LATER
@@ -588,9 +594,6 @@ public class LevelModel {
 	 * The activeLight is set to be the first element of lights, assuming it is not empty.
 	 */
 	public void attachLights(GuardModel guard, LightSource light) {
-//		for(LightSource light : lights) {
-//			light.attachToBody(guard.getBody(), light.getX(), light.getY(), light.getDirection());
-//		}
 		light.setActive(true);
 		light.attachToBody(guard.getBody(), light.getX(), light.getY(), light.getDirection());
 		if (lights.size > 0) {
@@ -830,7 +833,7 @@ public class LevelModel {
 
             System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
 			//Test for displaying board states
-			//board.update();
+			board.update();
 			AIController ai = controls.get(0);
 			AIController ai2 = controls.get(1);
 			ai.update();

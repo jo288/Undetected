@@ -50,8 +50,16 @@
 			"file": 	"textures/guardsprite.png",
 			"wrap": 	false,
 		},
-		"box": {
+		"box1": {
 			"file": 	"textures/BG_Box3.png",
+			"wrap": 	false,
+		},
+		"box2": {
+			"file": 	"textures/BG_Box2.png",
+			"wrap": 	false,
+		},
+		"box3": {
+			"file": 	"textures/BG_Box4.png",
 			"wrap": 	false,
 		},
 		"laser": {

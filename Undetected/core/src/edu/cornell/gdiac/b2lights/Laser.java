@@ -13,6 +13,11 @@ import edu.cornell.gdiac.physics.obstacle.*;
 import javax.xml.soap.Text;
 
 public class Laser extends BoxObstacle {
+    /** Collide Bit */
+    public static final String COLLIDE_BIT = "0001";
+    /** Default Width of Player */
+    public static final String EXCLUDE_BIT = "0000";
+
     private static final float LAZER_HEIGHT = 5f;
     private static final float LAZER_WIDTH = 0.01f;
     private float x_pos;
@@ -71,12 +76,12 @@ public class Laser extends BoxObstacle {
         setWidth(size[0]);
         setHeight(size[1]);
 
-        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
+        setBodyType(BodyDef.BodyType.StaticBody);
         setTimeToLive(json.get("timetolive").asInt()*60);
 
         // Create the collision filter (used for light penetration)
-        short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
-        short excludeBits = LevelModel.bitStringToComplement(json.get("excludeBits").asString());
+        short collideBits = LevelModel.bitStringToShort(COLLIDE_BIT);
+        short excludeBits = LevelModel.bitStringToComplement(EXCLUDE_BIT);
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
@@ -85,19 +90,18 @@ public class Laser extends BoxObstacle {
         // Reflection is best way to convert name to color
         Color debugColor;
         try {
-            String cname = json.get("debugcolor").asString().toUpperCase();
-            Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField(cname);
+            Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField("YELLOW");
             debugColor = new Color((Color)field.get(null));
         } catch (Exception e) {
             debugColor = null; // Not defined
         }
-        int opacity = json.get("debugopacity").asInt();
+        int opacity = 200;
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
 
         // Now get the texture from the AssetManager singleton
-        String key = json.get("texture").asString();
-        TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
+//        String key = json.get("texture").asString();
+        TextureRegion texture = JsonAssetManager.getInstance().getEntry("laser", TextureRegion.class);
         setTexture(texture);
         setOrigin(origin.x, 0);
 

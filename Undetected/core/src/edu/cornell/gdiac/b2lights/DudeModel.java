@@ -32,6 +32,25 @@ import edu.cornell.gdiac.physics.obstacle.*;
  * by reading the JSON value.
  */
 public class DudeModel extends CharacterModel {
+
+	/** Default Height of Player */
+	public static final float DEFAULT_HEIGHT = 0.5f;
+	/** Default Width of Player */
+	public static final float DEFAULT_WIDTH = 1;
+	/** Collide Bit */
+	public static final String COLLIDE_BIT = "0001";
+	/** Default Width of Player */
+	public static final String EXCLUDE_BIT = "0000";
+	/** Default Density of Player */
+	public static final float DEFAULT_DENSITY = 1.5f;
+	/** Default Force of Player */
+	public static final float DEFAULT_FORCE = 200;
+	/** Default Damping of Player */
+	public static final float DEFAULT_DAMPING = 10;
+	/** Default Damping of Player */
+	public static final float DEFAULT_MAXSPEED = 1;
+
+
 	// Physics constants
 	/** The factor to multiply by the input */
 	private float force;
@@ -323,29 +342,29 @@ public class DudeModel extends CharacterModel {
 	 */
 	public void initialize(JsonValue json) {
 		setName(json.name());
-		float width = json.get("width").asFloat();
-		float height = json.get("height").asFloat();
 		float[] pos = json.get("pos").asFloatArray();
 		setPosition(pos[0]+0.5f,pos[1]+0.5f);
-		setWidth(width);
-		setHeight(height/2);
+		setWidth(DEFAULT_WIDTH);
+		setHeight(DEFAULT_HEIGHT);
 		setFixedRotation(true);
 		
 		// Technically, we should do error checking here.
 		// A JSON field might accidentally be missing
-		setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
-		setDensity(json.get("density").asFloat());
-		setFriction(json.get("friction").asFloat());
-		setRestitution(json.get("restitution").asFloat());
-		setForce(json.get("force").asFloat());
-		setDamping(json.get("damping").asFloat());
-		setMaxSpeed(json.get("maxspeed").asFloat());
-		setStartFrame(json.get("startframe").asInt());
-		setWalkLimit(json.get("walklimit").asInt());
+		setBodyType(BodyDef.BodyType.DynamicBody);
+		setDensity(DEFAULT_DENSITY);
+		setFriction(0);
+		setRestitution(0);
+		setForce(DEFAULT_FORCE);
+		setDamping(DEFAULT_DAMPING);
+		setMaxSpeed(DEFAULT_MAXSPEED);
+
+		//Animation
+		setStartFrame(0);
+		setWalkLimit(4);
 		
 		// Create the collision filter (used for light penetration)
-      	short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
-      	short excludeBits = LevelModel.bitStringToComplement(json.get("excludeBits").asString());
+      	short collideBits = LevelModel.bitStringToShort(COLLIDE_BIT);
+      	short excludeBits = LevelModel.bitStringToComplement(EXCLUDE_BIT);
       	Filter filter = new Filter();
       	filter.categoryBits = collideBits;
       	filter.maskBits = excludeBits;
@@ -354,13 +373,12 @@ public class DudeModel extends CharacterModel {
 		// Reflection is best way to convert name to color
 		Color debugColor;
 		try {
-			String cname = json.get("debugcolor").asString().toUpperCase();
-		    Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField(cname);
+		    Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField("GREEN");
 		    debugColor = new Color((Color)field.get(null));
 		} catch (Exception e) {
 			debugColor = null; // Not defined
 		}
-		int opacity = json.get("debugopacity").asInt();
+		int opacity = 192;
 		debugColor.mul(opacity/255.0f);
 		setDebugColor(debugColor);
 
@@ -404,7 +422,10 @@ public class DudeModel extends CharacterModel {
 		// Apply force for movement
 		if (getMovement().len2() > 0f) {
 			forceCache.set(getMovement());
-			body.applyForce(forceCache,getPosition(),true);
+			if (body.getLinearVelocity().len()>maxspeed)
+				body.setLinearVelocity(body.getLinearVelocity().scl(body.getLinearVelocity().len()/maxspeed));
+			else
+				body.applyForce(forceCache,getPosition(),true);
 			animate = true;
 		} else {
 			animate = false;

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="20">
+ <properties>
+  <property name="lighting" type="color" value="#ffa9a9a9"/>
+ </properties>
+ <tileset firstgid="1" source="FloorTile.tsx"/>
+ <tileset firstgid="2" source="HorizontalWall.tsx"/>
+ <tileset firstgid="3" source="VerticalWall.tsx"/>
+ <tileset firstgid="4" source="Player.tsx"/>
+ <tileset firstgid="5" source="Exit.tsx"/>
+ <tileset firstgid="6" source="Objective.tsx"/>
+ <tileset firstgid="7" source="Guard.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="20" height="15">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="1" template="HorizontalWall.tx" x="96" y="128" width="320" height="48"/>
+  <object id="8" template="HorizontalWall.tx" x="64" y="384" width="384" height="48"/>
+  <object id="9" template="HorizontalWall.tx" x="0" y="480" width="640" height="48"/>
+  <object id="10" template="VerticalWall.tx" x="416" y="352" width="32" height="272"/>
+  <object id="11" template="VerticalWall.tx" x="64" y="352" width="32" height="272"/>
+  <object id="12" template="VerticalWall.tx" x="0" y="448" width="32" height="464"/>
+  <object id="13" template="VerticalWall.tx" x="608" y="448" width="32" height="464"/>
+  <object id="14" template="HorizontalWall.tx" x="96" y="32" width="512" height="48"/>
+  <object id="15" template="Player.tx" x="32" y="64"/>
+  <object id="16" template="Exit.tx" x="32" y="32"/>
+  <object id="17" template="KeyObjective.tx" x="512" y="384"/>
+  <object id="19" template="Guard.tx" x="224" y="416">
+   <properties>
+    <property name="IsPatrolling" type="bool" value="true"/>
+    <property name="path" value="[7,2,16,2]"/>
+   </properties>
+  </object>
+  <object id="18" template="Guard.tx" x="288" y="64"/>
+ </objectgroup>
+</map>

@@ -27,6 +27,10 @@ import edu.cornell.gdiac.physics.obstacle.*;
  * by reading the JSON value.
  */
 public class ExitModel extends BoxObstacle {
+	/** Collide Bit */
+	public static final String COLLIDE_BIT = "10001";
+	/** Default Width of Player */
+	public static final String EXCLUDE_BIT = "0000";
 
 	/**
 	 * Create a new ExitModel with degenerate settings
@@ -53,14 +57,14 @@ public class ExitModel extends BoxObstacle {
 		
 		// Technically, we should do error checking here.
 		// A JSON field might accidentally be missing
-		setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
-		setDensity(json.get("density").asFloat());
-		setFriction(json.get("friction").asFloat());
-		setRestitution(json.get("restitution").asFloat());
+		setBodyType(BodyDef.BodyType.StaticBody );
+		setDensity(0);
+		setFriction(0);
+		setRestitution(0);
 		
 		// Create the collision filter (used for light penetration)
-      	short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
-      	short excludeBits = LevelModel.bitStringToComplement(json.get("excludeBits").asString());
+      	short collideBits = LevelModel.bitStringToShort(COLLIDE_BIT);
+      	short excludeBits = LevelModel.bitStringToComplement(EXCLUDE_BIT);
       	Filter filter = new Filter();
       	filter.categoryBits = collideBits;
       	filter.maskBits = excludeBits;
@@ -69,19 +73,19 @@ public class ExitModel extends BoxObstacle {
 		// Reflection is best way to convert name to color
 		Color debugColor;
 		try {
-			String cname = json.get("debugcolor").asString().toUpperCase();
-		    Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField(cname);
+//			String cname = json.get("debugcolor").asString().toUpperCase();
+		    Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField("YELLOW");
 		    debugColor = new Color((Color)field.get(null));
 		} catch (Exception e) {
 			debugColor = null; // Not defined
 		}
-		int opacity = json.get("debugopacity").asInt();
+		int opacity = 200;
 		debugColor.mul(opacity/255.0f);
 		setDebugColor(debugColor);
 		
 		// Now get the texture from the AssetManager singleton
-		String key = json.get("texture").asString();
-		TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
+//		String key = json.get("texture").asString();
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("goal", TextureRegion.class);
 		setTexture(texture);
 		setOrigin(origin.x,0);
 	}

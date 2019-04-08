@@ -16,6 +16,10 @@ import edu.cornell.gdiac.util.JsonAssetManager;
 import java.lang.reflect.Field;
 
 public class InteriorWall extends Obstacle{
+    /** Collide Bit */
+    public static final String COLLIDE_BIT = "1000";
+    /** Default Width of Player */
+    public static final String EXCLUDE_BIT = "0000";
 
     /** A complex physics object has multiple bodies */
     protected Array<Obstacle> bodies;
@@ -41,13 +45,13 @@ public class InteriorWall extends Obstacle{
             setDimension(1,1);
 
             setBodyType(BodyDef.BodyType.StaticBody);
-            setDensity(json.get("density").asFloat());
-            setFriction(json.get("friction").asFloat());
-            setRestitution(json.get("restitution").asFloat());
+            setDensity(0);
+            setFriction(0.2f);
+            setRestitution(0.1f);
 
             // Create the collision filter (used for light penetration)
-            short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
-            short excludeBits = LevelModel.bitStringToComplement(json.get("excludeBits").asString());
+            short collideBits = LevelModel.bitStringToShort(COLLIDE_BIT);
+            short excludeBits = LevelModel.bitStringToComplement(EXCLUDE_BIT);
             Filter filter = new Filter();
             filter.categoryBits = collideBits;
             filter.maskBits = excludeBits;
@@ -56,13 +60,12 @@ public class InteriorWall extends Obstacle{
             // Reflection is best way to convert name to color
             Color debugColor;
             try {
-                String cname = json.get("debugcolor").asString().toUpperCase();
-                Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField(cname);
+                Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField("YELLOW");
                 debugColor = new Color((Color)field.get(null));
             } catch (Exception e) {
                 debugColor = null; // Not defined
             }
-            int opacity = json.get("debugopacity").asInt();
+            int opacity = 200;
             debugColor.mul(opacity/255.0f);
             setDebugColor(debugColor);
 
