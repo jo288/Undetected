@@ -146,6 +146,37 @@ public class LevelParser {
             if(e.get("template").equals("Player.tx")){
                 testLevel.avatar.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
             }
+            if(e.get("template").equals("Box1.tx")){
+                Box b1 = new Box();
+                b1.texture = "box1";
+                b1.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                testLevel.boxes.add(b1);
+            }
+            if(e.get("template").equals("Box2.tx")){
+                Box b2 = new Box();
+                b2.texture = "box2";
+                b2.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                testLevel.boxes.add(b2);
+            }
+            if(e.get("template").equals("Box3.tx")){
+                Box b3 = new Box();
+                b3.texture = "box3";
+                b3.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                testLevel.boxes.add(b3);
+            }
+            if (e.get("template").equals("Laser.tx")){
+                Laser l = new Laser();
+                if(e.hasAttribute("rotation")){
+                    l.size = new int[] {e.getInt("height")/32,1};
+                    l.pos = new int[] {Math.round(e.getFloat("x"))/32,testLevel.boardSize[1]-Math.round(e.getFloat("y"))/32};
+                }else{
+                    l.size = new int[] {1,e.getInt("height")/32};
+                    l.pos = new int[] {Math.round(e.getFloat("x"))/32,testLevel.boardSize[1]-Math.round(e.getFloat("y"))/32};
+                }
+                if(e.hasAttribute("timetolive"))
+                    l.timetolive = e.getInt("timetolive");
+                testLevel.lasers.add(l);
+            }
             if(e.get("template").equals("Guard.tx")){
                 Guard g = new Guard();
                 Light l = new Light();

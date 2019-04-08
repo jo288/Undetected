@@ -23,6 +23,7 @@ public class Laser extends BoxObstacle {
     private float x_pos;
     private float y_pos;
     private boolean isOn;
+    private boolean isHorizontal;
     private int time_store;
     /** how many seconds remaining until this laser turns off */
     private int time_to_live;
@@ -72,9 +73,18 @@ public class Laser extends BoxObstacle {
         setName(json.name());
         int[] pos  = json.get("pos").asIntArray();
         float[] size = json.get("size").asFloatArray();
-        setPosition(pos[0]+0.5f,pos[1]+0.5f*size[1]);
-        setWidth(size[0]);
-        setHeight(size[1]);
+        if(size[0]==1f) {
+            setPosition(pos[0] + 0.5f, pos[1] + 0.5f * size[1]);
+            isHorizontal = false;
+            setWidth(size[0]);
+            setHeight(size[1]);
+        }else{
+            setPosition(pos[0]+0.5f*size[0],pos[1]+0.5f);
+            isHorizontal = true;
+            setWidth(size[1]);
+            setHeight(size[0]);
+            setAngle(1.570796f);
+        }
 
         setBodyType(BodyDef.BodyType.StaticBody);
         setTimeToLive(json.get("timetolive").asInt()*60);
@@ -214,15 +224,18 @@ public class Laser extends BoxObstacle {
 
     @Override
     public void draw(ObstacleCanvas canvas){
-        canvas.draw(filmstrip,Color.WHITE,16,origin.y,getX()*drawScale.x,getY()*drawScale.y+getHeight()/2*drawScale.y,0,1,1);
-        if(isOn){
-            //canvas.setBlendState(ObstacleCanvas.BlendState.ALPHA_BLEND);
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,getHeight()+0.5f);
-        }
-        else{
-            //draw transparent texture instead
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1,getHeight()+0.5f, 0.0f);
+        if (!isHorizontal) {
+            canvas.draw(filmstrip, Color.WHITE, 16, origin.y, getX() * drawScale.x, getY() * drawScale.y + getHeight() / 2 * drawScale.y, 0, 1, 1);
+            if (isOn) {
+                //canvas.setBlendState(ObstacleCanvas.BlendState.ALPHA_BLEND);
+                canvas.draw(texture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y - getHeight() / 2 * drawScale.y, getAngle(), 1.0f, getHeight() + 0.5f);
+            } else {
+                //draw transparent texture instead
+                canvas.draw(texture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y - getHeight() / 2 * drawScale.y, getAngle(), 1, getHeight() + 0.5f, 0.0f);
 
+            }
+        }else{
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x + getHeight()/2*drawScale.x,getY()*drawScale.y,getAngle(),1f,getHeight());
         }
     }
 }

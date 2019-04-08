@@ -320,7 +320,6 @@ public class GameController implements Screen, ContactListener {
 			loadFile = chooser.getSelectedFile().getPath();
 		}
 
-//		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/level1.json"));
 		try{
 			levelFormat = jsonReader.parse(Gdx.files.absolute(loadFile));
 			LevelModel newLoad = new LevelModel();
@@ -334,6 +333,7 @@ public class GameController implements Screen, ContactListener {
 			hasObjective = false;
 			countdown = -1;
 			guardCollided = null;
+			lightController = new LightController(level);
 
 			resetCamera();
 		}
