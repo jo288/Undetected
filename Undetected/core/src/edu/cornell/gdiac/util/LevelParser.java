@@ -45,7 +45,7 @@ public class LevelParser {
 
     private class Guard{
         protected int[] pos = new int[2];
-        protected String state = "sleep";
+        protected String status = "sleep";
         protected float force = 40f;
         protected float sensitiveRadius = 1.6f;
         protected Array<Integer> path = new Array<Integer>();
@@ -154,7 +154,7 @@ public class LevelParser {
                     try {
                         switch (property.get("name")) {
                             case "IsPatrolling":
-                                if (property.getBoolean("value")) g.state = "patrol";
+                                if (property.getBoolean("value")) g.status = "patrol";
                                 break;
                             case "force":
                                 g.force = property.getFloat("value");
@@ -199,31 +199,6 @@ public class LevelParser {
 
         return json.prettyPrint(testLevel);
     }
-
-    private Guard parseGuard(XmlReader.Element e){
-        Guard ret = new Guard();
-        Array<XmlReader.Element> properties = e.getChildrenByNameRecursively("property");
-        for (XmlReader.Element property: properties){
-            switch(property.get("name")){
-                case "IsPatrolling":
-                    if(property.getBoolean("value")) ret.state = "patrolling";
-                    break;
-                case "force":
-                    ret.force = property.getFloat("value");
-                    break;
-                case "sensitiveRadius":
-                    ret.sensitiveRadius = property.getFloat("value");
-                    break;
-                default:
-                    break;
-            }
-        }
-        return ret;
-    }
-
-
-
-
 
 
 }

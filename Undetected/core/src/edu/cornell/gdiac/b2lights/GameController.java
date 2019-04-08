@@ -721,6 +721,7 @@ public class GameController implements Screen, ContactListener {
 			// Check for objective
 			if ((bd1 == avatar && bd2 == objective) || (bd1 == objective && bd2== avatar)){
 				hasObjective = true;
+				door.open();
 				level.queueDestroyed(objective);
 			}
 

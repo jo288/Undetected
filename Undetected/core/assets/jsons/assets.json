@@ -39,7 +39,7 @@
 			}
 		},
         "goal": { 
-         	"file":		"textures/helicopter.png",
+         	"file":		"textures/door.png",
          	"wrap":		false,
          },
 		"defaultDude": {

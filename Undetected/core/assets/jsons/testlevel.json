@@ -27,7 +27,7 @@
 "guards": [
 	{
 		"pos": [ 16, 11 ],
-		"state": "patrol",
+		"status": "patrol",
 		"force": 50,
 		"sensitiveRadius": 1.6,
 		"path": [ 16, 6, 16, 14 ],
@@ -35,7 +35,7 @@
 	},
 	{
 		"pos": [ 16, 3 ],
-		"state": "sleep",
+		"status": "sleep",
 		"force": 40,
 		"sensitiveRadius": 1.6,
 		"path": [],

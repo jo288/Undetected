@@ -40,6 +40,7 @@ import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.physics.box2d.*;
 
+// import com.sun.media.sound.AiffFileReader;
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.lights.*;
 import edu.cornell.gdiac.physics.obstacle.*;
@@ -379,7 +380,6 @@ public class LevelModel {
 		for (Obstacle o: ew.bodies){
 			activate(o);
 		}
-//		activate(ew);
 
 		JsonValue walls = levelFormat.get("interiorwall");
 		InteriorWall iw = new InteriorWall();
@@ -388,7 +388,6 @@ public class LevelModel {
 		for (Obstacle o: iw.bodies){
 			activate(o);
 		}
-//		activate(iw);
 
 		// Create the dude and attach light sources
 	    avatar = new DudeModel();
@@ -399,8 +398,9 @@ public class LevelModel {
 	    avatar.setDrawScale(scale);
 		activate(avatar);
 
-		//create guard
+		//Guard List
 		guards = new ArrayList<GuardModel>();
+		//AIController List
 		controls = new ArrayList<AIController>();
 		GuardModel guard;
 		AIController ai;
@@ -831,14 +831,12 @@ public class LevelModel {
 			enableObjects();
 			updateBoard();
 
-            System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
+            // System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
 			//Test for displaying board states
 			board.update();
-			AIController ai = controls.get(0);
-			AIController ai2 = controls.get(1);
-			ai.update();
-			ai2.update();
-
+			for (AIController ai : controls) {
+				ai.update();
+			}
 			return true;
 		}
 		return false;
