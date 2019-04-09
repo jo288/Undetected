@@ -31,6 +31,7 @@ package edu.cornell.gdiac.b2lights;
 import box2dLight.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import com.badlogic.gdx.Gdx;
@@ -451,31 +452,15 @@ public class LevelModel {
 			boxdata = boxdata.next();
 		}
 
-		switches = new ArrayList<SwitchModel>();
-		JsonValue switchdata = levelFormat.getChild("switches");
-		int[] switchPositions;
-		while (switchdata!=null){
-			switchPositions = switchdata.get("pos").asIntArray();
-			SwitchModel switchi = new SwitchModel();
-			switchi.setSwitch(switchdata.get("switched").asBoolean());
-			switches.add(switchi);
-			switchi.initialize(switchdata);
-			if (switchi.getTexture().getRegionWidth()<tSize)
-				switchi.setWidth(switchi.getTexture().getRegionWidth()/scale.x);
-			if (switchi.getTexture().getRegionHeight()<tSize)
-				switchi.setHeight(switchi.getTexture().getRegionHeight()/scale.y);
-			switchi.setPosition(switchPositions[0]+0.5f, switchPositions[1]+0.5f);
-			switchi.setDrawScale(scale);
-			activate(switchi);
-			switchdata = switchdata.next();
-		}
-
+		HashMap<String, DoorModel> doorMap = new HashMap<>();
 		doors = new ArrayList<DoorModel>();
 		JsonValue doordata = levelFormat.getChild("doors");
 		int[] doorPositions;
 		while (doordata!=null){
 			doorPositions = doordata.get("pos").asIntArray();
+			String temp = doorPositions[0] + " " + doorPositions[1];
 			DoorModel door = new DoorModel();
+			doorMap.put(temp, door);
 			door.setOpen(doordata.get("open").asBoolean());
 			doors.add(door);
 			door.initialize(doordata);
@@ -486,8 +471,34 @@ public class LevelModel {
 			door.setPosition(doorPositions[0]+0.5f, doorPositions[1]+0.5f);
 			door.setDrawScale(scale);
 			activate(door);
-			switches.get(0).addDoor(door);
 			doordata = doordata.next();
+		}
+
+		ArrayList<int[]> doorTuples = new ArrayList<>();
+		switches = new ArrayList<SwitchModel>();
+		JsonValue switchdata = levelFormat.getChild("switches");
+		int[] temp;
+		int[] switchPositions;
+		while (switchdata!=null){
+			switchPositions = switchdata.get("pos").asIntArray();
+			temp = switchdata.get("doors").asIntArray();
+			SwitchModel switchi = new SwitchModel();
+			switchi.setSwitch(switchdata.get("switched").asBoolean());
+			switches.add(switchi);
+			switchi.initialize(switchdata);
+			if (switchi.getTexture().getRegionWidth()<tSize)
+				switchi.setWidth(switchi.getTexture().getRegionWidth()/scale.x);
+			if (switchi.getTexture().getRegionHeight()<tSize)
+				switchi.setHeight(switchi.getTexture().getRegionHeight()/scale.y);
+			switchi.setPosition(switchPositions[0]+0.5f, switchPositions[1]+0.5f);
+			switchi.setDrawScale(scale);
+			for (int i = 0; i < temp.length / 2; i++) {
+				int j = i * 2;
+				String doorsToSwitch = temp[j] + " " + temp[j+1];
+				switchi.addDoor(doorMap.get(doorsToSwitch));
+			}
+			activate(switchi);
+			switchdata = switchdata.next();
 		}
 
 		lasers = new ArrayList<Laser>();
