@@ -15,7 +15,8 @@ import java.lang.reflect.Field;
 public class SwitchModel extends BoxObstacle{
     private static final float SWITCH_SIZE = 1f;
     private boolean switched = false;
-    private TextureRegion switchTexture;
+    private TextureRegion switchOffTexture;
+    private TextureRegion switchOnTexture;
     private boolean flaggedForDelete;
     private ArrayList<DoorModel> doors = new ArrayList<DoorModel>();
 
@@ -33,11 +34,31 @@ public class SwitchModel extends BoxObstacle{
         return switched;
     }
 
-    public void setSwitched(boolean value) {
+    public void setSwitch(boolean value) {
         switched = value;
+        TextureRegion offTexture = JsonAssetManager.getInstance().getEntry("switchOff", TextureRegion.class);
+        switchOffTexture = offTexture;
+        TextureRegion onTexture = JsonAssetManager.getInstance().getEntry("switchOn", TextureRegion.class);
+        switchOnTexture = onTexture;
+        if (switched) {
+            setTexture(switchOnTexture);
+        } else {
+            setTexture(switchOffTexture);
+        }
+        setOrigin(origin.x, 0);
+    }
+
+    public void switchMode() {
+        switched = !switched;
         for (DoorModel door : doors) {
             door.switchState();
         }
+        if (switched) {
+            setTexture(switchOnTexture);
+        } else {
+            setTexture(switchOffTexture);
+        }
+        setOrigin(origin.x, 0);
     }
 
     public void addDoor(DoorModel door) {
@@ -57,16 +78,23 @@ public class SwitchModel extends BoxObstacle{
     }
 
     public void initialize(){
-        TextureRegion texture = JsonAssetManager.getInstance().getEntry("switch", TextureRegion.class);
-        switchTexture = texture;
-        setTexture(texture);
+        TextureRegion offTexture = JsonAssetManager.getInstance().getEntry("switchOff", TextureRegion.class);
+        switchOffTexture = offTexture;
+        TextureRegion onTexture = JsonAssetManager.getInstance().getEntry("switchOn", TextureRegion.class);
+        switchOnTexture = onTexture;
+        if (!switched) {
+            setTexture(offTexture);
+        } else {
+            setTexture(onTexture);
+        }
+        setOrigin(origin.x, 0);
         setBodyType(BodyDef.BodyType.StaticBody);
     }
 
     public void initialize(JsonValue json){
         setName(json.name());
 //        int[] pos  = json.get("pos").asIntArray();
-        float[] size = json.get("size").asFloatArray();
+        float[] size = {1, 1};
 //        setPosition(pos[0]+0.5f,pos[1]+0.5f);
         setWidth(size[0]);
         setHeight(size[1]);
@@ -74,14 +102,11 @@ public class SwitchModel extends BoxObstacle{
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
-        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
-        setDensity(json.get("density").asFloat());
-        setFriction(json.get("friction").asFloat());
-        setRestitution(json.get("restitution").asFloat());
+        setBodyType(BodyDef.BodyType.StaticBody);
 
         // Create the collision filter (used for light penetration)
-        short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
-        short excludeBits = LevelModel.bitStringToComplement(json.get("excludeBits").asString());
+        short collideBits = LevelModel.bitStringToShort("1000");
+        short excludeBits = LevelModel.bitStringToComplement("0000");
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
@@ -90,20 +115,26 @@ public class SwitchModel extends BoxObstacle{
         // Reflection is best way to convert name to color
         Color debugColor;
         try {
-            String cname = json.get("debugcolor").asString().toUpperCase();
+            String cname = "YELLOW";
             Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField(cname);
             debugColor = new Color((Color)field.get(null));
         } catch (Exception e) {
             debugColor = null; // Not defined
         }
-        int opacity = json.get("debugopacity").asInt();
+        int opacity = 200;
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
 
         // Now get the texture from the AssetManager singleton
-        String key = json.get("texture").asString();
-        TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
-        setTexture(texture);
+        TextureRegion offTexture = JsonAssetManager.getInstance().getEntry("switchOff", TextureRegion.class);
+        switchOffTexture = offTexture;
+        TextureRegion onTexture = JsonAssetManager.getInstance().getEntry("switchOn", TextureRegion.class);
+        switchOnTexture = onTexture;
+        if (!switched) {
+            setTexture(offTexture);
+        } else {
+            setTexture(onTexture);
+        }
         setOrigin(origin.x, 0);
     }
 

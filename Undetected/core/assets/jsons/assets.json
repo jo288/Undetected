@@ -62,14 +62,22 @@
 			"file": 	"textures/BG_Box4.png",
 			"wrap": 	false,
 		},
-        "door": {
+        "doorClosed": {
           "file": 	    "textures/doorC.png",
           "wrap":     	false,
         },
-        "switch": {
+		"doorOpen": {
+			"file": 	    "textures/doorLO.png",
+			"wrap":     	false,
+		},
+        "switchOff": {
           "file": 	    "textures/switchOff.png",
           "wrap":     	false,
         },
+		"switchOn": {
+			"file": 	    "textures/switchOn.png",
+			"wrap":     	false,
+		},
 		"laser": {
 			"file": 	"textures/laser.png",
 			"wrap": 	true,

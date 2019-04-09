@@ -494,7 +494,7 @@ public class GameController implements Screen, ContactListener {
 			avatar.pickupBox();
 			level.queueDisabled(avatar.getBoxInContact());
 		} else if(input.didAction() && switchCollided != null) {
-			switchCollided.setSwitched(true);
+			switchCollided.switchMode();
 		}
 		//camera follow player
 		//canvas.getCamera().translate(input.getHorizontal(), input.getVertical());
