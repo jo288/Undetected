@@ -127,6 +127,21 @@ public class Laser extends BoxObstacle {
 //		setTexture(texture);
     }
 
+//    public  void switchState() {
+//        isOn = !isOn;
+//        setOn(isOn);
+//    }
+
+    public void setOn(boolean val) {
+        isOn = val;
+        if (isOn) {
+            time_to_live = time_store;
+        } else {
+            time_store = time_to_live;
+            time_to_live = -1;
+        }
+    }
+
     public void pause() {
         time_store = time_to_live;
         if (isOn) {
@@ -156,7 +171,10 @@ public class Laser extends BoxObstacle {
         time_to_live--;
 
         //Animate
-        if (time_to_live <= 8) {
+        if (time_to_live <= -1) {
+            filmstrip.setFrame(0);
+        }
+        else if (time_to_live <= 8 && time_to_live >= 0) {
             if (filmstrip != null) {
 //                int next = (filmstrip.getFrame()+1) % filmstrip.getSize();
                 filmstrip.setFrame(5-time_to_live/2);

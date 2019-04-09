@@ -64,7 +64,8 @@
 		"switch1": {
 			"pos": 		[1, 11],
 			"switched": 		false,
-			"doors": [7,4, 12,4]
+			"doors": [7,4, 12,4],
+			"lasers": []
 		}
 	},
 	"doors": {
