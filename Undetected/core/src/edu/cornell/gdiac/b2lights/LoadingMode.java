@@ -199,7 +199,6 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 		budget = millis;
 
 		//TEST LEVEL PARSER
-
 		LevelParser lp = new LevelParser();
 
 		if(Gdx.files.internal("levels").isDirectory()){

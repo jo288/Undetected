@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="Switch.tsx"/>
+ <object name="switch" type="switch" gid="1" width="32" height="23">
+  <properties>
+   <property name="doors" value=""/>
+   <property name="lasers" value=""/>
+   <property name="switched" type="bool" value="false"/>
+  </properties>
+ </object>
+</template>

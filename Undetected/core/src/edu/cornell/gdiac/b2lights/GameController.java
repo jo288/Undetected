@@ -360,9 +360,9 @@ public class GameController implements Screen, ContactListener {
 		float dy = (vh - effectiveVH)/2;
 		float sx = vw / level.bounds.width;
 		float sy = vh / level.bounds.height;
-		//cam.position.set(playerX*sx, playerY*sy, 0);
+//		cam.position.set(playerX*sx, playerY*sy, 0);
 		cam.position.x = MathUtils.clamp(playerX*sx, cx-dx, cx + dx);
-		cam.position.y = MathUtils.clamp(playerY*sy, cy-dy, cy+dy);
+		cam.position.y = MathUtils.clamp(playerY*sy, cy-dy, cy + dy);
 
 		//pan the rayhandler camera
 		OrthographicCamera rcam = level.raycamera;

@@ -79,6 +79,7 @@ public class LevelModel {
 	private ArrayList<DoorModel> doors;
 	/** Reference to all the switches */
 	private ArrayList<SwitchModel> switches;
+	private ArrayList<CameraModel> cameras;
 	/** Reference to all the guards (for line-of-sight checks) */
 	private ArrayList<GuardModel> guards;
 	/** Guard AI */
@@ -194,6 +195,7 @@ public class LevelModel {
 	 * Returns a reference to all the guards
 	 */
 	public ArrayList<SwitchModel> getSwtiches() { return switches; }
+	public ArrayList<CameraModel> getCameras() { return cameras;}
 
     /**
      * Returns a reference to all AI
@@ -371,16 +373,6 @@ public class LevelModel {
 		goalDoor.setDrawScale(scale);
 		activate(goalDoor);
 
-		objective = new ObjectiveModel();
-		objective.initialize(levelFormat.get("objective"));
-		if (objective.getTexture().getRegionWidth()<tSize)
-			objective.setWidth(objective.getTexture().getRegionWidth()/scale.x);
-		if (objective.getTexture().getRegionHeight()<tSize)
-			objective.setHeight(objective.getTexture().getRegionHeight()/scale.y);
-		objective.setDrawScale(scale);
-		activate(objective);
-
-
 		JsonValue bounds = levelFormat.get("exteriorwall");
 		ExteriorWall ew = new ExteriorWall();
 		ew.initialize(bounds);
@@ -452,6 +444,42 @@ public class LevelModel {
 			boxdata = boxdata.next();
 		}
 
+        cameras = new ArrayList<CameraModel>();
+        JsonValue cameraData = levelFormat.getChild("cameras");
+        while (cameraData!=null){
+            CameraModel camera = new CameraModel();
+            camera.initialize(cameraData);
+
+            camera.setDrawScale(scale);
+            activate(camera);
+            camera.addLight(lights.get(cameraData.get("lightIndex").asInt()));
+            System.out.println("CAMERA "+camera);
+            attachLights(camera, lights.get(cameraData.get("lightIndex").asInt()));
+            this.cameras.add(camera);
+            //switches.get(0).addCamera(camera);
+            cameraData = cameraData.next();
+        }
+
+		HashMap<String, Laser> laserMap = new HashMap<>();
+		lasers = new ArrayList<Laser>();
+		JsonValue laserdata = levelFormat.getChild("lasers");
+		int[] laserPositions;
+		while (laserdata!=null){
+			laserPositions = laserdata.get("pos").asIntArray();
+			String temp = laserPositions[0] + " " + laserPositions[1];
+			Laser l = new Laser();
+			laserMap.put(temp, l);
+			l.setTimeToLive(laserdata.get("timetolive").asInt());
+			lasers.add(l);
+			l.initialize(laserdata);
+			if (l.getTexture().getRegionWidth()<tSize)
+				l.setWidth(l.getTexture().getRegionWidth()/scale.x);
+			l.setDrawScale(scale);
+			activate(l);
+			l.start();
+			laserdata = laserdata.next();
+		}
+
 		HashMap<String, DoorModel> doorMap = new HashMap<>();
 		doors = new ArrayList<DoorModel>();
 		JsonValue doordata = levelFormat.getChild("doors");
@@ -474,14 +502,15 @@ public class LevelModel {
 			doordata = doordata.next();
 		}
 
-		ArrayList<int[]> doorTuples = new ArrayList<>();
 		switches = new ArrayList<SwitchModel>();
 		JsonValue switchdata = levelFormat.getChild("switches");
-		int[] temp;
+		int[] switchDoor;
+		int[] switchLaser;
 		int[] switchPositions;
 		while (switchdata!=null){
 			switchPositions = switchdata.get("pos").asIntArray();
-			temp = switchdata.get("doors").asIntArray();
+			switchDoor = switchdata.get("doors").asIntArray();
+			switchLaser = switchdata.get("lasers").asIntArray();
 			SwitchModel switchi = new SwitchModel();
 			switchi.setSwitch(switchdata.get("switched").asBoolean());
 			switches.add(switchi);
@@ -492,28 +521,42 @@ public class LevelModel {
 				switchi.setHeight(switchi.getTexture().getRegionHeight()/scale.y);
 			switchi.setPosition(switchPositions[0]+0.5f, switchPositions[1]+0.5f);
 			switchi.setDrawScale(scale);
-			for (int i = 0; i < temp.length / 2; i++) {
+			for (int i = 0; i < switchDoor.length / 2; i++) {
 				int j = i * 2;
-				String doorsToSwitch = temp[j] + " " + temp[j+1];
+				String doorsToSwitch = switchDoor[j] + " " + switchDoor[j+1];
 				switchi.addDoor(doorMap.get(doorsToSwitch));
+			}
+			for (int i = 0; i < switchLaser.length / 2; i++) {
+				int j = i * 2;
+				String lasersToSwitch = switchLaser[j] + " " + switchLaser[j+1];
+				switchi.addLaser(laserMap.get(lasersToSwitch));
 			}
 			activate(switchi);
 			switchdata = switchdata.next();
 		}
 
-		lasers = new ArrayList<Laser>();
-		JsonValue laserdata = levelFormat.getChild("lasers");
-		while (laserdata!=null){
-			Laser l = new Laser();
-			lasers.add(l);
-			l.initialize(laserdata);
-			if (l.getTexture().getRegionWidth()<tSize)
-				l.setWidth(l.getTexture().getRegionWidth()/scale.x);
-			l.setDrawScale(scale);
-			activate(l);
-//			l.start();
-			laserdata = laserdata.next();
+		int[] objDoors;
+		int[] objLasers;
+		objective = new ObjectiveModel();
+		objDoors = levelFormat.get("objective").get("doors").asIntArray();
+		objLasers = levelFormat.get("objective").get("lasers").asIntArray();
+		objective.initialize(levelFormat.get("objective"));
+		if (objective.getTexture().getRegionWidth()<tSize)
+			objective.setWidth(objective.getTexture().getRegionWidth()/scale.x);
+		if (objective.getTexture().getRegionHeight()<tSize)
+			objective.setHeight(objective.getTexture().getRegionHeight()/scale.y);
+		objective.setDrawScale(scale);
+		for (int i = 0; i < objDoors.length / 2; i++) {
+			int j = i * 2;
+			String doorsToSwitch = objDoors[j] + " " + objDoors[j+1];
+			objective.addDoor(doorMap.get(doorsToSwitch));
 		}
+		for (int i = 0; i < objLasers.length / 2; i++) {
+			int j = i * 2;
+			String lasersToSwitch = objLasers[j] + " " + objLasers[j+1];
+			objective.addLaser(laserMap.get(lasersToSwitch));
+		}
+		activate(objective);
 	}
 
 	public void placeBox(DudeModel player) {
@@ -650,7 +693,17 @@ public class LevelModel {
 			activeLight = -1;
 		}
 	}
-	
+	public void attachLights(CameraModel camera, LightSource light) {
+		light.setActive(true);
+		light.attachToBody(camera.getBody(), light.getX(), light.getY(), light.getDirection());
+		if (lights.size > 0) {
+			activeLight = 0;
+			lights.get(0).setActive(true);
+		} else {
+			activeLight = -1;
+		}
+	}
+
 	/**
 	 * Activates the next light in the light list.
 	 *
@@ -887,6 +940,16 @@ public class LevelModel {
 			//board.update();
 			for (AIController ai : controls) {
 				ai.update();
+			}
+			for(CameraModel camera: cameras){
+				camera.update();
+				if(camera.isOn() && camera.getLight()==null){
+					attachLights(camera, lights.get(2));
+					camera.addLight(lights.get(2));
+				}
+				else if(!camera.isOn() && camera.getLight()!=null){
+					camera.removeLight();
+				}
 			}
 			return true;
 		}

@@ -19,6 +19,8 @@ public class LevelParser {
         protected Array<Guard> guards = new Array<Guard>();
         protected Exit exit = new Exit();
         protected Array<Box> boxes = new Array<Box>();
+        protected Array<Switch> switches = new Array<Switch>();
+        protected Array<Door> doors = new Array<Door>();
         protected Array<Laser> lasers = new Array<Laser>();
         protected Objective objective = new Objective();
         protected Array<Integer> invalidTiles = new Array<Integer>();
@@ -73,6 +75,18 @@ public class LevelParser {
         protected int[] size = {1,1};
         protected String texture = "key";
         protected boolean hasAlarm = false;
+    }
+
+    private class Switch{
+        private int[] pos = new int[2];
+        private boolean switched = false;
+        private Array<Integer> doors = new Array<Integer>();
+        private Array<Integer> lasers = new Array<Integer>();
+    }
+
+    private class Door{
+        private int[] pos = new int[2];
+        private boolean open = false;
     }
 
     private class ExteriorWall{
@@ -141,6 +155,37 @@ public class LevelParser {
             }
             if(e.get("template").equals("Exit.tx")) {
                 testLevel.exit.pos = new int[] {e.getInt("x")/32+1,testLevel.boardSize[1]-e.getInt("y")/32};
+            }
+            if(e.get("template").equals("DoorClosed.tx")){
+                Door d = new Door();
+                d.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                d.open = false;
+                testLevel.doors.add(d);
+            }
+            if(e.get("template").equals("DoorOpen.tx")){
+                Door d = new Door();
+                d.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                d.open = true;
+                testLevel.doors.add(d);
+            }
+            if(e.get("template").equals("Switch.tx")){
+                Switch s = new Switch();
+                s.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                if (e.hasChildRecursive("property")){
+                    Array<XmlReader.Element> properties = e.getChildrenByNameRecursively("property");
+                    for (XmlReader.Element p: properties){
+                        if (p.get("name").equals("doors")){
+                            String[] ds = p.get("value").split(",");
+                            for(String d:ds){ s.doors.add(Integer.parseInt(d));}
+                        } else if (p.get("name").equals("lasers")){
+                            String[] ds = p.get("value").split(",");
+                            for(String d:ds){ s.lasers.add(Integer.parseInt(d));}
+                        } else if(p.get("name").equals("switched")){
+                            s.switched = p.getBoolean("value");
+                        }
+                    }
+                }
+                testLevel.switches.add(s);
             }
 //            if(e.get("template").equals(""))
             if(e.get("template").equals("Player.tx")){

@@ -86,6 +86,10 @@
 			"file": 	"textures/BG_Box4.png",
 			"wrap": 	false,
 		},
+		"camera": {
+			"file": "textures/camera.png",
+			"wrap": false
+		},
         "doorClosed": {
           "file": 	    "textures/doorC.png",
           "wrap":     	false,

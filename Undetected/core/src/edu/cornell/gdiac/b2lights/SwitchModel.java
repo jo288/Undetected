@@ -18,7 +18,9 @@ public class SwitchModel extends BoxObstacle{
     private TextureRegion switchOffTexture;
     private TextureRegion switchOnTexture;
     private boolean flaggedForDelete;
-    private ArrayList<DoorModel> doors = new ArrayList<DoorModel>();
+    private ArrayList<Laser> lasers = new ArrayList<>();
+    private ArrayList<DoorModel> doors = new ArrayList<>();
+    private ArrayList<CameraModel> cameras = new ArrayList<CameraModel>();
 
     public SwitchModel(float x, float y) {
         super(x, y, SWITCH_SIZE, SWITCH_SIZE);
@@ -61,14 +63,45 @@ public class SwitchModel extends BoxObstacle{
             }
             setOrigin(origin.x, 0);
         }
+        if (lasers != null) {
+            for (Laser las : lasers) {
+                if (switched) {
+                    if (!las.isTurnedOn()) {
+                        las.setOn(true);
+                    }
+                } else {
+                    las.setOn(false);
+                }
+            }
+            if (switched) {
+                setTexture(switchOnTexture);
+            } else {
+                setTexture(switchOffTexture);
+            }
+            setOrigin(origin.x, 0);
+        }
+    }
+
+    public void addLaser(Laser laser) {
+        lasers.add(laser);
     }
 
     public void addDoor(DoorModel door) {
         doors.add(door);
     }
+    public void addCamera(CameraModel camera){
+        cameras.add(camera);
+    }
+
+    public ArrayList<Laser> getLasers() {
+        return lasers;
+    }
 
     public ArrayList<DoorModel> getDoors() {
         return doors;
+    }
+    public ArrayList<CameraModel> getCameras() {
+        return cameras;
     }
 
     public void setFlaggedForDelete () {
