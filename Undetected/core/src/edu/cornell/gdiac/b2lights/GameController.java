@@ -416,12 +416,6 @@ public class GameController implements Screen, ContactListener {
 		rcam.position.y = MathUtils.clamp(playerY, (mincy-dy)/32f, (maxcy+dy)/32f);
 //		rcam.zoom = cam.zoom * ()
 		rcam.update();
-		System.out.println("max y:"+(maxcy+dy)/32f+", max x:"+(maxcx+dx)/32f);
-		System.out.println("min y:"+(mincy-dy)/32f+", max x:"+(mincx-dx)/32f);
-		System.out.println("player y:"+playerY+", max x:"+playerX);
-		System.out.println("actual viewport y:"+rcam.viewportHeight+", viewport x:"+rcam.viewportWidth);
-		System.out.println("viewport y:"+reffectiveVW+", viewport x:"+reffectiveVH);
-		System.out.println("camera y:"+rcam.position.y+", camera x:"+rcam.position.x);
 		level.rayhandler.setCombinedMatrix(rcam);
 		level.rayhandler.updateAndRender();
 	}
@@ -867,8 +861,11 @@ public class GameController implements Screen, ContactListener {
 //						setFailure(true);
 //					}
 					for (AIController ai : level.getControl()) {
-						ai.setAlarmed();
-						ai.setProtect(bd1);
+						if (Math.abs(bd1.getX()-ai.getGuardX())<5) {
+							ai.setAlarmed();
+							ai.setProtect(bd1);
+							System.out.println("laser");
+						}
 					}
 				}
 				else{
@@ -882,8 +879,12 @@ public class GameController implements Screen, ContactListener {
 //						setFailure(true);
 //					}
 					for (AIController ai : level.getControl()) {
-						ai.setAlarmed();
-						ai.setProtect(bd2);
+
+						if (Math.abs(bd2.getX()-ai.getGuardX())<10) {
+							ai.setAlarmed();
+							ai.setProtect(bd2);
+							System.out.println("laser");
+						}
 					}
 				}
 				else{

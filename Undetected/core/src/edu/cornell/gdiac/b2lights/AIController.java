@@ -37,6 +37,10 @@ public class AIController {
         ALERT
     }
 
+    public float getGuardX(){
+        return guard.getX();
+    }
+
     /** Initialize with current Guard */
     public AIController(Board board, GuardModel guard) {
         this.board = board;

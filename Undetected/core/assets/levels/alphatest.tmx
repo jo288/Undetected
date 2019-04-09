@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="82">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="82">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="2" source="HorizontalWall.tsx"/>
  <tileset firstgid="3" source="VerticalWall.tsx"/>
@@ -12,146 +12,130 @@
  <tileset firstgid="10" source="Objective.tsx"/>
  <tileset firstgid="11" source="Switch.tsx"/>
  <tileset firstgid="12" source="Laser.tsx"/>
- <layer id="1" name="Tile Layer 1" width="50" height="50">
+ <layer id="3" name="Tile Layer 1" width="40" height="34">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,
+1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,
+1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,
+1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,
+1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,0,
+1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,
+0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,
+0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,
+0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,
+0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,
+0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,
+0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,
+0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,
+0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,
+0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" template="HorizontalWall.tx" x="160" y="960" width="160" height="48"/>
-  <object id="2" template="HorizontalWall.tx" x="128" y="1184" width="224" height="48"/>
-  <object id="3" template="VerticalWall.tx" x="128" y="1152" width="32" height="240"/>
-  <object id="5" template="VerticalWall.tx" x="320" y="1152" width="32" height="240"/>
-  <object id="6" template="VerticalWall.tx" x="0" y="1280" width="32" height="496"/>
-  <object id="7" template="VerticalWall.tx" x="448" y="992" width="32" height="208"/>
-  <object id="8" template="HorizontalWall.tx" x="0" y="1312" width="96" height="48"/>
-  <object id="9" template="HorizontalWall.tx" x="384" y="1312" width="96" height="48"/>
-  <object id="10" template="VerticalWall.tx" x="96" y="1568" width="32" height="304"/>
-  <object id="11" template="VerticalWall.tx" x="352" y="1472" width="32" height="208"/>
-  <object id="16" template="VerticalWall.tx" x="224" y="1568" width="32" height="304"/>
-  <object id="17" template="HorizontalWall.tx" x="32" y="832" width="416" height="48"/>
-  <object id="19" template="HorizontalWall.tx" x="480" y="1216" width="128" height="48"/>
-  <object id="20" template="VerticalWall.tx" x="448" y="1280" width="32" height="112"/>
-  <object id="22" template="HorizontalWall.tx" x="448" y="1024" width="448" height="48"/>
-  <object id="23" template="DoorOpen.tx" x="288" y="1408"/>
-  <object id="24" template="HorizontalWall.tx" x="256" y="1408"/>
-  <object id="25" template="HorizontalWall.tx" x="320" y="1408"/>
-  <object id="27" template="HorizontalWall.tx" x="352" y="1504" width="288" height="48"/>
-  <object id="28" template="VerticalWall.tx" x="608" y="1472" width="32" height="304"/>
-  <object id="30" template="DoorClosed.tx" x="672" y="1216"/>
-  <object id="31" template="HorizontalWall.tx" x="640" y="1216"/>
-  <object id="32" template="HorizontalWall.tx" x="704" y="1216"/>
-  <object id="33" template="HorizontalWall.tx" x="224" y="1600" width="544" height="48"/>
-  <object id="34" template="VerticalWall.tx" x="736" y="1568" width="32" height="400"/>
-  <object id="35" template="HorizontalWall.tx" x="768" y="1216" width="96" height="48"/>
-  <object id="36" template="VerticalWall.tx" x="864" y="1568" width="32" height="400"/>
-  <object id="37" template="VerticalWall.tx" x="992" y="1568" width="32" height="400"/>
-  <object id="38" template="HorizontalWall.tx" x="864" y="1600" width="160" height="48"/>
-  <object id="39" template="HorizontalWall.tx" x="96" y="1600" width="64" height="48"/>
-  <object id="42" template="Exit.tx" x="160" y="1600"/>
-  <object id="43" template="HorizontalWall.tx" x="1024" y="1216" width="256" height="48"/>
-  <object id="44" template="VerticalWall.tx" x="1248" y="1184" width="32" height="400"/>
-  <object id="45" template="HorizontalWall.tx" x="1024" y="832" width="224" height="48"/>
-  <object id="46" template="HorizontalWall.tx" x="992" y="1088" width="160" height="48"/>
-  <object id="47" template="HorizontalWall.tx" x="1024" y="960" width="96" height="48"/>
-  <object id="48" template="VerticalWall.tx" x="1120" y="1056" width="32" height="144"/>
-  <object id="49" template="VerticalWall.tx" x="992" y="1056" width="32" height="144"/>
-  <object id="52" template="DoorOpen.tx" x="1184" y="960"/>
-  <object id="53" template="DoorOpen.tx" x="1184" y="1088"/>
-  <object id="54" template="HorizontalWall.tx" x="1216" y="1088"/>
-  <object id="55" template="HorizontalWall.tx" x="1216" y="960"/>
-  <object id="56" template="HorizontalWall.tx" x="1152" y="960"/>
-  <object id="57" template="HorizontalWall.tx" x="1152" y="1088"/>
-  <object id="60" template="VerticalWall.tx" x="864" y="992" width="32" height="336"/>
-  <object id="61" template="VerticalWall.tx" x="992" y="832" width="32" height="176"/>
-  <object id="62" template="HorizontalWall.tx" x="704" y="704" width="160" height="48"/>
-  <object id="63" template="HorizontalWall.tx" x="736" y="576" width="416" height="48"/>
-  <object id="64" template="HorizontalWall.tx" x="1024" y="704" width="160" height="48"/>
-  <object id="65" template="VerticalWall.tx" x="1152" y="672" width="32" height="144"/>
-  <object id="66" template="VerticalWall.tx" x="704" y="672" width="32" height="144"/>
-  <object id="67" template="Player.tx" x="160" y="1536"/>
-  <object id="68" template="Guard.tx" x="64" y="1248">
+  <object id="1" template="HorizontalWall.tx" x="160" y="448" width="160" height="48"/>
+  <object id="2" template="HorizontalWall.tx" x="128" y="672" width="224" height="48"/>
+  <object id="3" template="VerticalWall.tx" x="128" y="640" width="32" height="240"/>
+  <object id="5" template="VerticalWall.tx" x="320" y="640" width="32" height="240"/>
+  <object id="6" template="VerticalWall.tx" x="0" y="768" width="32" height="496"/>
+  <object id="7" template="VerticalWall.tx" x="448" y="480" width="32" height="208"/>
+  <object id="8" template="HorizontalWall.tx" x="0" y="800" width="96" height="48"/>
+  <object id="9" template="HorizontalWall.tx" x="384" y="800" width="96" height="48"/>
+  <object id="10" template="VerticalWall.tx" x="96" y="1056" width="32" height="304"/>
+  <object id="11" template="VerticalWall.tx" x="352" y="960" width="32" height="208"/>
+  <object id="16" template="VerticalWall.tx" x="224" y="1056" width="32" height="304"/>
+  <object id="17" template="HorizontalWall.tx" x="32" y="320" width="416" height="48"/>
+  <object id="19" template="HorizontalWall.tx" x="480" y="704" width="128" height="48"/>
+  <object id="20" template="VerticalWall.tx" x="448" y="768" width="32" height="112"/>
+  <object id="22" template="HorizontalWall.tx" x="448" y="512" width="448" height="48"/>
+  <object id="23" template="DoorOpen.tx" x="288" y="896"/>
+  <object id="24" template="HorizontalWall.tx" x="256" y="896"/>
+  <object id="25" template="HorizontalWall.tx" x="320" y="896"/>
+  <object id="27" template="HorizontalWall.tx" x="352" y="992" width="288" height="48"/>
+  <object id="28" template="VerticalWall.tx" x="608" y="960" width="32" height="304"/>
+  <object id="30" template="DoorClosed.tx" x="672" y="704"/>
+  <object id="31" template="HorizontalWall.tx" x="640" y="704"/>
+  <object id="32" template="HorizontalWall.tx" x="704" y="704"/>
+  <object id="33" template="HorizontalWall.tx" x="224" y="1088" width="544" height="48"/>
+  <object id="34" template="VerticalWall.tx" x="736" y="1056" width="32" height="400"/>
+  <object id="35" template="HorizontalWall.tx" x="768" y="704" width="96" height="48"/>
+  <object id="36" template="VerticalWall.tx" x="864" y="1056" width="32" height="400"/>
+  <object id="37" template="VerticalWall.tx" x="992" y="1056" width="32" height="400"/>
+  <object id="38" template="HorizontalWall.tx" x="864" y="1088" width="160" height="48"/>
+  <object id="39" template="HorizontalWall.tx" x="96" y="1088" width="64" height="48"/>
+  <object id="42" template="Exit.tx" x="160" y="1088"/>
+  <object id="43" template="HorizontalWall.tx" x="1024" y="704" width="256" height="48"/>
+  <object id="44" template="VerticalWall.tx" x="1248" y="672" width="32" height="400"/>
+  <object id="45" template="HorizontalWall.tx" x="1024" y="320" width="224" height="48"/>
+  <object id="46" template="HorizontalWall.tx" x="992" y="576" width="160" height="48"/>
+  <object id="47" template="HorizontalWall.tx" x="1024" y="448" width="96" height="48"/>
+  <object id="48" template="VerticalWall.tx" x="1120" y="544" width="32" height="144"/>
+  <object id="49" template="VerticalWall.tx" x="992" y="544" width="32" height="144"/>
+  <object id="52" template="DoorOpen.tx" x="1184" y="448"/>
+  <object id="53" template="DoorOpen.tx" x="1184" y="576"/>
+  <object id="54" template="HorizontalWall.tx" x="1216" y="576"/>
+  <object id="55" template="HorizontalWall.tx" x="1216" y="448"/>
+  <object id="56" template="HorizontalWall.tx" x="1152" y="448"/>
+  <object id="57" template="HorizontalWall.tx" x="1152" y="576"/>
+  <object id="60" template="VerticalWall.tx" x="864" y="480" width="32" height="336"/>
+  <object id="61" template="VerticalWall.tx" x="992" y="320" width="32" height="176"/>
+  <object id="62" template="HorizontalWall.tx" x="704" y="192" width="160" height="48"/>
+  <object id="63" template="HorizontalWall.tx" x="736" y="64" width="416" height="48"/>
+  <object id="64" template="HorizontalWall.tx" x="1024" y="192" width="160" height="48"/>
+  <object id="65" template="VerticalWall.tx" x="1152" y="160" width="32" height="144"/>
+  <object id="66" template="VerticalWall.tx" x="704" y="160" width="32" height="144"/>
+  <object id="67" template="Player.tx" x="160" y="1024"/>
+  <object id="68" template="Guard.tx" x="64" y="736">
    <properties>
     <property name="IsPatrolling" type="bool" value="true"/>
     <property name="path" value="[2,11,2,22,12,22,12,11]"/>
    </properties>
   </object>
-  <object id="69" template="Guard.tx" x="384" y="896">
+  <object id="69" template="Guard.tx" x="384" y="384">
    <properties>
     <property name="IsPatrolling" type="bool" value="true"/>
     <property name="path" value="[12,22,12,11,2,11,2,22]"/>
    </properties>
   </object>
-  <object id="70" template="Guard.tx" x="288" y="1344"/>
-  <object id="71" template="Guard.tx" x="768" y="640">
+  <object id="70" template="Guard.tx" x="288" y="832"/>
+  <object id="71" template="Guard.tx" x="768" y="128">
    <properties>
     <property name="IsPatrolling" type="bool" value="true"/>
     <property name="path" value="[24,30,34,30]"/>
    </properties>
   </object>
-  <object id="72" template="Guard.tx" x="928" y="1440"/>
-  <object id="73" template="Box2.tx" x="448" y="1056"/>
-  <object id="74" template="KeyObjective.tx" x="928" y="1504"/>
-  <object id="75" template="Switch.tx" x="896" y="1536">
+  <object id="72" template="Guard.tx" x="928" y="928"/>
+  <object id="73" template="Box2.tx" x="448" y="544"/>
+  <object id="74" template="KeyObjective.tx" x="928" y="992"/>
+  <object id="75" template="Switch.tx" x="896" y="1024">
    <properties>
     <property name="doors" value="21,12"/>
    </properties>
   </object>
-  <object id="77" template="Switch.tx" x="1024" y="864">
+  <object id="77" template="Switch.tx" x="1024" y="352">
    <properties>
     <property name="doors" value="37,16,37,20"/>
    </properties>
   </object>
-  <object id="79" template="HorizontalWall.tx" x="992" y="864"/>
-  <object id="80" template="Laser.tx" x="1152" y="992.5" width="3" height="96" rotation="-270"/>
+  <object id="79" template="HorizontalWall.tx" x="992" y="352"/>
+  <object id="80" template="Laser.tx" x="1152" y="480.5" width="3" height="96" rotation="-270"/>
  </objectgroup>
 </map>

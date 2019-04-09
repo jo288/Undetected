@@ -141,7 +141,7 @@ public class LevelParser {
             }
             if(e.get("template").equals("VerticalWall.tx")){
                 int w = e.getInt("x")/32;
-                for(int i=testLevel.boardSize[1]-e.getInt("y")/32;i<testLevel.boardSize[1]-e.getInt("y")/32+e.getInt("height")/32;i++){
+                for(int i=testLevel.boardSize[1]-e.getInt("y")/32;i<testLevel.boardSize[1]-e.getInt("y")/32+e.getInt("height",32)/32;i++){
                     testLevel.exteriorwall.pos.add(w);
                     testLevel.exteriorwall.pos.add(i);
                     testLevel.exteriorwall.type.add(1);
