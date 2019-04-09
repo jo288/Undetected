@@ -63,7 +63,8 @@
 	"switches": {
 		"switch1": {
 			"pos": 		[1, 11],
-			"switched": 		false
+			"switched": 		false,
+			"doors": [7,4, 12,4]
 		}
 	},
 	"doors": {
