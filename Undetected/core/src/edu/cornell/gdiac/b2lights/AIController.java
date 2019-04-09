@@ -247,7 +247,7 @@ public class AIController {
             path = new Vector2[paths.length / 2];
             for (int i = 0; i < paths.length / 2; i++) {
                 int j = i * 2;
-                path[i] = new Vector2(paths[j], paths[j + 1]);
+                path[i] = new Vector2(paths[j] + 0.5f , paths[j + 1] + 0.5f );
             }
         }
 
