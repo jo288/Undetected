@@ -71,11 +71,11 @@
 			"wrap":     	false,
 		},
         "switchOff": {
-          "file": 	    "textures/switchOff.png",
+          "file": 	    "textures/switchOffReal.png",
           "wrap":     	false,
         },
 		"switchOn": {
-			"file": 	    "textures/switchOn.png",
+			"file": 	    "textures/switchOnReal.png",
 			"wrap":     	false,
 		},
 		"laser": {

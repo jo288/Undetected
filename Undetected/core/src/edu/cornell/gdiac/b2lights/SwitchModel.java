@@ -50,15 +50,17 @@ public class SwitchModel extends BoxObstacle{
 
     public void switchMode() {
         switched = !switched;
-        for (DoorModel door : doors) {
-            door.switchState();
+        if (doors != null) {
+            for (DoorModel door : doors) {
+                door.switchState();
+            }
+            if (switched) {
+                setTexture(switchOnTexture);
+            } else {
+                setTexture(switchOffTexture);
+            }
+            setOrigin(origin.x, 0);
         }
-        if (switched) {
-            setTexture(switchOnTexture);
-        } else {
-            setTexture(switchOffTexture);
-        }
-        setOrigin(origin.x, 0);
     }
 
     public void addDoor(DoorModel door) {
@@ -103,6 +105,8 @@ public class SwitchModel extends BoxObstacle{
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
         setBodyType(BodyDef.BodyType.StaticBody);
+
+
 
         // Create the collision filter (used for light penetration)
         short collideBits = LevelModel.bitStringToShort("1000");

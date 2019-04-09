@@ -85,6 +85,7 @@ public class DudeModel extends CharacterModel {
 	/** Texture of character with box */
 	private TextureRegion boxCharTexture;
 
+	/** FilmStrip pointer to the dude animation */
 	/** FilmStrip pointer to the texture region */
 	private FilmStrip filmstrip;
 	/** The current animation frame of the avatar */
