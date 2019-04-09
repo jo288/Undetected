@@ -347,7 +347,7 @@ public class GameController implements Screen, ContactListener {
 	}
 
 
-	public void cameraPan(InputController input){
+	public void cameraPan(float dt){
 //		float playerX = level.getAvatar().getX();
 //		float playerY = level.getAvatar().getY();
 //		//pan the canvas camera
@@ -390,8 +390,8 @@ public class GameController implements Screen, ContactListener {
 		float sx = 32;
 		float sy = 32;
 //		cam.position.set(playerX*sx, playerY*sy, 0);
-		cam.position.x = MathUtils.clamp(playerX*sx, mincx-dx, maxcx + dx);
-		cam.position.y = MathUtils.clamp(playerY*sy, mincy-dy, maxcy + dy);
+		cam.position.x += (MathUtils.clamp(playerX*sx, mincx-dx, maxcx + dx) - cam.position.x)*dt*2.8;
+		cam.position.y += (MathUtils.clamp(playerY*sy, mincy-dy, maxcy + dy)  - cam.position.y)*dt*2.8;
 //		cam.position.y = 600;
 
 
@@ -412,8 +412,8 @@ public class GameController implements Screen, ContactListener {
 //		rcam.position.set(playerX, playerY , 0);
 //		rcam.position.x = MathUtils.clamp(playerX, minrcx-rdx, maxrcx + rdx);
 //		rcam.position.y = MathUtils.clamp(playerY, minrcy-rdy, maxrcy + rdy);
-		rcam.position.x = MathUtils.clamp(playerX, (mincx-dx)/32f, (maxcx+dx)/32f);
-		rcam.position.y = MathUtils.clamp(playerY, (mincy-dy)/32f, (maxcy+dy)/32f);
+		rcam.position.x += (MathUtils.clamp(playerX, (mincx-dx)/32f, (maxcx+dx)/32f)-rcam.position.x)*dt*2.8;
+		rcam.position.y += (MathUtils.clamp(playerY, (mincy-dy)/32f, (maxcy+dy)/32f)-rcam.position.y)*dt*2.8;
 //		rcam.zoom = cam.zoom * ()
 		rcam.update();
 		System.out.println("max y:"+(maxcy+dy)/32f+", max x:"+(maxcx+dx)/32f);
@@ -455,7 +455,6 @@ public class GameController implements Screen, ContactListener {
 		if (input.didDebug()) {
 			level.setDebug(!level.getDebug());
 		}
-		cameraPan(input);
 		if(input.zoomIn()){
 			canvas.getCamera().zoom = MathUtils.clamp(canvas.getCamera().zoom-0.01f, 0.4f, 1f);
 			level.raycamera.zoom = MathUtils.clamp(level.raycamera.zoom-0.01f, 0.4f, 1f);
@@ -577,6 +576,8 @@ public class GameController implements Screen, ContactListener {
 		guardAngle.scl(guard.getForce());
 		guard.setMovement(guardAngle.x,guardAngle.y);
 		guard.applyForce();
+
+		cameraPan(dt);
 
 		if (guardCollided != null) {
 			guardCollided.collidedAvatar(avatar);
