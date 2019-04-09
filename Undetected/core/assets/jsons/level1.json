@@ -19,11 +19,6 @@
 			"color":		[1.0, 0.0, 0.0, 1.0],
 			"distance":		   9,
 			"angle":	 	  40,
-		},
-		{
-			"color":		[1.0, 0.0, 0.0, 1.0],
-			"distance":		   6,
-			"angle":	 	  40,
 		}
 	],
     "avatar": {
@@ -80,15 +75,6 @@
 		"door2": {
 			"pos": 		[12, 4],
 			"open": 		true
-		}
-	},
-	"cameras": {
-		"camera1": {
-			"pos": [3, 14],
-			"on": true,
-			"lightIndex": 2,
-			"rotationSpeed": 1,
-			"direction": [1,0]
 		}
 	},
 	"lasers": [
