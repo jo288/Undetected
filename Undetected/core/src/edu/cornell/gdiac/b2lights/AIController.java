@@ -9,8 +9,8 @@ public class AIController {
     /** Current Guard */
     private GuardModel guard;
 
-    /** Object the guard is attempting to protect */
-    private Obstacle item;
+    /** ObjectSet the guard has been alerted to */
+    private HashSet<Obstacle> itemlist;
 
     /** Board */
     private Board board;
@@ -42,6 +42,7 @@ public class AIController {
         this.board = board;
         this.guard = guard;
         state = FSMState.SLEEP;
+        itemlist = new HashSet<>();
     }
 
     /** Sets the path for the guard, linear I.E. walk back and forth */
@@ -70,14 +71,17 @@ public class AIController {
 
     /** Sets the object the Guard is protecting */
     public void setProtect(Obstacle item) {
-        this.item = item;
-        currentGoal = new Vector2(item.getX(), item.getY());
-        Vector2[] newPath = new Vector2[path.length + 1];
-        for (int i = 0; i < path.length; i++) {
-            newPath[i] = path[i];
+        if (!itemlist.contains(item)) {
+            itemlist.add(item);
+            currentGoal = new Vector2(item.getX(), item.getY());
+            Vector2[] newPath = new Vector2[path.length + 1];
+            for (int i = 0; i < path.length; i++) {
+                newPath[i] = path[i];
+            }
+            newPath[newPath.length - 1] = currentGoal;
+            path = newPath;
+            pathIndex = newPath.length - 1;
         }
-        newPath[newPath.length-1] = currentGoal;
-        path = newPath;
     }
 
     /** Sets the tile the Guard is protecting*/
@@ -89,6 +93,7 @@ public class AIController {
         }
         newPath[newPath.length-1] = currentGoal;
         path = newPath;
+        pathIndex = newPath.length-1;
     }
 
     /** Main function to update the guard's velocity */
@@ -104,15 +109,48 @@ public class AIController {
                 int goaly = board.physicsToBoard(currentGoal.y);
                 int guardx = board.physicsToBoard(guard.getX());
                 int guardy = board.physicsToBoard(guard.getY());
-                if (goalx == guardx && goaly == guardy) {
-                    pathIndex = (pathIndex + 1) % path.length;
-                    currentGoal = path[pathIndex];
-                    goalx = board.physicsToBoard(currentGoal.x);
-                    goaly = board.physicsToBoard(currentGoal.y);
-                    board.setGoal(goalx, goaly);
-                    break;
+                if (board.getOccupant(goalx, goaly) == 5) {
+                    PriorityQueue<Node> queue = new PriorityQueue<>(
+                            new Comparator<Node>(){
+                                @Override
+                                public int compare(Node n1, Node n2) {return n1.priority - n2.priority; }});
+                    int prev = pathIndex-1 < 0 ? path.length-1 : pathIndex-1;
+                    Vector2 prevgoal = path[prev];
+                    if (board.isSafeAt(goalx+1, goaly) && (board.getOccupant(goalx+1,goaly) == 0 || board.getOccupant(goalx+1,goaly) == 4 || board.getOccupant(goalx+1,goaly) == 3 || board.getOccupant(goalx+1,goaly) == 6 || board.getOccupant(goalx+1,goaly) == 8)) {
+                        Node n1 = new Node(goalx+1, goaly, 0);
+                        n1.priority = manDist(board.screenToBoard(prevgoal.x), board.screenToBoard(prevgoal.y), goalx+1, goaly);
+                        queue.add(n1);
+                    }
+                    if (board.isSafeAt(goalx-1, goaly) && (board.getOccupant(goalx-1, goaly) == 0 || board.getOccupant(goalx-1, goaly) == 4 || board.getOccupant(goalx-1, goaly) == 3 || board.getOccupant(goalx-1, goaly) == 6 || board.getOccupant(goalx-1, goaly) == 8)) {
+                        Node n1 = new Node(goalx-1, goaly, 0);
+                        n1.priority = manDist(board.screenToBoard(prevgoal.x), board.screenToBoard(prevgoal.y), goalx-1, goaly);
+                        queue.add(n1);
+                    }
+                    if (board.isSafeAt(goalx, goaly+1) && (board.getOccupant(goalx, goaly+1) == 0 || board.getOccupant(goalx, goaly+1) == 4 || board.getOccupant(goalx, goaly+1) == 3 || board.getOccupant(goalx, goaly+1) == 6 || board.getOccupant(goalx, goaly+1) == 8)) {
+                        Node n1 = new Node(goalx, goaly+1, 0);
+                        n1.priority = manDist(board.screenToBoard(prevgoal.x), board.screenToBoard(prevgoal.y), goalx, goaly+1);
+                        queue.add(n1);
+                    }
+                    if (board.isSafeAt(goalx, goaly-1) && (board.getOccupant(goalx, goaly-1) == 0 || board.getOccupant(goalx, goaly-1) == 4 || board.getOccupant(goalx, goaly-1) == 3 || board.getOccupant(goalx, goaly-1) == 6 || board.getOccupant(goalx, goaly-1) == 8)) {
+                        Node n1 = new Node(goalx, goaly-1, 0);
+                        n1.priority = manDist(board.screenToBoard(prevgoal.x), board.screenToBoard(prevgoal.y), goalx, goaly-1);
+                        queue.add(n1);
+                    }
+                    Node closest = queue.poll();
+                    currentGoal = new Vector2(board.boardToPhysics(closest.x), board.boardToPhysics(closest.y));
+                    board.resetTiles();
+                    board.setGoal(closest.x, closest.y);
                 } else {
-                    board.setGoal(goalx, goaly);
+                    if (goalx == guardx && goaly == guardy) {
+                        pathIndex = (pathIndex + 1) % path.length;
+                        currentGoal = path[pathIndex];
+                        goalx = board.physicsToBoard(currentGoal.x);
+                        goaly = board.physicsToBoard(currentGoal.y);
+                        board.setGoal(goalx, goaly);
+                        break;
+                    } else {
+                        board.setGoal(goalx, goaly);
+                    }
                 }
                 pathFind();
                 board.resetTiles();
@@ -139,19 +177,19 @@ public class AIController {
             guard.setMovement(0,0);
         } else if (i == 1) {
             guard.setDirection(-(float) Math.PI/2);
-            guard.setMovement(50,0);
+            guard.setMovement(25,0);
             guard.applyForce();
         } else if (i == 2) {
             guard.setDirection(0);
-            guard.setMovement(0, 50);
+            guard.setMovement(0, 25);
             guard.applyForce();
         } else if (i == -1) {
             guard.setDirection((float) Math.PI/2);
-            guard.setMovement(-50,0);
+            guard.setMovement(-25,0);
             guard.applyForce();
         } else if (i == -2){
             guard.setDirection((float) Math.PI);
-            guard.setMovement(0,-50);
+            guard.setMovement(0,-25);
             guard.applyForce();
         }
     }
