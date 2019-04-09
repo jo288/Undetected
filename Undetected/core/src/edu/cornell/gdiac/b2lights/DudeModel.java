@@ -38,7 +38,7 @@ public class DudeModel extends CharacterModel {
 	/** Default Width of Player */
 	public static final float DEFAULT_WIDTH = 1;
 	/** Collide Bit */
-	public static final String COLLIDE_BIT = "0001";
+	public static final String COLLIDE_BIT = "1111";
 	/** Default Width of Player */
 	public static final String EXCLUDE_BIT = "0000";
 	/** Default Density of Player */
