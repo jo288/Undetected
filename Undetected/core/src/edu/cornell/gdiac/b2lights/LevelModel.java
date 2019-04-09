@@ -76,8 +76,6 @@ public class LevelModel {
 	private ArrayList<GuardModel> guards;
 	/** Guard AI */
 	private ArrayList<AIController> controls;
-	/** Only update AI every time tick is 60 */
-	private int tick = 0;
 
 	/** Whether or not the level is in debug more (showing off physics) */	
 	private boolean debug;
@@ -433,7 +431,7 @@ public class LevelModel {
 		controls.add(ai);
 		controls.add(ai2);
 		ai.initialize(gddata);
-		ai.initialize(gddata2);
+		ai2.initialize(gddata2);
 		this.guards.add(guard);
 		this.guards.add(guard2);
 
@@ -829,8 +827,8 @@ public class LevelModel {
 			updateBoard();
 
             // System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
-			//Test for displaying board states
-			board.update();
+			// Test for displaying board states
+			// board.update();
 			for (AIController ai : controls) {
 				ai.update();
 			}

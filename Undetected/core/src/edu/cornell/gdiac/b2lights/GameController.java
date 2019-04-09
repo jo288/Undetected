@@ -744,7 +744,7 @@ public class GameController implements Screen, ContactListener {
 //					}
 					for (AIController ai : level.getControl()) {
 						ai.setAlarmed();
-						ai.setProtect(bd2.getX(), bd2.getY());
+						ai.setProtect(bd1);
 					}
 				}
 				else{
@@ -759,7 +759,7 @@ public class GameController implements Screen, ContactListener {
 //					}
 					for (AIController ai : level.getControl()) {
 						ai.setAlarmed();
-						ai.setProtect(bd1.getX(), bd1.getY());
+						ai.setProtect(bd2);
 					}
 				}
 				else{

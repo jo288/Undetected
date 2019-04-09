@@ -16,7 +16,7 @@ public class AIController {
     private Board board;
 
     /** Current State of Guard */
-    private FSMState state;
+    public FSMState state;
 
     /** Patrol Path of the Guard, Vector2 values are the respective patrol points in x,y screen coordinates */
     private Vector2[] path;
@@ -71,11 +71,24 @@ public class AIController {
     /** Sets the object the Guard is protecting */
     public void setProtect(Obstacle item) {
         this.item = item;
+        currentGoal = new Vector2(item.getX() - 1, item.getY());
+        Vector2[] newPath = new Vector2[path.length + 1];
+        for (int i = 0; i < path.length; i++) {
+            newPath[i] = path[i];
+        }
+        newPath[newPath.length-1] = currentGoal;
+        path = newPath;
     }
 
     /** Sets the tile the Guard is protecting*/
     public void setProtect(float x, float y) {
-        currentGoal = new Vector2(board.physicsToBoard(x+guard.getWidth()/2), board.physicsToBoard(y+guard.getHeight()/2));
+        currentGoal = new Vector2(x, y);
+        Vector2[] newPath = new Vector2[path.length + 1];
+        for (int i = 0; i < path.length; i++) {
+            newPath[i] = path[i];
+        }
+        newPath[newPath.length-1] = currentGoal;
+        path = newPath;
     }
 
     /** Main function to update the guard's velocity */
@@ -85,6 +98,7 @@ public class AIController {
                 // Do Nothing
                 break;
             case PATROL:
+            case ALERT:
                 // Check if Guard is at patrol
                 int goalx = board.physicsToBoard(currentGoal.x);
                 int goaly = board.physicsToBoard(currentGoal.y);
@@ -100,20 +114,6 @@ public class AIController {
                 } else {
                     board.setGoal(goalx, goaly);
                 }
-                pathFind();
-                board.resetTiles();
-                break;
-            case ALERT:
-                // Set Goal tile to be the object, and find it
-                if (item != null) {
-                    int obx = board.physicsToBoard(item.getX());
-                    int oby = board.physicsToBoard(item.getY());
-                    board.setGoal(obx, oby);
-                    currentGoal = new Vector2(obx, oby);
-                } else {
-                    board.setGoal((int) currentGoal.x, (int) currentGoal.y);
-                }
-                // System.out.println(currentGoal);
                 pathFind();
                 board.resetTiles();
                 break;
@@ -165,13 +165,13 @@ public class AIController {
      *          2 if character needs to move up
      */
     private int bfs (int startX, int startY) {
-        PriorityQueue<Node> queue = new PriorityQueue<Node>(
-                new Comparator<Node>(){
-                    @Override
-                    public int compare(Node n1, Node n2){
-                        return n1.priority - n2.priority;
-                    }
-                }
+        Queue<Node> queue = new LinkedList<Node>(
+//                new Comparator<Node>(){
+//                    @Override
+//                    public int compare(Node n1, Node n2){
+//                        return n1.priority - n2.priority;
+//                    }
+//                }
         );
         Node start = new Node(startX, startY, 0);
         queue.add(start);
