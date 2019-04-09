@@ -44,7 +44,7 @@ public class DudeModel extends CharacterModel {
 	/** Default Density of Player */
 	public static final float DEFAULT_DENSITY = 1.5f;
 	/** Default Force of Player */
-	public static final float DEFAULT_FORCE = 200;
+	public static final float DEFAULT_FORCE = 160;
 	/** Default Damping of Player */
 	public static final float DEFAULT_DAMPING = 10;
 	/** Default Damping of Player */
@@ -360,7 +360,7 @@ public class DudeModel extends CharacterModel {
 
 		//Animation
 		setStartFrame(0);
-		setWalkLimit(4);
+		setWalkLimit(8);
 		
 		// Create the collision filter (used for light penetration)
       	short collideBits = LevelModel.bitStringToShort(COLLIDE_BIT);
@@ -387,22 +387,22 @@ public class DudeModel extends CharacterModel {
 		TextureRegion texture = JsonAssetManager.getInstance().getEntry("defaultDude", TextureRegion.class);
 		defaultCharTexture = texture;
 		texture.getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-		setTexture(texture);
-		setOrigin(origin.x,0);
+//		setTexture(texture);
+//		setOrigin(origin.x,0);
 
 		texture = JsonAssetManager.getInstance().getEntry("boxDude", TextureRegion.class);
 		boxCharTexture = texture;
 
-		/*
-		String key = json.get("texture").asString();
-		TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
+
+		texture = JsonAssetManager.getInstance().getEntry("dude", TextureRegion.class);
 		try {
-			filmstrip = (FilmStrip)texture;			
+			filmstrip = (FilmStrip)texture;
 		} catch (Exception e) {
 			filmstrip = null;
 		}
 		setTexture(texture);
-		*/
+		setOrigin(origin.x,0);
+
 	}
 
 	/**

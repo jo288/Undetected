@@ -558,6 +558,12 @@ public class GameController implements Screen, ContactListener {
 		
 		level.draw(canvas);
 
+//		framerate display
+        displayFont.setColor(Color.YELLOW);
+        canvas.begin(); // DO NOT SCALE
+        canvas.drawTextCentered(""+(int)(1f/delta), displayFont, 0.0f);
+        canvas.end();
+
 		// Final message
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);

@@ -19,12 +19,12 @@
 			"wrap": 	true,
 		},
     	"dude": {      
-    		"file": 	"textures/walking.png",
+    		"file": 	"textures/dudeanimation.png",
     		"wrap":  	false,
     		"strip":	{
-    			"size":		4,
+    			"size":		8,
     			"rows":		1,
-    			"cols":		4,
+    			"cols":		8,
     			"first":	0
     		}
     	},
