@@ -51,7 +51,9 @@ public class Board {
 		 * 2: Guard
 		 * 3: Player Character
 		 * 4: Laser
-		 * 5: Box */
+		 * 5: Box
+		 * 6: Door
+		 * 7: Switch*/
 		public int occupant = 0;
 		/** Is this a goal tile (used for pathfinding)? */
 		public boolean goal = false;

@@ -154,6 +154,7 @@ public class GameController implements Screen, ContactListener {
 	/** Whether the player reached the objective or not */
 	private boolean hasObjective;
 	private GuardModel guardCollided = null;
+	private SwitchModel switchCollided = null;
 
 
 	/** Mark set to handle more sophisticated collision callbacks */
@@ -486,12 +487,14 @@ public class GameController implements Screen, ContactListener {
 			level.activatePrevLight();
 		}*/
 
-		if(input.didAction()&&avatar.getHasBox()){
+		if(input.didAction() && avatar.getHasBox()){
 			level.placeBox(avatar);
-		} else if(input.didAction()&&!avatar.getHasBox() && avatarBoxCollision){
+		} else if(input.didAction() && !avatar.getHasBox() && avatarBoxCollision){
 			avatar.setBoxHeld(avatar.getBoxInContact());
 			avatar.pickupBox();
 			level.queueDisabled(avatar.getBoxInContact());
+		} else if(input.didAction() && switchCollided != null) {
+			switchCollided.setSwitched(true);
 		}
 		//camera follow player
 		//canvas.getCamera().translate(input.getHorizontal(), input.getVertical());
@@ -693,8 +696,9 @@ public class GameController implements Screen, ContactListener {
 			Obstacle bd2 = (Obstacle)body2.getUserData();
 
 			DudeModel avatar = level.getAvatar();
-			ExitModel door   = level.getExit();
+			ExitModel exit   = level.getExit();
 			ArrayList<GuardModel> guards = level.getGuards();
+			ArrayList<SwitchModel> switches = level.getSwtiches();
 			ObjectiveModel objective = level.getObjective();
 
             if((guards.contains(bd1) && bd2==avatar ) || (bd1 == avatar && guards.contains(bd2))){
@@ -708,9 +712,18 @@ public class GameController implements Screen, ContactListener {
                 setFailure(true);
             }
 
+			if((switches.contains(bd1) && bd2==avatar ) || (bd1 == avatar && switches.contains(bd2))){
+				if (switches.contains(bd1)) {
+					SwitchModel switchi = switches.get(switches.indexOf(bd1));
+					switchCollided = switchi;
+				} else if (switches.contains(bd2)) {
+					SwitchModel switchi = switches.get(switches.indexOf(bd2));
+					switchCollided = switchi;
+				}
+			}
+
 			if((bd1==avatar && bd2 instanceof MoveableBox ) || (bd1 instanceof MoveableBox && bd2==avatar)){
 				avatarBoxCollision = true;
-//				System.out.println("Box in contact");
 				if (bd1 instanceof  MoveableBox) {
 				    avatar.setBoxInContact(bd1);
                 } else if (bd2 instanceof  MoveableBox) {
@@ -721,17 +734,13 @@ public class GameController implements Screen, ContactListener {
 			// Check for objective
 			if ((bd1 == avatar && bd2 == objective) || (bd1 == objective && bd2== avatar)){
 				hasObjective = true;
-				door.open();
+				exit.open();
 				level.queueDestroyed(objective);
 			}
 
-			if((bd1 instanceof MoveableBox && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2 instanceof MoveableBox)){
-				System.out.println("laserbox");
-			}
-
 			// Check for win condition
-			if ((bd1 == avatar && bd2 == door && hasObjective ) ||
-				(bd1 == door   && bd2 == avatar && hasObjective)) {
+			if ((bd1 == avatar && bd2 == exit && hasObjective ) ||
+				(bd1 == exit   && bd2 == avatar && hasObjective)) {
 				setComplete(true);
 			}
 		} catch (Exception e) {
@@ -755,11 +764,17 @@ public class GameController implements Screen, ContactListener {
 		Obstacle bd2 = (Obstacle)body2.getUserData();
 
 		DudeModel avatar = level.getAvatar();
+		ArrayList<SwitchModel> switches = level.getSwtiches();
 
 		if((bd1 == avatar && bd2 instanceof MoveableBox) || (bd1 instanceof MoveableBox && bd2==avatar)){
 			avatarBoxCollision = false;
             avatar.setBoxInContact(null);
 		}
+
+		if((switches.contains(bd1) && bd2==avatar ) || (bd1 == avatar && switches.contains(bd2))){
+			switchCollided = null;
+		}
+
 		if((bd1 == avatar && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2==avatar)){
 			avatarLaserCollision = false;
 		}
