@@ -20,6 +20,7 @@ public class SwitchModel extends BoxObstacle{
     private boolean flaggedForDelete;
     private ArrayList<Laser> lasers = new ArrayList<>();
     private ArrayList<DoorModel> doors = new ArrayList<>();
+    private ArrayList<CameraModel> cameras = new ArrayList<CameraModel>();
 
     public SwitchModel(float x, float y) {
         super(x, y, SWITCH_SIZE, SWITCH_SIZE);
@@ -88,6 +89,9 @@ public class SwitchModel extends BoxObstacle{
     public void addDoor(DoorModel door) {
         doors.add(door);
     }
+    public void addCamera(CameraModel camera){
+        cameras.add(camera);
+    }
 
     public ArrayList<Laser> getLasers() {
         return lasers;
@@ -95,6 +99,9 @@ public class SwitchModel extends BoxObstacle{
 
     public ArrayList<DoorModel> getDoors() {
         return doors;
+    }
+    public ArrayList<CameraModel> getCameras() {
+        return cameras;
     }
 
     public void setFlaggedForDelete () {
