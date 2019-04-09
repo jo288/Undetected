@@ -47,6 +47,8 @@
 	"size": [ 2, 1 ]
 },
 "boxes": [],
+"switches": [],
+"doors": [],
 "lasers": [],
 "objective": {
 	"pos": [ 16, 17 ],
