@@ -60,6 +60,52 @@
 			"texture":      "box3"
 		}
 	],
+	"switches": {
+		"switch1": {
+			"pos": 		[1, 11],
+			"size": 	[1,  1],
+			"bodytype": "static",
+			"density":  	  0.0,
+			"friction":       0.0,
+			"restitution":    0.0,
+			"switched": 		false,
+			"collideBits":	"10001",
+			"excludeBits":	"0000",
+			"texture":      "switch",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		}
+	},
+	"doors": {
+		"door1": {
+			"pos": 		[7, 4],
+			"size": 	[1,  1],
+			"bodytype": "static",
+			"density":  	  0.0,
+			"friction":       0.0,
+			"restitution":    0.0,
+			"open": 		false,
+			"collideBits":	"10001",
+			"excludeBits":	"0000",
+			"texture":      "door",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		},
+		"door2": {
+			"pos": 		[12, 4],
+			"size": 	[1,  1],
+			"bodytype": "static",
+			"density":  	  0.0,
+			"friction":       0.0,
+			"restitution":    0.0,
+			"open": 		true,
+			"collideBits":	"10001",
+			"excludeBits":	"0000",
+			"texture":      "door",
+			"debugcolor":   "yellow",
+			"debugopacity":  200
+		}
+	},
 	"lasers": [
 		{
 			"pos": 		[7, 14],
@@ -108,7 +154,7 @@
 			1,1,1,1,1, 1,1,1,1,1, 	1,1,1,1,1, 1],
 	},
 	"interiorwall": {
-		"pos": 		[4,4,5,4,6,4,7,4,8,4,		9,4,10,4,11,4,12,4,13,4,		14,4,15,4,16,4,17,4,
+		"pos": 		[4,4,5,4,6,4,8,4,		9,4,10,4,11,4,13,4,		14,4,15,4,16,4,17,4,
 					 4,13,5,13,6,13,7,13,8,13,	9,13,10,13,11,13,12,13,13,13,	14,13,15,13,16,13,17,13,
 					 4,5,4,6,4,7,4,8,4,9,4,10,  4,11,4,12,
 					 17,5,17,6,17,7,17,8,17,9,17,10, 17,11,17,12],

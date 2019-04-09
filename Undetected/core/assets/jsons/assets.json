@@ -39,7 +39,7 @@
 			}
 		},
         "goal": { 
-         	"file":		"textures/door.png",
+         	"file":		"textures/exit.png",
          	"wrap":		false,
          },
 		"defaultDude": {
@@ -62,6 +62,14 @@
 			"file": 	"textures/BG_Box4.png",
 			"wrap": 	false,
 		},
+        "door": {
+          "file": 	    "textures/doorC.png",
+          "wrap":     	false,
+        },
+        "switch": {
+          "file": 	    "textures/switchOff.png",
+          "wrap":     	false,
+        },
 		"laser": {
 			"file": 	"textures/laser.png",
 			"wrap": 	true,

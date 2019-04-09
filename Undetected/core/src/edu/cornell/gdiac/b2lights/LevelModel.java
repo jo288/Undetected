@@ -40,7 +40,7 @@ import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.physics.box2d.*;
 
-// import com.sun.media.sound.AiffFileReader;
+import com.sun.media.sound.AiffFileReader;
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.lights.*;
 import edu.cornell.gdiac.physics.obstacle.*;
@@ -74,12 +74,14 @@ public class LevelModel {
 	private ObjectiveModel objective;
 	/** Reference to all the lasers */
 	private ArrayList<Laser> lasers;
+	/** Reference to all the doors */
+	private ArrayList<DoorModel> doors;
+	/** Reference to all the switches */
+	private ArrayList<SwitchModel> switches;
 	/** Reference to all the guards (for line-of-sight checks) */
 	private ArrayList<GuardModel> guards;
 	/** Guard AI */
 	private ArrayList<AIController> controls;
-	/** Only update AI every time tick is 60 */
-	private int tick = 0;
 
 	/** Whether or not the level is in debug more (showing off physics) */	
 	private boolean debug;
@@ -187,6 +189,11 @@ public class LevelModel {
 	 */
 	public ArrayList<GuardModel> getGuards() { return guards; }
 
+	/**
+	 * Returns a reference to all the guards
+	 */
+	public ArrayList<SwitchModel> getSwtiches() { return switches; }
+
     /**
      * Returns a reference to all AI
      *
@@ -221,9 +228,9 @@ public class LevelModel {
 	}
 
 	/**
-	 * Returns a reference to the exit door
+	 * Returns a reference to a box
 	 *
-	 * @return a reference to the exit door
+	 * @return a reference to a box
 	 */
 	public Obstacle getBox() {
 		for (Obstacle o : objects) {
@@ -402,6 +409,7 @@ public class LevelModel {
 		guards = new ArrayList<GuardModel>();
 		//AIController List
 		controls = new ArrayList<AIController>();
+
 		GuardModel guard;
 		AIController ai;
 		JsonValue guardData = levelFormat.getChild("guards");
@@ -427,6 +435,7 @@ public class LevelModel {
 			guardData = guardData.next();
 		}
 
+
 		// Create Test Box
 		JsonValue boxesdata = levelFormat.get("boxes");
 		JsonValue boxdata = levelFormat.getChild("boxes");
@@ -440,6 +449,45 @@ public class LevelModel {
 			box.setDrawScale(scale);
 			activate(box);
 			boxdata = boxdata.next();
+		}
+
+		switches = new ArrayList<SwitchModel>();
+		JsonValue switchdata = levelFormat.getChild("switches");
+		int[] switchPositions;
+		while (switchdata!=null){
+			switchPositions = switchdata.get("pos").asIntArray();
+			SwitchModel switchi = new SwitchModel();
+//			switchi.setSwitched(switchdata.get("switched").asBoolean());
+			switches.add(switchi);
+			switchi.initialize(switchdata);
+			if (switchi.getTexture().getRegionWidth()<tSize)
+				switchi.setWidth(switchi.getTexture().getRegionWidth()/scale.x);
+			if (switchi.getTexture().getRegionHeight()<tSize)
+				switchi.setHeight(switchi.getTexture().getRegionHeight()/scale.y);
+			switchi.setPosition(switchPositions[0]+0.5f, switchPositions[1]+0.5f);
+			switchi.setDrawScale(scale);
+			activate(switchi);
+			switchdata = switchdata.next();
+		}
+
+		doors = new ArrayList<DoorModel>();
+		JsonValue doordata = levelFormat.getChild("doors");
+		int[] doorPositions;
+		while (doordata!=null){
+			doorPositions = doordata.get("pos").asIntArray();
+			DoorModel door = new DoorModel();
+			door.setOpen(doordata.get("open").asBoolean());
+			doors.add(door);
+			door.initialize(doordata);
+			if (door.getTexture().getRegionWidth()<tSize)
+				door.setWidth(door.getTexture().getRegionWidth()/scale.x);
+			if (door.getTexture().getRegionHeight()<tSize)
+				door.setHeight(door.getTexture().getRegionHeight()/scale.y);
+			door.setPosition(doorPositions[0]+0.5f, doorPositions[1]+0.5f);
+			door.setDrawScale(scale);
+			activate(door);
+			switches.get(0).addDoor(door);
+			doordata = doordata.next();
 		}
 
 		lasers = new ArrayList<Laser>();
@@ -767,6 +815,12 @@ public class LevelModel {
 			}
 			if(o instanceof MoveableBox){
 				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),5);
+			}
+			if(o instanceof DoorModel){
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),6);
+			}
+			if(o instanceof SwitchModel){
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),7);
 			}
 			if(o instanceof Laser){
 				if (((Laser) o).isHorizontal()){
