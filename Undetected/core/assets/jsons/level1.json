@@ -26,7 +26,7 @@
     },
 	"guards": [
 		{
-			"pos":        	[2.0,4.0],
+			"pos":        	[2.0,3.0],
 			"status": 		"patrol",
 			"force": 		 40.0,
 			"sensitiveRadius":  1.6,

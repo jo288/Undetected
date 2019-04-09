@@ -726,7 +726,25 @@ public class GameController implements Screen, ContactListener {
 			}
 
 			if((bd1 instanceof MoveableBox && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2 instanceof MoveableBox)){
-				System.out.println("laserbox");
+				System.out.println("boxlaser");
+				if (bd1 instanceof Laser) {
+					if (((Laser) bd1).isTurnedOn()) {
+						avatarLaserCollision = true;
+						for (AIController ai : level.getControl()) {
+							ai.setAlarmed();
+							ai.setProtect(bd2.getX(), bd2.getY());
+						}
+					}
+				}
+				else{
+					if (((Laser) bd2).isTurnedOn()) {
+						avatarLaserCollision = true;
+						for (AIController ai : level.getControl()) {
+							ai.setAlarmed();
+							ai.setProtect(bd1.getX(), bd1.getY());
+						}
+					}
+				}
 			}
 
 			// Check for win condition

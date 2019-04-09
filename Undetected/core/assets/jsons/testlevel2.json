@@ -30,14 +30,14 @@
 		"status": "patrol",
 		"force": 40,
 		"sensitiveRadius": 1.6,
-		"path": [ 7, 2, 16, 2, 16, 5 ],
+		"path": [ 7, 2, 16, 2, 16, 5, 16, 2 ],
 		"lightIndex": 0
 	},
 	{
 		"pos": [ 9, 13 ],
 		"status": "sleep",
 		"force": 40,
-		"sensitiveRadius": 4,
+		"sensitiveRadius": 1.6,
 		"path": [],
 		"lightIndex": 1
 	}
@@ -52,7 +52,7 @@
 		"texture": "box1"
 	},
 	{
-		"pos": [ 5, 13 ],
+		"pos": [ 1, 4 ],
 		"texture": "box2"
 	},
 	{
@@ -64,12 +64,12 @@
 	{
 		"pos": [ 13, 12 ],
 		"size": [ 1, 2 ],
-		"timetolive": 0
+		"timetolive": 2
 	},
 	{
 		"pos": [ 14, 7 ],
 		"size": [ 5, 1 ],
-		"timetolive": 0
+		"timetolive": 3
 	}
 ],
 "objective": {

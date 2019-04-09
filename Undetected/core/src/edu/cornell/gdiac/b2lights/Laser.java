@@ -221,6 +221,7 @@ public class Laser extends BoxObstacle {
     }
 
     public boolean isTurnedOn(){return isOn;}
+    public boolean isHorizontal(){return isHorizontal;}
 
     @Override
     public void draw(ObstacleCanvas canvas){
@@ -235,7 +236,14 @@ public class Laser extends BoxObstacle {
 
             }
         }else{
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x + getHeight()/2*drawScale.x,getY()*drawScale.y,getAngle(),1f,getHeight());
+            if (isOn) {
+                //canvas.setBlendState(ObstacleCanvas.BlendState.ALPHA_BLEND);
+                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x + getHeight()/2*drawScale.x,getY()*drawScale.y,getAngle(),1f,getHeight());
+            } else {
+                //draw transparent texture instead
+                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x + getHeight()/2*drawScale.x,getY()*drawScale.y,getAngle(),1f,getHeight(),0.0f);
+            }
+
         }
     }
 }

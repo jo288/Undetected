@@ -441,18 +441,6 @@ public class LevelModel {
 			activate(box);
 			boxdata = boxdata.next();
 		}
-//		int[] boxPositions = boxesdata.get("pos").asIntArray();
-//		for(int i=0;i<boxPositions.length;i+=2){
-//			MoveableBox box = new MoveableBox();
-//			box.initialize(boxesdata);
-//			if (box.getTexture().getRegionWidth()<tSize)
-//				box.setWidth(box.getTexture().getRegionWidth()/scale.x);
-//			if (box.getTexture().getRegionHeight()<tSize)
-//				box.setHeight(box.getTexture().getRegionHeight()/scale.y);
-//			box.setPosition(boxPositions[i]+0.5f,boxPositions[i+1]+0.5f);
-//			box.setDrawScale(scale);
-//			activate(box);
-//		}
 
 		lasers = new ArrayList<Laser>();
 		JsonValue laserdata = levelFormat.getChild("lasers");
@@ -765,20 +753,6 @@ public class LevelModel {
 	private void updateBoard(){
 		board.resetOccupants();
 		for(Obstacle o: objects){
-//			if(o instanceof ExteriorWall){
-//				for (int i=0;i<((ExteriorWall) o).getPositions().size;i+=2){
-//					board.setOccupiedTiles(((ExteriorWall) o).getPositions().get(i),
-//							((ExteriorWall) o).getPositions().get(i+1),1);
-//				}
-//			}
-//
-//			if(o instanceof InteriorWall){
-//				for (int i=0;i<((InteriorWall) o).getPositions().size;i+=2){
-//					board.setOccupiedTiles(((InteriorWall) o).getPositions().get(i),
-//							((InteriorWall) o).getPositions().get(i+1),1);
-//				}
-//			}
-
 			if(o instanceof ExteriorWall.WallBlock){
 				board.setOccupiedTiles(board.physicsToBoard(o.getX()),
 						board.physicsToBoard(o.getY()),1);
@@ -795,10 +769,14 @@ public class LevelModel {
 				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),5);
 			}
 			if(o instanceof Laser){
-				//TODO: TEMPORARY FIX, CHANGE LATER WHEN LASERS ARE FIXED
-				//for(int i=(int)o.getY(); i<(int)(o.getY()+((Laser) o).getHeight());i++){
-				for(int i=(int)o.getY(); i<(int)(o.getY()+((Laser) o).getHeight());i++){
-					board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(i),4);
+				if (((Laser) o).isHorizontal()){
+					for (int i=(int)o.getX();i<(int)o.getX()+((Laser) o).getHeight();i++){
+						board.setOccupiedTiles(board.physicsToBoard(i), board.physicsToBoard(o.getY()), 4);
+					}
+				}else {
+					for (int i = (int) o.getY(); i < (int) (o.getY() + ((Laser) o).getHeight()); i++) {
+						board.setOccupiedTiles(board.physicsToBoard(o.getX()), board.physicsToBoard(i), 4);
+					}
 				}
 			}
 			if(o instanceof GuardModel){

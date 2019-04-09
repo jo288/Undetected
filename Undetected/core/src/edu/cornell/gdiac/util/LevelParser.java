@@ -173,8 +173,8 @@ public class LevelParser {
                     l.size = new int[] {1,e.getInt("height")/32};
                     l.pos = new int[] {Math.round(e.getFloat("x"))/32,testLevel.boardSize[1]-Math.round(e.getFloat("y"))/32};
                 }
-                if(e.hasAttribute("timetolive"))
-                    l.timetolive = e.getInt("timetolive");
+                if(e.hasChild("properties"))
+                    l.timetolive = e.getChildByNameRecursive("property").getInt("value");
                 testLevel.lasers.add(l);
             }
             if(e.get("template").equals("Guard.tx")){
