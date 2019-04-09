@@ -182,22 +182,22 @@ public class AIController {
                 prev = n.act;
                 return n.act;
             }
-            if (board.isSafeAt(n.x+1, n.y) && (board.getOccupant(n.x+1,n.y) == 0 || board.getOccupant(n.x+1,n.y) == 4 || board.getOccupant(n.x+1,n.y) == 3) && !board.isVisited(n.x+1, n.y))  {
+            if (board.isSafeAt(n.x+1, n.y) && (board.getOccupant(n.x+1,n.y) == 0 || board.getOccupant(n.x+1,n.y) == 4 || board.getOccupant(n.x+1,n.y) == 3 || board.getOccupant(n.x+1,n.y) == 6 || board.getOccupant(n.x+1,n.y) == 8) && !board.isVisited(n.x+1, n.y))  {
                 int act = n.act == 0 ? 1 : n.act;
                 Node n1 = new Node(n.x+1, n.y, act);
                 queue.add(n1);
             }
-            if (board.isSafeAt(n.x-1, n.y) && (board.getOccupant(n.x-1,n.y) == 0 || board.getOccupant(n.x-1,n.y) == 4 || board.getOccupant(n.x-1,n.y) == 3) && !board.isVisited(n.x-1, n.y)) {
+            if (board.isSafeAt(n.x-1, n.y) && (board.getOccupant(n.x-1,n.y) == 0 || board.getOccupant(n.x-1,n.y) == 4 || board.getOccupant(n.x-1,n.y) == 3 || board.getOccupant(n.x-1,n.y) == 6 || board.getOccupant(n.x-1,n.y) == 8) && !board.isVisited(n.x-1, n.y)) {
                 int act = n.act == 0 ? -1 : n.act;
                 Node n1 = new Node(n.x-1, n.y, act);
                 queue.add(n1);
             }
-            if (board.isSafeAt(n.x, n.y+1) && (board.getOccupant(n.x,n.y+1) == 0 || board.getOccupant(n.x,n.y+1) == 4 || board.getOccupant(n.x,n.y+1) == 3) && !board.isVisited(n.x, n.y+1)) {
+            if (board.isSafeAt(n.x, n.y+1) && (board.getOccupant(n.x,n.y+1) == 0 || board.getOccupant(n.x,n.y+1) == 4 || board.getOccupant(n.x,n.y+1) == 3 || board.getOccupant(n.x,n.y+1) == 6 || board.getOccupant(n.x,n.y+1) == 8) && !board.isVisited(n.x, n.y+1)) {
                 int act = n.act == 0 ? 2 : n.act;
                 Node n1 = new Node(n.x, n.y+1, act);
                 queue.add(n1);
             }
-            if (board.isSafeAt(n.x, n.y-1) && (board.getOccupant(n.x,n.y-1) == 0 || board.getOccupant(n.x,n.y-1) == 4 || board.getOccupant(n.x,n.y-1) == 3) && !board.isVisited(n.x, n.y-1)) {
+            if (board.isSafeAt(n.x, n.y-1) && (board.getOccupant(n.x,n.y-1) == 0 || board.getOccupant(n.x,n.y-1) == 4 || board.getOccupant(n.x,n.y-1) == 3 || board.getOccupant(n.x,n.y-1) == 6 || board.getOccupant(n.x,n.y-1) == 8) && !board.isVisited(n.x, n.y-1)) {
                 int act = n.act == 0 ? -2 : n.act;
                 Node n1 = new Node(n.x, n.y-1, act);
                 queue.add(n1);
