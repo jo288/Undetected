@@ -67,7 +67,7 @@
           "wrap":     	false,
         },
 		"doorOpen": {
-			"file": 	    "textures/doorLO.png",
+			"file": 	    "textures/doorCO.png",
 			"wrap":     	false,
 		},
         "switchOff": {

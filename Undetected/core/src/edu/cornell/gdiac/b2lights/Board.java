@@ -54,7 +54,8 @@ public class Board {
 		 * 5: Box
 		 * 6: Open Door
 		 * 7: Closed Door
-         * 8: Switch*/
+         * 8: Switch
+		 * 9: Exit*/
 		public int occupant = 0;
 		/** Is this a goal tile (used for pathfinding)? */
 		public boolean goal = false;

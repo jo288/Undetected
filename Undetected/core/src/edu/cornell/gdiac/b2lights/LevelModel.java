@@ -852,6 +852,10 @@ public class LevelModel {
 				board.setOccupiedTiles(board.physicsToBoard(o.getX()+((GuardModel) o).getWidth()/2),
 						board.physicsToBoard(o.getY()+((GuardModel) o).getHeight()/2),2);
 			}
+			if (o instanceof  ExitModel) {
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),9);
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()+1),board.physicsToBoard(o.getY()),9);
+			}
 		}
 	}
 	
