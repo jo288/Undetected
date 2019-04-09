@@ -21,6 +21,7 @@ import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.JsonAssetManager;
 
 import java.lang.reflect.Field;
+import java.util.*;
 
 /**
  * A sensor obstacle representing the end of the level
@@ -38,6 +39,8 @@ public class ObjectiveModel extends BoxObstacle {
 	private boolean isActive;
 	/** Whether the objective triggers alarm or not */
 	private boolean hasAlarm;
+	private ArrayList<Laser> lasers = new ArrayList<>();
+	private ArrayList<DoorModel> doors = new ArrayList<>();
 
 	private TextureRegion defaultCardTexture;
 	private TextureRegion stolenCardTexture;
@@ -47,7 +50,6 @@ public class ObjectiveModel extends BoxObstacle {
 	 */
 	public ObjectiveModel() {
 		super(0,0,1,1);
-//		setSensor(true);
 	}
 
 	/**
@@ -55,7 +57,6 @@ public class ObjectiveModel extends BoxObstacle {
 	 */
 	public ObjectiveModel(boolean hasAlarm) {
 		super(0,0,1,1);
-//		setSensor(true);
 		this.hasAlarm = hasAlarm;
 	}
 
@@ -64,7 +65,37 @@ public class ObjectiveModel extends BoxObstacle {
 		setTexture(stolenCardTexture);
 		setOrigin(origin.x,0);
 //		setBoxHeld(box);
+		alarmMode();
 		return true;
+	}
+
+	public void addLaser(Laser laser) {
+		lasers.add(laser);
+	}
+
+	public void addDoor(DoorModel door) {
+		doors.add(door);
+	}
+
+	public ArrayList<Laser> getLasers() {
+		return lasers;
+	}
+
+	public ArrayList<DoorModel> getDoors() {
+		return doors;
+	}
+
+	public void alarmMode() {
+		if (doors != null) {
+			for (DoorModel door : doors) {
+				door.switchState();
+			}
+		}
+		if (lasers != null) {
+			for (Laser las : lasers) {
+				las.setOn(true);
+			}
+		}
 	}
 
 	public boolean getIsActive(){
