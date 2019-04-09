@@ -75,6 +75,8 @@ public class LevelParser {
         protected int[] size = {1,1};
         protected String texture = "key";
         protected boolean hasAlarm = false;
+        protected Array<Integer> doors = new Array<Integer>();
+        protected Array<Integer> lasers = new Array<Integer>();
     }
 
     private class Switch{
@@ -131,7 +133,7 @@ public class LevelParser {
         for (XmlReader.Element e:objects){
             if(e.get("template").equals("HorizontalWall.tx")){
                 int h = testLevel.boardSize[1]-e.getInt("y")/32;
-                for(int i=e.getInt("x")/32;i<e.getInt("x")/32+e.getInt("width")/32;i++){
+                for(int i=e.getInt("x")/32;i<e.getInt("x")/32+e.getInt("width",32)/32;i++){
                     testLevel.exteriorwall.pos.add(i);
                     testLevel.exteriorwall.pos.add(h);
                     testLevel.exteriorwall.type.add(0);

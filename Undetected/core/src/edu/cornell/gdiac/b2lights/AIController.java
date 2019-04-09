@@ -139,19 +139,19 @@ public class AIController {
             guard.setMovement(0,0);
         } else if (i == 1) {
             guard.setDirection(-(float) Math.PI/2);
-            guard.setMovement(50,0);
+            guard.setMovement(30,0);
             guard.applyForce();
         } else if (i == 2) {
             guard.setDirection(0);
-            guard.setMovement(0, 50);
+            guard.setMovement(0, 30);
             guard.applyForce();
         } else if (i == -1) {
             guard.setDirection((float) Math.PI/2);
-            guard.setMovement(-50,0);
+            guard.setMovement(-30,0);
             guard.applyForce();
         } else if (i == -2){
             guard.setDirection((float) Math.PI);
-            guard.setMovement(0,-50);
+            guard.setMovement(0,-30);
             guard.applyForce();
         }
     }

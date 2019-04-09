@@ -16,6 +16,7 @@
 package edu.cornell.gdiac.b2lights;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
@@ -155,6 +156,7 @@ public class GameController implements Screen, ContactListener {
 	private boolean hasObjective;
 	private GuardModel guardCollided = null;
 	private SwitchModel switchCollided = null;
+	private FileHandle currentFile = Gdx.files.internal("jsons/level1.json");
 
 
 	/** Mark set to handle more sophisticated collision callbacks */
@@ -293,7 +295,7 @@ public class GameController implements Screen, ContactListener {
 		countdown = -1;
 		
 		// Reload the json each time
-		levelFormat = jsonReader.parse(Gdx.files.internal("jsons/level1.json"));
+		levelFormat = jsonReader.parse(currentFile);
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 		resetCamera();
@@ -323,6 +325,7 @@ public class GameController implements Screen, ContactListener {
 
 		try{
 			levelFormat = jsonReader.parse(Gdx.files.absolute(loadFile));
+			currentFile = Gdx.files.absolute(loadFile);
 			LevelModel newLoad = new LevelModel();
 			newLoad.populate(levelFormat);
 			level.dispose();
