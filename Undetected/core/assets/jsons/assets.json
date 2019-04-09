@@ -14,6 +14,10 @@
 //			"file":		"textures/cropped_hwall.png",
 			"wrap":		false,
 		},
+		"shadow": {
+			"file": 	"textures/shadow.png",
+			"wrap": 	false
+		},
 		"floor": {
 			"file": 	"textures/BG_Tile.png",
 			"wrap": 	true,

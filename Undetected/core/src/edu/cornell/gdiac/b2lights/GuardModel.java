@@ -79,6 +79,7 @@ public class GuardModel extends CharacterModel {
 
     /** Texture of character */
     private TextureRegion defaultCharTexture;
+    private TextureRegion shadowTexture;
 
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
@@ -400,6 +401,9 @@ public class GuardModel extends CharacterModel {
 //        setTexture(texture);
 //        setOrigin(origin.x,0);
 
+        texture = JsonAssetManager.getInstance().getEntry("shadow", TextureRegion.class);
+        shadowTexture = texture;
+
         texture = JsonAssetManager.getInstance().getEntry("guardwalk", TextureRegion.class);
         try {
             filmstrip = (FilmStrip)texture;
@@ -479,5 +483,7 @@ public class GuardModel extends CharacterModel {
         if (texture != null) {
             canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,0f,scale,scale);
         }
+
+        canvas.draw(shadowTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+4,getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.5f,1.5f);
     }
 }

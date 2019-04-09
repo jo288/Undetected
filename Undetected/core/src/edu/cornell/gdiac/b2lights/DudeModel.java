@@ -86,6 +86,7 @@ public class DudeModel extends CharacterModel {
 	private TextureRegion defaultCharTexture;
 	/** Texture of character with box */
 	private TextureRegion boxCharTexture;
+	private TextureRegion shadowTexture;
 
 	/** FilmStrip pointer to the dude animation */
 	private FilmStrip dudeanimation;
@@ -406,6 +407,9 @@ public class DudeModel extends CharacterModel {
 		texture = JsonAssetManager.getInstance().getEntry("boxDude", TextureRegion.class);
 		boxCharTexture = texture;
 
+		texture = JsonAssetManager.getInstance().getEntry("shadow", TextureRegion.class);
+		shadowTexture = texture;
+
 		texture = JsonAssetManager.getInstance().getEntry("boxdude", TextureRegion.class);
 		try {
 			filmstrip = (FilmStrip)texture;
@@ -489,5 +493,6 @@ public class DudeModel extends CharacterModel {
 		if (texture != null) {
 			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),scale,scale);
 		}
+		canvas.draw(shadowTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+4,getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.5f,1.5f);
 	}
 }
