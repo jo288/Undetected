@@ -242,12 +242,15 @@ public class AIController {
 
     /** Initializes path values */
     public void initialize(JsonValue json) {
-        float[] paths = json.get("path").asFloatArray();
-        path = new Vector2[paths.length/2];
-        for (int i = 0; i < paths.length/2; i++) {
-            int j = i*2;
-            path[i] = new Vector2(paths[j], paths[j+1]);
+        if (json.has("path")) {
+            float[] paths = json.get("path").asFloatArray();
+            path = new Vector2[paths.length / 2];
+            for (int i = 0; i < paths.length / 2; i++) {
+                int j = i * 2;
+                path[i] = new Vector2(paths[j], paths[j + 1]);
+            }
         }
+
         String status = json.get("status").asString();
         if (status.equals("sleep")) {
             state = FSMState.SLEEP;

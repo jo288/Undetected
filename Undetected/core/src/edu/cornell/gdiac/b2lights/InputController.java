@@ -50,6 +50,9 @@ public class InputController {
 	/** Whether the button to step back worlds was pressed. */
 	private boolean pausePressed;
 	private boolean pausePrevious;
+	/** Whether the load button was pressed. */
+	private boolean loadPressed;
+	private boolean loadPrevious;
 	/** Whether the debug toggle was pressed. */
 	private boolean debugPressed;
 	private boolean debugPrevious;
@@ -142,6 +145,14 @@ public class InputController {
 	public boolean didPause() {
 		return pausePressed && !pausePrevious;
 	}
+	/**
+	 * Returns true if the player wants to go to the previous level.
+	 *
+	 * @return true if the player wants to go to the previous level.
+	 */
+	public boolean didLoad() {
+		return loadPressed && !loadPrevious;
+	}
 	
 	/**
 	 * Returns true if the player wants to go toggle the debug mode.
@@ -216,6 +227,7 @@ public class InputController {
 		exitPrevious = exitPressed;
 		nextPrevious = nextPressed;
 		pausePrevious = pausePressed;
+		loadPrevious = loadPressed;
 		actionPrevious = actionPressed;
 
 		// Check to see if a GamePad is connected
@@ -264,6 +276,7 @@ public class InputController {
 		resetPressed = (secondary && resetPressed) || (Gdx.input.isKeyPressed(Input.Keys.R));
 		debugPressed = (secondary && debugPressed) || (Gdx.input.isKeyPressed(Input.Keys.D));
 		pausePressed = (secondary && pausePressed) || (Gdx.input.isKeyPressed(Input.Keys.P));
+		loadPressed = (secondary && loadPressed) || (Gdx.input.isKeyPressed(Input.Keys.L));
 		nextPressed = (secondary && nextPressed) || (Gdx.input.isKeyPressed(Input.Keys.N));
 		exitPressed  = (secondary && exitPressed) || (Gdx.input.isKeyPressed(Input.Keys.ESCAPE));
 		actionPressed = (secondary && actionPressed) || (Gdx.input.isKeyPressed(Input.Keys.SPACE));

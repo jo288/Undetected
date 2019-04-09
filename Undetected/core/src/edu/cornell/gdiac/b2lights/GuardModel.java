@@ -36,6 +36,19 @@ import static edu.cornell.gdiac.b2lights.LevelModel.bitStringToComplement;
  * by reading the JSON value.
  */
 public class GuardModel extends CharacterModel {
+    private static final float DEFAULT_WIDTH = 0.9f;
+    private static final float DEFAULT_HEIGHT = 0.5f;
+    private static final String COLLISION_BITS = "0100";
+    private static final String EXCLUSION_BITS = "0000";
+    /** Default Density of Player */
+    public static final float DEFAULT_DENSITY = 0.5f;
+    /** Default Force of Player */
+    public static final float DEFAULT_FORCE = 80;
+    /** Default Damping of Player */
+    public static final float DEFAULT_DAMPING = 10;
+    /** Default Damping of Player */
+    public static final float DEFAULT_MAXSPEED = 10;
+
     // Physics constants
     /** The factor to multiply by the input */
     private float force;
@@ -332,32 +345,33 @@ public class GuardModel extends CharacterModel {
      */
     public void initialize(JsonValue json) {
         setName(json.name());
-        float width = json.get("width").asFloat();
-        float height = json.get("height").asFloat();
+//        float width = json.get("width").asFloat();
+//        float height = json.get("height").asFloat();
         float[] pos = json.get("pos").asFloatArray();
         setPosition(pos[0]+0.5f,pos[1]+0.5f);
-        setWidth(width);
-        setHeight(height/2);
+        setWidth(DEFAULT_WIDTH);
+        setHeight(DEFAULT_HEIGHT);
         setFixedRotation(true);
         setActive(false);
         setAlarmed(false);
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
-        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
-        setDensity(json.get("density").asFloat());
-        setFriction(json.get("friction").asFloat());
-        setRestitution(json.get("restitution").asFloat());
+        //setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
+        setBodyType(BodyDef.BodyType.DynamicBody);
+        setDensity(DEFAULT_DENSITY);
+        setFriction(0);
+        setRestitution(0);
         setForce(json.get("force").asFloat());
-        setDamping(json.get("damping").asFloat());
-        setMaxSpeed(json.get("maxspeed").asFloat());
-        setStartFrame(json.get("startframe").asInt());
-        setWalkLimit(json.get("walklimit").asInt());
+        setDamping(DEFAULT_DAMPING);
+        setMaxSpeed(DEFAULT_MAXSPEED);
+        setStartFrame(0);
+        setWalkLimit(4);
         setSensitiveRadius(json.get("sensitiveRadius").asFloat());
 
         // Create the collision filter (used for light penetration)
-        short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
-        short excludeBits = bitStringToComplement(json.get("excludeBits").asString());
+        short collideBits = LevelModel.bitStringToShort(COLLISION_BITS);
+        short excludeBits = bitStringToComplement(EXCLUSION_BITS);
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
@@ -366,20 +380,20 @@ public class GuardModel extends CharacterModel {
         // Reflection is best way to convert name to color
         Color debugColor;
         try {
-            String cname = json.get("debugcolor").asString().toUpperCase();
-            Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField(cname);
+//            String cname = json.get("debugcolor").asString().toUpperCase();
+            Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField("WHITE");
             debugColor = new Color((Color)field.get(null));
         } catch (Exception e) {
             debugColor = null; // Not defined
         }
-        int opacity = json.get("debugopacity").asInt();
+        int opacity = 192;
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
 
 
         // Now get the texture from the AssetManager singleton
-        String key = json.get("texture").asString();
-        TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
+//        String key = json.get("texture").asString();
+        TextureRegion texture = JsonAssetManager.getInstance().getEntry("guard", TextureRegion.class);
 //        texture.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
         setTexture(texture);
         setOrigin(origin.x,0);

@@ -26,6 +26,8 @@ import edu.cornell.gdiac.util.*;
 
 import edu.cornell.gdiac.physics.obstacle.*;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.security.Guard;
 import java.util.ArrayList;
 
@@ -298,6 +300,48 @@ public class GameController implements Screen, ContactListener {
 		guardCollided = null;
 	}
 
+	public void loadLevel(){
+		// Reload the json each time
+		JFileChooser chooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(
+				"JSON level files", "json");
+		chooser.setFileFilter(filter);
+		chooser.setCurrentDirectory(Gdx.files.internal("jsons").file());
+		String loadFile = "";
+		JFrame f = new JFrame();
+		f.setVisible(true);
+		f.toFront();
+		f.setVisible(false);
+		int returnVal = chooser.showOpenDialog(f);
+		f.dispose();
+		if(returnVal == JFileChooser.APPROVE_OPTION) {
+			System.out.println("You chose to open this file: " +
+					chooser.getSelectedFile().getPath());
+			loadFile = chooser.getSelectedFile().getPath();
+		}
+
+		try{
+			levelFormat = jsonReader.parse(Gdx.files.absolute(loadFile));
+			LevelModel newLoad = new LevelModel();
+			newLoad.populate(levelFormat);
+			level.dispose();
+			level = newLoad;
+			level.getWorld().setContactListener(this);
+
+			setComplete(false);
+			setFailure(false);
+			hasObjective = false;
+			countdown = -1;
+			guardCollided = null;
+			lightController = new LightController(level);
+
+			resetCamera();
+		}
+		catch (Exception e){
+			System.out.println("WRONG FILE");
+		}
+	}
+
 
 	public void cameraPan(InputController input){
 		float playerX = level.getAvatar().getX();
@@ -394,6 +438,11 @@ public class GameController implements Screen, ContactListener {
 		if (input.didReset()) {
 			reset();
 		}
+
+
+		if (input.didLoad()){
+			loadLevel();
+		}
 		
 		// Now it is time to maybe switch screens.
 		if (input.didExit()) {
@@ -460,8 +509,11 @@ public class GameController implements Screen, ContactListener {
 //			avatar.setAngle(angle);
 			avatar.setDirection(angle);
 		}
+		if(angleCache.x!=0f &&angleCache.y!=0f)
+			angleCache.set(angleCache.x*0.7071f,angleCache.y*0.7071f);
 		angleCache.scl(avatar.getForce());
 		avatar.setMovement(angleCache.x,angleCache.y);
+		System.out.println(avatar.getMovement());
 		avatar.applyForce();
 
 		//only used if we are manually controlling one guard for demo purposes

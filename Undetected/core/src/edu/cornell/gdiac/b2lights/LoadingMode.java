@@ -26,6 +26,7 @@
 package edu.cornell.gdiac.b2lights;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.assets.*;
 import com.badlogic.gdx.graphics.*;
@@ -35,6 +36,9 @@ import com.badlogic.gdx.controllers.*;
 
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.*;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 /**
  * Class that provides a loading screen for the state of the game.
@@ -193,6 +197,21 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 		this.manager = JsonAssetManager.getInstance();
 		this.canvas  = canvas;
 		budget = millis;
+
+		//TEST LEVEL PARSER
+
+		LevelParser lp = new LevelParser();
+
+		if(Gdx.files.internal("levels").isDirectory()){
+			FileHandle[] xmlLevels = Gdx.files.internal("levels").list("tmx");
+			for (int i=0;i<xmlLevels.length;i++){
+				String jsonLevel = lp.readXml(xmlLevels[i]);
+				System.out.println(lp.readXml(xmlLevels[i]));
+				FileHandle jsonLevelFile = Gdx.files.local("jsons/"+xmlLevels[i].nameWithoutExtension()+".json");
+				jsonLevelFile.writeString(jsonLevel,false);
+			}
+		}
+
 		
 		// Compute the dimensions from the canvas
 		resize(canvas.getWidth(),canvas.getHeight());

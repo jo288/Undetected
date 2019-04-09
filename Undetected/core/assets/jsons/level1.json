@@ -4,221 +4,89 @@
 	"tileSize": 		32,
 	"fpsRange":		  	[  20,  60],
 	"lighting": {
-		"color":	  	[0.9, 0.9, 0.9, 0.9],
+		"color":	  	[0.9, 0.9, 0.9, 0.8],
 		"gamma":		true,
 		"diffuse":		true,
 		"blur":			3
 	},
-	"pointlights": {
-		"standard": {
-			"color":		[1.0, 1.0, 1.0, 1.0],
-			"pos":			[  0,   0],
-			"distance":		   7,
-			"rays":			512,
-			"soft":			false,
-      		"excludeBits":	"0010"
-		},
-		"soft": {
-			"color":		[1.0, 1.0, 1.0, 1.0],
-			"pos":			[  0,   0],
-			"distance":		   9,
-			"rays":			512,
-			"soft":			true,
-      		"excludeBits":	"0010"
-		},
-		"exterior": {
-			"color":		[1.0, 1.0, 1.0, 1.0],
-			"pos":			[  0,   0],
-			"distance":		   9,
-			"rays":			512,
-			"soft":			false,
-      		"excludeBits":	"0110"
-		},
-		"forward": {
-			"color":		[1.0, 1.0, 1.0, 1.0],
-			"pos":			[  0,   0.5],
-			"distance":		   9,
-			"rays":			512,
-			"soft":			false,
-      		"excludeBits":	"0010"
-		},
-		"cursed": {
-			"color":		[1.0, 1.0, 1.0, 1.0],
-			"pos":			[  0,   0],
-			"distance":		 50,
-			"rays":			512,
-			"soft":			false,
-      		"excludeBits":	"0000"
-		}
-	}, 
-	"conelights": {
-		"xray": {
+	"lights": [
+		{
 			"color":		[1.0, 1.0, 0.0, 1.0],
-			"pos":			[  0,   0],
 			"distance":		   9,
 			"angle":	 	  40,
-			"facing":		  90,
-			"rays":			 512,
-			"soft":			false,
-      		"excludeBits":	"10001"
 		},
-		"xray2": {
-			"color":		[1.0, 1.0, 0.0, 1.0],
-			"pos":			[  0,   0],
+		{
+			"color":		[1.0, 0.0, 0.0, 1.0],
 			"distance":		   9,
 			"angle":	 	  40,
-			"facing":		  90,
-			"rays":			 512,
-			"soft":			false,
-			"excludeBits":	"10001"
-		},
-		"side": {
-			"color":		[1.0, 1.0, 1.0, 1.0],
-			"pos":			[  0,   0],
-			"distance":		   9,
-			"angle":	 	  90,
-			"facing":		   0,
-			"rays":			 512,
-			"soft":			false,
-      		"excludeBits":	"10001"
 		}
-	}, 
+	],
     "avatar": {
 		"pos": 			[1, 16],
-        "width":      	1,
-		"height": 		1,
-        "bodytype":    	"dynamic",
-        "density":        1.5,
-        "friction":       0.0,
-        "restitution":    0.0,
-      	"force": 		 200.0,
-      	"damping": 		 10.0,
-      	"maxspeed": 	  30.0,
-      	"collideBits":	"0001",
-      	"excludeBits":	"0000",
-      	"startframe":       0,
-      	"walklimit":		4,
-        "texture":     	"dude",
-       	"debugcolor":  	"green",
-       	"debugopacity":	192,
     },
-	"guard": {
-		"pos":        	[2.0, 4.0],
-		"width":      	0.90,
-		"height": 		0.90,
-		"bodytype":    	"dynamic",
-		"density":        0.5,
-		"friction":       0.0,
-		"restitution":    0.0,
-		"force": 		 80.0,
-		"damping": 		 10.0,
-		"maxspeed": 	  5.0,
-		"collideBits":	"0100",
-		"excludeBits":	"0000",
-		"startframe":       0,
-		"walklimit":		4,
-		"sensitiveRadius":  1.6,
-		"texture":     	"guard",
-		"debugcolor":  	"white",
-		"debugopacity":	192,
-		"path": 		[2.5, 4.5, 2.5, 8.5],
-		"status":		"patrol",
-	},
-	"guard2": {
-		"pos":        	[19.0,5.0],
-		"width":      	0.90,
-		"height": 		0.90,
-		"bodytype":    	"dynamic",
-		"density":        0.5,
-		"friction":       0.0,
-		"restitution":    0.0,
-		"force": 		 80.0,
-		"damping": 		 10.0,
-		"maxspeed": 	  5.0,
-		"collideBits":	"0100",
-		"excludeBits":	"0000",
-		"startframe":       0,
-		"walklimit":		4,
-		"sensitiveRadius":  1.6,
-		"texture":     	"guard",
-		"debugcolor":  	"white",
-		"debugopacity":	192,
-		"path": 		[ 7.5, 1.5, 7.5, 6.5],
-		"status":		"sleep",
-	},
+	"guards": [
+		{
+			"pos":        	[2.0,4.0],
+			"status": 		"patrol",
+			"force": 		 40.0,
+			"sensitiveRadius":  1.6,
+			"path": 		[ 2, 3, 2, 6],
+			"lightIndex": 		1
+		},
+		{
+			"pos":        	[19.0,5.0],
+			"status": 		"sleep",
+			"force": 		 80.0,
+			"sensitiveRadius":  1.6,
+			"path": 		[ 7.5, 1.5, 7.5, 6.5],
+			"lightIndex": 		0
+		}
+	],
     "exit": {
         "pos":          [2, 17],
         "size":         [2, 1],
-        "bodytype":    	"static",
-        "density":  	  0.0,
-        "friction":       0.0,
-        "restitution":    0.0,
-      	"collideBits":	"10001",
-      	"excludeBits":	"0000",
-        "texture":      "goal",
-       	"debugcolor":   "yellow",
-       	"debugopacity":  200
     },
-	"boxes": {
+	"boxes": [
+		{
 			"pos":          [3,14],
-			"size":         [0.9,0.9],
-			"bodytype":    	"dynamic",
-			"density":  	  999999999.0,
-			"friction":       0.0,
-			"restitution":    0.0,
-			"collideBits":	"0010",
-			"excludeBits":	"0000",
-			"texture":      "box",
-			"debugcolor":   "yellow",
-			"debugopacity":  200
-	},
-	"lasers": {
-		"laser1": {
+			"texture":      "box1"
+		},
+		{
+			"pos":          [4,3],
+			"texture":      "box2"
+		},
+		{
+			"pos":          [5,3],
+			"texture":      "box3"
+		}
+	],
+	"lasers": [
+		{
 			"pos": 		[7, 14],
 			"size": 	[1,  3],
 			"timetolive": 1,
-			"bodytype": "static",
-			"collideBits":	"0001",
-			"excludeBits":	"0000",
-			"texture":      "laser",
-			"debugcolor":   "yellow",
-			"debugopacity":  200
 		},
-		"laser2": {
+		{
 			"pos": 		[9, 14],
 			"size": 	[1,  3],
 			"timetolive": 2,
-			"bodytype": "static",
-			"collideBits":	"0001",
-			"excludeBits":	"0000",
-			"texture":      "laser",
-			"debugcolor":   "yellow",
-			"debugopacity":  200
 		},
-		"laser3": {
+		{
 			"pos": 		[11, 14],
 			"size": 	[1,  3],
 			"timetolive": 3,
-			"bodytype": "static",
-			"collideBits":	"0001",
-			"excludeBits":	"0000",
-			"texture":      "laser",
-			"debugcolor":   "yellow",
-			"debugopacity":  200
+		},
+		{
+			"pos": 		[18, 4],
+			"size": 	[3,  1],
+			"timetolive": 1,
 		}
-	},
-	"key": {
+	],
+	"objective": {
 		"pos":          [19, 12],
 		"size":         [1, 1],
-		"bodytype":    	"static",
-		"density":  	  0.0,
-		"friction":       0.0,
-		"restitution":    0.0,
-		"collideBits":	"10001",
-		"excludeBits":	"0000",
 		"texture":      "key",
-		"debugcolor":   "yellow",
-		"debugopacity":  200
+		"hasAlarm": 	false
 	},
 	"invalidTiles": [4,5,5,5,6,5,7,5,8,5,		9,5,10,5,11,5,12,5,13,5,		14,5,15,5,16,5,17,5,
 					 4,6,5,6,6,6,7,6,8,6,		9,6,10,6,11,6,12,6,13,6,		14,6,15,6,16,6,17,6,
@@ -238,15 +106,6 @@
 			1,1,1,1,1, 1,1,1,1,1, 	1,1,1,1,1, 1,
 			1,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0, 0,1,
 			1,1,1,1,1, 1,1,1,1,1, 	1,1,1,1,1, 1],
-		"bodytype":  	"static",
-		"density":        0.0,
-		"friction":       0.2,
-		"restitution":    0.1,
-		"collideBits":	"1000",
-		"excludeBits":	"0000",
-		"texture":      "earth",
-		"debugcolor":   "yellow",
-		"debugopacity":  200
 	},
 	"interiorwall": {
 		"pos": 		[4,4,5,4,6,4,7,4,8,4,		9,4,10,4,11,4,12,4,13,4,		14,4,15,4,16,4,17,4,
@@ -257,14 +116,5 @@
 					 1,0,0,0,0,	0,0,0,0,0,	0,0,0,1,
 					 1,1,1,1,1, 1,1,1,
 					 1,1,1,1,1, 1,1,1],
-		"bodytype":  	"static",
-		"density":        0.0,
-		"friction":       0.2,
-		"restitution":    0.1,
-		"collideBits":	"1000",
-		"excludeBits":	"0000",
-		"texture":      "earth",
-		"debugcolor":   "yellow",
-		"debugopacity":  200
 	}
  }
