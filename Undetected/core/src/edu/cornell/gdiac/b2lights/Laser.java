@@ -16,7 +16,7 @@ public class Laser extends BoxObstacle {
     /** Collide Bit */
     public static final String COLLIDE_BIT = "0001";
     /** Default Width of Player */
-    public static final String EXCLUDE_BIT = "0000";
+    public static final String EXCLUDE_BIT = "0100";
 
     private static final float LAZER_HEIGHT = 5f;
     private static final float LAZER_WIDTH = 0.01f;

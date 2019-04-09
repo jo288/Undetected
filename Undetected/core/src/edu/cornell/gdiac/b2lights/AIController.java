@@ -71,7 +71,7 @@ public class AIController {
     /** Sets the object the Guard is protecting */
     public void setProtect(Obstacle item) {
         this.item = item;
-        currentGoal = new Vector2(item.getX() - 1, item.getY());
+        currentGoal = new Vector2(item.getX(), item.getY());
         Vector2[] newPath = new Vector2[path.length + 1];
         for (int i = 0; i < path.length; i++) {
             newPath[i] = path[i];
