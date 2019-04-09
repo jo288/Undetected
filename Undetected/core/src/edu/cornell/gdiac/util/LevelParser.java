@@ -81,6 +81,7 @@ public class LevelParser {
         private int[] pos = new int[2];
         private boolean switched = false;
         private Array<Integer> doors = new Array<Integer>();
+        private Array<Integer> lasers = new Array<Integer>();
     }
 
     private class Door{
@@ -176,6 +177,9 @@ public class LevelParser {
                         if (p.get("name").equals("doors")){
                             String[] ds = p.get("value").split(",");
                             for(String d:ds){ s.doors.add(Integer.parseInt(d));}
+                        } else if (p.get("name").equals("lasers")){
+                            String[] ds = p.get("value").split(",");
+                            for(String d:ds){ s.lasers.add(Integer.parseInt(d));}
                         } else if(p.get("name").equals("switched")){
                             s.switched = p.getBoolean("value");
                         }

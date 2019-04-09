@@ -64,7 +64,8 @@
 	{
 		"pos": [ 14, 9 ],
 		"switched": false,
-		"doors": [ 11, 3, 5, 3 ]
+		"doors": [ 11, 3, 5, 3 ],
+		"lasers": [ 13, 12 ]
 	}
 ],
 "doors": [

@@ -79,6 +79,7 @@
   <object id="36" template="Switch.tx" x="448" y="192">
    <properties>
     <property name="doors" value="11,3,5,3"/>
+    <property name="lasers" value="13,12"/>
    </properties>
   </object>
  </objectgroup>

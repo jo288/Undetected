@@ -66,19 +66,20 @@
 		}
 	],
 	"cameras": {
-		"camera1": {
-			"pos": [3, 14],
-			"on": true,
-			"lightIndex": 2,
-			"rotationSpeed": 1,
-			"direction": [1,0]
-		}
+//		"camera1": {
+//			"pos": [3, 14],
+//			"on": true,
+//			"lightIndex": 2,
+//			"rotationSpeed": 1,
+//			"direction": [1,0]
+//		}å
 	},
 	"switches": {
 		"switch1": {
 			"pos": 		[1, 11],
 			"switched": 		false,
-			"doors": [7,4, 12,4]
+			"doors": [7,4, 12,4],
+			"lasers": [],
 		}
 	},
 	"doors": {
