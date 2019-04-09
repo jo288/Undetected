@@ -828,10 +828,14 @@ public class LevelModel {
 				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),5);
 			}
 			if(o instanceof DoorModel){
-				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),6);
+				if (((DoorModel) o).getOpen()) {
+					board.setOccupiedTiles(board.physicsToBoard(o.getX()), board.physicsToBoard(o.getY()), 6);
+				} else {
+					board.setOccupiedTiles(board.physicsToBoard(o.getX()), board.physicsToBoard(o.getY()), 7);
+				}
 			}
 			if(o instanceof SwitchModel){
-				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),7);
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),8);
 			}
 			if(o instanceof Laser){
 				if (((Laser) o).isHorizontal()){
