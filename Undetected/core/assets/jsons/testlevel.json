@@ -1,5 +1,5 @@
 {
-"graphicSize": [ 800, 600 ],
+"graphicSize": [ 768, 640 ],
 "boardSize": [ 24, 20 ],
 "tileSize": 32,
 "fpsRange": [ 20, 60 ],

@@ -348,12 +348,36 @@ public class GameController implements Screen, ContactListener {
 
 
 	public void cameraPan(InputController input){
+//		float playerX = level.getAvatar().getX();
+//		float playerY = level.getAvatar().getY();
+//		//pan the canvas camera
+//		OrthographicCamera cam = canvas.getCamera();
+//		float cx = canvas.getWidth()/2;
+//		float cy = canvas.getHeight()/2;
+//
+//		float vw = cam.viewportWidth;
+//		float vh = cam.viewportHeight;
+//		float effectiveVW = vw * cam.zoom;
+//		float effectiveVH = vh * cam.zoom;
+//		float dx = (vw - effectiveVW)/2;
+//		float dy = (vh - effectiveVH)/2;
+//		float sx = vw / level.bounds.width;
+//		float sy = vh / level.bounds.height;
+//		cam.position.x = MathUtils.clamp(playerX*sx, cx-dx, cx + dx);
+//		cam.position.y = MathUtils.clamp(playerY*sy, cy-dy, cy + dy);
+
+		///*WORKING
 		float playerX = level.getAvatar().getX();
 		float playerY = level.getAvatar().getY();
 		//pan the canvas camera
 		OrthographicCamera cam = canvas.getCamera();
-		int cx = canvas.getWidth()/2;
-		int cy = canvas.getHeight()/2;
+//		float cx = canvas.getWidth()/2;
+//		float cy = canvas.getHeight()/2;
+		float mincx = canvas.getHeight()/2;
+		float mincy = canvas.getHeight()/2;
+		float maxcx = level.bounds.width*level.scale.x - mincx;
+		float maxcy = level.bounds.height*level.scale.y - mincy;
+
 		//cam.translate(input.getHorizontal(), input.getVertical());
 		float vw = cam.viewportWidth;
 		float vh = cam.viewportHeight;
@@ -361,24 +385,43 @@ public class GameController implements Screen, ContactListener {
 		float effectiveVH = vh * cam.zoom;
 		float dx = (vw - effectiveVW)/2;
 		float dy = (vh - effectiveVH)/2;
-		float sx = vw / level.bounds.width;
-		float sy = vh / level.bounds.height;
+//		float sx = vw / level.bounds.width;
+//		float sy = vh / level.bounds.height;
+		float sx = 32;
+		float sy = 32;
 //		cam.position.set(playerX*sx, playerY*sy, 0);
-		cam.position.x = MathUtils.clamp(playerX*sx, cx-dx, cx + dx);
-		cam.position.y = MathUtils.clamp(playerY*sy, cy-dy, cy + dy);
+		cam.position.x = MathUtils.clamp(playerX*sx, mincx-dx, maxcx + dx);
+		cam.position.y = MathUtils.clamp(playerY*sy, mincy-dy, maxcy + dy);
+//		cam.position.y = 600;
+
 
 		//pan the rayhandler camera
 		OrthographicCamera rcam = level.raycamera;
 		float rcx = level.bounds.width/2;
 		float rcy = level.bounds.height/2;
-		float reffectiveVW = level.bounds.width*rcam.zoom;
-		float reffectiveVH = level.bounds.height*rcam.zoom;
+		float minrcx = mincx/32f;
+		float minrcy = mincy/32f;
+		float maxrcx = maxcx/32f;
+		float maxrcy = maxcy/32f;
+//		float reffectiveVW = level.bounds.width*rcam.zoom;
+//		float reffectiveVH = level.bounds.height*rcam.zoom;
+		float reffectiveVW = (canvas.getWidth()/32f)*rcam.zoom;
+		float reffectiveVH = (canvas.getHeight()/32f)*rcam.zoom;
 		float rdx = (level.bounds.width - reffectiveVW)/2;
 		float rdy = (level.bounds.height - reffectiveVH)/2;
-		rcam.position.set(playerX, playerY , 0);
-		rcam.position.x = MathUtils.clamp(rcam.position.x, rcx-rdx, rcx + rdx);
-		rcam.position.y = MathUtils.clamp(rcam.position.y, rcy-rdy, rcy + rdy);
+//		rcam.position.set(playerX, playerY , 0);
+//		rcam.position.x = MathUtils.clamp(playerX, minrcx-rdx, maxrcx + rdx);
+//		rcam.position.y = MathUtils.clamp(playerY, minrcy-rdy, maxrcy + rdy);
+		rcam.position.x = MathUtils.clamp(playerX, (mincx-dx)/32f, (maxcx+dx)/32f);
+		rcam.position.y = MathUtils.clamp(playerY, (mincy-dy)/32f, (maxcy+dy)/32f);
+//		rcam.zoom = cam.zoom * ()
 		rcam.update();
+		System.out.println("max y:"+(maxcy+dy)/32f+", max x:"+(maxcx+dx)/32f);
+		System.out.println("min y:"+(mincy-dy)/32f+", max x:"+(mincx-dx)/32f);
+		System.out.println("player y:"+playerY+", max x:"+playerX);
+		System.out.println("actual viewport y:"+rcam.viewportHeight+", viewport x:"+rcam.viewportWidth);
+		System.out.println("viewport y:"+reffectiveVW+", viewport x:"+reffectiveVH);
+		System.out.println("camera y:"+rcam.position.y+", camera x:"+rcam.position.x);
 		level.rayhandler.setCombinedMatrix(rcam);
 		level.rayhandler.updateAndRender();
 	}

@@ -582,7 +582,9 @@ public class LevelModel {
 	 * @param  light	the JSON tree defining the light
 	 */
 	private void initLighting(JsonValue light) {
-		raycamera = new OrthographicCamera(bounds.width,bounds.height);
+//		raycamera = new OrthographicCamera(bounds.width,bounds.height);
+		//Just hardcoded the constants
+		raycamera = new OrthographicCamera(800f/32f,600f/32f);
 		raycamera.position.set(bounds.width/2.0f, bounds.height/2.0f, 0);
 		raycamera.update();
 
@@ -592,7 +594,7 @@ public class LevelModel {
 		rayhandler.setCombinedMatrix(raycamera);
 			
 		float[] color = light.get("color").asFloatArray();
-		rayhandler.setAmbientLight(color[0], color[0], color[0], color[0]);
+		rayhandler.setAmbientLight(color[0], color[1], color[2], color[3]);
 		int blur = light.getInt("blur");
 		rayhandler.setBlur(blur > 0);
 		rayhandler.setBlurNum(blur);

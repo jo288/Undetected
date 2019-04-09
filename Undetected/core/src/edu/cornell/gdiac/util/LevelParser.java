@@ -106,8 +106,8 @@ public class LevelParser {
         XmlReader.Element xmlLevel = x.parse(fh);
         Level testLevel = new Level();
 
-        testLevel.boardSize[0] = xmlLevel.getInt("width");
-        testLevel.boardSize[1] = xmlLevel.getInt("height");
+        testLevel.boardSize = new int[] {xmlLevel.getInt("width"),xmlLevel.getInt("height")};
+        testLevel.graphicSize = new int[]{testLevel.boardSize[0]*32,testLevel.boardSize[1]*32};
         try {
             String t = xmlLevel.getChildByName("properties").getChildByName("property").get("value");
             testLevel.lighting.color[3] = Integer.parseInt(t.substring(1, 3), 16) / 255f;
