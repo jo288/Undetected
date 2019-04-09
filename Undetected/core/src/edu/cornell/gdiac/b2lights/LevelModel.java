@@ -79,6 +79,7 @@ public class LevelModel {
 	private ArrayList<DoorModel> doors;
 	/** Reference to all the switches */
 	private ArrayList<SwitchModel> switches;
+	private ArrayList<CameraModel> cameras;
 	/** Reference to all the guards (for line-of-sight checks) */
 	private ArrayList<GuardModel> guards;
 	/** Guard AI */
@@ -194,6 +195,7 @@ public class LevelModel {
 	 * Returns a reference to all the guards
 	 */
 	public ArrayList<SwitchModel> getSwtiches() { return switches; }
+	public ArrayList<CameraModel> getCameras() { return cameras;}
 
     /**
      * Returns a reference to all AI
@@ -452,6 +454,22 @@ public class LevelModel {
 			boxdata = boxdata.next();
 		}
 
+		cameras = new ArrayList<CameraModel>();
+		JsonValue cameraData = levelFormat.getChild("cameras");
+		while (cameraData!=null){
+			CameraModel camera = new CameraModel();
+			camera.initialize(cameraData);
+
+			camera.setDrawScale(scale);
+			activate(camera);
+			camera.addLight(lights.get(cameraData.get("lightIndex").asInt()));
+			System.out.println("CAMERA "+camera);
+			attachLights(camera, lights.get(cameraData.get("lightIndex").asInt()));
+			this.cameras.add(camera);
+			//switches.get(0).addCamera(camera);
+			cameraData = cameraData.next();
+		}
+
 		HashMap<String, DoorModel> doorMap = new HashMap<>();
 		doors = new ArrayList<DoorModel>();
 		JsonValue doordata = levelFormat.getChild("doors");
@@ -643,6 +661,16 @@ public class LevelModel {
 	public void attachLights(GuardModel guard, LightSource light) {
 		light.setActive(true);
 		light.attachToBody(guard.getBody(), light.getX(), light.getY(), light.getDirection());
+		if (lights.size > 0) {
+			activeLight = 0;
+			lights.get(0).setActive(true);
+		} else {
+			activeLight = -1;
+		}
+	}
+	public void attachLights(CameraModel camera, LightSource light) {
+		light.setActive(true);
+		light.attachToBody(camera.getBody(), light.getX(), light.getY(), light.getDirection());
 		if (lights.size > 0) {
 			activeLight = 0;
 			lights.get(0).setActive(true);
@@ -887,6 +915,16 @@ public class LevelModel {
 			board.update();
 			for (AIController ai : controls) {
 				ai.update();
+			}
+			for(CameraModel camera: cameras){
+				camera.update();
+				if(camera.isOn() && camera.getLight()==null){
+					attachLights(camera, lights.get(2));
+					camera.addLight(lights.get(2));
+				}
+				else if(!camera.isOn() && camera.getLight()!=null){
+					camera.removeLight();
+				}
 			}
 			return true;
 		}
