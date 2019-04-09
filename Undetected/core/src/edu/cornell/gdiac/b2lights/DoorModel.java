@@ -15,7 +15,8 @@ public class DoorModel extends BoxObstacle{
     private static final float DOOR_WIDTH = 1f;
     private static final float DOOR_HEIGHT = 1f;
     private boolean open = false;
-    private TextureRegion doorTexture;
+    private TextureRegion closedDoorTexture;
+    private TextureRegion openDoorTexture;
     private boolean flaggedForDelete;
 
     public DoorModel(float x, float y) {
@@ -32,16 +33,29 @@ public class DoorModel extends BoxObstacle{
 
     public void setOpen(boolean val) {
         open = val;
+        TextureRegion closedTexture = JsonAssetManager.getInstance().getEntry("doorClosed", TextureRegion.class);
+        closedDoorTexture = closedTexture;
+        TextureRegion openTexture = JsonAssetManager.getInstance().getEntry("doorOpen", TextureRegion.class);
+        openDoorTexture = openTexture;
         if (open) {
             setSensor(true);
+            setTexture(openDoorTexture);
         } else {
             setSensor(false);
+            setTexture(closedDoorTexture);
         }
+        setOrigin(origin.x, 0);
     }
 
     public void switchState() {
         open = !open;
         setSensor(open);
+        if (open) {
+            setTexture(openDoorTexture);
+        } else {
+            setTexture(closedDoorTexture);
+        }
+        setOrigin(origin.x, 0);
     }
 
     public void setFlaggedForDelete () {
@@ -53,16 +67,23 @@ public class DoorModel extends BoxObstacle{
     }
 
     public void initialize(){
-        TextureRegion texture = JsonAssetManager.getInstance().getEntry("door", TextureRegion.class);
-        doorTexture = texture;
-        setTexture(texture);
+        TextureRegion closedTexture = JsonAssetManager.getInstance().getEntry("doorClosed", TextureRegion.class);
+        closedDoorTexture = closedTexture;
+        TextureRegion openTexture = JsonAssetManager.getInstance().getEntry("doorOpen", TextureRegion.class);
+        openDoorTexture = openTexture;
+        if (!open) {
+            setTexture(closedTexture);
+        } else {
+            setTexture(openTexture);
+        }
+        setOrigin(origin.x, 0);
         setBodyType(BodyDef.BodyType.StaticBody);
     }
 
     public void initialize(JsonValue json){
         setName(json.name());
 //        int[] pos  = json.get("pos").asIntArray();
-        float[] size = json.get("size").asFloatArray();
+        float[] size = {1, 1};
 //        setPosition(pos[0]+0.5f,pos[1]+0.5f);
         setWidth(size[0]);
         setHeight(size[1]);
@@ -70,14 +91,11 @@ public class DoorModel extends BoxObstacle{
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
-        setBodyType(json.get("bodytype").asString().equals("static") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
-        setDensity(json.get("density").asFloat());
-        setFriction(json.get("friction").asFloat());
-        setRestitution(json.get("restitution").asFloat());
+        setBodyType(BodyDef.BodyType.StaticBody);
 
         // Create the collision filter (used for light penetration)
-        short collideBits = LevelModel.bitStringToShort(json.get("collideBits").asString());
-        short excludeBits = LevelModel.bitStringToComplement(json.get("excludeBits").asString());
+        short collideBits = LevelModel.bitStringToShort("10001");
+        short excludeBits = LevelModel.bitStringToComplement("0000");
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
@@ -86,20 +104,26 @@ public class DoorModel extends BoxObstacle{
         // Reflection is best way to convert name to color
         Color debugColor;
         try {
-            String cname = json.get("debugcolor").asString().toUpperCase();
+            String cname = "YELLOW";
             Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField(cname);
             debugColor = new Color((Color)field.get(null));
         } catch (Exception e) {
             debugColor = null; // Not defined
         }
-        int opacity = json.get("debugopacity").asInt();
+        int opacity = 200;
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
 
         // Now get the texture from the AssetManager singleton
-        String key = json.get("texture").asString();
-        TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
-        setTexture(texture);
+        TextureRegion closedTexture = JsonAssetManager.getInstance().getEntry("doorClosed", TextureRegion.class);
+        closedDoorTexture = closedTexture;
+        TextureRegion openTexture = JsonAssetManager.getInstance().getEntry("doorOpen", TextureRegion.class);
+        openDoorTexture = openTexture;
+        if (!open) {
+            setTexture(closedTexture);
+        } else {
+            setTexture(openTexture);
+        }
         setOrigin(origin.x, 0);
     }
 

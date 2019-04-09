@@ -457,7 +457,7 @@ public class LevelModel {
 		while (switchdata!=null){
 			switchPositions = switchdata.get("pos").asIntArray();
 			SwitchModel switchi = new SwitchModel();
-//			switchi.setSwitched(switchdata.get("switched").asBoolean());
+			switchi.setSwitch(switchdata.get("switched").asBoolean());
 			switches.add(switchi);
 			switchi.initialize(switchdata);
 			if (switchi.getTexture().getRegionWidth()<tSize)
