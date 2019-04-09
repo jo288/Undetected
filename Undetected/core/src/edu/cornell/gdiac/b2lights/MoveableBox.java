@@ -59,8 +59,8 @@ public class MoveableBox extends BoxObstacle{
         int[] pos  = json.get("pos").asIntArray();
 //        float[] size = json.get("size").asFloatArray();
         setPosition(pos[0]+0.5f,pos[1]+0.5f);
-        setWidth(1f);
-        setHeight(1f);
+        setWidth(.9f);
+        setHeight(.9f);
         setFixedRotation(true);
 
         // Technically, we should do error checking here.
