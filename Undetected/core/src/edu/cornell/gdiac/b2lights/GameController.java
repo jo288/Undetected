@@ -559,10 +559,10 @@ public class GameController implements Screen, ContactListener {
 		level.draw(canvas);
 
 //		framerate display
-        displayFont.setColor(Color.YELLOW);
-        canvas.begin(); // DO NOT SCALE
-        canvas.drawTextCentered(""+(int)(1f/delta), displayFont, 0.0f);
-        canvas.end();
+//        displayFont.setColor(Color.YELLOW);
+//        canvas.begin(); // DO NOT SCALE
+//        canvas.drawTextCentered(""+(int)(1f/delta), displayFont, 0.0f);
+//        canvas.end();
 
 		// Final message
 		if (complete && !failed) {
@@ -739,9 +739,14 @@ public class GameController implements Screen, ContactListener {
 
 			// Check for objective
 			if ((bd1 == avatar && bd2 == objective) || (bd1 == objective && bd2== avatar)){
+			    if(bd1 instanceof ObjectiveModel){
+			        ((ObjectiveModel) bd1).stealCard();
+                }if(bd2 instanceof ObjectiveModel){
+			        ((ObjectiveModel) bd2).stealCard();
+                }
 				hasObjective = true;
 				exit.open();
-				level.queueDestroyed(objective);
+//				level.queueDestroyed(objective);
 			}
 
 			// Check for win condition

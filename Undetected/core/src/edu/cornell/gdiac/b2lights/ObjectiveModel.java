@@ -11,6 +11,7 @@
 package edu.cornell.gdiac.b2lights;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Filter;
@@ -38,12 +39,15 @@ public class ObjectiveModel extends BoxObstacle {
 	/** Whether the objective triggers alarm or not */
 	private boolean hasAlarm;
 
+	private TextureRegion defaultCardTexture;
+	private TextureRegion stolenCardTexture;
+
 	/**
 	 * Create a new ObjectiveModel with degenerate settings
 	 */
 	public ObjectiveModel() {
 		super(0,0,1,1);
-		setSensor(true);
+//		setSensor(true);
 	}
 
 	/**
@@ -51,8 +55,16 @@ public class ObjectiveModel extends BoxObstacle {
 	 */
 	public ObjectiveModel(boolean hasAlarm) {
 		super(0,0,1,1);
-		setSensor(true);
+//		setSensor(true);
 		this.hasAlarm = hasAlarm;
+	}
+
+	public boolean stealCard(){
+		//change sprite
+		setTexture(stolenCardTexture);
+		setOrigin(origin.x,0);
+//		setBoxHeld(box);
+		return true;
 	}
 
 	public boolean getIsActive(){
@@ -105,12 +117,21 @@ public class ObjectiveModel extends BoxObstacle {
 		int opacity = 200;
 		debugColor.mul(opacity/255.0f);
 		setDebugColor(debugColor);
-		
-		// Now get the texture from the AssetManager singleton
-		String key = json.get("texture").asString();
-		TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
+
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("stealcard", TextureRegion.class);
+		defaultCardTexture = texture;
+		texture.getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
 		setTexture(texture);
 		setOrigin(origin.x,0);
+
+		texture = JsonAssetManager.getInstance().getEntry("stolencard", TextureRegion.class);
+		stolenCardTexture = texture;
+		
+		// Now get the texture from the AssetManager singleton
+//		String key = json.get("texture").asString();
+//		TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
+//		setTexture(texture);
+//		setOrigin(origin.x,0);
 	}
 	/**
 	 * Draws the physics object.

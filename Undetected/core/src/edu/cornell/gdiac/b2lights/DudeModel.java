@@ -34,7 +34,7 @@ import edu.cornell.gdiac.physics.obstacle.*;
 public class DudeModel extends CharacterModel {
 
 	/** Default Height of Player */
-	public static final float DEFAULT_HEIGHT = 0.5f;
+	public static final float DEFAULT_HEIGHT = 0.3f;
 	/** Default Width of Player */
 	public static final float DEFAULT_WIDTH = 1;
 	/** Collide Bit */
@@ -43,8 +43,10 @@ public class DudeModel extends CharacterModel {
 	public static final String EXCLUDE_BIT = "0000";
 	/** Default Density of Player */
 	public static final float DEFAULT_DENSITY = 1.5f;
+	/** Default Force of BOXDUDE */
+	public static final float BOXDUDE_FORCE = 250;
 	/** Default Force of Player */
-	public static final float DEFAULT_FORCE = 160;
+	public static final float DEFAULT_FORCE = 300;
 	/** Default Damping of Player */
 	public static final float DEFAULT_DAMPING = 10;
 	/** Default Damping of Player */
@@ -86,6 +88,10 @@ public class DudeModel extends CharacterModel {
 	private TextureRegion boxCharTexture;
 
 	/** FilmStrip pointer to the dude animation */
+	private FilmStrip dudeanimation;
+	/** FilmStrip pointer to the box dude animation */
+	private FilmStrip boxdudeanimation;
+
 	/** FilmStrip pointer to the texture region */
 	private FilmStrip filmstrip;
 	/** The current animation frame of the avatar */
@@ -96,6 +102,8 @@ public class DudeModel extends CharacterModel {
 
 	/** Direction of character */
 	private float direction;
+
+	private float scale = 1.4f;
 
 	/**
 	 * Returns the directional movement of this character.
@@ -290,8 +298,10 @@ public class DudeModel extends CharacterModel {
 			return false;
 		hasBox = true;
 		//change sprite
-		setTexture(boxCharTexture);
+		filmstrip = boxdudeanimation;
+		setTexture(filmstrip);
 		setOrigin(origin.x,0);
+		setForce(BOXDUDE_FORCE);
 //		setBoxHeld(box);
 		return true;
 	}
@@ -306,8 +316,10 @@ public class DudeModel extends CharacterModel {
 			return false;
 		hasBox = false;
 		//change sprite
-		setTexture(defaultCharTexture);
+		filmstrip = dudeanimation;
+		setTexture(filmstrip);
 		setOrigin(origin.x,0);
+		setForce(DEFAULT_FORCE);
 		lastBoxHeld = boxHeld;
 		boxHeld = null;
 		return true;
@@ -345,8 +357,8 @@ public class DudeModel extends CharacterModel {
 		setName(json.name());
 		float[] pos = json.get("pos").asFloatArray();
 		setPosition(pos[0]+0.5f,pos[1]+0.5f);
-		setWidth(DEFAULT_WIDTH);
-		setHeight(DEFAULT_HEIGHT);
+		setWidth(DEFAULT_WIDTH*scale);
+		setHeight(DEFAULT_HEIGHT*scale);
 		setFixedRotation(true);
 		
 		// Technically, we should do error checking here.
@@ -394,10 +406,18 @@ public class DudeModel extends CharacterModel {
 		texture = JsonAssetManager.getInstance().getEntry("boxDude", TextureRegion.class);
 		boxCharTexture = texture;
 
+		texture = JsonAssetManager.getInstance().getEntry("boxdude", TextureRegion.class);
+		try {
+			filmstrip = (FilmStrip)texture;
+			boxdudeanimation = filmstrip;
+		} catch (Exception e) {
+			filmstrip = null;
+		}
 
 		texture = JsonAssetManager.getInstance().getEntry("dude", TextureRegion.class);
 		try {
 			filmstrip = (FilmStrip)texture;
+			dudeanimation = filmstrip;
 		} catch (Exception e) {
 			filmstrip = null;
 		}
@@ -467,7 +487,7 @@ public class DudeModel extends CharacterModel {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		if (texture != null) {
-			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.0f,1.0f);
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),scale,scale);
 		}
 	}
 }

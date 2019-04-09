@@ -401,7 +401,7 @@ public class LevelModel {
 	    JsonValue avdata = levelFormat.get("avatar");
 	    avatar.initialize(avdata);
 		if (avatar.getTexture().getRegionWidth()<tSize)
-			avatar.setWidth(avatar.getTexture().getRegionWidth()/scale.x);
+			avatar.setWidth(1.4f*avatar.getTexture().getRegionWidth()/scale.x);
 	    avatar.setDrawScale(scale);
 		activate(avatar);
 

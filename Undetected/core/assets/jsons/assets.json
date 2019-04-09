@@ -5,13 +5,13 @@
     		"wrap":		true,
     	},
 		"wallvertical": {
-//			"file":		"textures/BG_Wall_Vertical.png",
-			"file":		"textures/cropped_vwall.png",
+			"file":		"textures/BG_Wall_Vertical.png",
+//			"file":		"textures/cropped_vwall.png",
 			"wrap":		false,
 		},
 		"wallhorizontal": {
-//			"file":		"textures/BG_Wall_Mid.png",
-			"file":		"textures/cropped_hwall.png",
+			"file":		"textures/BG_Wall_Mid.png",
+//			"file":		"textures/cropped_hwall.png",
 			"wrap":		false,
 		},
 		"floor": {
@@ -28,6 +28,26 @@
     			"first":	0
     		}
     	},
+		"boxdude": {
+			"file": 	"textures/boxdudeanimation.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"guardwalk":{
+			"file": 	"textures/guardanimation.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
 		"laserAnimation": {
 			"file": 	"textures/laseranimation.png",
 			"wrap":  	false,
@@ -89,6 +109,14 @@
 		"key": 		{
 			"file": 	"textures/key.png",
 			"wrap": 	false,
+		},
+		"stealcard": {
+			"file": 	"textures/Steal Card.png",
+			"wrap": 	false
+		},
+		"stolencard": {
+			"file": 	"textures/Stolen Card.png",
+			"wrap": 	false
 		},
 		"pause":	{
 			"file":		"textures/temp_pause.png",

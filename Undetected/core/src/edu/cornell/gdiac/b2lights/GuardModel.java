@@ -37,7 +37,7 @@ import static edu.cornell.gdiac.b2lights.LevelModel.bitStringToComplement;
  */
 public class GuardModel extends CharacterModel {
     private static final float DEFAULT_WIDTH = 0.9f;
-    private static final float DEFAULT_HEIGHT = 0.5f;
+    private static final float DEFAULT_HEIGHT = 0.3f;
     private static final String COLLISION_BITS = "0100";
     private static final String EXCLUSION_BITS = "0001";
     /** Default Density of Player */
@@ -48,6 +48,8 @@ public class GuardModel extends CharacterModel {
     public static final float DEFAULT_DAMPING = 10;
     /** Default Damping of Player */
     public static final float DEFAULT_MAXSPEED = 10;
+
+    private static final float scale = 1.4f;
 
     // Physics constants
     /** The factor to multiply by the input */
@@ -349,8 +351,8 @@ public class GuardModel extends CharacterModel {
 //        float height = json.get("height").asFloat();
         float[] pos = json.get("pos").asFloatArray();
         setPosition(pos[0]+0.5f,pos[1]+0.5f);
-        setWidth(DEFAULT_WIDTH);
-        setHeight(DEFAULT_HEIGHT);
+        setWidth(DEFAULT_WIDTH*scale);
+        setHeight(DEFAULT_HEIGHT*scale);
         setFixedRotation(true);
         setActive(false);
         setAlarmed(false);
@@ -366,7 +368,7 @@ public class GuardModel extends CharacterModel {
         setDamping(DEFAULT_DAMPING);
         setMaxSpeed(DEFAULT_MAXSPEED);
         setStartFrame(0);
-        setWalkLimit(4);
+        setWalkLimit(8);
         setSensitiveRadius(json.get("sensitiveRadius").asFloat());
 
         // Create the collision filter (used for light penetration)
@@ -393,8 +395,17 @@ public class GuardModel extends CharacterModel {
 
         // Now get the texture from the AssetManager singleton
 //        String key = json.get("texture").asString();
-        TextureRegion texture = JsonAssetManager.getInstance().getEntry("guard", TextureRegion.class);
-//        texture.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+//        TextureRegion texture = JsonAssetManager.getInstance().getEntry("guard", TextureRegion.class);
+////        texture.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+//        setTexture(texture);
+//        setOrigin(origin.x,0);
+
+        texture = JsonAssetManager.getInstance().getEntry("guardwalk", TextureRegion.class);
+        try {
+            filmstrip = (FilmStrip)texture;
+        } catch (Exception e) {
+            filmstrip = null;
+        }
         setTexture(texture);
         setOrigin(origin.x,0);
     }
@@ -466,7 +477,7 @@ public class GuardModel extends CharacterModel {
      */
     public void draw(ObstacleCanvas canvas) {
         if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,0f,0.15f,0.15f);
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,0f,scale,scale);
         }
     }
 }
