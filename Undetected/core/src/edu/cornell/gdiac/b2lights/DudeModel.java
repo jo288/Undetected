@@ -36,7 +36,7 @@ public class DudeModel extends CharacterModel {
 	/** Default Height of Player */
 	public static final float DEFAULT_HEIGHT = 0.3f;
 	/** Default Width of Player */
-	public static final float DEFAULT_WIDTH = 1;
+	public static final float DEFAULT_WIDTH = 0.9f;
 	/** Collide Bit */
 	public static final String COLLIDE_BIT = "1111";
 	/** Default Width of Player */
@@ -44,9 +44,9 @@ public class DudeModel extends CharacterModel {
 	/** Default Density of Player */
 	public static final float DEFAULT_DENSITY = 1.5f;
 	/** Default Force of BOXDUDE */
-	public static final float BOXDUDE_FORCE = 200;
+	public static final float BOXDUDE_FORCE = 80;
 	/** Default Force of Player */
-	public static final float DEFAULT_FORCE = 250;
+	public static final float DEFAULT_FORCE = 160;
 	/** Default Damping of Player */
 	public static final float DEFAULT_DAMPING = 10;
 	/** Default Damping of Player */
@@ -415,8 +415,8 @@ public class DudeModel extends CharacterModel {
 		setName(json.name());
 		float[] pos = json.get("pos").asFloatArray();
 		setPosition(pos[0]+0.5f,pos[1]+0.5f);
-		setWidth(DEFAULT_WIDTH*1.25f);
-		setHeight(DEFAULT_HEIGHT*1.25f);
+		setWidth(DEFAULT_WIDTH);
+		setHeight(DEFAULT_HEIGHT);
 		setFixedRotation(true);
 		
 		// Technically, we should do error checking here.
