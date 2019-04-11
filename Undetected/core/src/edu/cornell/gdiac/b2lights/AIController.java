@@ -48,7 +48,6 @@ public class AIController {
     public AIController(Board board, GuardModel guard) {
         this.board = board;
         this.guard = guard;
-        state = FSMState.SLEEP;
         itemList = new HashSet<>();
         queue = new PriorityQueue<>(new Comparator<Node>(){
             @Override
@@ -114,8 +113,10 @@ public class AIController {
         switch (state) {
             case SLEEP:
                 // Do Nothing
+                guard.walking = true; //TEMPORARY FIX
                 break;
             case PATROL:
+                guard.walking = true;
             case ALERT:
                 // Check if Guard is at patrol
                 int goalx = board.physicsToBoard(currentGoal.x);
@@ -166,7 +167,6 @@ public class AIController {
                 board.resetTiles();
                 break;
         }
-
     }
 
     /** Finds the shortest path to goal tile and changes the guard's velocity accordingly
@@ -185,22 +185,27 @@ public class AIController {
 
         if (i == 0) {
             guard.setMovement(0,0);
+            guard.walking = false;
         } else if (i == 1) {
             guard.setDirection(-(float) Math.PI/2);
             guard.setMovement(30,0);
             guard.applyForce();
+            guard.walking = true;
         } else if (i == -1) {
             guard.setDirection((float) Math.PI/2);
             guard.setMovement(-30,0);
             guard.applyForce();
+            guard.walking = true;
         } else if (i == 2) {
             guard.setDirection(0);
             guard.setMovement(0, 30);
             guard.applyForce();
+            guard.walking = true;
         } else if (i == -2){
             guard.setDirection((float) Math.PI);
             guard.setMovement(0,-30);
             guard.applyForce();
+            guard.walking = true;
         }
     }
 
@@ -309,6 +314,7 @@ public class AIController {
             state = FSMState.PATROL;
             currentGoal = path[0];
             pathIndex = 0;
+            guard.walking = true;
         }
     }
 

@@ -81,6 +81,8 @@ public class GuardModel extends CharacterModel {
     private TextureRegion defaultCharTexture;
     private TextureRegion shadowTexture;
 
+    /** FilmStrip pointer to the dude animation */
+    private FilmStrip guardanimation;
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
     /** The current animation frame of the avatar */
@@ -91,12 +93,15 @@ public class GuardModel extends CharacterModel {
 
     /** Direction of character */
     private Vector2 direction;
+    private float dirAngle;
 
     /** Line of sight of guard */
     private ConeSource light;
 
     /** How close the player needs to be near this guard for the guard to sense him */
     private float sensitiveRadius;
+    public boolean walking = false;
+    public float prevY;
 
     /**
      * Returns the directional movement of this character.
@@ -180,9 +185,12 @@ public class GuardModel extends CharacterModel {
         movement.set(dx,dy);
     }
 
+    public float getDirectionFloat(){ return dirAngle; }
+
     public Vector2 getDirection(){ return direction; }
 
     public void setDirection(float angle){
+        dirAngle = angle;
         float adjustedAng = angle+(float)Math.PI/2.0f;
         this.light.setDirection(adjustedAng*MathUtils.radiansToDegrees);
         direction = new Vector2((float)Math.cos(adjustedAng), (float)Math.sin(adjustedAng));
@@ -338,6 +346,47 @@ public class GuardModel extends CharacterModel {
         setFixedRotation(false);
     }
 
+    public void animateDirection(float dir) {
+        if (dir == 0) {
+            texture = JsonAssetManager.getInstance().getEntry("guardback", TextureRegion.class);
+            try {
+                filmstrip = (FilmStrip)texture;
+                guardanimation = filmstrip;
+            } catch (Exception e) {
+                filmstrip = null;
+            }
+            setTexture(texture);
+        } else if ((Math.round(dir * 100.0) / 100.0) == 3.14) {
+            texture = JsonAssetManager.getInstance().getEntry("guardfront", TextureRegion.class);
+            try {
+                filmstrip = (FilmStrip)texture;
+                guardanimation = filmstrip;
+            } catch (Exception e) {
+                filmstrip = null;
+            }
+            setTexture(texture);
+        } else if ((Math.round(dir * 100.0) / 100.0) == -1.57) {
+            texture = JsonAssetManager.getInstance().getEntry("guardright", TextureRegion.class);
+            try {
+                filmstrip = (FilmStrip)texture;
+                guardanimation = filmstrip;
+            } catch (Exception e) {
+                filmstrip = null;
+            }
+            setTexture(texture);
+        } else if ((Math.round(dir * 100.0) / 100.0) == 1.57) {
+            texture = JsonAssetManager.getInstance().getEntry("guardleft", TextureRegion.class);
+            try {
+                filmstrip = (FilmStrip)texture;
+                guardanimation = filmstrip;
+            } catch (Exception e) {
+                filmstrip = null;
+            }
+            setTexture(texture);
+        }
+        setOrigin(origin.x,0);
+    }
+
     /**
      * Initializes the dude via the given JSON value
      *
@@ -368,9 +417,11 @@ public class GuardModel extends CharacterModel {
         setForce(json.get("force").asFloat());
         setDamping(DEFAULT_DAMPING);
         setMaxSpeed(DEFAULT_MAXSPEED);
+        setSensitiveRadius(json.get("sensitiveRadius").asFloat());
+
+        //Animation
         setStartFrame(0);
         setWalkLimit(8);
-        setSensitiveRadius(json.get("sensitiveRadius").asFloat());
 
         // Create the collision filter (used for light penetration)
         short collideBits = LevelModel.bitStringToShort(COLLISION_BITS);
@@ -404,9 +455,10 @@ public class GuardModel extends CharacterModel {
         texture = JsonAssetManager.getInstance().getEntry("shadow", TextureRegion.class);
         shadowTexture = texture;
 
-        texture = JsonAssetManager.getInstance().getEntry("guardwalk", TextureRegion.class);
+        texture = JsonAssetManager.getInstance().getEntry("guardback", TextureRegion.class);
         try {
             filmstrip = (FilmStrip)texture;
+            guardanimation = filmstrip;
         } catch (Exception e) {
             filmstrip = null;
         }
@@ -456,6 +508,9 @@ public class GuardModel extends CharacterModel {
      */
     public void update(float dt) {
         // Animate if necessary
+        if (walking) {
+            animate = true;
+        }
         if (animate && walkCool == 0) {
             if (filmstrip != null) {
                 int next = (filmstrip.getFrame()+1) % filmstrip.getSize();

@@ -76,6 +76,7 @@ public class DudeModel extends CharacterModel {
 	private Vector2 movement = new Vector2();
 	/** Whether or not to animate the current frame */
 	private boolean animate = false;
+	private boolean alerted = false;
 	
 	/** How many frames until we can walk again */
 	private int walkCool;
@@ -92,6 +93,7 @@ public class DudeModel extends CharacterModel {
 	private FilmStrip dudeanimation;
 	/** FilmStrip pointer to the box dude animation */
 	private FilmStrip boxdudeanimation;
+	private FilmStrip alerteddudeanimation;
 
 	/** FilmStrip pointer to the texture region */
 	private FilmStrip filmstrip;
@@ -326,6 +328,58 @@ public class DudeModel extends CharacterModel {
 		return true;
 	}
 
+	public void alertCharacter() {
+		alerted = true;
+		filmstrip = alerteddudeanimation;
+		setTexture(filmstrip);
+		setOrigin(origin.x,0);
+	}
+
+	public void animateDirection(float dir) {
+		if (alerted) {
+			dudeanimation = alerteddudeanimation;
+			return;
+		}
+		if (dir == 0) {
+			texture = JsonAssetManager.getInstance().getEntry("charback", TextureRegion.class);
+			try {
+				filmstrip = (FilmStrip)texture;
+				dudeanimation = filmstrip;
+			} catch (Exception e) {
+				filmstrip = null;
+			}
+			setTexture(texture);
+		} else if ((Math.round(dir * 100.0) / 100.0) == 3.14) {
+			texture = JsonAssetManager.getInstance().getEntry("charfront", TextureRegion.class);
+			try {
+				filmstrip = (FilmStrip)texture;
+				dudeanimation = filmstrip;
+			} catch (Exception e) {
+				filmstrip = null;
+			}
+			setTexture(texture);
+		} else if ((Math.round(dir * 100.0) / 100.0) == -1.57) {
+			texture = JsonAssetManager.getInstance().getEntry("charright", TextureRegion.class);
+			try {
+				filmstrip = (FilmStrip)texture;
+				dudeanimation = filmstrip;
+			} catch (Exception e) {
+				filmstrip = null;
+			}
+			setTexture(texture);
+		} else if ((Math.round(dir * 100.0) / 100.0) == 1.57) {
+			texture = JsonAssetManager.getInstance().getEntry("charleft", TextureRegion.class);
+			try {
+				filmstrip = (FilmStrip)texture;
+				dudeanimation = filmstrip;
+			} catch (Exception e) {
+				filmstrip = null;
+			}
+			setTexture(texture);
+		}
+		setOrigin(origin.x,0);
+	}
+
 	public void setBoxInContact(Obstacle box) {
 		boxContact = box;
 	}
@@ -418,7 +472,15 @@ public class DudeModel extends CharacterModel {
 			filmstrip = null;
 		}
 
-		texture = JsonAssetManager.getInstance().getEntry("dude", TextureRegion.class);
+		texture = JsonAssetManager.getInstance().getEntry("charalert", TextureRegion.class);
+		try {
+			filmstrip = (FilmStrip)texture;
+			alerteddudeanimation = filmstrip;
+		} catch (Exception e) {
+			filmstrip = null;
+		}
+
+		texture = JsonAssetManager.getInstance().getEntry("charfront", TextureRegion.class);
 		try {
 			filmstrip = (FilmStrip)texture;
 			dudeanimation = filmstrip;

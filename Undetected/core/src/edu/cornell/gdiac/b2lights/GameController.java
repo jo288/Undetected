@@ -526,6 +526,11 @@ public class GameController implements Screen, ContactListener {
 			level.activatePrevLight();
 		}*/
 
+		avatar.animateDirection(avatar.getDirection());
+		for (GuardModel g : guards) {
+			g.animateDirection(g.getDirectionFloat());
+		}
+
 		if(input.didAction() && avatar.getHasBox()){
 			level.placeBox(avatar);
 		} else if(input.didAction() && !avatar.getHasBox() && avatarBoxCollision){
@@ -858,11 +863,12 @@ public class GameController implements Screen, ContactListener {
 			if (bd1 instanceof Laser) {
 				if (((Laser) bd1).isTurnedOn()) {
 					avatarLaserCollision = true;
+					avatar.alertCharacter();
 //					if(!failed){
 //						setFailure(true);
 //					}
 					for (AIController ai : level.getControl()) {
-						if (Math.abs(bd1.getX()-ai.getGuardX())<50) {
+						if (Math.abs(bd1.getX()-ai.getGuardX())<100) {
 							ai.setAlarmed();
 							ai.setProtect(bd1);
 							System.out.println("laser");
@@ -876,12 +882,13 @@ public class GameController implements Screen, ContactListener {
 			else{
 				if (((Laser) bd2).isTurnedOn()) {
 					avatarLaserCollision = true;
+					avatar.alertCharacter();
 //					if(!failed){
 //						setFailure(true);
 //					}
 					for (AIController ai : level.getControl()) {
 
-						if (Math.abs(bd2.getX()-ai.getGuardX())<50) {
+						if (Math.abs(bd2.getX()-ai.getGuardX())<100) {
 							ai.setAlarmed();
 							ai.setProtect(bd2);
 							System.out.println("laser");

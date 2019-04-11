@@ -22,8 +22,8 @@
 			"file": 	"textures/BG_Tile.png",
 			"wrap": 	true,
 		},
-    	"dude": {      
-    		"file": 	"textures/dudeanimation.png",
+    	"charfront": {
+    		"file": 	"textures/character_front.png",
     		"wrap":  	false,
     		"strip":	{
     			"size":		8,
@@ -32,6 +32,46 @@
     			"first":	0
     		}
     	},
+		"charleft": {
+			"file": 	"textures/character_left.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"charright": {
+			"file": 	"textures/character_right.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"charback": {
+			"file": 	"textures/character_back.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"charalert": {
+			"file": 	"textures/character_alert.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
 		"boxdude": {
 			"file": 	"textures/boxdudeanimation.png",
 			"wrap":  	false,
@@ -42,8 +82,38 @@
 				"first":	0
 			}
 		},
-		"guardwalk":{
-			"file": 	"textures/guardanimation.png",
+		"guardfront":{
+			"file": 	"textures/guard_front.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"guardleft":{
+			"file": 	"textures/guard_left.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"guardright":{
+			"file": 	"textures/guard_right.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"guardback":{
+			"file": 	"textures/guard_back.png",
 			"wrap":  	false,
 			"strip":	{
 				"size":		8,
@@ -97,6 +167,16 @@
 		"doorOpen": {
 			"file": 	    "textures/doorCO.png",
 			"wrap":     	false,
+		},
+		"switchAnimation": {
+			"file": 	"textures/switchanimation.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		10,
+				"rows":		1,
+				"cols":		10,
+				"first":	0
+			}
 		},
         "switchOff": {
           "file": 	    "textures/switchOffReal.png",

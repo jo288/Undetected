@@ -928,6 +928,11 @@ public class LevelModel {
 				rayhandler.update();
 			}
 			avatar.update(dt);
+
+			for (SwitchModel sw : switches) {
+				sw.update(dt);
+			}
+
 			goalDoor.update(dt);
 			for(Laser l: lasers){
 				l.update(dt);
@@ -940,9 +945,15 @@ public class LevelModel {
             // System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
 			//Test for displaying board states
 			board.update();
+
 			for (AIController ai : controls) {
 				ai.update();
 			}
+
+			for (GuardModel g : guards) {
+				g.update(dt);
+			}
+
 			for(CameraModel camera: cameras){
 				camera.update();
 				if(camera.isOn() && camera.getLight()==null){
