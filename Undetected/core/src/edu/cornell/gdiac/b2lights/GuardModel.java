@@ -39,7 +39,7 @@ public class GuardModel extends CharacterModel {
     private static final float DEFAULT_WIDTH = 0.9f;
     private static final float DEFAULT_HEIGHT = 0.3f;
     private static final String COLLISION_BITS = "0100";
-    private static final String EXCLUSION_BITS = "0001";
+    private static final String EXCLUSION_BITS = "0101";
     /** Default Density of Player */
     public static final float DEFAULT_DENSITY = 0.5f;
     /** Default Force of Player */

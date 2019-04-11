@@ -244,8 +244,21 @@ public class Board {
 	 */
 	public boolean isSafeAt(int x, int y) {
 		return x >= 0 && y >= 0 && x < width && y < height
-				&& getTileState(x, y).isValid &&
-				(getTileState(x,y).occupant == 0 || getTileState(x,y).occupant == 4 || getTileState(x,y).occupant == 3);
+				&& getTileState(x, y).isValid;
+	}
+
+
+	/**
+	 * Returns true if a tile location is walkable for guard
+	 *
+	 * @param x The x index for the Tile cell
+	 * @param y The y index for the Tile cell
+	 * @return true if screen location can be walked on by a guard
+	 */
+	public boolean isWalkable(int x, int y) {
+		return isSafeAt(x,y) &&
+		(getTileState(x,y).occupant == 0 || getTileState(x,y).occupant == 4 || getTileState(x,y).occupant == 3
+				|| getTileState(x,y).occupant == 6 || getTileState(x,y).occupant == 8);
 	}
 
 	// GAME LOOP

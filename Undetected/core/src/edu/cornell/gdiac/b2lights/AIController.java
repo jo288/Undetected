@@ -10,7 +10,7 @@ public class AIController {
     private GuardModel guard;
 
     /** ObjectSet the guard has been alerted to */
-    private HashSet<Obstacle> itemlist;
+    private HashSet<Obstacle> itemList;
 
     /** Board */
     private Board board;
@@ -30,6 +30,9 @@ public class AIController {
     /** Int that keeps track of whether the guard should update its movement */
     private int prev;
 
+    /** Priority Queue used for Path Finding*/
+    private PriorityQueue<Node> queue;
+
     /** Possible States of a Guard, sleeping, patrolling, in alert */
     private enum FSMState {
         SLEEP,
@@ -46,7 +49,13 @@ public class AIController {
         this.board = board;
         this.guard = guard;
         state = FSMState.SLEEP;
-        itemlist = new HashSet<>();
+        itemList = new HashSet<>();
+        queue = new PriorityQueue<>(new Comparator<Node>(){
+            @Override
+            public int compare(Node n1, Node n2){
+                return n1.priority - n2.priority;
+            }
+        });
     }
 
     /** Sets the path for the guard, linear I.E. walk back and forth */
@@ -75,8 +84,8 @@ public class AIController {
 
     /** Sets the object the Guard is protecting */
     public void setProtect(Obstacle item) {
-        if (!itemlist.contains(item)) {
-            itemlist.add(item);
+        if (!itemList.contains(item)) {
+            itemList.add(item);
             currentGoal = new Vector2(item.getX(), item.getY());
             Vector2[] newPath = new Vector2[path.length + 1];
             for (int i = 0; i < path.length; i++) {
@@ -114,29 +123,26 @@ public class AIController {
                 int guardx = board.physicsToBoard(guard.getX());
                 int guardy = board.physicsToBoard(guard.getY());
                 if (board.getOccupant(goalx, goaly) == 5) {
-                    PriorityQueue<Node> queue = new PriorityQueue<>(
-                            new Comparator<Node>(){
-                                @Override
-                                public int compare(Node n1, Node n2) {return n1.priority - n2.priority; }});
+                    queue.clear();
                     int prev = pathIndex-1 < 0 ? path.length-1 : pathIndex-1;
                     Vector2 prevgoal = path[prev];
-                    if (board.isSafeAt(goalx+1, goaly) && (board.getOccupant(goalx+1,goaly) == 0 || board.getOccupant(goalx+1,goaly) == 4 || board.getOccupant(goalx+1,goaly) == 3 || board.getOccupant(goalx+1,goaly) == 6 || board.getOccupant(goalx+1,goaly) == 8)) {
-                        Node n1 = new Node(goalx+1, goaly, 0);
+                    if (board.isWalkable(goalx+1, goaly)) {
+                        Node n1 = new Node(goalx+1, goaly, 0, 1);
                         n1.priority = manDist(board.screenToBoard(prevgoal.x), board.screenToBoard(prevgoal.y), goalx+1, goaly);
                         queue.add(n1);
                     }
-                    if (board.isSafeAt(goalx-1, goaly) && (board.getOccupant(goalx-1, goaly) == 0 || board.getOccupant(goalx-1, goaly) == 4 || board.getOccupant(goalx-1, goaly) == 3 || board.getOccupant(goalx-1, goaly) == 6 || board.getOccupant(goalx-1, goaly) == 8)) {
-                        Node n1 = new Node(goalx-1, goaly, 0);
+                    if (board.isWalkable(goalx-1, goaly)) {
+                        Node n1 = new Node(goalx-1, goaly, 0, 1);
                         n1.priority = manDist(board.screenToBoard(prevgoal.x), board.screenToBoard(prevgoal.y), goalx-1, goaly);
                         queue.add(n1);
                     }
-                    if (board.isSafeAt(goalx, goaly+1) && (board.getOccupant(goalx, goaly+1) == 0 || board.getOccupant(goalx, goaly+1) == 4 || board.getOccupant(goalx, goaly+1) == 3 || board.getOccupant(goalx, goaly+1) == 6 || board.getOccupant(goalx, goaly+1) == 8)) {
-                        Node n1 = new Node(goalx, goaly+1, 0);
+                    if (board.isWalkable(goalx, goaly+1)) {
+                        Node n1 = new Node(goalx, goaly+1, 0, 1);
                         n1.priority = manDist(board.screenToBoard(prevgoal.x), board.screenToBoard(prevgoal.y), goalx, goaly+1);
                         queue.add(n1);
                     }
-                    if (board.isSafeAt(goalx, goaly-1) && (board.getOccupant(goalx, goaly-1) == 0 || board.getOccupant(goalx, goaly-1) == 4 || board.getOccupant(goalx, goaly-1) == 3 || board.getOccupant(goalx, goaly-1) == 6 || board.getOccupant(goalx, goaly-1) == 8)) {
-                        Node n1 = new Node(goalx, goaly-1, 0);
+                    if (board.isWalkable(goalx, goaly-1)) {
+                        Node n1 = new Node(goalx, goaly-1, 0, 1);
                         n1.priority = manDist(board.screenToBoard(prevgoal.x), board.screenToBoard(prevgoal.y), goalx, goaly-1);
                         queue.add(n1);
                     }
@@ -183,13 +189,13 @@ public class AIController {
             guard.setDirection(-(float) Math.PI/2);
             guard.setMovement(30,0);
             guard.applyForce();
-        } else if (i == 2) {
-            guard.setDirection(0);
-            guard.setMovement(0, 30);
-            guard.applyForce();
         } else if (i == -1) {
             guard.setDirection((float) Math.PI/2);
             guard.setMovement(-30,0);
+            guard.applyForce();
+        } else if (i == 2) {
+            guard.setDirection(0);
+            guard.setMovement(0, 30);
             guard.applyForce();
         } else if (i == -2){
             guard.setDirection((float) Math.PI);
@@ -207,15 +213,8 @@ public class AIController {
      *          2 if character needs to move up
      */
     private int bfs (int startX, int startY) {
-        Queue<Node> queue = new LinkedList<Node>(
-//                new Comparator<Node>(){
-//                    @Override
-//                    public int compare(Node n1, Node n2){
-//                        return n1.priority - n2.priority;
-//                    }
-//                }
-        );
-        Node start = new Node(startX, startY, 0);
+        queue.clear();
+        Node start = new Node(startX, startY, 0,0);
         queue.add(start);
         while (!queue.isEmpty()) {
             Node n = queue.poll();
@@ -224,24 +223,24 @@ public class AIController {
                 prev = n.act;
                 return n.act;
             }
-            if (board.isSafeAt(n.x+1, n.y) && (board.getOccupant(n.x+1,n.y) == 0 || board.getOccupant(n.x+1,n.y) == 4 || board.getOccupant(n.x+1,n.y) == 3 || board.getOccupant(n.x+1,n.y) == 6 || board.getOccupant(n.x+1,n.y) == 8) && !board.isVisited(n.x+1, n.y))  {
+            if (board.isWalkable(n.x+1, n.y) && !board.isVisited(n.x+1, n.y))  {
                 int act = n.act == 0 ? 1 : n.act;
-                Node n1 = new Node(n.x+1, n.y, act);
+                Node n1 = new Node(n.x+1, n.y, act, n.cost + 1);
                 queue.add(n1);
             }
-            if (board.isSafeAt(n.x-1, n.y) && (board.getOccupant(n.x-1,n.y) == 0 || board.getOccupant(n.x-1,n.y) == 4 || board.getOccupant(n.x-1,n.y) == 3 || board.getOccupant(n.x-1,n.y) == 6 || board.getOccupant(n.x-1,n.y) == 8) && !board.isVisited(n.x-1, n.y)) {
+            if (board.isWalkable(n.x-1, n.y) && !board.isVisited(n.x-1, n.y)) {
                 int act = n.act == 0 ? -1 : n.act;
-                Node n1 = new Node(n.x-1, n.y, act);
+                Node n1 = new Node(n.x-1, n.y, act, n.cost + 1);
                 queue.add(n1);
             }
-            if (board.isSafeAt(n.x, n.y+1) && (board.getOccupant(n.x,n.y+1) == 0 || board.getOccupant(n.x,n.y+1) == 4 || board.getOccupant(n.x,n.y+1) == 3 || board.getOccupant(n.x,n.y+1) == 6 || board.getOccupant(n.x,n.y+1) == 8) && !board.isVisited(n.x, n.y+1)) {
+            if (board.isWalkable(n.x, n.y+1) && !board.isVisited(n.x, n.y+1)) {
                 int act = n.act == 0 ? 2 : n.act;
-                Node n1 = new Node(n.x, n.y+1, act);
+                Node n1 = new Node(n.x, n.y+1, act, n.cost + 1);
                 queue.add(n1);
             }
-            if (board.isSafeAt(n.x, n.y-1) && (board.getOccupant(n.x,n.y-1) == 0 || board.getOccupant(n.x,n.y-1) == 4 || board.getOccupant(n.x,n.y-1) == 3 || board.getOccupant(n.x,n.y-1) == 6 || board.getOccupant(n.x,n.y-1) == 8) && !board.isVisited(n.x, n.y-1)) {
+            if (board.isWalkable(n.x, n.y-1) && !board.isVisited(n.x, n.y-1)) {
                 int act = n.act == 0 ? -2 : n.act;
-                Node n1 = new Node(n.x, n.y-1, act);
+                Node n1 = new Node(n.x, n.y-1, act, n.cost + 1);
                 queue.add(n1);
             }
         }
@@ -252,18 +251,20 @@ public class AIController {
     private class Node {
         public int x;
         public int y;
+        public int cost;
 
         // -1 for -x, 1 for +x, -2 for -y, 2 for +y
         public int act;
         public int priority;
 
-        public Node(int x, int y, int act) {
+        public Node(int x, int y, int act, int cost) {
             this.x = x;
             this.y = y;
+            this.cost = cost;
             this.act = act;
             int goalx = board.physicsToBoard(currentGoal.x);
             int goaly = board.physicsToBoard(currentGoal.y);
-            this.priority = manDist(x,y,goalx,goaly);
+            this.priority = manDist(x,y,goalx,goaly) + cost;
         }
 
         // Debug
