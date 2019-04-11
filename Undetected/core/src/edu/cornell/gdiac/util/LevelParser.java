@@ -121,7 +121,9 @@ public class LevelParser {
             String tileData = tileLayer.getChildByName("data").getText();
             tileData = tileData.replaceAll("[,\r\n]", "");
             for (int i = 0; i < tileData.length(); i++) {
-                if (tileData.charAt(i) == '0') {
+                if (tileData.charAt(i) == '0' &&
+                !searchCoordinateArrays(i % testLevel.boardSize[0],testLevel.boardSize[1] - 1 - (i / testLevel.boardSize[0]),testLevel.exteriorwall.pos)
+                && !searchCoordinateArrays(i % testLevel.boardSize[0],testLevel.boardSize[1] - 1 - (i / testLevel.boardSize[0]),testLevel.interiorwall.pos)) {
                     testLevel.invalidTiles.add(i % testLevel.boardSize[0]);
                     testLevel.invalidTiles.add(testLevel.boardSize[1] - 1 - (i / testLevel.boardSize[0]));
                 }
@@ -137,6 +139,7 @@ public class LevelParser {
                     testLevel.exteriorwall.pos.add(i);
                     testLevel.exteriorwall.pos.add(h);
                     testLevel.exteriorwall.type.add(0);
+                    deleteFromCoordinateArrays(i,h,testLevel.invalidTiles);
                 }
             }
             if(e.get("template").equals("VerticalWall.tx")){
@@ -145,6 +148,7 @@ public class LevelParser {
                     testLevel.exteriorwall.pos.add(w);
                     testLevel.exteriorwall.pos.add(i);
                     testLevel.exteriorwall.type.add(1);
+                    deleteFromCoordinateArrays(w,i,testLevel.invalidTiles);
                 }
             }
             if(e.get("template").equals("KeyObjective.tx")){
@@ -276,6 +280,25 @@ public class LevelParser {
         json.setOutputType(JsonWriter.OutputType.json);
 
         return json.prettyPrint(testLevel);
+    }
+
+
+    private void deleteFromCoordinateArrays(int x, int y, Array<Integer> a){
+        for (int i=0; i<a.size; i+=2){
+            if (a.get(i)==x&&a.get(i+1)==y){
+                a.removeIndex(i+1);
+                a.removeIndex(i);
+            }
+        }
+    }
+
+    private boolean searchCoordinateArrays(int x, int y, Array<Integer> a){
+        for (int i=0; i<a.size; i+=2){
+            if (a.get(i)==x&&a.get(i+1)==y){
+                return true;
+            }
+        }
+        return false;
     }
 
 

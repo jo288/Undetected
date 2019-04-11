@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="50">
+ <properties>
+  <property name="lighting" type="color" value="#ffa9a9a9"/>
+ </properties>
+ <tileset firstgid="1" source="FloorTile.tsx"/>
+ <tileset firstgid="2" source="HorizontalWall.tsx"/>
+ <tileset firstgid="3" source="VerticalWall.tsx"/>
+ <tileset firstgid="4" source="Player.tsx"/>
+ <tileset firstgid="5" source="Exit.tsx"/>
+ <tileset firstgid="6" source="Objective.tsx"/>
+ <tileset firstgid="7" source="Guard.tsx"/>
+ <tileset firstgid="8" source="Box1.tsx"/>
+ <tileset firstgid="9" source="Box2.tsx"/>
+ <tileset firstgid="10" source="Box3.tsx"/>
+ <tileset firstgid="11" source="Laser.tsx"/>
+ <tileset firstgid="12" source="DoorClosed.tsx"/>
+ <tileset firstgid="13" source="DoorOpen.tsx"/>
+ <tileset firstgid="14" source="Switch.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="20" height="15">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
+1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
+1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="1" template="HorizontalWall.tx" x="128" y="128" width="288" height="48"/>
+  <object id="8" template="HorizontalWall.tx" x="192" y="384" width="160" height="48"/>
+  <object id="9" template="HorizontalWall.tx" x="0" y="480" width="640" height="48"/>
+  <object id="10" template="VerticalWall.tx" x="416" y="352" width="32" height="272"/>
+  <object id="11" template="VerticalWall.tx" x="96" y="352" width="32" height="272"/>
+  <object id="12" template="VerticalWall.tx" x="0" y="448" width="32" height="464"/>
+  <object id="13" template="VerticalWall.tx" x="608" y="448" width="32" height="464"/>
+  <object id="14" template="HorizontalWall.tx" x="96" y="32" width="512" height="48"/>
+  <object id="15" template="Player.tx" x="32" y="64"/>
+  <object id="16" template="Exit.tx" x="32" y="32"/>
+  <object id="17" template="KeyObjective.tx" x="512" y="384"/>
+  <object id="19" template="Guard.tx" x="224" y="416">
+   <properties>
+    <property name="IsPatrolling" type="bool" value="true"/>
+    <property name="path" value="[7,2,16,2,16,5,16,2]"/>
+    <property name="sensitiveRadius" type="float" value="1.6000000000000001"/>
+   </properties>
+  </object>
+  <object id="18" template="Guard.tx" x="512" y="128">
+   <properties>
+    <property name="sensitiveRadius" type="float" value="0.80000000000000004"/>
+   </properties>
+  </object>
+  <object id="20" template="Box1.tx" x="128" y="64"/>
+  <object id="21" template="Box2.tx" x="32" y="352"/>
+  <object id="22" template="Box3.tx" x="192" y="64"/>
+  <object id="23" template="Laser.tx" x="256" y="352" width="3" height="96">
+   <properties>
+    <property name="timetolive" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="24" template="Laser.tx" x="448" y="256" width="3" height="160" rotation="-270">
+   <properties>
+    <property name="timetolive" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="34" template="HorizontalWall.tx" x="128" y="256" width="288" height="48"/>
+  <object id="35" template="DoorOpen.tx" x="160" y="384"/>
+  <object id="36" template="Switch.tx" x="448" y="192">
+   <properties>
+    <property name="doors" value="4,3,5,3,11,3,12,3"/>
+    <property name="lasers" value="8,4"/>
+   </properties>
+  </object>
+  <object id="37" template="HorizontalWall.tx" x="416" y="384" width="32" height="48"/>
+  <object id="38" template="HorizontalWall.tx" x="96" y="384" width="32" height="48"/>
+  <object id="43" template="DoorOpen.tx" x="352" y="384"/>
+  <object id="46" template="DoorOpen.tx" x="384" y="384"/>
+  <object id="48" template="DoorOpen.tx" x="128" y="384"/>
+ </objectgroup>
+</map>

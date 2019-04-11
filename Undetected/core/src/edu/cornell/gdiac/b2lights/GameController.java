@@ -862,7 +862,7 @@ public class GameController implements Screen, ContactListener {
 //						setFailure(true);
 //					}
 					for (AIController ai : level.getControl()) {
-						if (Math.abs(bd1.getX()-ai.getGuardX())<5) {
+						if (Math.abs(bd1.getX()-ai.getGuardX())<10) {
 							ai.setAlarmed();
 							ai.setProtect(bd1);
 							System.out.println("laser");
