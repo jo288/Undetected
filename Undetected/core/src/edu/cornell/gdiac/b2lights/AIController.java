@@ -216,7 +216,14 @@ public class AIController {
         queue.clear();
         Node start = new Node(startX, startY, 0,0);
         queue.add(start);
+        int debug = 0;
         while (!queue.isEmpty()) {
+            debug++;
+            if (debug > 200){
+                currentGoal = path[0];
+                pathIndex = 0;
+                break;
+            }
             Node n = queue.poll();
             board.setVisited(n.x, n.y);
             if (board.isGoal(n.x, n.y)) {
