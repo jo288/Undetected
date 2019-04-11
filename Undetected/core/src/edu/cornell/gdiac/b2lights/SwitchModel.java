@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.utils.JsonValue;
 import edu.cornell.gdiac.physics.obstacle.BoxObstacle;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
+import edu.cornell.gdiac.util.FilmStrip;
 import edu.cornell.gdiac.util.JsonAssetManager;
 
 import java.lang.reflect.Field;
@@ -15,8 +16,11 @@ import java.lang.reflect.Field;
 public class SwitchModel extends BoxObstacle{
     private static final float SWITCH_SIZE = 1f;
     private boolean switched = false;
+    private boolean animateOn = false;
+    private boolean animateOff = false;
     private TextureRegion switchOffTexture;
     private TextureRegion switchOnTexture;
+    private FilmStrip filmstrip;
     private boolean flaggedForDelete;
     private ArrayList<Laser> lasers = new ArrayList<>();
     private ArrayList<DoorModel> doors = new ArrayList<>();
@@ -57,9 +61,15 @@ public class SwitchModel extends BoxObstacle{
                 door.switchState();
             }
             if (switched) {
-                setTexture(switchOnTexture);
+//                setTexture(switchOnTexture);
+//                filmstrip.setFrame(0);
+                animateOn = true;
+                animateOff = false;
             } else {
-                setTexture(switchOffTexture);
+//                setTexture(switchOffTexture);
+//                filmstrip.setFrame(9);
+                animateOff = true;
+                animateOn = false;
             }
             setOrigin(origin.x, 0);
         }
@@ -74,9 +84,15 @@ public class SwitchModel extends BoxObstacle{
                 }
             }
             if (switched) {
-                setTexture(switchOnTexture);
+//                setTexture(switchOnTexture);
+//                filmstrip.setFrame(0);
+                animateOn = true;
+                animateOff = false;
             } else {
-                setTexture(switchOffTexture);
+//                setTexture(switchOffTexture);
+//                filmstrip.setFrame(9);
+                animateOff = true;
+                animateOn = false;
             }
             setOrigin(origin.x, 0);
         }
@@ -166,13 +182,41 @@ public class SwitchModel extends BoxObstacle{
         TextureRegion offTexture = JsonAssetManager.getInstance().getEntry("switchOff", TextureRegion.class);
         switchOffTexture = offTexture;
         TextureRegion onTexture = JsonAssetManager.getInstance().getEntry("switchOn", TextureRegion.class);
+        texture = JsonAssetManager.getInstance().getEntry("switchAnimation", TextureRegion.class);
+        try {
+            filmstrip = (FilmStrip)texture;
+        } catch (Exception e) {
+            filmstrip = null;
+        }
+        setTexture(filmstrip);
+
         switchOnTexture = onTexture;
         if (!switched) {
-            setTexture(offTexture);
+//            setTexture(offTexture);
+            filmstrip.setFrame(9);
         } else {
-            setTexture(onTexture);
+//            setTexture(onTexture);
+            filmstrip.setFrame(0);
         }
         setOrigin(origin.x, 0);
+
+    }
+
+    public void update(float dt){
+        if (animateOff){
+            if(filmstrip.getFrame()>=9) {
+                animateOff = false;
+            }else{
+                filmstrip.setFrame(filmstrip.getFrame()+1);
+            }
+        }
+        if (animateOn){
+            if(filmstrip.getFrame()<=0) {
+                animateOn = false;
+            }else{
+                filmstrip.setFrame(filmstrip.getFrame()-1);
+            }
+        }
     }
 
     /**
@@ -182,7 +226,7 @@ public class SwitchModel extends BoxObstacle{
      */
     public void draw(ObstacleCanvas canvas) {
         if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,(getX()-getWidth()/2f)*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
         }
     }
 

@@ -132,6 +132,30 @@
 				"first":	0
 			}
 		},
+		"questionAnimation": {
+			"file": 	"textures/question_mark_on.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"questionAnimationReverse": {
+			"file": 	"textures/question_mark_off.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"question": {
+			"file":		"textures/question_mark.png",
+			"wrap":		false,
+		},
         "goal": { 
          	"file":		"textures/exit.png",
          	"wrap":		false,

@@ -76,10 +76,14 @@ public class AIController {
     /** Sets the Guard to Patrol state */
     public void setPatrol() {
         state = FSMState.PATROL;
+        guard.setAlarmed(false);
     }
 
     /** Sets the Guard to Alarmed state */
-    public void setAlarmed() { state = FSMState.ALERT; }
+    public void setAlarmed() {
+        state = FSMState.ALERT;
+        guard.setAlarmed(true);
+    }
 
     /** Sets the object the Guard is protecting */
     public void setProtect(Obstacle item) {

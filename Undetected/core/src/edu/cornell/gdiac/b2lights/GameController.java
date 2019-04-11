@@ -784,7 +784,7 @@ public class GameController implements Screen, ContactListener {
 			}
 
 			// Check for objective
-			if ((bd1 == avatar && bd2 == objective) || (bd1 == objective && bd2== avatar)){
+			if (((bd1 == avatar && bd2 == objective) || (bd1 == objective && bd2== avatar)) && !hasObjective){
 			    if(bd1 instanceof ObjectiveModel){
 			        ((ObjectiveModel) bd1).stealCard();
                 }if(bd2 instanceof ObjectiveModel){
@@ -863,7 +863,7 @@ public class GameController implements Screen, ContactListener {
 			if (bd1 instanceof Laser) {
 				if (((Laser) bd1).isTurnedOn()) {
 					avatarLaserCollision = true;
-					avatar.alertCharacter();
+//					avatar.alertCharacter();
 //					if(!failed){
 //						setFailure(true);
 //					}
@@ -882,7 +882,7 @@ public class GameController implements Screen, ContactListener {
 			else{
 				if (((Laser) bd2).isTurnedOn()) {
 					avatarLaserCollision = true;
-					avatar.alertCharacter();
+//					avatar.alertCharacter();
 //					if(!failed){
 //						setFailure(true);
 //					}

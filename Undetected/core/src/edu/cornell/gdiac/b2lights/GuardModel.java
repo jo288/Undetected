@@ -80,7 +80,16 @@ public class GuardModel extends CharacterModel {
     /** Texture of character */
     private TextureRegion defaultCharTexture;
     private TextureRegion shadowTexture;
+    private TextureRegion alertTexture;
 
+    private int animateCool = 3;
+    private boolean animateOn = false;
+    private boolean animateOff = false;
+
+    /** FilmStrip pointer to the dude animation */
+    private FilmStrip alertAnimation;
+    /** FilmStrip pointer to the dude animation */
+    private FilmStrip alertAnimationReverse;
     /** FilmStrip pointer to the dude animation */
     private FilmStrip guardanimation;
     /** FilmStrip pointer to the texture region */
@@ -170,7 +179,16 @@ public class GuardModel extends CharacterModel {
      *
      */
     public void setAlarmed(boolean value) {
-        isAlarmed = value;
+        if (isAlarmed != value) {
+            isAlarmed = value;
+            if (value) {
+                animateOn = true;
+                animateOff = false;
+            } else {
+                animateOff = true;
+                animateOn = false;
+            }
+        }
     }
 
     /**
@@ -444,16 +462,27 @@ public class GuardModel extends CharacterModel {
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
 
-
-        // Now get the texture from the AssetManager singleton
-//        String key = json.get("texture").asString();
-//        TextureRegion texture = JsonAssetManager.getInstance().getEntry("guard", TextureRegion.class);
-////        texture.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
-//        setTexture(texture);
-//        setOrigin(origin.x,0);
-
         texture = JsonAssetManager.getInstance().getEntry("shadow", TextureRegion.class);
         shadowTexture = texture;
+
+        texture = JsonAssetManager.getInstance().getEntry("question", TextureRegion.class);
+        alertTexture = texture;
+
+        texture = JsonAssetManager.getInstance().getEntry("questionAnimation", TextureRegion.class);
+        try {
+            filmstrip = (FilmStrip)texture;
+            alertAnimation = filmstrip;
+        } catch (Exception e) {
+            filmstrip = null;
+        }
+
+        texture = JsonAssetManager.getInstance().getEntry("questionAnimationReverse", TextureRegion.class);
+        try {
+            filmstrip = (FilmStrip)texture;
+            alertAnimationReverse = filmstrip;
+        } catch (Exception e) {
+            filmstrip = null;
+        }
 
         texture = JsonAssetManager.getInstance().getEntry("guardback", TextureRegion.class);
         try {
@@ -507,6 +536,20 @@ public class GuardModel extends CharacterModel {
      * //@param delta Number of seconds since last animation frame
      */
     public void update(float dt) {
+        if(animateOn){
+            if (animateCool==0) {
+                if (alertAnimation.getFrame() >= 7) {
+                    animateOn = false;
+                    alertAnimation.setFrame(0);
+                } else {
+                    alertAnimation.setFrame(alertAnimation.getFrame() + 1);
+                }
+                animateCool=3;
+            }else{
+                animateCool--;
+            }
+
+        }
         // Animate if necessary
         if (walking) {
             animate = true;
@@ -539,6 +582,18 @@ public class GuardModel extends CharacterModel {
             canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,0f,scale,scale);
         }
 
+        if(animateOn){
+            canvas.draw(alertAnimation,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
+            System.out.println("isAlarmedAnimated");
+        }else if(isAlarmed){
+            canvas.draw(alertTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
+            System.out.println("isAlarmed");
+        }else {
+//            canvas.draw(alertTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
+            System.out.println("isntAlarmed");
+        }
+
+//        canvas.draw(alertTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
         canvas.draw(shadowTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+4,getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.5f,1.5f);
     }
 }

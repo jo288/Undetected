@@ -340,6 +340,9 @@ public class DudeModel extends CharacterModel {
 			dudeanimation = alerteddudeanimation;
 			return;
 		}
+		if (hasBox){
+			return;
+		}
 		if (dir == 0) {
 			texture = JsonAssetManager.getInstance().getEntry("charback", TextureRegion.class);
 			try {
