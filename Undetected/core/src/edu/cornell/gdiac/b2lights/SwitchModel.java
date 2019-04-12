@@ -96,6 +96,23 @@ public class SwitchModel extends BoxObstacle{
             }
             setOrigin(origin.x, 0);
         }
+        if (cameras != null) {
+            for (CameraModel cam : cameras) {
+                cam.toggle();
+            }
+            if (switched) {
+//                setTexture(switchOnTexture);
+//                filmstrip.setFrame(0);
+                animateOn = true;
+                animateOff = false;
+            } else {
+//                setTexture(switchOffTexture);
+//                filmstrip.setFrame(9);
+                animateOff = true;
+                animateOn = false;
+            }
+            setOrigin(origin.x, 0);
+        }
     }
 
     public void addLaser(Laser laser) {

@@ -956,13 +956,6 @@ public class LevelModel {
 
 			for(CameraModel camera: cameras){
 				camera.update();
-				if(camera.isOn() && camera.getLight()==null){
-					attachLights(camera, lights.get(2));
-					camera.addLight(lights.get(2));
-				}
-				else if(!camera.isOn() && camera.getLight()!=null){
-					camera.removeLight();
-				}
 			}
 			return true;
 		}

@@ -20,6 +20,8 @@ public class CameraModel extends BoxObstacle{
     private static final float CAMERA_HEIGHT = 1f;
     private boolean isOn = true;
     private ConeSource light;
+    private float onRadius;
+    private float offRadius = 0;
     private Vector2 direction;
     private float rotationSpeed;
     private TextureRegion cameraTexture;
@@ -29,7 +31,7 @@ public class CameraModel extends BoxObstacle{
     }
 
     public CameraModel() {
-        super(CAMERA_WIDTH, CAMERA_HEIGHT);
+        super(CAMERA_WIDTH, CAMERA_HEIGHT); isOn=true;
     }
 
     public boolean isOn() {return isOn;}
@@ -40,16 +42,13 @@ public class CameraModel extends BoxObstacle{
 
     public void addLight(ConeSource light){
         this.light = light;
+        this.onRadius = light.getDistance();
     }
 
-    public void removeLight(){
-        this.light.remove();
-        this.light = null;
-    }
-
-    public void setState(boolean val) {
+    public void turnOn(boolean val) {
         isOn = val;
     }
+    public void toggle(){isOn=!isOn;}
 
     public void switchState() {
         isOn = !isOn;
@@ -75,7 +74,9 @@ public class CameraModel extends BoxObstacle{
 
     //pan the camera
     public void update() {
-        if (this.light != null) {
+        if (this.isOn && this.light!=null) {
+            System.out.println("camera onn "+onRadius);
+            this.light.setDistance(onRadius);
             Vector2 newDir = this.direction.rotate(rotationSpeed);
             float angle = newDir.angle();
             System.out.println("CAM ANGLE " + angle);
@@ -89,13 +90,24 @@ public class CameraModel extends BoxObstacle{
             this.light.setDirection(angle);
             this.setDirection(new Vector2((float) Math.cos(angle * MathUtils.degreesToRadians), (float) Math.sin(angle * MathUtils.degreesToRadians)));
         }
+        else{
+            System.out.println("camera off");
+            if(this.light!=null&&this.light.getDistance()!=0){
+                this.light.setDistance(0);
+            }
+        }
     }
 
     public void initialize(){
         TextureRegion texture = JsonAssetManager.getInstance().getEntry("camera", TextureRegion.class);
         cameraTexture = texture;
-        setOrigin(origin.x, 0);
         setBodyType(BodyDef.BodyType.StaticBody);
+        setPosition(3+0.5f,3+0.5f);
+        turnOn(true);
+        setRotationSpeed(1);
+        setDirection(new Vector2(1, 0));
+        setTexture(texture);
+        setOrigin(origin.x, 0);
     }
 
     public void initialize(JsonValue json){
@@ -107,7 +119,7 @@ public class CameraModel extends BoxObstacle{
         float[] pos = json.get("pos").asFloatArray();
         setPosition(pos[0]+0.5f,pos[1]+0.5f);
         setRotationSpeed(json.get("rotationSpeed").asFloat());
-        setState(json.get("on").asBoolean());
+        turnOn(json.get("on").asBoolean());
         int[] dir = json.get("direction").asIntArray();
         setDirection(new Vector2(dir[0], dir[1]));
 
@@ -139,6 +151,7 @@ public class CameraModel extends BoxObstacle{
         // Now get the texture from the AssetManager singleton
         TextureRegion texture = JsonAssetManager.getInstance().getEntry("camera", TextureRegion.class);
         cameraTexture = texture;
+        setTexture(texture);
         setOrigin(origin.x, 0);
     }
 
