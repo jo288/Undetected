@@ -94,7 +94,7 @@ public class DoorModel extends BoxObstacle{
         setBodyType(BodyDef.BodyType.StaticBody);
 
         // Create the collision filter (used for light penetration)
-        short collideBits = LevelModel.bitStringToShort("10001");
+        short collideBits = LevelModel.bitStringToShort("0010");
         short excludeBits = LevelModel.bitStringToComplement("0000");
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
