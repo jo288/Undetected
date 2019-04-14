@@ -70,6 +70,8 @@ public class GameController implements Screen, ContactListener {
 	
 	/** Track asset loading from all instances and subclasses */
 	private AssetState assetState = AssetState.EMPTY;
+
+	private LevelParser levelparser = new LevelParser();
 	
 	/**
 	 * Preloads the assets for this controller.
@@ -156,7 +158,7 @@ public class GameController implements Screen, ContactListener {
 	private boolean hasObjective;
 	private GuardModel guardCollided = null;
 	private SwitchModel switchCollided = null;
-	private FileHandle currentFile = Gdx.files.internal("jsons/level1.json");
+	private FileHandle currentFile = Gdx.files.internal("jsons/alphatest.json");
 
 
 	/** Mark set to handle more sophisticated collision callbacks */
@@ -560,7 +562,7 @@ public class GameController implements Screen, ContactListener {
 			angleCache.set(angleCache.x*0.7071f,angleCache.y*0.7071f);
 		angleCache.scl(avatar.getForce());
 		avatar.setMovement(angleCache.x,angleCache.y);
-		System.out.println(avatar.getMovement());
+//		System.out.println(avatar.getMovement());
 		avatar.applyForce();
 
 		//only used if we are manually controlling one guard for demo purposes
@@ -871,7 +873,7 @@ public class GameController implements Screen, ContactListener {
 						if (Math.abs(bd1.getX()-ai.getGuardX())<100) {
 							ai.setAlarmed();
 							ai.setProtect(bd1);
-							System.out.println("laser");
+//							System.out.println("laser");
 						}
 					}
 				}
@@ -891,7 +893,7 @@ public class GameController implements Screen, ContactListener {
 						if (Math.abs(bd2.getX()-ai.getGuardX())<100) {
 							ai.setAlarmed();
 							ai.setProtect(bd2);
-							System.out.println("laser");
+//							System.out.println("laser");
 						}
 					}
 				}

@@ -584,13 +584,13 @@ public class GuardModel extends CharacterModel {
 
         if(animateOn){
             canvas.draw(alertAnimation,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
-            System.out.println("isAlarmedAnimated");
+//            System.out.println("isAlarmedAnimated");
         }else if(isAlarmed){
             canvas.draw(alertTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
-            System.out.println("isAlarmed");
+//            System.out.println("isAlarmed");
         }else {
 //            canvas.draw(alertTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
-            System.out.println("isntAlarmed");
+//            System.out.println("isntAlarmed");
         }
 
 //        canvas.draw(alertTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);

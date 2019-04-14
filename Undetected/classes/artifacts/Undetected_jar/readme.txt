@@ -1,4 +1,4 @@
-Undetected - Gameplay Prototype
+Undetected - Alpha Release
 
 by. 7studio
 
