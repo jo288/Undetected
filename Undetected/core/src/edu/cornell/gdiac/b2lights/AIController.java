@@ -44,6 +44,10 @@ public class AIController {
         return guard.getX();
     }
 
+    public float getGuardY() {return guard.getY();}
+
+    public Vector2 getCurrentGoal() {return currentGoal;}
+
     /** Initialize with current Guard */
     public AIController(Board board, GuardModel guard) {
         this.board = board;
@@ -181,14 +185,15 @@ public class AIController {
         int guardy = board.physicsToBoard(guard.getY());
         int i;
 
+        System.out.println(isGrid(guard));
         if (!isGrid(guard)) {
             i = prev;
         } else {
             i = bfs(guardx, guardy);
         }
+        System.out.println(i);
 
         if (i == 0) {
-            guard.setMovement(0,0);
             guard.walking = false;
         } else if (i == 1) {
             guard.setDirection(-(float) Math.PI/2);
@@ -228,10 +233,12 @@ public class AIController {
         int debug = 0;
         while (!queue.isEmpty()) {
             debug++;
-            if (debug > 200){
+            if (debug > board.getHeight() * board.getWidth()) {
+                System.out.println("lel");
+                prev = 0;
                 currentGoal = path[0];
                 pathIndex = 0;
-                break;
+                return 0;
             }
             Node n = queue.poll();
             board.setVisited(n.x, n.y);

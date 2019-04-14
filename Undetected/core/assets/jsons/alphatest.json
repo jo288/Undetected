@@ -58,10 +58,10 @@
 	},
 	{
 		"pos": [ 9, 8 ],
-		"status": "sleep",
+		"status": "patrol",
 		"force": 40,
 		"sensitiveRadius": 1.6,
-		"path": [],
+		"path": [ 9, 8 ],
 		"lightIndex": 2
 	},
 	{
@@ -74,10 +74,10 @@
 	},
 	{
 		"pos": [ 29, 5 ],
-		"status": "sleep",
+		"status": "patrol",
 		"force": 40,
 		"sensitiveRadius": 1.6,
-		"path": [],
+		"path": [ 29, 5 ],
 		"lightIndex": 4
 	}
 ],
