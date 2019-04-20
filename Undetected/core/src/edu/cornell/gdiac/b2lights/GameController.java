@@ -350,83 +350,42 @@ public class GameController implements Screen, ContactListener {
 
 
 	public void cameraPan(float dt){
-//		float playerX = level.getAvatar().getX();
-//		float playerY = level.getAvatar().getY();
-//		//pan the canvas camera
-//		OrthographicCamera cam = canvas.getCamera();
-//		float cx = canvas.getWidth()/2;
-//		float cy = canvas.getHeight()/2;
-//
-//		float vw = cam.viewportWidth;
-//		float vh = cam.viewportHeight;
-//		float effectiveVW = vw * cam.zoom;
-//		float effectiveVH = vh * cam.zoom;
-//		float dx = (vw - effectiveVW)/2;
-//		float dy = (vh - effectiveVH)/2;
-//		float sx = vw / level.bounds.width;
-//		float sy = vh / level.bounds.height;
-//		cam.position.x = MathUtils.clamp(playerX*sx, cx-dx, cx + dx);
-//		cam.position.y = MathUtils.clamp(playerY*sy, cy-dy, cy + dy);
-
 		///*WORKING
 		float playerX = level.getAvatar().getX();
 		float playerY = level.getAvatar().getY();
 		//pan the canvas camera
 		OrthographicCamera cam = canvas.getCamera();
-//		float cx = canvas.getWidth()/2;
-//		float cy = canvas.getHeight()/2;
-		float mincx = canvas.getHeight()/2;
-		float mincy = canvas.getHeight()/2;
-		float maxcx = level.bounds.width*level.scale.x - mincx;
-		float maxcy = level.bounds.height*level.scale.y - mincy;
+//		float mincx = canvas.getHeight()/2;
+//		float mincy = canvas.getHeight()/2;
+//		float maxcx = level.bounds.width*level.scale.x - mincx;
+//		float maxcy = level.bounds.height*level.scale.y - mincy;
+		float cx = level.bounds.width*level.scale.x/2;
+		float cy = level.bounds.height*level.scale.y/2;
 
 		//cam.translate(input.getHorizontal(), input.getVertical());
 		float vw = cam.viewportWidth;
 		float vh = cam.viewportHeight;
 		float effectiveVW = vw * cam.zoom;
 		float effectiveVH = vh * cam.zoom;
-		float dx = (vw - effectiveVW)/2;
-		float dy = (vh - effectiveVH)/2;
-//		float sx = vw / level.bounds.width;
-//		float sy = vh / level.bounds.height;
+		float dx = Math.abs((level.bounds.width*level.scale.x - effectiveVW)/2);
+		float dy = Math.abs((level.bounds.height*level.scale.y - effectiveVH)/2);
 		float sx = 32;
 		float sy = 32;
-//		cam.position.set(playerX*sx, playerY*sy, 0);
-		cam.position.x += (MathUtils.clamp(playerX*sx, mincx-dx, maxcx + dx) - cam.position.x)*dt*2.8;
-		cam.position.y += (MathUtils.clamp(playerY*sy, mincy-dy, maxcy + dy)  - cam.position.y)*dt*2.8;
-//		cam.position.y = 600;
-
+		cam.position.x += (MathUtils.clamp(playerX*sx, cx-dx, cx + dx) - cam.position.x)*dt*2.8;
+		cam.position.y += (MathUtils.clamp(playerY*sy, cy-dy, cy + dy)  - cam.position.y)*dt*2.8;
 
 		//pan the rayhandler camera
 		OrthographicCamera rcam = level.raycamera;
-		float rcx = level.bounds.width/2;
-		float rcy = level.bounds.height/2;
-		float minrcx = mincx/32f;
-		float minrcy = mincy/32f;
-		float maxrcx = maxcx/32f;
-		float maxrcy = maxcy/32f;
-//		float reffectiveVW = level.bounds.width*rcam.zoom;
-//		float reffectiveVH = level.bounds.height*rcam.zoom;
-		float reffectiveVW = (canvas.getWidth()/32f)*rcam.zoom;
-		float reffectiveVH = (canvas.getHeight()/32f)*rcam.zoom;
-		float rdx = (level.bounds.width - reffectiveVW)/2;
-		float rdy = (level.bounds.height - reffectiveVH)/2;
-//		rcam.position.set(playerX, playerY , 0);
-//		rcam.position.x = MathUtils.clamp(playerX, minrcx-rdx, maxrcx + rdx);
-//		rcam.position.y = MathUtils.clamp(playerY, minrcy-rdy, maxrcy + rdy);
-		rcam.position.x += (MathUtils.clamp(playerX, (mincx-dx)/32f, (maxcx+dx)/32f)-rcam.position.x)*dt*2.8;
-		rcam.position.y += (MathUtils.clamp(playerY, (mincy-dy)/32f, (maxcy+dy)/32f)-rcam.position.y)*dt*2.8;
-//		rcam.zoom = cam.zoom * ()
+		rcam.position.x = cam.position.x/32;
+		rcam.position.y = cam.position.y/32;
 		rcam.update();
 		level.rayhandler.setCombinedMatrix(rcam);
 		level.rayhandler.updateAndRender();
 	}
 
 	public void resetCamera(){
-		float cx = canvas.getCamera().position.x;
-		float cy = canvas.getCamera().position.y;
-		canvas.getCamera().translate(canvas.getWidth()/2-cx, canvas.getHeight()/2-cy);
 		canvas.getCamera().zoom=1;
+		level.raycamera.zoom = 1;
 	}
 	
 	/**
@@ -611,17 +570,17 @@ public class GameController implements Screen, ContactListener {
 //        canvas.begin(); // DO NOT SCALE
 //        canvas.drawTextCentered(""+(int)(1f/delta), displayFont, 0.0f);
 //        canvas.end();
-
+		OrthographicCamera cam = canvas.getCamera();
 		// Final message
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("VICTORY!", displayFont, 0.0f);
+			canvas.drawText("VICTORY!", displayFont, cam.position.x, cam.position.y);
 			canvas.end();
 		} else if (failed) {
 			displayFont.setColor(Color.RED);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawTextCentered("FAILURE!", displayFont, 0.0f);
+			canvas.drawText("FAILURE!", displayFont, cam.position.x, cam.position.y);
 			canvas.end();
 		}
 

@@ -184,9 +184,11 @@ public class GuardModel extends CharacterModel {
             if (value) {
                 animateOn = true;
                 animateOff = false;
+                this.getLight().setColor(1,0,0,1);
             } else {
                 animateOff = true;
                 animateOn = false;
+                this.getLight().setColor(1,1,0,1);
             }
         }
     }
