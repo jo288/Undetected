@@ -948,11 +948,11 @@ public class LevelModel {
 
 			for (AIController ai : controls) {
 				ai.update();
-				if (ai.getCurrentGoal() != null) {
-					System.out.println();
-					System.out.println(ai.getGuardX() + " " + ai.getGuardY() + " : " + ai.getCurrentGoal().toString());
-					System.out.println();
-				}
+//				if (ai.getCurrentGoal() != null) {
+//					System.out.println();
+//					System.out.println(ai.getGuardX() + " " + ai.getGuardY() + " : " + ai.getCurrentGoal().toString());
+//					System.out.println();
+//				}
 			}
 
 			for (GuardModel g : guards) {

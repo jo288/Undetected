@@ -30,6 +30,9 @@ public class AIController {
     /** Int that keeps track of whether the guard should update its movement */
     private int prev;
 
+    /** Initial direction of the Guard */
+    private float initialDirection;
+
     /** Priority Queue used for Path Finding*/
     private PriorityQueue<Node> queue;
 
@@ -91,29 +94,15 @@ public class AIController {
 
     /** Sets the object the Guard is protecting */
     public void setProtect(Obstacle item) {
-        if (!itemList.contains(item)) {
-            itemList.add(item);
-            currentGoal = new Vector2(item.getX(), item.getY());
-            Vector2[] newPath = new Vector2[path.length + 1];
-            for (int i = 0; i < path.length; i++) {
-                newPath[i] = path[i];
-            }
-            newPath[newPath.length - 1] = currentGoal;
-            path = newPath;
-            pathIndex = newPath.length - 1;
-        }
+        itemList.add(item);
+        currentGoal = new Vector2(item.getX(), item.getY());
+        pathIndex = path.length - 1;
     }
 
     /** Sets the tile the Guard is protecting*/
     public void setProtect(float x, float y) {
         currentGoal = new Vector2(x, y);
-        Vector2[] newPath = new Vector2[path.length + 1];
-        for (int i = 0; i < path.length; i++) {
-            newPath[i] = path[i];
-        }
-        newPath[newPath.length-1] = currentGoal;
-        path = newPath;
-        pathIndex = newPath.length-1;
+        pathIndex = path.length-1;
     }
 
     /** Main function to update the guard's velocity */
@@ -121,7 +110,9 @@ public class AIController {
         switch (state) {
             case SLEEP:
                 // Do Nothing
-                guard.walking = true; //TEMPORARY FIX
+                guard.setMovement(0,0);
+                guard.applyForce();
+                guard.walking = false; //TEMPORARY FIX
                 break;
             case PATROL:
                 guard.walking = true;
@@ -161,6 +152,16 @@ public class AIController {
                     board.setGoal(closest.x, closest.y);
                 } else {
                     if (goalx == guardx && goaly == guardy) {
+                        if (guard.getAlarmed() && path.length == 1) {
+                            guard.setAlarmed(false);
+                        } else if (guard.getAlarmed()) {
+                            state = FSMState.PATROL;
+                            guard.setAlarmed(false);
+                        }
+                        if (path.length == 1 && guardx == board.physicsToBoard(path[0].x) && guardy == board.physicsToBoard(path[0].y) && isGrid(guard)) {
+                            guard.setDirection(initialDirection);
+                            state = FSMState.SLEEP;
+                        }
                         pathIndex = (pathIndex + 1) % path.length;
                         currentGoal = path[pathIndex];
                         goalx = board.physicsToBoard(currentGoal.x);
@@ -183,36 +184,40 @@ public class AIController {
     private void pathFind () {
         int guardx = board.physicsToBoard(guard.getX());
         int guardy = board.physicsToBoard(guard.getY());
-        int i;
+        int i, spd;
 
-        System.out.println(isGrid(guard));
         if (!isGrid(guard)) {
             i = prev;
         } else {
             i = bfs(guardx, guardy);
         }
-        System.out.println(i);
+
+        if (guard.getAlarmed()) {
+            spd = 30;
+        } else {
+            spd = 20;
+        }
 
         if (i == 0) {
             guard.walking = false;
         } else if (i == 1) {
             guard.setDirection(-(float) Math.PI/2);
-            guard.setMovement(30,0);
+            guard.setMovement(spd,0);
             guard.applyForce();
             guard.walking = true;
         } else if (i == -1) {
             guard.setDirection((float) Math.PI/2);
-            guard.setMovement(-30,0);
+            guard.setMovement(-spd,0);
             guard.applyForce();
             guard.walking = true;
         } else if (i == 2) {
             guard.setDirection(0);
-            guard.setMovement(0, 30);
+            guard.setMovement(0, spd);
             guard.applyForce();
             guard.walking = true;
         } else if (i == -2){
             guard.setDirection((float) Math.PI);
-            guard.setMovement(0,-30);
+            guard.setMovement(0,-spd);
             guard.applyForce();
             guard.walking = true;
         }
@@ -231,10 +236,10 @@ public class AIController {
         Node start = new Node(startX, startY, 0,0);
         queue.add(start);
         int debug = 0;
+        if (board.isGoal(startX, startY)) return 0;
         while (!queue.isEmpty()) {
             debug++;
             if (debug > board.getHeight() * board.getWidth()) {
-                System.out.println("lel");
                 prev = 0;
                 currentGoal = path[0];
                 pathIndex = 0;
@@ -327,6 +332,22 @@ public class AIController {
             pathIndex = 0;
             guard.walking = true;
         }
+
+//        String dir = json.get("direction").asString();
+//
+//        if (dir.equals("left")) {
+//            guard.setDirection(( float) Math.PI/2);
+//        } else if (dir.equals("right")) {
+//            guard.setDirection((float) -Math.PI/2);
+//        } else if (dir.equals("up")) {
+//            guard.setDirection(0f);
+//        } else if (dir.equals("down")) {
+//            guard.setDirection((float) Math.PI);
+//        } else {
+//            guard.setDirection(0f);
+//        }
+
+        initialDirection = guard.getDirectionFloat();
     }
 
     /** Returns the Manhattan Distance of two points */

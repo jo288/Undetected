@@ -258,7 +258,7 @@ public class Board {
 	public boolean isWalkable(int x, int y) {
 		return isSafeAt(x,y) &&
 		(getTileState(x,y).occupant == 0 || getTileState(x,y).occupant == 4 || getTileState(x,y).occupant == 3
-				|| getTileState(x,y).occupant == 6 || getTileState(x,y).occupant == 8);
+				|| getTileState(x,y).occupant == 6 || getTileState(x,y).occupant == 8 || getTileState(x, y).occupant == 2);
 	}
 
 	// GAME LOOP
