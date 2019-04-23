@@ -39,7 +39,8 @@ public class GuardModel extends CharacterModel {
     private static final float DEFAULT_WIDTH = 0.9f;
     private static final float DEFAULT_HEIGHT = 0.3f;
     private static final String COLLISION_BITS = "0100";
-    private static final String EXCLUSION_BITS = "0101";
+    //private static final String EXCLUSION_BITS = "0101";
+    private static final short MASK_BITS = (short)0xffeb;
     /** Default Density of Player */
     public static final float DEFAULT_DENSITY = 0.5f;
     /** Default Force of Player */
@@ -445,10 +446,10 @@ public class GuardModel extends CharacterModel {
 
         // Create the collision filter (used for light penetration)
         short collideBits = LevelModel.bitStringToShort(COLLISION_BITS);
-        short excludeBits = bitStringToComplement(EXCLUSION_BITS);
+        //short excludeBits = bitStringToComplement(EXCLUSION_BITS);
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
-        filter.maskBits = excludeBits;
+        filter.maskBits = MASK_BITS;
         setFilterData(filter);
 
         // Reflection is best way to convert name to color

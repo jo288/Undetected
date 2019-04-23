@@ -176,7 +176,7 @@ public class SwitchModel extends BoxObstacle{
 
         // Create the collision filter (used for light penetration)
         short collideBits = LevelModel.bitStringToShort("1000");
-        short excludeBits = LevelModel.bitStringToComplement("0000");
+        short excludeBits = LevelModel.bitStringToComplement("0000000000000000");
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;

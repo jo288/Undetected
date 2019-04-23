@@ -17,6 +17,10 @@ public class DoorModel extends BoxObstacle{
     private boolean open = false;
     private TextureRegion closedDoorTexture;
     private TextureRegion openDoorTexture;
+    private short openCategoryBits = (short)0x0010;
+    private short openMaskBits = (short)0x0000;
+    private short closedMaskBits = (short)0xffff;
+    private short closedCategoryBits = (short)0x0020;
     private boolean flaggedForDelete;
 
     public DoorModel(float x, float y) {
@@ -37,24 +41,35 @@ public class DoorModel extends BoxObstacle{
         closedDoorTexture = closedTexture;
         TextureRegion openTexture = JsonAssetManager.getInstance().getEntry("doorOpen", TextureRegion.class);
         openDoorTexture = openTexture;
+        Filter f = this.getFilterData();
         if (open) {
-            setSensor(true);
             setTexture(openDoorTexture);
+            f.categoryBits = openCategoryBits;
+            f.maskBits = openMaskBits;
         } else {
-            setSensor(false);
             setTexture(closedDoorTexture);
+            f.categoryBits = closedCategoryBits;
+            f.maskBits = closedMaskBits;
         }
+        setFilterData(f);
+        System.out.println(open+" category bits "+f.categoryBits+" mask "+f.maskBits);
         setOrigin(origin.x, 0);
     }
 
     public void switchState() {
         open = !open;
-        setSensor(open);
+        Filter f = getFilterData();
         if (open) {
             setTexture(openDoorTexture);
+            f.categoryBits = openCategoryBits;
+            f.maskBits = openMaskBits;
         } else {
             setTexture(closedDoorTexture);
+            f.categoryBits = closedCategoryBits;
+            f.maskBits = closedMaskBits;
         }
+        setFilterData(f);
+        System.out.println(open+" category bits "+f.categoryBits+" mask "+f.maskBits);
         setOrigin(origin.x, 0);
     }
 
@@ -94,12 +109,8 @@ public class DoorModel extends BoxObstacle{
         setBodyType(BodyDef.BodyType.StaticBody);
 
         // Create the collision filter (used for light penetration)
-        short collideBits = LevelModel.bitStringToShort("0010");
-        short excludeBits = LevelModel.bitStringToComplement("0000");
-        Filter filter = new Filter();
-        filter.categoryBits = collideBits;
-        filter.maskBits = excludeBits;
-        setFilterData(filter);
+       /* short collideBits = LevelModel.bitStringToShort("0010");
+        short excludeBits = LevelModel.bitStringToComplement("0000");*/
 
         // Reflection is best way to convert name to color
         Color debugColor;
@@ -119,11 +130,17 @@ public class DoorModel extends BoxObstacle{
         closedDoorTexture = closedTexture;
         TextureRegion openTexture = JsonAssetManager.getInstance().getEntry("doorOpen", TextureRegion.class);
         openDoorTexture = openTexture;
+        Filter filter = new Filter();
         if (!open) {
             setTexture(closedTexture);
+            filter.categoryBits = closedCategoryBits;
+            filter.maskBits = closedMaskBits;
         } else {
             setTexture(openTexture);
+            filter.categoryBits = openCategoryBits;
+            filter.maskBits = openMaskBits;
         }
+        setFilterData(filter);
         setOrigin(origin.x, 0);
     }
 

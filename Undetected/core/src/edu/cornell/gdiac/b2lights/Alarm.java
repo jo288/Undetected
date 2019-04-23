@@ -1,7 +1,6 @@
 package edu.cornell.gdiac.b2lights;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Timer;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
@@ -35,7 +34,6 @@ public class Alarm extends ObstacleCanvas{
                            @Override
                            public void run() {
                                alpha+=flash_speed;
-                               System.out.println("alpha "+alpha);
                                if(alpha>1 || alpha<0){
                                    flash_speed*=-1;
                                }

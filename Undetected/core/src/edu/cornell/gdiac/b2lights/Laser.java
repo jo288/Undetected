@@ -14,9 +14,10 @@ import javax.xml.soap.Text;
 
 public class Laser extends BoxObstacle {
     /** Collide Bit */
-    public static final String COLLIDE_BIT = "0001";
+    public static final String COLLIDE_BIT = "0010";
     /** Default Width of Player */
-    public static final String EXCLUDE_BIT = "0100";
+    //public static final String EXCLUDE_BIT = "0100";
+    public static final short MASK_BIT = (short)0xefef;
 
     private static final float LAZER_HEIGHT = 5f;
     private static final float LAZER_WIDTH = 0.01f;
@@ -91,10 +92,10 @@ public class Laser extends BoxObstacle {
 
         // Create the collision filter (used for light penetration)
         short collideBits = LevelModel.bitStringToShort(COLLIDE_BIT);
-        short excludeBits = LevelModel.bitStringToComplement(EXCLUDE_BIT);
+        //short excludeBits = LevelModel.bitStringToComplement(EXCLUDE_BIT);
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
-        filter.maskBits = excludeBits;
+        filter.maskBits = MASK_BIT;
         setFilterData(filter);
 
         // Reflection is best way to convert name to color

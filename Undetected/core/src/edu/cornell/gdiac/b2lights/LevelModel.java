@@ -64,7 +64,8 @@ public class LevelModel {
 	/** Number of position iterations for the constrain solvers */
 	public static final int WORLD_POSIT = 2;
 	/** Exclude bits for raycasting */
-	public static final String LIGHT_EXCLUDEBITS = "10001";
+	public static final short LIGHT_COLLIDEBITS = (short)0x1000;
+	public static final short LIGHT_MASKBITS = (short)0xefef;
 
 	// Physics objects for the game
 	/** Reference to the character avatar */
@@ -696,7 +697,8 @@ public class LevelModel {
 			
 			// Create a filter to exclude see through items
 			Filter f = new Filter();
-			f.maskBits = bitStringToComplement(LIGHT_EXCLUDEBITS);
+			f.categoryBits = LIGHT_COLLIDEBITS;
+			f.maskBits = LIGHT_MASKBITS;
 			System.out.println("Dude mask bits "+f.maskBits);
 			cone.setContactFilter(f);
 			cone.setActive(false); // TURN ON LATER

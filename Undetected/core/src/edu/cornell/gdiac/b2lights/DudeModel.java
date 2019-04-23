@@ -38,9 +38,11 @@ public class DudeModel extends CharacterModel {
 	/** Default Width of Player */
 	public static final float DEFAULT_WIDTH = 0.9f;
 	/** Collide Bit */
-	public static final String COLLIDE_BIT = "1111";
+	public static final String COLLIDE_BIT = "0001";
 	/** Default Width of Player */
 	public static final String EXCLUDE_BIT = "0000";
+	public static final short MASK_BIT = (short)0xffef;
+
 	/** Default Density of Player */
 	public static final float DEFAULT_DENSITY = 1.5f;
 	/** Default Force of BOXDUDE */
@@ -438,8 +440,8 @@ public class DudeModel extends CharacterModel {
       	short excludeBits = LevelModel.bitStringToComplement(EXCLUDE_BIT);
       	Filter filter = new Filter();
       	filter.categoryBits = collideBits;
-      	filter.maskBits = excludeBits;
-      	setFilterData(filter);
+		filter.maskBits = MASK_BIT;
+		setFilterData(filter);
       	
 		// Reflection is best way to convert name to color
 		Color debugColor;

@@ -19,7 +19,7 @@ public class InteriorWall extends Obstacle{
     /** Collide Bit */
     public static final String COLLIDE_BIT = "1000";
     /** Default Width of Player */
-    public static final String EXCLUDE_BIT = "0000";
+    public static final String EXCLUDE_BIT = "0000000000000000";
 
     /** A complex physics object has multiple bodies */
     protected Array<Obstacle> bodies;

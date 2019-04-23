@@ -31,9 +31,9 @@ import java.util.*;
  */
 public class ObjectiveModel extends BoxObstacle {
 	/** Collide Bit */
-	public static final String COLLIDE_BIT = "10001";
+	public static final String COLLIDE_BIT = "0010";
 	/** Default Width of Player */
-	public static final String EXCLUDE_BIT = "0000";
+	public static final String EXCLUDE_BIT = "0000000000000000";
 
 	/** Whether the objective is active or not */
 	private boolean isActive;

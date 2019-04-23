@@ -28,9 +28,9 @@ import edu.cornell.gdiac.physics.obstacle.*;
  */
 public class ExitModel extends BoxObstacle {
 	/** Collide Bit */
-	public static final String COLLIDE_BIT = "10001";
+	public static final String COLLIDE_BIT = "0010";
 	/** Default Width of Player */
-	public static final String EXCLUDE_BIT = "0000";
+	public static final String EXCLUDE_BIT = "0000000000000000";
 
 	/**
 	 * Create a new ExitModel with degenerate settings
