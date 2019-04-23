@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="40" height="34" tilewidth="32" tileheight="32" infinite="0" nextobjectid="82">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="82">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="2" source="HorizontalWall.tsx"/>
  <tileset firstgid="3" source="VerticalWall.tsx"/>
@@ -12,7 +12,7 @@
  <tileset firstgid="10" source="Objective.tsx"/>
  <tileset firstgid="11" source="Switch.tsx"/>
  <tileset firstgid="12" source="Laser.tsx"/>
- <layer name="Tile Layer 1" width="40" height="34">
+ <layer id="1" name="Tile Layer 1" width="40" height="34">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -50,7 +50,7 @@
 0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Object Layer 1">
+ <objectgroup id="2" name="Object Layer 1">
   <object id="1" template="HorizontalWall.tx" x="160" y="448" width="160" height="48"/>
   <object id="2" template="HorizontalWall.tx" x="128" y="672" width="224" height="48"/>
   <object id="3" template="VerticalWall.tx" x="128" y="640" width="32" height="240"/>
@@ -134,7 +134,13 @@
    </properties>
   </object>
   <object id="73" template="Box2.tx" x="448" y="544"/>
-  <object id="74" template="KeyObjective.tx" x="928" y="992"/>
+  <object id="74" template="KeyObjective.tx" x="928" y="992">
+   <properties>
+    <property name="doors" value="37,16,37,20"/>
+    <property name="hasAlarm" type="bool" value="false"/>
+    <property name="lasers" value=""/>
+   </properties>
+  </object>
   <object id="75" template="Switch.tx" x="896" y="1024">
    <properties>
     <property name="doors" value="21,12"/>

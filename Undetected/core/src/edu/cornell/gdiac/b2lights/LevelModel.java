@@ -463,12 +463,14 @@ public class LevelModel {
 		HashMap<String, Laser> laserMap = new HashMap<>();
 		lasers = new ArrayList<Laser>();
 		JsonValue laserdata = levelFormat.getChild("lasers");
-		int[] laserPositions;
+//		int[] laserPositions;
 		while (laserdata!=null){
-			laserPositions = laserdata.get("pos").asIntArray();
-			String temp = laserPositions[0] + " " + laserPositions[1];
+//			laserPositions = laserdata.get("pos").asIntArray();
+			String laserName = laserdata.get("name").asString();
+//			String temp = laserPositions[0] + " " + laserPositions[1];
 			Laser l = new Laser();
-			laserMap.put(temp, l);
+//			laserMap.put(temp, l);
+			laserMap.put(laserName, l);
 			l.setTimeToLive(laserdata.get("timetolive").asInt());
 			lasers.add(l);
 			l.initialize(laserdata);
@@ -486,9 +488,11 @@ public class LevelModel {
 		int[] doorPositions;
 		while (doordata!=null){
 			doorPositions = doordata.get("pos").asIntArray();
-			String temp = doorPositions[0] + " " + doorPositions[1];
+			String doorName = doordata.get("name").asString();
+//			String temp = doorPositions[0] + " " + doorPositions[1];
 			DoorModel door = new DoorModel();
-			doorMap.put(temp, door);
+//			doorMap.put(temp, door);
+			doorMap.put(doorName, door);
 			door.setOpen(doordata.get("open").asBoolean());
 			doors.add(door);
 			door.initialize(doordata);
@@ -504,13 +508,17 @@ public class LevelModel {
 
 		switches = new ArrayList<SwitchModel>();
 		JsonValue switchdata = levelFormat.getChild("switches");
-		int[] switchDoor;
-		int[] switchLaser;
+//		int[] switchDoor;
+//		int[] switchLaser;
+		String[] switchDoor;
+		String[] switchLaser;
 		int[] switchPositions;
 		while (switchdata!=null){
 			switchPositions = switchdata.get("pos").asIntArray();
-			switchDoor = switchdata.get("doors").asIntArray();
-			switchLaser = switchdata.get("lasers").asIntArray();
+//			switchDoor = switchdata.get("doors").asIntArray();
+//			switchLaser = switchdata.get("lasers").asIntArray();
+			switchDoor = switchdata.get("doors").asStringArray();
+			switchLaser = switchdata.get("lasers").asStringArray();
 			SwitchModel switchi = new SwitchModel();
 			switchi.setSwitch(switchdata.get("switched").asBoolean());
 			switches.add(switchi);
@@ -521,40 +529,56 @@ public class LevelModel {
 				switchi.setHeight(switchi.getTexture().getRegionHeight()/scale.y);
 			switchi.setPosition(switchPositions[0]+0.5f, switchPositions[1]+0.5f);
 			switchi.setDrawScale(scale);
-			for (int i = 0; i < switchDoor.length / 2; i++) {
-				int j = i * 2;
-				String doorsToSwitch = switchDoor[j] + " " + switchDoor[j+1];
-				switchi.addDoor(doorMap.get(doorsToSwitch));
+//			for (int i = 0; i < switchDoor.length / 2; i++) {
+//				int j = i * 2;
+//				String doorsToSwitch = switchDoor[j] + " " + switchDoor[j+1];
+//				switchi.addDoor(doorMap.get(doorsToSwitch));
+//			}
+//			for (int i = 0; i < switchLaser.length / 2; i++) {
+//				int j = i * 2;
+//				String lasersToSwitch = switchLaser[j] + " " + switchLaser[j+1];
+//				switchi.addLaser(laserMap.get(lasersToSwitch));
+//			}
+			for (int i = 0; i < switchDoor.length; i++) {
+				switchi.addDoor(doorMap.get(switchDoor[i]));
 			}
-			for (int i = 0; i < switchLaser.length / 2; i++) {
-				int j = i * 2;
-				String lasersToSwitch = switchLaser[j] + " " + switchLaser[j+1];
-				switchi.addLaser(laserMap.get(lasersToSwitch));
+			for (int i = 0; i < switchLaser.length; i++) {
+				switchi.addLaser(laserMap.get(switchLaser[i]));
 			}
 			activate(switchi);
 			switchdata = switchdata.next();
 		}
 
-		int[] objDoors;
-		int[] objLasers;
+//		int[] objDoors;
+//		int[] objLasers;
+		String[] objDoors;
+		String[] objLasers;
 		objective = new ObjectiveModel();
-		objDoors = levelFormat.get("objective").get("doors").asIntArray();
-		objLasers = levelFormat.get("objective").get("lasers").asIntArray();
+//		objDoors = levelFormat.get("objective").get("doors").asIntArray();
+//		objLasers = levelFormat.get("objective").get("lasers").asIntArray();
+		objDoors = levelFormat.get("objective").get("doors").asStringArray();
+		objLasers = levelFormat.get("objective").get("lasers").asStringArray();
 		objective.initialize(levelFormat.get("objective"));
 		if (objective.getTexture().getRegionWidth()<tSize)
 			objective.setWidth(objective.getTexture().getRegionWidth()/scale.x);
 		if (objective.getTexture().getRegionHeight()<tSize)
 			objective.setHeight(objective.getTexture().getRegionHeight()/scale.y);
 		objective.setDrawScale(scale);
-		for (int i = 0; i < objDoors.length / 2; i++) {
-			int j = i * 2;
-			String doorsToSwitch = objDoors[j] + " " + objDoors[j+1];
-			objective.addDoor(doorMap.get(doorsToSwitch));
+//		for (int i = 0; i < objDoors.length / 2; i++) {
+//			int j = i * 2;
+//			String doorsToSwitch = objDoors[j] + " " + objDoors[j+1];
+//			objective.addDoor(doorMap.get(doorsToSwitch));
+//		}
+//		for (int i = 0; i < objLasers.length / 2; i++) {
+//			int j = i * 2;
+//			String lasersToSwitch = objLasers[j] + " " + objLasers[j+1];
+//			objective.addLaser(laserMap.get(lasersToSwitch));
+//		}
+		for (int i = 0; i < objDoors.length; i++) {
+			objective.addDoor(doorMap.get(objDoors[i]));
 		}
-		for (int i = 0; i < objLasers.length / 2; i++) {
-			int j = i * 2;
-			String lasersToSwitch = objLasers[j] + " " + objLasers[j+1];
-			objective.addLaser(laserMap.get(lasersToSwitch));
+		for (int i = 0; i < objLasers.length; i++) {
+			objective.addLaser(laserMap.get(objLasers[i]));
 		}
 		activate(objective);
 	}
