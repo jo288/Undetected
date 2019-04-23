@@ -106,7 +106,8 @@ public class LevelModel {
 	protected Vector2 scale;
 	/** The Board */
 	protected Board board;
-
+	/** Alarm */
+	protected Alarm alarm;
 	/** The camera defining the RayHandler view; scale is in physics coordinates */
 	protected OrthographicCamera raycamera;
 	/** The rayhandler for storing lights, and drawing them (SIGH) */
@@ -167,6 +168,8 @@ public class LevelModel {
 	public Board getBoard() {
 		return board;
 	}
+
+	public Alarm getAlarm(){ return alarm;}
 	
 	/**
 	 * Returns a reference to the lighting rayhandler
@@ -324,6 +327,7 @@ public class LevelModel {
 		scale = new Vector2(1,1);
 		debug  = false;
 		board = null;
+		alarm = new Alarm();
 	}
 	
 	/**
@@ -338,7 +342,9 @@ public class LevelModel {
 		int tSize = levelFormat.get("tileSize").asInt();
 		float[] pSize = {((float)gSize[0])/(float)tSize,((float)gSize[1])/(float)tSize};
 		BoxObstacle.setTileOffset(tSize/2f);
-		
+
+		alarm = new Alarm();
+
 		world = new World(Vector2.Zero,false);
 		board = new Board(bSize[0],bSize[1],tSize);
 		board.setTileTexture(JsonAssetManager.getInstance().getEntry("floor", TextureRegion.class));

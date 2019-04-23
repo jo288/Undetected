@@ -72,7 +72,7 @@ public class GameController implements Screen, ContactListener {
 	private AssetState assetState = AssetState.EMPTY;
 
 	private LevelParser levelparser = new LevelParser();
-	
+
 	/**
 	 * Preloads the assets for this controller.
 	 *
@@ -584,18 +584,21 @@ public class GameController implements Screen, ContactListener {
 			canvas.end();
 		}
 
-		if (hasObjective) {
-			Texture alarmFlash = new Texture(assetDirectory.get("textures").get("alarmFlash").getString("file"));
+		if (hasObjective ) {
+			Alarm alarm = level.getAlarm();
+			if(!alarm.isOn()){
+				alarm.turnOn();
+				alarm.start();
+			}
 			canvas.begin();
-			canvas.draw(alarmFlash, new Color(Color.WHITE), alarmFlash.getWidth()/2,
-					alarmFlash.getHeight()/2, canvas.getWidth(), canvas.getHeight(), 0, 5, 5);
+			alarm.draw(canvas);
 			canvas.end();
 		}
 
 		if (paused) {
 			Texture pauseButton = new Texture(assetDirectory.get("textures").get("pause").getString("file"));
 			canvas.begin();
-			canvas.draw(pauseButton, new Color(Color.GRAY), pauseButton.getWidth()/2, pauseButton.getHeight()/2,
+			canvas.draw(pauseButton, Color.GRAY, pauseButton.getWidth()/2, pauseButton.getHeight()/2,
 					canvas.getWidth()/2, canvas.getHeight()/2, 0, 0.3f, 0.3f);
 			canvas.end();
 		}
