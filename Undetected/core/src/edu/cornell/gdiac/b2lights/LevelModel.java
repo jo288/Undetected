@@ -982,7 +982,7 @@ public class LevelModel {
 				ai.update();
 //				if (ai.getCurrentGoal() != null) {
 //					System.out.println();
-//					System.out.println(ai.getGuardX() + " " + ai.getGuardY() + " : " + ai.getCurrentGoal().toString());
+//					System.out.println(ai.getCurrentGoal().toString());
 //					System.out.println();
 //				}
 			}

@@ -2,7 +2,6 @@ package edu.cornell.gdiac.b2lights;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonValue;
 import edu.cornell.gdiac.physics.obstacle.Obstacle;
-
 import java.util.*;
 
 public class AIController {
@@ -43,12 +42,19 @@ public class AIController {
         ALERT
     }
 
+    /** Last Switch pulled by player*/
+    private SwitchModel lastSwitch;
+
+    /** Gets the guard's X position */
     public float getGuardX(){
         return guard.getX();
     }
 
+
+    /** Gets the guard's Y position */
     public float getGuardY() {return guard.getY();}
 
+    /** Gets the guard's current Goal Tile */
     public Vector2 getCurrentGoal() {return currentGoal;}
 
     /** Initialize with current Guard */
@@ -102,17 +108,20 @@ public class AIController {
     /** Sets the tile the Guard is protecting*/
     public void setProtect(float x, float y) {
         currentGoal = new Vector2(x, y);
-        pathIndex = path.length-1;
+        pathIndex = path.length - 1;
     }
 
     /** Main function to update the guard's velocity */
     public void update(){
+//        System.out.println(guard.getX() + " " + guard.getY() + " : " + currentGoal);
         switch (state) {
             case SLEEP:
                 // Do Nothing
                 guard.setMovement(0,0);
                 guard.applyForce();
                 guard.walking = false; //TEMPORARY FIX
+                currentGoal = path[0];
+                pathIndex = 0;
                 break;
             case PATROL:
                 guard.walking = true;
@@ -123,33 +132,7 @@ public class AIController {
                 int guardx = board.physicsToBoard(guard.getX());
                 int guardy = board.physicsToBoard(guard.getY());
                 if (board.getOccupant(goalx, goaly) == 5) {
-                    queue.clear();
-                    int prev = pathIndex-1 < 0 ? path.length-1 : pathIndex-1;
-                    Vector2 prevgoal = path[prev];
-                    if (board.isWalkable(goalx+1, goaly)) {
-                        Node n1 = new Node(goalx+1, goaly, 0, 1);
-                        n1.priority = manDist(board.screenToBoard(prevgoal.x), board.screenToBoard(prevgoal.y), goalx+1, goaly);
-                        queue.add(n1);
-                    }
-                    if (board.isWalkable(goalx-1, goaly)) {
-                        Node n1 = new Node(goalx-1, goaly, 0, 1);
-                        n1.priority = manDist(board.screenToBoard(prevgoal.x), board.screenToBoard(prevgoal.y), goalx-1, goaly);
-                        queue.add(n1);
-                    }
-                    if (board.isWalkable(goalx, goaly+1)) {
-                        Node n1 = new Node(goalx, goaly+1, 0, 1);
-                        n1.priority = manDist(board.screenToBoard(prevgoal.x), board.screenToBoard(prevgoal.y), goalx, goaly+1);
-                        queue.add(n1);
-                    }
-                    if (board.isWalkable(goalx, goaly-1)) {
-                        Node n1 = new Node(goalx, goaly-1, 0, 1);
-                        n1.priority = manDist(board.screenToBoard(prevgoal.x), board.screenToBoard(prevgoal.y), goalx, goaly-1);
-                        queue.add(n1);
-                    }
-                    Node closest = queue.poll();
-                    currentGoal = new Vector2(board.boardToPhysics(closest.x), board.boardToPhysics(closest.y));
-                    board.resetTiles();
-                    board.setGoal(closest.x, closest.y);
+                    findClosest();
                 } else {
                     if (goalx == guardx && goaly == guardy) {
                         if (guard.getAlarmed() && path.length == 1) {
@@ -176,6 +159,57 @@ public class AIController {
                 board.resetTiles();
                 break;
         }
+    }
+
+    /** Finds closest tile to current goal and sets it as current goal */
+    private void findClosest() {
+        PriorityQueue<Node> temp = new PriorityQueue<>(new Comparator<Node>(){
+            @Override
+            public int compare(Node n1, Node n2){
+                return n1.priority - n2.priority;
+            }
+        });
+        board.clearMarks();
+        int goalx = board.physicsToBoard(currentGoal.x);
+        int goaly = board.physicsToBoard(currentGoal.y);
+        int guardx = board.physicsToBoard(guard.getX());
+        int guardy = board.physicsToBoard(guard.getY());
+        int prev = pathIndex-1 < 0 ? path.length-1 : pathIndex-1;
+        Vector2 prevgoal = path[prev];
+        lastSwitch = null;
+        board.setGoal(goalx+1, goaly);
+        if (board.isWalkable(goalx+1, goaly) && bfs(guardx, guardy) != 0) {
+            Node n1 = new Node(goalx+1, goaly, 0, 1);
+            n1.priority = manDist(board.physicsToBoard(prevgoal.x), board.physicsToBoard(prevgoal.y), goalx+1, goaly);
+            temp.add(n1);
+        }
+        board.clearMarks();
+        board.setGoal(goalx-1, goaly);
+        if (board.isWalkable(goalx-1, goaly) && bfs(guardx, guardy) != 0) {
+            Node n1 = new Node(goalx-1, goaly, 0, 1);
+            n1.priority = manDist(board.physicsToBoard(prevgoal.x), board.physicsToBoard(prevgoal.y), goalx-1, goaly);
+            temp.add(n1);
+        }
+        board.clearMarks();
+        board.setGoal(goalx, goaly+1);
+        if (board.isWalkable(goalx, goaly+1) && bfs(guardx, guardy) != 0) {
+            Node n1 = new Node(goalx, goaly+1, 0, 1);
+            n1.priority = manDist(board.physicsToBoard(prevgoal.x), board.physicsToBoard(prevgoal.y), goalx, goaly+1);
+            temp.add(n1);
+
+        }
+        board.clearMarks();
+        board.setGoal(goalx, goaly-1);
+        if (board.isWalkable(goalx, goaly-1) && bfs(guardx, guardy) != 0) {
+            Node n1 = new Node(goalx, goaly-1, 0, 1);
+            n1.priority = manDist(board.physicsToBoard(prevgoal.x), board.physicsToBoard(prevgoal.y), goalx, goaly-1);
+            temp.add(n1);
+
+        }
+        Node closest = temp.poll();
+        if (closest != null) currentGoal = new Vector2(board.boardToScreen(closest.x), board.boardToScreen(closest.y));
+        board.clearMarks();
+        System.out.println(closest.x +  " " + closest.y);
     }
 
     /** Finds the shortest path to goal tile and changes the guard's velocity accordingly
@@ -221,6 +255,7 @@ public class AIController {
             guard.applyForce();
             guard.walking = true;
         }
+        board.clearMarks();
     }
 
     /** BFS that looks for shortest path to current goal tile
@@ -240,8 +275,10 @@ public class AIController {
         while (!queue.isEmpty()) {
             debug++;
             if (debug > board.getHeight() * board.getWidth()) {
-                prev = 0;
-                currentGoal = path[0];
+                if (lastSwitch != null) {
+                    updateAISwitch();
+                }
+//                currentGoal = path[0];
                 pathIndex = 0;
                 return 0;
             }
@@ -273,6 +310,26 @@ public class AIController {
             }
         }
         return 0;
+    }
+
+    /** Sets the last switched switch for the guards */
+    public void setLastSwitch (SwitchModel swtch){
+        lastSwitch = swtch;
+    }
+
+    /** Updates the guard's current goal to the closest tile of the closest door. */
+    public void updateAISwitch() {
+        if (lastSwitch == null) return;
+        DoorModel closest = lastSwitch.getDoors().get(0);
+        for (DoorModel door : lastSwitch.getDoors()) {
+            if (manDist(board.physicsToBoard(door.getX()), board.physicsToBoard(door.getY()), board.physicsToBoard(guard.getX()), board.physicsToBoard(guard.getY()))
+                    < manDist(board.physicsToBoard(closest.getX()), board.physicsToBoard(closest.getY()), board.physicsToBoard(guard.getX()), board.physicsToBoard(guard.getY()))) {
+                closest = door;
+            }
+        }
+        System.out.println(closest.getX() + " " + closest.getY());
+        setProtect(closest);
+        findClosest();
     }
 
     /** Private class for keeping track of board tiles */

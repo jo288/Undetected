@@ -740,9 +740,15 @@ public class GameController implements Screen, ContactListener {
 				if (switches.contains(bd1)) {
 					SwitchModel switchi = switches.get(switches.indexOf(bd1));
 					switchCollided = switchi;
+					for (AIController ai : level.getControl()) {
+						ai.setLastSwitch((SwitchModel) bd1);
+					}
 				} else if (switches.contains(bd2)) {
 					SwitchModel switchi = switches.get(switches.indexOf(bd2));
 					switchCollided = switchi;
+					for (AIController ai : level.getControl()) {
+						ai.setLastSwitch((SwitchModel) bd2);
+					}
 				}
 			}
 
