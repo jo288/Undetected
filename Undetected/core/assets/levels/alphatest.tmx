@@ -134,8 +134,10 @@
    </properties>
   </object>
   <object id="73" template="Box2.tx" name="box2" x="448" y="544"/>
-  <object id="74" template="KeyObjective.tx" name="" x="928" y="992">
+  <object id="74" template="KeyObjective.tx" x="928" y="992">
    <properties>
+    <property name="doors" value="door2,door3"/>
+    <property name="hasAlarm" type="bool" value="false"/>
     <property name="lasers" value="laser1"/>
    </properties>
   </object>

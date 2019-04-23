@@ -153,7 +153,10 @@
 	"size": [ 1, 1 ],
 	"texture": "key",
 	"hasAlarm": false,
-	"doors": [],
+	"doors": [
+		"door2",
+		"door3"
+	],
 	"lasers": [
 		"laser1"
 	]
