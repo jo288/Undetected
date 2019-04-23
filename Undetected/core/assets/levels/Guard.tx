@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
  <tileset firstgid="1" source="Guard.tsx"/>
- <object name="guard1" type="guard" gid="1" width="32" height="48">
+ <object type="guard" gid="1" width="32" height="48">
   <properties>
    <property name="IsPatrolling" type="bool" value="false"/>
    <property name="force" type="float" value="50"/>

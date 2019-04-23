@@ -21,6 +21,7 @@
 },
 "guards": [
 	{
+		"name": "guard",
 		"pos": [ 16, 15 ],
 		"status": "patrol",
 		"force": 40,
@@ -38,6 +39,7 @@
 "doors": [],
 "lasers": [
 	{
+		"name": "laser",
 		"pos": [ 20, 8 ],
 		"size": [ 16, 1 ],
 		"timetolive": 0

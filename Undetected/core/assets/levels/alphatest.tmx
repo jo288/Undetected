@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="40" height="34" tilewidth="32" tileheight="32" infinite="0" nextobjectid="82">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="82">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="2" source="HorizontalWall.tsx"/>
  <tileset firstgid="3" source="VerticalWall.tsx"/>
@@ -12,7 +12,7 @@
  <tileset firstgid="10" source="Objective.tsx"/>
  <tileset firstgid="11" source="Switch.tsx"/>
  <tileset firstgid="12" source="Laser.tsx"/>
- <layer name="Tile Layer 1" width="40" height="34">
+ <layer id="1" name="Tile Layer 1" width="40" height="34">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -50,7 +50,7 @@
 0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Object Layer 1">
+ <objectgroup id="2" name="Object Layer 1">
   <object id="1" template="HorizontalWall.tx" x="160" y="448" width="160" height="48"/>
   <object id="2" template="HorizontalWall.tx" x="128" y="672" width="224" height="48"/>
   <object id="3" template="VerticalWall.tx" x="128" y="640" width="32" height="240"/>
@@ -71,7 +71,7 @@
   <object id="25" template="HorizontalWall.tx" x="320" y="896"/>
   <object id="27" template="HorizontalWall.tx" x="352" y="992" width="288" height="48"/>
   <object id="28" template="VerticalWall.tx" x="608" y="960" width="32" height="304"/>
-  <object id="30" template="DoorClosed.tx" x="672" y="704"/>
+  <object id="30" template="DoorClosed.tx" name="door1" x="672" y="704"/>
   <object id="31" template="HorizontalWall.tx" x="640" y="704"/>
   <object id="32" template="HorizontalWall.tx" x="704" y="704"/>
   <object id="33" template="HorizontalWall.tx" x="224" y="1088" width="544" height="48"/>
@@ -89,8 +89,8 @@
   <object id="47" template="HorizontalWall.tx" x="1024" y="448" width="96" height="48"/>
   <object id="48" template="VerticalWall.tx" x="1120" y="544" width="32" height="144"/>
   <object id="49" template="VerticalWall.tx" x="992" y="544" width="32" height="144"/>
-  <object id="52" template="DoorOpen.tx" x="1184" y="448"/>
-  <object id="53" template="DoorOpen.tx" x="1184" y="576"/>
+  <object id="52" template="DoorOpen.tx" name="door3" x="1184" y="448"/>
+  <object id="53" template="DoorOpen.tx" name="door2" x="1184" y="576"/>
   <object id="54" template="HorizontalWall.tx" x="1216" y="576"/>
   <object id="55" template="HorizontalWall.tx" x="1216" y="448"/>
   <object id="56" template="HorizontalWall.tx" x="1152" y="448"/>
@@ -115,7 +115,7 @@
     <property name="path" value="[12,22,12,11,2,11,2,22]"/>
    </properties>
   </object>
-  <object id="70" template="Guard.tx" x="288" y="832">
+  <object id="70" template="Guard.tx" name="guard2" x="288" y="832">
    <properties>
     <property name="IsPatrolling" type="bool" value="true"/>
     <property name="path" value="[9,8]"/>
@@ -133,19 +133,23 @@
     <property name="path" value="[29,5]"/>
    </properties>
   </object>
-  <object id="73" template="Box2.tx" x="448" y="544"/>
-  <object id="74" template="KeyObjective.tx" x="928" y="992"/>
+  <object id="73" template="Box2.tx" name="box2" x="448" y="544"/>
+  <object id="74" template="KeyObjective.tx" name="" x="928" y="992">
+   <properties>
+    <property name="lasers" value="laser1"/>
+   </properties>
+  </object>
   <object id="75" template="Switch.tx" x="896" y="1024">
    <properties>
-    <property name="doors" value="21,12"/>
+    <property name="doors" value="door1"/>
    </properties>
   </object>
   <object id="77" template="Switch.tx" x="1024" y="352">
    <properties>
-    <property name="doors" value="37,16,37,20"/>
+    <property name="doors" value="door2,door3"/>
    </properties>
   </object>
   <object id="79" template="HorizontalWall.tx" x="992" y="352"/>
-  <object id="80" template="Laser.tx" x="1152" y="480.5" width="3" height="96" rotation="-270"/>
+  <object id="80" template="Laser.tx" name="laser1" x="1152" y="480.5" width="3" height="96" rotation="-270"/>
  </objectgroup>
 </map>

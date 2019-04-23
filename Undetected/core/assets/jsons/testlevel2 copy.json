@@ -26,6 +26,7 @@
 },
 "guards": [
 	{
+		"name": "guard",
 		"pos": [ 7, 2 ],
 		"status": "patrol",
 		"force": 40,
@@ -34,6 +35,7 @@
 		"lightIndex": 0
 	},
 	{
+		"name": "guard",
 		"pos": [ 16, 11 ],
 		"status": "sleep",
 		"force": 40,
@@ -48,51 +50,73 @@
 },
 "boxes": [
 	{
+		"name": "box",
 		"pos": [ 4, 13 ],
 		"texture": "box1"
 	},
 	{
+		"name": "box",
 		"pos": [ 1, 4 ],
 		"texture": "box2"
 	},
 	{
+		"name": "box",
 		"pos": [ 6, 13 ],
 		"texture": "box3"
 	}
 ],
 "switches": [
 	{
+		"name": "switch",
 		"pos": [ 14, 9 ],
 		"switched": false,
-		"doors": [ 4, 3, 5, 3, 11, 3, 12, 3 ],
-		"lasers": [ 8, 4 ]
+		"doors": [
+			"4",
+			"3",
+			"5",
+			"3",
+			"11",
+			"3",
+			"12",
+			"3"
+		],
+		"lasers": [
+			"8",
+			"4"
+		]
 	}
 ],
 "doors": [
 	{
+		"name": "door",
 		"pos": [ 5, 3 ],
 		"open": true
 	},
 	{
+		"name": "door",
 		"pos": [ 11, 3 ],
 		"open": true
 	},
 	{
+		"name": "door",
 		"pos": [ 12, 3 ],
 		"open": true
 	},
 	{
+		"name": "door",
 		"pos": [ 4, 3 ],
 		"open": true
 	}
 ],
 "lasers": [
 	{
+		"name": "laser",
 		"pos": [ 8, 4 ],
 		"size": [ 1, 3 ],
 		"timetolive": 2
 	},
 	{
+		"name": "laser",
 		"pos": [ 14, 7 ],
 		"size": [ 5, 1 ],
 		"timetolive": 3
