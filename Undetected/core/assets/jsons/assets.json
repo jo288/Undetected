@@ -2,17 +2,15 @@
     "textures": {
     	"earth": {
     		"file":		"textures/wallvertical.png",
-    		"wrap":		true,
+    		"wrap":		true
     	},
 		"wallvertical": {
 			"file":		"textures/BG_Wall_Vertical.png",
-//			"file":		"textures/cropped_vwall.png",
-			"wrap":		false,
+			"wrap":		false
 		},
 		"wallhorizontal": {
 			"file":		"textures/BG_Wall_Mid.png",
-//			"file":		"textures/cropped_hwall.png",
-			"wrap":		false,
+			"wrap":		false
 		},
 		"shadow": {
 			"file": 	"textures/shadow.png",
@@ -20,7 +18,7 @@
 		},
 		"floor": {
 			"file": 	"textures/BG_Tile.png",
-			"wrap": 	true,
+			"wrap": 	true
 		},
     	"charfront": {
     		"file": 	"textures/character_front.png",
@@ -154,31 +152,31 @@
 		},
 		"question": {
 			"file":		"textures/question_mark.png",
-			"wrap":		false,
+			"wrap":		false
 		},
         "goal": { 
          	"file":		"textures/exit.png",
-         	"wrap":		false,
+         	"wrap":		false
          },
 		"defaultDude": {
 			"file": 	"textures/Player.png",
-			"wrap": 	false,
+			"wrap": 	false
 		},
 		"guard": {
 			"file": 	"textures/guardsprite.png",
-			"wrap": 	false,
+			"wrap": 	false
 		},
 		"box1": {
 			"file": 	"textures/BG_Box3.png",
-			"wrap": 	false,
+			"wrap": 	false
 		},
 		"box2": {
 			"file": 	"textures/BG_Box2.png",
-			"wrap": 	false,
+			"wrap": 	false
 		},
 		"box3": {
 			"file": 	"textures/BG_Box4.png",
-			"wrap": 	false,
+			"wrap": 	false
 		},
 		"camera": {
 			"file": "textures/camera.png",
@@ -186,11 +184,11 @@
 		},
         "doorClosed": {
           "file": 	    "textures/doorC.png",
-          "wrap":     	false,
+          "wrap":     	false
         },
 		"doorOpen": {
 			"file": 	    "textures/doorCO.png",
-			"wrap":     	false,
+			"wrap":     	false
 		},
 		"switchAnimation": {
 			"file": 	"textures/switchanimation.png",
@@ -204,23 +202,23 @@
 		},
         "switchOff": {
           "file": 	    "textures/switchOffReal.png",
-          "wrap":     	false,
+          "wrap":     	false
         },
 		"switchOn": {
 			"file": 	    "textures/switchOnReal.png",
-			"wrap":     	false,
+			"wrap":     	false
 		},
 		"laser": {
 			"file": 	"textures/laser.png",
-			"wrap": 	true,
+			"wrap": 	true
 		},
 		"boxDude": {
 			"file": 	"textures/boxdude.png",
-			"wrap": 	false,
+			"wrap": 	false
 		},
 		"key": 		{
 			"file": 	"textures/key.png",
-			"wrap": 	false,
+			"wrap": 	false
 		},
 		"stealcard": {
 			"file": 	"textures/Steal Card.png",
@@ -232,8 +230,12 @@
 		},
 		"pause":	{
 			"file":		"textures/temp_pause.png",
-			"wrap": 	false,
+			"wrap": 	false
 		},
+		"alarmFlash": {
+			"file": 	"textures/alarmFlash.png",
+			"wrap": 	false
+		}
   	},
   	"fonts": {
   		"display": {

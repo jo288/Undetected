@@ -584,6 +584,14 @@ public class GameController implements Screen, ContactListener {
 			canvas.end();
 		}
 
+		if (hasObjective) {
+			Texture alarmFlash = new Texture(assetDirectory.get("textures").get("alarmFlash").getString("file"));
+			canvas.begin();
+			canvas.draw(alarmFlash, new Color(Color.WHITE), alarmFlash.getWidth()/2,
+					alarmFlash.getHeight()/2, canvas.getWidth(), canvas.getHeight(), 0, 5, 5);
+			canvas.end();
+		}
+
 		if (paused) {
 			Texture pauseButton = new Texture(assetDirectory.get("textures").get("pause").getString("file"));
 			canvas.begin();

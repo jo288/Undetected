@@ -320,7 +320,6 @@ public class Board {
 		//This one does the same thing as the line below
 		//canvas.draw(tileTexture, Color.WHITE, tileTexture.getRegionWidth()/2, tileTexture.getRegionHeight()/2,
 		//		TILE_WIDTH * (x + 0.5f), TILE_WIDTH * (y + 0.5f), 0, 1.0f, 1.0f);
-
 		canvas.draw(tileTexture, Color.WHITE, 0, 0,
 				TILE_WIDTH * x, TILE_WIDTH * y, 0, TILE_WIDTH/tileTexture.getRegionWidth(), TILE_WIDTH/tileTexture.getRegionHeight());
 	}
