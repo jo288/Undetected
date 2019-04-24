@@ -58,7 +58,7 @@
 "switches": [
 	{
 		"name": "switch",
-		"pos": [ 12, 15 ],
+		"pos": [ 10, 15 ],
 		"switched": false,
 		"doors": [
 			"door1",
