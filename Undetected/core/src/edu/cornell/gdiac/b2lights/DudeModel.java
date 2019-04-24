@@ -343,46 +343,85 @@ public class DudeModel extends CharacterModel {
 			return;
 		}
 		if (hasBox){
-			return;
+			if (dir == 0) {
+				return;
+//				texture = JsonAssetManager.getInstance().getEntry("boxcharback", TextureRegion.class);
+//				try {
+//					filmstrip = (FilmStrip)texture;
+//					dudeanimation = filmstrip;
+//				} catch (Exception e) {
+//					filmstrip = null;
+//				}
+//				setTexture(texture);
+			} else if ((Math.round(dir * 100.0) / 100.0) == 3.14) {
+				texture = JsonAssetManager.getInstance().getEntry("boxcharfront", TextureRegion.class);
+				try {
+					filmstrip = (FilmStrip)texture;
+					dudeanimation = filmstrip;
+				} catch (Exception e) {
+					filmstrip = null;
+				}
+				setTexture(texture);
+			} else if ((Math.round(dir * 100.0) / 100.0) == -1.57) {
+				texture = JsonAssetManager.getInstance().getEntry("boxcharright", TextureRegion.class);
+				try {
+					filmstrip = (FilmStrip)texture;
+					dudeanimation = filmstrip;
+				} catch (Exception e) {
+					filmstrip = null;
+				}
+				setTexture(texture);
+			} else if ((Math.round(dir * 100.0) / 100.0) == 1.57) {
+				texture = JsonAssetManager.getInstance().getEntry("boxcharleft", TextureRegion.class);
+				try {
+					filmstrip = (FilmStrip)texture;
+					dudeanimation = filmstrip;
+				} catch (Exception e) {
+					filmstrip = null;
+				}
+				setTexture(texture);
+			}
+			setOrigin(origin.x,0);
+		} else {
+			if (dir == 0) {
+				texture = JsonAssetManager.getInstance().getEntry("charback", TextureRegion.class);
+				try {
+					filmstrip = (FilmStrip)texture;
+					dudeanimation = filmstrip;
+				} catch (Exception e) {
+					filmstrip = null;
+				}
+				setTexture(texture);
+			} else if ((Math.round(dir * 100.0) / 100.0) == 3.14) {
+				texture = JsonAssetManager.getInstance().getEntry("charfront", TextureRegion.class);
+				try {
+					filmstrip = (FilmStrip)texture;
+					dudeanimation = filmstrip;
+				} catch (Exception e) {
+					filmstrip = null;
+				}
+				setTexture(texture);
+			} else if ((Math.round(dir * 100.0) / 100.0) == -1.57) {
+				texture = JsonAssetManager.getInstance().getEntry("charright", TextureRegion.class);
+				try {
+					filmstrip = (FilmStrip)texture;
+					dudeanimation = filmstrip;
+				} catch (Exception e) {
+					filmstrip = null;
+				}
+				setTexture(texture);
+			} else if ((Math.round(dir * 100.0) / 100.0) == 1.57) {
+				texture = JsonAssetManager.getInstance().getEntry("charleft", TextureRegion.class);
+				try {
+					filmstrip = (FilmStrip)texture;
+					dudeanimation = filmstrip;
+				} catch (Exception e) {
+					filmstrip = null;
+				}
+				setTexture(texture);
+			}
+			setOrigin(origin.x,0);
 		}
-		if (dir == 0) {
-			texture = JsonAssetManager.getInstance().getEntry("charback", TextureRegion.class);
-			try {
-				filmstrip = (FilmStrip)texture;
-				dudeanimation = filmstrip;
-			} catch (Exception e) {
-				filmstrip = null;
-			}
-			setTexture(texture);
-		} else if ((Math.round(dir * 100.0) / 100.0) == 3.14) {
-			texture = JsonAssetManager.getInstance().getEntry("charfront", TextureRegion.class);
-			try {
-				filmstrip = (FilmStrip)texture;
-				dudeanimation = filmstrip;
-			} catch (Exception e) {
-				filmstrip = null;
-			}
-			setTexture(texture);
-		} else if ((Math.round(dir * 100.0) / 100.0) == -1.57) {
-			texture = JsonAssetManager.getInstance().getEntry("charright", TextureRegion.class);
-			try {
-				filmstrip = (FilmStrip)texture;
-				dudeanimation = filmstrip;
-			} catch (Exception e) {
-				filmstrip = null;
-			}
-			setTexture(texture);
-		} else if ((Math.round(dir * 100.0) / 100.0) == 1.57) {
-			texture = JsonAssetManager.getInstance().getEntry("charleft", TextureRegion.class);
-			try {
-				filmstrip = (FilmStrip)texture;
-				dudeanimation = filmstrip;
-			} catch (Exception e) {
-				filmstrip = null;
-			}
-			setTexture(texture);
-		}
-		setOrigin(origin.x,0);
 	}
 
 	public void setBoxInContact(Obstacle box) {
@@ -492,6 +531,7 @@ public class DudeModel extends CharacterModel {
 		} catch (Exception e) {
 			filmstrip = null;
 		}
+
 		setTexture(texture);
 		setOrigin(origin.x,0);
 
