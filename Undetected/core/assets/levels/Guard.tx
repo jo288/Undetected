@@ -8,6 +8,7 @@
    <property name="lightAngle" type="float" value="40"/>
    <property name="lightColor" type="color" value="#fffeba09"/>
    <property name="lightRadius" type="float" value="9"/>
+   <property name="objectivepath" value="[]"/>
    <property name="path" value="[]"/>
    <property name="sensitiveRadius" type="float" value="1.6000000000000001"/>
   </properties>

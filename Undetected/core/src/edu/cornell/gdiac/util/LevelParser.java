@@ -52,6 +52,7 @@ public class LevelParser {
         protected float force = 40f;
         protected float sensitiveRadius = 1.6f;
         protected Array<Integer> path = new Array<Integer>();
+        protected Array<Integer> objectivepath = new Array<Integer>();
         protected int lightIndex;
     }
 
@@ -282,6 +283,13 @@ public class LevelParser {
                                 String[] pSplit = p.substring(1, p.length() - 1).split("[^0-9]");
                                 for (String s : pSplit) {
                                     g.path.add(Integer.parseInt(s));
+                                }
+                                break;
+                            case "objectivepath":
+                                String op = property.get("value");
+                                String[] opSplit = op.substring(1, op.length() - 1).split("[^0-9]");
+                                for (String s : opSplit) {
+                                    g.objectivepath.add(Integer.parseInt(s));
                                 }
                                 break;
                             case "lightAngle":
