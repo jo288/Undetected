@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="24" height="14" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="19">
+ <tileset firstgid="1" source="FloorTile.tsx"/>
+ <tileset firstgid="2" source="VerticalWall.tsx"/>
+ <tileset firstgid="3" source="HorizontalWall.tsx"/>
+ <tileset firstgid="4" source="Guard.tsx"/>
+ <tileset firstgid="5" source="Player.tsx"/>
+ <tileset firstgid="6" source="Exit.tsx"/>
+ <tileset firstgid="7" source="Box2.tsx"/>
+ <tileset firstgid="8" source="Objective.tsx"/>
+ <tileset firstgid="9" source="Laser.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="24" height="14">
+  <data encoding="csv">
+0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
+1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="1" template="HorizontalWall.tx" x="32" y="32" width="64" height="48"/>
+  <object id="2" template="VerticalWall.tx" x="96" y="96" width="32" height="96"/>
+  <object id="3" template="Guard.tx" x="64" y="64">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="lightAngle" type="float" value="0"/>
+    <property name="objectivepath" value="[8,6,8,2]"/>
+    <property name="path" value="[2,12]"/>
+   </properties>
+  </object>
+  <object id="4" template="HorizontalWall.tx" x="32" y="128"/>
+  <object id="5" template="VerticalWall.tx" x="0" y="416" width="32" height="416"/>
+  <object id="6" template="VerticalWall.tx" x="160" y="416" width="32" height="160"/>
+  <object id="7" template="VerticalWall.tx" x="672" y="256" width="32" height="176"/>
+  <object id="8" template="HorizontalWall.tx" x="0" y="448" width="64" height="48"/>
+  <object id="9" template="HorizontalWall.tx" x="128" y="448" width="64" height="48"/>
+  <object id="10" template="HorizontalWall.tx" x="192" y="288" width="512" height="48"/>
+  <object id="11" template="HorizontalWall.tx" x="96" y="128" width="576" height="48"/>
+  <object id="12" template="Player.tx" x="64" y="384"/>
+  <object id="13" template="Exit.tx" x="64" y="448"/>
+  <object id="15" template="Box2.tx" x="32" y="288"/>
+  <object id="16" template="KeyObjective.tx" x="640" y="192">
+   <properties>
+    <property name="lasers" value="laser1"/>
+   </properties>
+  </object>
+  <object id="18" template="Laser.tx" name="laser1" x="512" y="224" width="3" height="96">
+   <properties>
+    <property name="timetolive" type="int" value="-1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
