@@ -121,6 +121,7 @@
     <property name="IsPatrolling" type="bool" value="true"/>
     <property name="direction" value="down"/>
     <property name="path" value="[9,8]"/>
+    <property name="sector" type="int" value="1"/>
    </properties>
   </object>
   <object id="71" template="Guard.tx" x="768" y="128">
