@@ -560,7 +560,7 @@ public class LevelModel {
 		float bx = (board.getTileSize() * board.screenToBoard(player.getX()-(float)Math.sin(dir)) + 0.5f);
 		float by = (board.getTileSize() * board.screenToBoard(player.getY()+(float)Math.cos(dir)) + 0.5f);
 		int o = board.getOccupantAt(board.physicsToBoard(bx), board.physicsToBoard(by));
-		if (o==0||o==3||o==4||o==6) {
+		if (o==0||o==3||o==4) {
 			b.setPosition(bx, by);
 			avatar.dropBox();
 			queueEnabled(b);
@@ -572,7 +572,7 @@ public class LevelModel {
 		float bx = (board.getTileSize() * board.screenToBoard(avatar.getX()-(float)Math.sin(dir)) + 0.5f);
 		float by = (board.getTileSize() * board.screenToBoard(avatar.getY()+(float)Math.cos(dir)) + 0.5f);
 		int o = board.getOccupantAt(board.physicsToBoard(bx), board.physicsToBoard(by));
-		if (o==0||o==3||o==4||o==6) {
+		if (o==0||o==3||o==4) {
 			return true;
 		}
 		return false;
