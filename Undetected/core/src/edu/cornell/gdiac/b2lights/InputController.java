@@ -67,6 +67,8 @@ public class InputController {
 	/** Whether hot key for changing guard's line of sight was pressed */
 	private boolean incViewPressed;
 	private boolean decViewPressed;
+	/** Whether the home button is pressed or not */
+	private boolean homePressed;
 	/**Whether hot keys for translating camera was pressed */
 	private boolean cameraUp;
 	private boolean cameraLeft;
@@ -181,6 +183,28 @@ public class InputController {
 	 */
 	public boolean didResetHover() {
 		return Gdx.input.getX() >= 710 && Gdx.input.getX() <= 800 && Gdx.input.getY() >= 5 && Gdx.input.getY() <= 45;
+	}
+
+	/**
+	 * Returns true if the home button was pressed;
+	 *
+	 * @return
+	 */
+	public boolean didHome() {return homePressed;}
+
+	/**
+	 * Resets Home Button
+	 *
+	 */
+	public void resetHome() {homePressed = false;}
+
+	/**
+	 * Returns true if the home button is being hovered.
+	 *
+	 * @return
+	 */
+	public boolean didHomeHover() {
+		return Gdx.input.getX() >= 605 && Gdx.input.getX() <= 695 && Gdx.input.getY() >= 5 && Gdx.input.getY() <= 45;
 	}
 
 	/**
@@ -338,6 +362,10 @@ public class InputController {
 		if (didResetHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 			resetPressed = true;
 			resetPrevious = false;
+		}
+
+		if (didHomeHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+			homePressed = true;
 		}
 	}
 }

@@ -543,6 +543,11 @@ public class GameController implements Screen, ContactListener {
 			avatar.applyForce();
 		}
 
+		if (input.didHome()) {
+			nextFile = Gdx.files.internal("jsons/levelselect.json");
+			input.resetHome();
+		}
+
 		//only used if we are manually controlling one guard for demo purposes
 //		GuardModel guard = guards.get(0);
 //		Vector2 guardAngle = new Vector2(input.getHorizontalG(),input.getVerticalG());
@@ -672,12 +677,17 @@ public class GameController implements Screen, ContactListener {
 			canvas.end();
 		}
 
-		canvas.begin();
-		TextureRegion texture = JsonAssetManager.getInstance().getEntry("restart", TextureRegion.class);
-		InputController input = InputController.getInstance();
-		Color tint = input.didResetHover() ? Color.GRAY : Color.WHITE;
+
+		if (!currentFile.equals(levelSelectFile)) {
+			canvas.begin();
+			TextureRegion texture = JsonAssetManager.getInstance().getEntry("restart", TextureRegion.class);
+			TextureRegion tex = JsonAssetManager.getInstance().getEntry("home", TextureRegion.class);
+			InputController input = InputController.getInstance();
+			Color tint = input.didResetHover() ? Color.GRAY : Color.WHITE;
+			Color tint2 = input.didHomeHover() ? Color.GRAY : Color.WHITE;
 //		Drawable drawable = new TextureRegionDrawable(texture);
-		canvas.draw(texture,tint,texture.getRegionWidth()/2f,texture.getRegionHeight()/2f,cam.position.x+350,cam.position.y+275,0,1.5f,1.5f);
+			canvas.draw(texture, tint, texture.getRegionWidth() / 2f, texture.getRegionHeight() / 2f, cam.position.x + 350, cam.position.y + 275, 0, 1.5f, 1.5f);
+			canvas.draw(tex, tint2, tex.getRegionWidth() / 2f, tex.getRegionHeight() / 2f, cam.position.x + 250, cam.position.y + 275, 0, 1.5f, 1.5f);
 //		ImageButton button = new ImageButton(drawable);
 //		button.setPosition(cam.position.x+350, cam.position.y+275);
 //		button.setSize(texture.getRegionWidth(), texture.getRegionHeight());
@@ -685,7 +695,8 @@ public class GameController implements Screen, ContactListener {
 //
 //		};
 //		button.addListener(listener);
-		canvas.end();
+			canvas.end();
+		}
 	}
 	
 	/**
