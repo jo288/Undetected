@@ -103,12 +103,14 @@ public class AIController {
 
     /** Sets the Guard to Patrol state */
     public void setPatrol() {
+        guard.getLight().setConeDegree(25);
         state = FSMState.PATROL;
         guard.setAlarmed(false);
     }
 
     /** Sets the Guard to Alarmed state */
     public void setAlarmed() {
+        guard.getLight().setConeDegree(25);
         state = FSMState.ALERT;
         guard.setAlarmed(true);
     }

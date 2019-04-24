@@ -521,7 +521,7 @@ public class GameController implements Screen, ContactListener {
 		//level.raycamera.update();
 		// Rotate the avatar to face the direction of movement
 
-		if (!failed) {
+		if (!failed && !complete) {
 			angleCache.set(input.getHorizontal(), input.getVertical());
 			if (angleCache.len2() > 0.0f) {
 				float angle = angleCache.angle();
@@ -536,7 +536,8 @@ public class GameController implements Screen, ContactListener {
 			avatar.setMovement(angleCache.x, angleCache.y);
 //		System.out.println(avatar.getMovement());
 			avatar.applyForce();
-		}else {
+		}
+		if (complete || failed) {
 			avatar.setMovement(0,0);
 			avatar.applyForce();
 		}
@@ -669,10 +670,12 @@ public class GameController implements Screen, ContactListener {
 			canvas.end();
 		}
 
-//		canvas.begin();
-//		TextureRegion texture = JsonAssetManager.getInstance().getEntry("restart", TextureRegion.class);
+		canvas.begin();
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("restart", TextureRegion.class);
+		InputController input = InputController.getInstance();
+		Color tint = input.didResetHover() ? Color.GRAY : Color.WHITE;
 //		Drawable drawable = new TextureRegionDrawable(texture);
-//		canvas.draw(texture,Color.WHITE,texture.getRegionWidth()/2f,texture.getRegionHeight()/2f,cam.position.x+350,cam.position.y+275,0,1.5f,1.5f);
+		canvas.draw(texture,tint,texture.getRegionWidth()/2f,texture.getRegionHeight()/2f,cam.position.x+350,cam.position.y+275,0,1.5f,1.5f);
 //		ImageButton button = new ImageButton(drawable);
 //		button.setPosition(cam.position.x+350, cam.position.y+275);
 //		button.setSize(texture.getRegionWidth(), texture.getRegionHeight());
@@ -680,7 +683,7 @@ public class GameController implements Screen, ContactListener {
 //
 //		};
 //		button.addListener(listener);
-//		canvas.end();
+		canvas.end();
 	}
 	
 	/**
@@ -852,6 +855,7 @@ public class GameController implements Screen, ContactListener {
                 }
                 for (AIController ai : level.getControl()) {
                     if (ai.getObPath().length != 0) {
+                        ai.setPatrol();
                         ai.setPath(ai.getObPath());
                     }
                 }
