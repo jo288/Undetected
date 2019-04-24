@@ -883,14 +883,14 @@ public class GameController implements Screen, ContactListener {
 //						setFailure(true);
 //					}
 					for (AIController ai : level.getControl()) {
-						if (Math.abs(bd1.getX()-ai.getGuardX())<100) {
+						if (ai.getGuard().sector == ((Laser) bd1).sector) {
 							ai.setAlarmed();
 							ai.setProtect(bd1);
 //							System.out.println("laser");
 						}
 					}
 				}
-				else{
+				else {
 					avatarLaserCollision =false;
 				}
 			}
@@ -903,7 +903,7 @@ public class GameController implements Screen, ContactListener {
 //					}
 					for (AIController ai : level.getControl()) {
 
-						if (Math.abs(bd2.getX()-ai.getGuardX())<100) {
+						if (ai.getGuard().sector == ((Laser) bd2).sector) {
 							ai.setAlarmed();
 							ai.setProtect(bd2);
 //							System.out.println("laser");

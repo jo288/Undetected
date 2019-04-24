@@ -35,8 +35,11 @@ public class AIController {
     /** Priority Queue used for Path Finding*/
     private PriorityQueue<Node> queue;
 
-    /** Timer for how long guard checks for */
+    /** Timer for how long guard checks at an alarm */
     private int timer;
+
+    /** Checker for the last time a guard was on a valid grid tile */
+    private int gridTimer;
 
     /** Possible States of a Guard, sleeping, patrolling, in alert */
     private enum FSMState {
@@ -53,6 +56,8 @@ public class AIController {
         return guard.getX();
     }
 
+    /** Gets the guard of the AIController */
+    public GuardModel getGuard() {return guard;}
 
     /** Gets the guard's Y position */
     public float getGuardY() {return guard.getY();}
@@ -66,6 +71,7 @@ public class AIController {
         this.guard = guard;
         itemList = new HashSet<>();
         timer = 0;
+        gridTimer = 0;
         queue = new PriorityQueue<>(new Comparator<Node>(){
             @Override
             public int compare(Node n1, Node n2){
@@ -137,6 +143,7 @@ public class AIController {
                 int guardy = board.physicsToBoard(guard.getY());
                 if (board.getOccupant(goalx, goaly) == 5) {
                     findClosest();
+                    break;
                 } else {
                     if (goalx == guardx && goaly == guardy) {
                         if (guard.getAlarmed() && path.length == 1) {
@@ -247,7 +254,7 @@ public class AIController {
 
         }
         Node closest = temp.poll();
-        if (closest != null) currentGoal = new Vector2(board.boardToScreen(closest.x), board.boardToScreen(closest.y));
+        if (closest != null) currentGoal = new Vector2(board.boardToScreen(closest.x) , board.boardToScreen(closest.y));
         board.clearMarks();
 //        System.out.println(closest.x +  " " + closest.y);
     }
@@ -262,8 +269,36 @@ public class AIController {
 
         if (!isGrid(guard)) {
             i = prev;
+            gridTimer++;
+            if (gridTimer > 75) {
+                i = -prev;
+            }
         } else {
-            i = bfs(guardx, guardy);
+            if (gridTimer > 75) {
+                if (timer > 200) {
+                    if (guard.getAlarmed()) guard.setAlarmed(false);
+                    currentGoal = path[0];
+                    pathIndex = 0;
+                    timer = 0;
+                    gridTimer = 0;
+                } else if (timer > 150) {
+                    guard.setDirection((float) Math.PI/2);
+                } else if (timer > 100) {
+                    guard.setDirection(0);
+                } else if (timer > 50) {
+                    guard.setDirection((float) -Math.PI/2);
+                } else if (timer > 0) {
+                    guard.setDirection((float) Math.PI);
+                }
+                guard.setMovement(0,0);
+                guard.applyForce();
+                guard.walking = false;
+                timer++;
+                i = 0;
+            } else {
+                gridTimer = 0;
+                i = bfs(guardx, guardy);
+            }
         }
 
         if (guard.getAlarmed()) {
