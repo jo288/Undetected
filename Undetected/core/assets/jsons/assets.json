@@ -60,6 +60,36 @@
 				"first":	0
 			}
 		},
+		"boxcharfront": {
+			"file": 	"textures/boxdude_front.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"boxcharleft": {
+			"file": 	"textures/boxdude_left.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"boxcharright": {
+			"file": 	"textures/boxdude_right.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
 		"charalert": {
 			"file": 	"textures/character_alert.png",
 			"wrap":  	false,
@@ -130,6 +160,16 @@
 				"first":	0
 			}
 		},
+		"sidelaserAnimation": {
+			"file": 	"textures/laserside.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		6,
+				"rows":		1,
+				"cols":		6,
+				"first":	0
+			}
+		},
 		"questionAnimation": {
 			"file": 	"textures/question_mark_on.png",
 			"wrap":  	false,
@@ -178,6 +218,14 @@
 			"file": 	"textures/BG_Box4.png",
 			"wrap": 	false
 		},
+		"victory": {
+			"file": 	"textures/victory.png",
+			"wrap": 	false
+		},
+		"defeat": {
+			"file": 	"textures/defeat.png",
+			"wrap": 	false
+		},
 		"camera": {
 			"file": "textures/camera.png",
 			"wrap": false
@@ -205,8 +253,8 @@
           "wrap":     	false
         },
 		"switchOn": {
-			"file": 	    "textures/switchOnReal.png",
-			"wrap":     	false
+			"file": 	"textures/switchOnReal.png",
+			"wrap":    	false
 		},
 		"laser": {
 			"file": 	"textures/laser.png",

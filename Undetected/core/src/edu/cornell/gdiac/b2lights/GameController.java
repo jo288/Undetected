@@ -509,20 +509,26 @@ public class GameController implements Screen, ContactListener {
 		//level.raycamera.translate(input.getHorizontal(), input.getVertical());
 		//level.raycamera.update();
 		// Rotate the avatar to face the direction of movement
-		angleCache.set(input.getHorizontal(),input.getVertical());
-		if (angleCache.len2() > 0.0f) {
-			float angle = angleCache.angle();
-			// Convert to radians with up as 0
-			angle = (float)Math.PI*(angle-90.0f)/180.0f;
+
+		if (!failed) {
+			angleCache.set(input.getHorizontal(), input.getVertical());
+			if (angleCache.len2() > 0.0f) {
+				float angle = angleCache.angle();
+				// Convert to radians with up as 0
+				angle = (float) Math.PI * (angle - 90.0f) / 180.0f;
 //			avatar.setAngle(angle);
-			avatar.setDirection(angle);
-		}
-		if(angleCache.x!=0f &&angleCache.y!=0f)
-			angleCache.set(angleCache.x*0.7071f,angleCache.y*0.7071f);
-		angleCache.scl(avatar.getForce());
-		avatar.setMovement(angleCache.x,angleCache.y);
+				avatar.setDirection(angle);
+			}
+			if (angleCache.x != 0f && angleCache.y != 0f)
+				angleCache.set(angleCache.x * 0.7071f, angleCache.y * 0.7071f);
+			angleCache.scl(avatar.getForce());
+			avatar.setMovement(angleCache.x, angleCache.y);
 //		System.out.println(avatar.getMovement());
-		avatar.applyForce();
+			avatar.applyForce();
+		}else {
+			avatar.setMovement(0,0);
+			avatar.applyForce();
+		}
 
 		//only used if we are manually controlling one guard for demo purposes
 		GuardModel guard = guards.get(0);
@@ -575,12 +581,16 @@ public class GameController implements Screen, ContactListener {
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawText("VICTORY!", displayFont, cam.position.x, cam.position.y);
+			TextureRegion texture = JsonAssetManager.getInstance().getEntry("victory", TextureRegion.class);
+			canvas.draw(texture,Color.WHITE,texture.getRegionWidth()/2f,texture.getRegionHeight()/2f,cam.position.x,cam.position.y,0,1.5f,1.5f);
+//			canvas.drawText("VICTORY!", displayFont, cam.position.x, cam.position.y);
 			canvas.end();
 		} else if (failed) {
 			displayFont.setColor(Color.RED);
 			canvas.begin(); // DO NOT SCALE
-			canvas.drawText("FAILURE!", displayFont, cam.position.x, cam.position.y);
+			TextureRegion texture = JsonAssetManager.getInstance().getEntry("defeat", TextureRegion.class);
+			canvas.draw(texture,Color.WHITE,texture.getRegionWidth()/2f,texture.getRegionHeight()/2f,cam.position.x,cam.position.y,0,1.5f,1.5f);
+//			canvas.drawText("FAILURE!", displayFont, cam.position.x, cam.position.y);
 			canvas.end();
 		}
 
