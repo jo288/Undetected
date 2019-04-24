@@ -72,6 +72,8 @@ public class GameController implements Screen, ContactListener {
 	private JsonValue  assetDirectory;
 	/** The JSON defining the level model */
 	private JsonValue  levelFormat;
+	private MiniMap miniMap;
+
 
 	/** The font for giving messages to the player */
 	protected BitmapFont displayFont;
@@ -270,6 +272,7 @@ public class GameController implements Screen, ContactListener {
 		jsonReader = new JsonReader();
 		level = new LevelModel();
 		lightController = new LightController(level);
+		miniMap = new MiniMap(300, 225, level);
 		complete = false;
 		failed = false;
 		active = false;
@@ -290,6 +293,7 @@ public class GameController implements Screen, ContactListener {
 		level.dispose();
 		level  = null;
 		canvas = null;
+		miniMap = null;
 	}
 	
 	/**
@@ -310,6 +314,8 @@ public class GameController implements Screen, ContactListener {
 		levelFormat = jsonReader.parse(currentFile);
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
+		miniMap = new MiniMap(300, 225, level);
+
 		resetCamera();
 
 		guardCollided = null;
@@ -350,6 +356,7 @@ public class GameController implements Screen, ContactListener {
 			countdown = -1;
 			guardCollided = null;
 			lightController = new LightController(level);
+			miniMap = new MiniMap(300, 225, level);
 
 			resetCamera();
 		}
@@ -607,7 +614,7 @@ public class GameController implements Screen, ContactListener {
 					}
 				}
 			}
-
+			miniMap = new MiniMap(300, 225, level);
 			resetCamera();
 			nextFile = null;
 		}
@@ -627,7 +634,6 @@ public class GameController implements Screen, ContactListener {
 		canvas.clear();
 		
 		level.draw(canvas);
-
 //		framerate display
 //      displayFont.setColor(Color.YELLOW);
 //      canvas.begin(); // DO NOT SCALE
@@ -714,6 +720,8 @@ public class GameController implements Screen, ContactListener {
 //		};
 //		button.addListener(listener);
 			canvas.end();
+			miniMap.render(canvas);
+
 		}
 	}
 	

@@ -322,6 +322,7 @@ public class ObstacleCanvas {
 	public OrthographicCamera getCamera() {
 		return camera;
 	}
+	public void setCamera(OrthographicCamera cam){this.camera = cam;}
 	
 	/**
 	 * Clear the screen so we can start a new animation frame
