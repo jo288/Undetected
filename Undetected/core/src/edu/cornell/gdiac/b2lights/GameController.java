@@ -578,6 +578,23 @@ public class GameController implements Screen, ContactListener {
 //      canvas.end();
 		OrthographicCamera cam = canvas.getCamera();
 
+		DudeModel avatar = level.getAvatar();
+		if (avatar.getHasBox()) {
+			TextureRegion gBox = JsonAssetManager.getInstance().getEntry("box2", TextureRegion.class);
+			canvas.begin();
+			if (level.canPlaceBoxAt()) {
+				canvas.draw(gBox, Color.WHITE, gBox.getRegionWidth() / 2, 0,
+						level.boxGhost().x * 32, level.boxGhost().y * 32 - 1f / 2 * 32,
+						0, 1, 1, 0.5f);
+			}else {
+				canvas.draw(gBox, Color.RED, gBox.getRegionWidth() / 2, 0,
+						level.boxGhost().x * 32, level.boxGhost().y * 32 - 1f / 2 * 32,
+						0, 1, 1, 0.5f);
+			}
+			canvas.end();
+		}
+
+
 		if(failed || complete) {
 			TextureRegion overlayTexture = JsonAssetManager.getInstance().getEntry("overlay", TextureRegion.class);
 			canvas.begin();

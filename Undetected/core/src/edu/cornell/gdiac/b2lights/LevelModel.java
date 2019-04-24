@@ -436,8 +436,6 @@ public class LevelModel {
 		}
 
 
-		// Create Test Box
-		JsonValue boxesdata = levelFormat.get("boxes");
 		JsonValue boxdata = levelFormat.getChild("boxes");
 		while (boxdata!=null){
 			MoveableBox box = new MoveableBox();
@@ -470,13 +468,9 @@ public class LevelModel {
 		HashMap<String, Laser> laserMap = new HashMap<>();
 		lasers = new ArrayList<Laser>();
 		JsonValue laserdata = levelFormat.getChild("lasers");
-//		int[] laserPositions;
 		while (laserdata!=null){
-//			laserPositions = laserdata.get("pos").asIntArray();
 			String laserName = laserdata.get("name").asString();
-//			String temp = laserPositions[0] + " " + laserPositions[1];
 			Laser l = new Laser();
-//			laserMap.put(temp, l);
 			laserMap.put(laserName, l);
 			l.setTimeToLive(laserdata.get("timetolive").asInt());
 			lasers.add(l);
@@ -496,9 +490,7 @@ public class LevelModel {
 		while (doordata!=null){
 			doorPositions = doordata.get("pos").asIntArray();
 			String doorName = doordata.get("name").asString();
-//			String temp = doorPositions[0] + " " + doorPositions[1];
 			DoorModel door = new DoorModel();
-//			doorMap.put(temp, door);
 			doorMap.put(doorName, door);
 			door.setOpen(doordata.get("open").asBoolean());
 			doors.add(door);
@@ -515,15 +507,11 @@ public class LevelModel {
 
 		switches = new ArrayList<SwitchModel>();
 		JsonValue switchdata = levelFormat.getChild("switches");
-//		int[] switchDoor;
-//		int[] switchLaser;
 		String[] switchDoor;
 		String[] switchLaser;
 		int[] switchPositions;
 		while (switchdata!=null){
 			switchPositions = switchdata.get("pos").asIntArray();
-//			switchDoor = switchdata.get("doors").asIntArray();
-//			switchLaser = switchdata.get("lasers").asIntArray();
 			switchDoor = switchdata.get("doors").asStringArray();
 			switchLaser = switchdata.get("lasers").asStringArray();
 			SwitchModel switchi = new SwitchModel();
@@ -536,16 +524,6 @@ public class LevelModel {
 				switchi.setHeight(switchi.getTexture().getRegionHeight()/scale.y);
 			switchi.setPosition(switchPositions[0]+0.5f, switchPositions[1]+0.5f);
 			switchi.setDrawScale(scale);
-//			for (int i = 0; i < switchDoor.length / 2; i++) {
-//				int j = i * 2;
-//				String doorsToSwitch = switchDoor[j] + " " + switchDoor[j+1];
-//				switchi.addDoor(doorMap.get(doorsToSwitch));
-//			}
-//			for (int i = 0; i < switchLaser.length / 2; i++) {
-//				int j = i * 2;
-//				String lasersToSwitch = switchLaser[j] + " " + switchLaser[j+1];
-//				switchi.addLaser(laserMap.get(lasersToSwitch));
-//			}
 			for (int i = 0; i < switchDoor.length; i++) {
 				switchi.addDoor(doorMap.get(switchDoor[i]));
 			}
@@ -556,13 +534,9 @@ public class LevelModel {
 			switchdata = switchdata.next();
 		}
 
-//		int[] objDoors;
-//		int[] objLasers;
 		String[] objDoors;
 		String[] objLasers;
 		objective = new ObjectiveModel();
-//		objDoors = levelFormat.get("objective").get("doors").asIntArray();
-//		objLasers = levelFormat.get("objective").get("lasers").asIntArray();
 		objDoors = levelFormat.get("objective").get("doors").asStringArray();
 		objLasers = levelFormat.get("objective").get("lasers").asStringArray();
 		objective.initialize(levelFormat.get("objective"));
@@ -571,16 +545,6 @@ public class LevelModel {
 		if (objective.getTexture().getRegionHeight()<tSize)
 			objective.setHeight(objective.getTexture().getRegionHeight()/scale.y);
 		objective.setDrawScale(scale);
-//		for (int i = 0; i < objDoors.length / 2; i++) {
-//			int j = i * 2;
-//			String doorsToSwitch = objDoors[j] + " " + objDoors[j+1];
-//			objective.addDoor(doorMap.get(doorsToSwitch));
-//		}
-//		for (int i = 0; i < objLasers.length / 2; i++) {
-//			int j = i * 2;
-//			String lasersToSwitch = objLasers[j] + " " + objLasers[j+1];
-//			objective.addLaser(laserMap.get(lasersToSwitch));
-//		}
 		for (int i = 0; i < objDoors.length; i++) {
 			objective.addDoor(doorMap.get(objDoors[i]));
 		}
@@ -596,12 +560,30 @@ public class LevelModel {
 		float bx = (board.getTileSize() * board.screenToBoard(player.getX()-(float)Math.sin(dir)) + 0.5f);
 		float by = (board.getTileSize() * board.screenToBoard(player.getY()+(float)Math.cos(dir)) + 0.5f);
 		int o = board.getOccupantAt(board.physicsToBoard(bx), board.physicsToBoard(by));
-		if (o==0||o==3||o==4) {
+		if (o==0||o==3||o==4||o==7) {
 			b.setPosition(bx, by);
 			avatar.dropBox();
 			queueEnabled(b);
 		}
     }
+
+    public boolean canPlaceBoxAt(){
+		float dir = avatar.getDirection();
+		float bx = (board.getTileSize() * board.screenToBoard(avatar.getX()-(float)Math.sin(dir)) + 0.5f);
+		float by = (board.getTileSize() * board.screenToBoard(avatar.getY()+(float)Math.cos(dir)) + 0.5f);
+		int o = board.getOccupantAt(board.physicsToBoard(bx), board.physicsToBoard(by));
+		if (o==0||o==3||o==4||o==7) {
+			return true;
+		}
+		return false;
+	}
+
+    public Vector2 boxGhost() {
+		float dir = avatar.getDirection();
+		float bx = (board.getTileSize() * board.screenToBoard(avatar.getX()-(float)Math.sin(dir)) + 0.5f);
+		float by = (board.getTileSize() * board.screenToBoard(avatar.getY()+(float)Math.cos(dir)) + 0.5f);
+		return new Vector2(bx, by);
+	}
 	
 	/**
 	 * Creates the ambient lighting for the level
