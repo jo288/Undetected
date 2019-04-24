@@ -35,6 +35,9 @@ public class AIController {
     /** Priority Queue used for Path Finding*/
     private PriorityQueue<Node> queue;
 
+    /** Timer for how long guard checks for */
+    private int timer;
+
     /** Possible States of a Guard, sleeping, patrolling, in alert */
     private enum FSMState {
         SLEEP,
@@ -62,6 +65,7 @@ public class AIController {
         this.board = board;
         this.guard = guard;
         itemList = new HashSet<>();
+        timer = 0;
         queue = new PriorityQueue<>(new Comparator<Node>(){
             @Override
             public int compare(Node n1, Node n2){
@@ -136,10 +140,46 @@ public class AIController {
                 } else {
                     if (goalx == guardx && goaly == guardy) {
                         if (guard.getAlarmed() && path.length == 1) {
-                            guard.setAlarmed(false);
+                            if (timer > 200) {
+                                timer = 0;
+                                guard.setAlarmed(false);
+                            } else {
+                                if (timer > 150) {
+                                    guard.setDirection((float) Math.PI/2);
+                                } else if (timer > 100) {
+                                    guard.setDirection(0);
+                                } else if (timer > 50) {
+                                    guard.setDirection((float) -Math.PI/2);
+                                } else if (timer > 0) {
+                                    guard.setDirection((float) Math.PI);
+                                }
+                                guard.setMovement(0,0);
+                                guard.applyForce();
+                                guard.walking = false;
+                                timer++;
+                                break;
+                            }
                         } else if (guard.getAlarmed()) {
-                            state = FSMState.PATROL;
-                            guard.setAlarmed(false);
+                            if (timer > 200) {
+                                timer = 0;
+                                state = FSMState.PATROL;
+                                guard.setAlarmed(false);
+                            } else {
+                                if (timer > 150) {
+                                    guard.setDirection((float) Math.PI/2);
+                                } else if (timer > 100) {
+                                    guard.setDirection(0);
+                                } else if (timer > 50) {
+                                    guard.setDirection((float) -Math.PI/2);
+                                } else if (timer > 0) {
+                                    guard.setDirection((float) Math.PI);
+                                }
+                                guard.setMovement(0,0);
+                                guard.applyForce();
+                                guard.walking = false;
+                                timer++;
+                                break;
+                            }
                         }
                         if (path.length == 1 && guardx == board.physicsToBoard(path[0].x) && guardy == board.physicsToBoard(path[0].y) && isGrid(guard)) {
                             guard.setDirection(initialDirection);
@@ -330,6 +370,7 @@ public class AIController {
         System.out.println(closest.getX() + " " + closest.getY());
         setProtect(closest);
         findClosest();
+        System.out.println(currentGoal);
     }
 
     /** Private class for keeping track of board tiles */
