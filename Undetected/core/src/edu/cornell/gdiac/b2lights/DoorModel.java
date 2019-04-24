@@ -96,7 +96,8 @@ public class DoorModel extends BoxObstacle{
     }
 
     public void initialize(JsonValue json){
-        setName(json.name());
+//        setName(json.name());
+        setName(json.get("name").asString());
 //        int[] pos  = json.get("pos").asIntArray();
         float[] size = {1, 1};
 //        setPosition(pos[0]+0.5f,pos[1]+0.5f);

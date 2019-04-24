@@ -166,7 +166,9 @@ public class GameController implements Screen, ContactListener {
 	private boolean hasObjective;
 	private GuardModel guardCollided = null;
 	private SwitchModel switchCollided = null;
-	private FileHandle currentFile = Gdx.files.internal("jsons/alphatest.json");
+	private FileHandle levelSelectFile = Gdx.files.internal("jsons/levelselect.json");
+	private FileHandle currentFile = Gdx.files.internal("jsons/levelselect.json");
+	private FileHandle nextFile;
 
 
 	/** Mark set to handle more sophisticated collision callbacks */
@@ -434,14 +436,14 @@ public class GameController implements Screen, ContactListener {
 			level.rayhandler.updateAndRender();
 		}
 
-		GuardModel guard = level.getGuards().get(0);
-		float degree = guard.getLight().getConeDegree();
-		if(input.increaseView()){
-			guard.getLight().setConeDegree(degree+0.5f);
-		}
-		else if(input.decreaseView()){
-			guard.getLight().setConeDegree(degree-0.5f);
-		}
+//		GuardModel guard = level.getGuards().get(0);
+//		float degree = guard.getLight().getConeDegree();
+//		if(input.increaseView()){
+//			guard.getLight().setConeDegree(degree+0.5f);
+//		}
+//		else if(input.decreaseView()){
+//			guard.getLight().setConeDegree(degree-0.5f);
+//		}
 		
 		// Handle resets
 		if (input.didReset()) {
@@ -562,6 +564,26 @@ public class GameController implements Screen, ContactListener {
 		level.update(dt);
 		if(lightController.detect() && !failed){
 			setFailure(true);
+		}
+
+		if (nextFile!=null) {
+			levelFormat = jsonReader.parse(nextFile);
+			currentFile = nextFile;
+			LevelModel newLoad = new LevelModel();
+			newLoad.populate(levelFormat);
+			level.dispose();
+			level = newLoad;
+			level.getWorld().setContactListener(this);
+
+			setComplete(false);
+			setFailure(false);
+			hasObjective = false;
+			countdown = -1;
+			guardCollided = null;
+			lightController = new LightController(level);
+
+			resetCamera();
+			nextFile = null;
 		}
 	}
 	
@@ -807,6 +829,9 @@ public class GameController implements Screen, ContactListener {
 						ai.setLastSwitch((SwitchModel) bd2);
 					}
 				}
+//				TEST
+//				nextFile = Gdx.files.internal("jsons/testlevel2.json");
+
 			}
 
 			if((bd1==avatar && bd2 instanceof MoveableBox ) || (bd1 instanceof MoveableBox && bd2==avatar)){
@@ -840,6 +865,15 @@ public class GameController implements Screen, ContactListener {
 				(bd1 == exit   && bd2 == avatar && hasObjective)) {
 				setComplete(true);
 			}
+
+			if (currentFile.equals(levelSelectFile)) {
+				System.out.println("levellll");
+				if ((bd1 == avatar && bd2 instanceof DoorModel) || (bd2 == avatar && bd1 instanceof DoorModel)) {
+					nextFile = Gdx.files.internal("jsons/" + (bd1 instanceof DoorModel ? bd1.getName() : bd2.getName()) + ".json");
+					System.out.println("contactdoor");
+				}
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

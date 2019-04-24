@@ -55,9 +55,11 @@ import java.io.FileWriter;
  */
 public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	// Textures necessary to support the loading screen 
-	private static final String BACKGROUND_FILE = "textures/loading.png";
+	private static final String BACKGROUND_FILE = "textures/loadingbg.png";
+	private static final String LOGO_FILE = "textures/undetected.png";
 	private static final String PROGRESS_FILE = "textures/progressbar.png";
 	private static final String PLAY_BTN_FILE = "textures/play.png";
+	private static final String NEWGAME_BTN_FILE = "textures/home_newgame.png";
 	private static final String PAUSE_BTN_FILE = "textures/pause_temp.png";
 	
 	/** Background texture for start-up */
@@ -68,6 +70,8 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	private Texture pauseButton;
 	/** Texture atlas to support a progress bar */
 	private Texture statusBar;
+	/** Texture atlas for logo */
+	private Texture logo;
 	
 	// statusBar is a "texture atlas." Break it up into parts.
 	/** Left cap to the status background (grey region) */
@@ -100,7 +104,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	/** Width of the middle portion in texture atlas */
 	private static int PROGRESS_MIDDLE = 200;
 	/** Amount to scale the play button */
-	private static float BUTTON_SCALE  = 0.75f;
+	private static float BUTTON_SCALE  = 1.5f;
 	
 	/** Start button for XBox controller on Windows */
 	private static int WINDOWS_START = 7;
@@ -220,6 +224,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 		pauseButton = null;
 		background = new Texture(BACKGROUND_FILE);
 		statusBar  = new Texture(PROGRESS_FILE);
+		logo = new Texture(LOGO_FILE);
 		
 		// No progress so far.		
 		progress   = 0;
@@ -259,8 +264,10 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 
 		 background.dispose();
 		 statusBar.dispose();
+		 logo.dispose();
 		 background = null;
 		 statusBar  = null;
+		 logo = null;
 		 if (playButton != null) {
 			 playButton.dispose();
 			 playButton = null;
@@ -286,7 +293,8 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 			this.progress = manager.getProgress();
 			if (progress >= 1.0f) {
 				this.progress = 1.0f;
-				playButton = new Texture(PLAY_BTN_FILE);
+//				playButton = new Texture(PLAY_BTN_FILE);
+				playButton = new Texture(NEWGAME_BTN_FILE);
 				playButton.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 			}
 		}
@@ -301,9 +309,10 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	 */
 	private void draw() {
 		canvas.begin();
-		//canvas.draw(background, 0, 0);
-		canvas.draw(background, Color.WHITE, 0, 0,
-		0, background.getHeight(), 0, canvas.getWidth()/background.getWidth(), canvas.getWidth()/background.getWidth());
+//		canvas.draw(background, 0, 0);
+		canvas.draw(background, Color.WHITE, background.getWidth()/2, background.getHeight()/2,
+		canvas.getWidth()/2, canvas.getHeight()/2, 0, canvas.getWidth()/background.getWidth(), canvas.getWidth()/background.getWidth());
+		canvas.draw(logo, Color.WHITE, logo.getWidth()/2, logo.getHeight()/2, canvas.getWidth()/2, canvas.getWidth()/2, 0, 1.7f, 1.7f);
 		if (playButton == null) {
 			drawProgress(canvas);
 		} else {
@@ -451,9 +460,15 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 		// Play button is a circle.
 		float radius = BUTTON_SCALE*scale*playButton.getWidth()/2.0f;
 		float dist = (screenX-centerX)*(screenX-centerX)+(screenY-centerY)*(screenY-centerY);
-		if (dist < radius*radius) {
+//		if (dist < radius*radius) {
+//			pressState = 1;
+//		}
+		if (Math.abs(screenX-centerX)<BUTTON_SCALE*scale*playButton.getWidth()/2f &&
+				Math.abs(screenY-centerY)<BUTTON_SCALE*scale*playButton.getHeight()/2f){
 			pressState = 1;
 		}
+
+
 		return false;
 	}
 	

@@ -371,14 +371,16 @@ public class LevelModel {
 		createConeLights(levelFormat.get("lights"));
 		
 		// Add level goal
-		goalDoor = new ExitModel();
-		goalDoor.initialize(levelFormat.get("exit"));
-		if (goalDoor.getTexture().getRegionWidth()<tSize)
-			goalDoor.setWidth(goalDoor.getTexture().getRegionWidth()/scale.x);
-		if (goalDoor.getTexture().getRegionHeight()<tSize)
-			goalDoor.setHeight(goalDoor.getTexture().getRegionHeight()/scale.y);
-		goalDoor.setDrawScale(scale);
-		activate(goalDoor);
+		if (levelFormat.has("exit")) {
+			goalDoor = new ExitModel();
+			goalDoor.initialize(levelFormat.get("exit"));
+			if (goalDoor.getTexture().getRegionWidth() < tSize)
+				goalDoor.setWidth(goalDoor.getTexture().getRegionWidth() / scale.x);
+			if (goalDoor.getTexture().getRegionHeight() < tSize)
+				goalDoor.setHeight(goalDoor.getTexture().getRegionHeight() / scale.y);
+			goalDoor.setDrawScale(scale);
+			activate(goalDoor);
+		}
 
 		JsonValue bounds = levelFormat.get("exteriorwall");
 		ExteriorWall ew = new ExteriorWall();
@@ -534,24 +536,26 @@ public class LevelModel {
 			switchdata = switchdata.next();
 		}
 
-		String[] objDoors;
-		String[] objLasers;
-		objective = new ObjectiveModel();
-		objDoors = levelFormat.get("objective").get("doors").asStringArray();
-		objLasers = levelFormat.get("objective").get("lasers").asStringArray();
-		objective.initialize(levelFormat.get("objective"));
-		if (objective.getTexture().getRegionWidth()<tSize)
-			objective.setWidth(objective.getTexture().getRegionWidth()/scale.x);
-		if (objective.getTexture().getRegionHeight()<tSize)
-			objective.setHeight(objective.getTexture().getRegionHeight()/scale.y);
-		objective.setDrawScale(scale);
-		for (int i = 0; i < objDoors.length; i++) {
-			objective.addDoor(doorMap.get(objDoors[i]));
+		if (levelFormat.has("objective")) {
+			String[] objDoors;
+			String[] objLasers;
+			objective = new ObjectiveModel();
+			objDoors = levelFormat.get("objective").get("doors").asStringArray();
+			objLasers = levelFormat.get("objective").get("lasers").asStringArray();
+			objective.initialize(levelFormat.get("objective"));
+			if (objective.getTexture().getRegionWidth() < tSize)
+				objective.setWidth(objective.getTexture().getRegionWidth() / scale.x);
+			if (objective.getTexture().getRegionHeight() < tSize)
+				objective.setHeight(objective.getTexture().getRegionHeight() / scale.y);
+			objective.setDrawScale(scale);
+			for (int i = 0; i < objDoors.length; i++) {
+				objective.addDoor(doorMap.get(objDoors[i]));
+			}
+			for (int i = 0; i < objLasers.length; i++) {
+				objective.addLaser(laserMap.get(objLasers[i]));
+			}
+			activate(objective);
 		}
-		for (int i = 0; i < objLasers.length; i++) {
-			objective.addLaser(laserMap.get(objLasers[i]));
-		}
-		activate(objective);
 	}
 
 	public void placeBox(DudeModel player) {
@@ -949,7 +953,8 @@ public class LevelModel {
 				sw.update(dt);
 			}
 
-			goalDoor.update(dt);
+			if(goalDoor!=null)
+				goalDoor.update(dt);
 			for(Laser l: lasers){
 				l.update(dt);
 			}
