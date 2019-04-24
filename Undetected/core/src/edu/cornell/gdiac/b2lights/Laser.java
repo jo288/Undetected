@@ -30,6 +30,8 @@ public class Laser extends BoxObstacle {
     private int time_to_live;
     /** the maximum time this laser can stay on for */
     private static final int LIFESPAN = 240;
+    /** Sector of the laser */
+    public int sector;
     private Fixture sensorFixture;
     private PolygonShape sensorShape;
 
@@ -90,6 +92,8 @@ public class Laser extends BoxObstacle {
 
         setBodyType(BodyDef.BodyType.StaticBody);
         setTimeToLive(json.get("timetolive").asInt()*60);
+
+        sector = json.get("sector").asInt();
 
         // Create the collision filter (used for light penetration)
         short collideBits = LevelModel.bitStringToShort(COLLIDE_BIT);

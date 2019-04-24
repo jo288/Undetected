@@ -113,6 +113,9 @@ public class GuardModel extends CharacterModel {
     public boolean walking = false;
     public float prevY;
 
+    /** Which sector the guard is in */
+    public int sector;
+
     /**
      * Returns the directional movement of this character.
      *
@@ -496,6 +499,8 @@ public class GuardModel extends CharacterModel {
         }
         setTexture(texture);
         setOrigin(origin.x,0);
+
+        sector = json.get("sector").asInt();
     }
 
 
