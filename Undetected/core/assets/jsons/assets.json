@@ -218,6 +218,14 @@
 			"file": 	"textures/BG_Box4.png",
 			"wrap": 	false
 		},
+		"victory": {
+			"file": 	"textures/victory.png",
+			"wrap": 	false
+		},
+		"defeat": {
+			"file": 	"textures/defeat.png",
+			"wrap": 	false
+		},
 		"camera": {
 			"file": "textures/camera.png",
 			"wrap": false
