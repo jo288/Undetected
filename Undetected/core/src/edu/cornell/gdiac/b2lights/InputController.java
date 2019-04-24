@@ -17,6 +17,8 @@ import com.badlogic.gdx.*;
 
 import edu.cornell.gdiac.util.XBox360Controller;
 
+import java.awt.event.InputEvent;
+
 /**
  * Class for reading player input. 
  *

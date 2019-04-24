@@ -829,6 +829,7 @@ public class GameController implements Screen, ContactListener {
                 }
                 for (AIController ai : level.getControl()) {
                     if (ai.getObPath().length != 0) {
+                        ai.setPatrol();
                         ai.setPath(ai.getObPath());
                     }
                 }
