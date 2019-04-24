@@ -462,7 +462,8 @@ public class GameController implements Screen, ContactListener {
 		} else if (countdown > 0) {
 			countdown--;
 		} else if (countdown == 0) {
-			reset();
+//			reset();
+			nextFile = levelSelectFile;
 		}
 		
 		return true;
@@ -567,6 +568,7 @@ public class GameController implements Screen, ContactListener {
 			setFailure(true);
 		}
 
+		//load the next level if needed
 		if (nextFile!=null) {
 			levelFormat = jsonReader.parse(nextFile);
 			currentFile = nextFile;
