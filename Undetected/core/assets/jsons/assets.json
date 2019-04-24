@@ -283,6 +283,10 @@
 		"alarmFlash": {
 			"file": 	"textures/alarmFlash.png",
 			"wrap": 	false
+		},
+		"overlay": {
+			"file": 	"textures/overlay_mask.png",
+			"wrap": 	false
 		}
   	},
   	"fonts": {

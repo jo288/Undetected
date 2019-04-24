@@ -531,17 +531,17 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		//only used if we are manually controlling one guard for demo purposes
-		GuardModel guard = guards.get(0);
-		Vector2 guardAngle = new Vector2(input.getHorizontalG(),input.getVerticalG());
-		if (guardAngle.len2() > 0.0f) {
-			float angle = guardAngle.angle();
-			// Convert to radians with up as 0
-			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-			guard.setDirection(angle);
-		}
-		guardAngle.scl(guard.getForce());
-		guard.setMovement(guardAngle.x,guardAngle.y);
-		guard.applyForce();
+//		GuardModel guard = guards.get(0);
+//		Vector2 guardAngle = new Vector2(input.getHorizontalG(),input.getVerticalG());
+//		if (guardAngle.len2() > 0.0f) {
+//			float angle = guardAngle.angle();
+//			// Convert to radians with up as 0
+//			angle = (float)Math.PI*(angle-90.0f)/180.0f;
+//			guard.setDirection(angle);
+//		}
+//		guardAngle.scl(guard.getForce());
+//		guard.setMovement(guardAngle.x,guardAngle.y);
+//		guard.applyForce();
 
 		cameraPan(dt);
 
@@ -572,11 +572,19 @@ public class GameController implements Screen, ContactListener {
 		level.draw(canvas);
 
 //		framerate display
-//        displayFont.setColor(Color.YELLOW);
-//        canvas.begin(); // DO NOT SCALE
-//        canvas.drawTextCentered(""+(int)(1f/delta), displayFont, 0.0f);
-//        canvas.end();
+//      displayFont.setColor(Color.YELLOW);
+//      canvas.begin(); // DO NOT SCALE
+//      canvas.drawTextCentered(""+(int)(1f/delta), displayFont, 0.0f);
+//      canvas.end();
 		OrthographicCamera cam = canvas.getCamera();
+
+		if(failed || complete) {
+			TextureRegion overlayTexture = JsonAssetManager.getInstance().getEntry("overlay", TextureRegion.class);
+			canvas.begin();
+			canvas.draw(overlayTexture, Color.WHITE, overlayTexture.getRegionWidth()/2,
+					overlayTexture.getRegionHeight()/2, canvas.getWidth(), canvas.getHeight(), 0, 5, 5, 0.8f);
+			canvas.end();
+		}
 		// Final message
 		if (complete && !failed) {
 			displayFont.setColor(Color.YELLOW);
@@ -594,9 +602,9 @@ public class GameController implements Screen, ContactListener {
 			canvas.end();
 		}
 
-		if (hasObjective ) {
+		if (hasObjective && !complete) {
 			Alarm alarm = level.getAlarm();
-			if(!alarm.isOn()){
+			if(!alarm.isOn()&&!failed){
 				alarm.turnOn();
 				alarm.start();
 			}
