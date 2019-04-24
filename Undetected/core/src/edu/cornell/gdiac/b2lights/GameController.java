@@ -961,7 +961,7 @@ public class GameController implements Screen, ContactListener {
 					for (AIController ai : level.getControl()) {
 						if (ai.getGuard().sector == ((Laser) bd1).sector) {
 							ai.setAlarmed();
-							ai.setProtect(avatar.getX(), avatar.getY());
+							ai.setProtect(bd1);
 //							System.out.println("laser");
 						}
 					}
@@ -981,7 +981,7 @@ public class GameController implements Screen, ContactListener {
 
 						if (ai.getGuard().sector == ((Laser) bd2).sector) {
 							ai.setAlarmed();
-							ai.setProtect(avatar.getX(), avatar.getY());
+							ai.setProtect(bd2);
 //							System.out.println("laser");
 						}
 					}

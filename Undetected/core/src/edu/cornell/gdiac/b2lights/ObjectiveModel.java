@@ -93,7 +93,7 @@ public class ObjectiveModel extends BoxObstacle {
 		}
 		if (lasers != null) {
 			for (Laser las : lasers) {
-				las.setOn(true);
+				las.permOn();
 			}
 		}
 	}

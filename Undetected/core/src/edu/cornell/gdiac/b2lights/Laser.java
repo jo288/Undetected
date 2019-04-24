@@ -149,6 +149,10 @@ public class Laser extends BoxObstacle {
 //        setOn(isOn);
 //    }
 
+    public void permOn() {
+        time_to_live = Integer.MAX_VALUE;
+    }
+
     public void setOn(boolean val) {
         isOn = val;
         if (isOn) {
