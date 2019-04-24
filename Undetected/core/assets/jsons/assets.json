@@ -297,8 +297,16 @@
 		"overlay": {
 			"file": 	"textures/overlay_mask.png",
 			"wrap": 	false
+		},
+		"restart": {
+			"file": 	"textures/Restart.png",
+			"wrap": 	false
+		},
+		"home": {
+			"file": 	"textures/home.png",
+			"wrap": 	false
 		}
-  	},
+	},
   	"fonts": {
   		"display": {
   			"file": 	"fonts/MarkerFelt.ttf",

@@ -17,7 +17,13 @@ package edu.cornell.gdiac.b2lights;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -29,8 +35,10 @@ import edu.cornell.gdiac.physics.obstacle.*;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.security.Guard;
 import java.util.ArrayList;
+import java.util.EventListener;
 
 /**
  * Gameplay controller for the game.
@@ -638,6 +646,19 @@ public class GameController implements Screen, ContactListener {
 					canvas.getWidth()/2, canvas.getHeight()/2, 0, 0.3f, 0.3f);
 			canvas.end();
 		}
+
+//		canvas.begin();
+//		TextureRegion texture = JsonAssetManager.getInstance().getEntry("restart", TextureRegion.class);
+//		Drawable drawable = new TextureRegionDrawable(texture);
+//		canvas.draw(texture,Color.WHITE,texture.getRegionWidth()/2f,texture.getRegionHeight()/2f,cam.position.x+350,cam.position.y+275,0,1.5f,1.5f);
+//		ImageButton button = new ImageButton(drawable);
+//		button.setPosition(cam.position.x+350, cam.position.y+275);
+//		button.setSize(texture.getRegionWidth(), texture.getRegionHeight());
+//		InputListener listener = new InputListener() {
+//
+//		};
+//		button.addListener(listener);
+//		canvas.end();
 	}
 	
 	/**

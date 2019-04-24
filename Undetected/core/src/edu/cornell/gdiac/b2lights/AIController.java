@@ -479,19 +479,19 @@ public class AIController {
             guard.walking = true;
         }
 
-//        String dir = json.get("direction").asString();
-//
-//        if (dir.equals("left")) {
-//            guard.setDirection(( float) Math.PI/2);
-//        } else if (dir.equals("right")) {
-//            guard.setDirection((float) -Math.PI/2);
-//        } else if (dir.equals("up")) {
-//            guard.setDirection(0f);
-//        } else if (dir.equals("down")) {
-//            guard.setDirection((float) Math.PI);
-//        } else {
-//            guard.setDirection(0f);
-//        }
+        String dir = json.get("direction").asString();
+
+        if (dir.equals("left")) {
+            guard.setDirection(( float) Math.PI/2);
+        } else if (dir.equals("right")) {
+            guard.setDirection((float) -Math.PI/2);
+        } else if (dir.equals("up")) {
+            guard.setDirection(0f);
+        } else if (dir.equals("down")) {
+            guard.setDirection((float) Math.PI);
+        } else {
+            guard.setDirection(0f);
+        }
 
         initialDirection = guard.getDirectionFloat();
     }
