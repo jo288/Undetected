@@ -461,7 +461,6 @@ public class LevelModel {
         while (cameraData!=null){
             CameraModel camera = new CameraModel();
             camera.initialize(cameraData);
-
             camera.setDrawScale(scale);
             activate(camera);
             camera.addLight(lights.get(cameraData.get("lightIndex").asInt()));
