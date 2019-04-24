@@ -19,6 +19,7 @@ public class AIController {
 
     /** Patrol Path of the Guard, Vector2 values are the respective patrol points in x,y screen coordinates */
     private Vector2[] path;
+    private Vector2[] obPath;
 
     /** Index of the path the Guard is currently going towards */
     private int pathIndex;
@@ -94,6 +95,10 @@ public class AIController {
         this.path = path;
         currentGoal = path[0];
         pathIndex = 0;
+    }
+
+    public Vector2[] getObPath() {
+        return obPath;
     }
 
     /** Sets the Guard to Patrol state */
@@ -452,6 +457,14 @@ public class AIController {
             for (int i = 0; i < paths.length / 2; i++) {
                 int j = i * 2;
                 path[i] = new Vector2(paths[j] + 0.5f , paths[j + 1] + 0.5f );
+            }
+        }
+        if (json.has("objectivepath")) {
+            float[] obPaths = json.get("objectivepath").asFloatArray();
+            obPath = new Vector2[obPaths.length / 2];
+            for (int i = 0; i < obPaths.length / 2; i++) {
+                int j = i * 2;
+                obPath[i] = new Vector2(obPaths[j] + 0.5f , obPaths[j + 1] + 0.5f );
             }
         }
 

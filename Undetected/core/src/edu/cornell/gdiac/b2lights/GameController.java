@@ -501,6 +501,7 @@ public class GameController implements Screen, ContactListener {
 		} else if(input.didAction() && switchCollided != null) {
 			switchCollided.switchMode();
 		}
+
 		//camera follow player
 		//canvas.getCamera().translate(input.getHorizontal(), input.getVertical());
 		int cx = (int)canvas.getCamera().position.x;
@@ -802,6 +803,11 @@ public class GameController implements Screen, ContactListener {
 			        ((ObjectiveModel) bd1).stealCard();
                 }if(bd2 instanceof ObjectiveModel){
 			        ((ObjectiveModel) bd2).stealCard();
+                }
+                for (AIController ai : level.getControl()) {
+                    if (ai.getObPath().length != 0) {
+                        ai.setPath(ai.getObPath());
+                    }
                 }
 				hasObjective = true;
 				exit.open();

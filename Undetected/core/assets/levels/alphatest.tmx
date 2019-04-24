@@ -124,6 +124,7 @@
   <object id="71" template="Guard.tx" x="768" y="128">
    <properties>
     <property name="IsPatrolling" type="bool" value="true"/>
+    <property name="objectivepath" value="[29,30,29,22]"/>
     <property name="path" value="[24,30,34,30]"/>
     <property name="sector" type="int" value="1"/>
    </properties>

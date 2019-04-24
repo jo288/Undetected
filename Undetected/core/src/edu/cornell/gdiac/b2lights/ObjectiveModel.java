@@ -96,7 +96,6 @@ public class ObjectiveModel extends BoxObstacle {
 				las.setOn(true);
 			}
 		}
-
 	}
 
 	public boolean getIsActive(){
