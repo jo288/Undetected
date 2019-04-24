@@ -48,7 +48,8 @@
 		"sensitiveRadius": 1.6,
 		"path": [ 2, 11, 2, 22, 12, 22, 12, 11 ],
 		"objectivepath": [],
-		"lightIndex": 0
+		"lightIndex": 0,
+		"sector": 0
 	},
 	{
 		"name": "guard",
@@ -58,7 +59,8 @@
 		"sensitiveRadius": 1.6,
 		"path": [ 12, 22, 12, 11, 2, 11, 2, 22 ],
 		"objectivepath": [],
-		"lightIndex": 1
+		"lightIndex": 1,
+		"sector": 0
 	},
 	{
 		"name": "guard2",
@@ -68,7 +70,8 @@
 		"sensitiveRadius": 1.6,
 		"path": [ 9, 8 ],
 		"objectivepath": [],
-		"lightIndex": 2
+		"lightIndex": 2,
+		"sector": 0
 	},
 	{
 		"name": "guard",
@@ -78,7 +81,8 @@
 		"sensitiveRadius": 1.6,
 		"path": [ 24, 30, 34, 30 ],
 		"objectivepath": [],
-		"lightIndex": 3
+		"lightIndex": 3,
+		"sector": 1
 	},
 	{
 		"name": "guard",
@@ -88,7 +92,8 @@
 		"sensitiveRadius": 1.6,
 		"path": [ 29, 5 ],
 		"objectivepath": [],
-		"lightIndex": 4
+		"lightIndex": 4,
+		"sector": 1
 	}
 ],
 "exit": {
@@ -150,7 +155,8 @@
 		"name": "laser1",
 		"pos": [ 36, 19 ],
 		"size": [ 3, 1 ],
-		"timetolive": 0
+		"timetolive": 0,
+		"sector": 1
 	}
 ],
 "objective": {

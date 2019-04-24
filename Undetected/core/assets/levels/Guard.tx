@@ -10,6 +10,7 @@
    <property name="lightRadius" type="float" value="9"/>
    <property name="objectivepath" value="[]"/>
    <property name="path" value="[]"/>
+   <property name="sector" type="int" value="0"/>
    <property name="sensitiveRadius" type="float" value="1.6000000000000001"/>
   </properties>
  </object>

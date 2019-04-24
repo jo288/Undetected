@@ -125,12 +125,14 @@
    <properties>
     <property name="IsPatrolling" type="bool" value="true"/>
     <property name="path" value="[24,30,34,30]"/>
+    <property name="sector" type="int" value="1"/>
    </properties>
   </object>
   <object id="72" template="Guard.tx" x="928" y="928">
    <properties>
     <property name="IsPatrolling" type="bool" value="true"/>
     <property name="path" value="[29,5]"/>
+    <property name="sector" type="int" value="1"/>
    </properties>
   </object>
   <object id="73" template="Box2.tx" name="box2" x="448" y="544"/>
@@ -152,6 +154,10 @@
    </properties>
   </object>
   <object id="79" template="HorizontalWall.tx" x="992" y="352"/>
-  <object id="80" template="Laser.tx" name="laser1" x="1152" y="480.5" width="3" height="96" rotation="-270"/>
+  <object id="80" template="Laser.tx" name="laser1" x="1152" y="480.5" width="3" height="96" rotation="-270">
+   <properties>
+    <property name="sector" type="int" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

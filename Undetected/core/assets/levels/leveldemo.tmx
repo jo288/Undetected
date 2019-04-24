@@ -36,7 +36,7 @@
   <object id="9" template="Exit.tx" x="32" y="32"/>
   <object id="10" template="Player.tx" x="64" y="64"/>
   <object id="11" template="Laser.tx" x="160" y="128" width="3" height="96"/>
-  <object id="12" template="Laser.tx" x="192" y="128.5" width="3" height="96" rotation="-270"/>
+  <object id="12" template="Laser.tx" name="laser1" x="192" y="128.5" width="3" height="96" rotation="-270"/>
   <object id="13" template="Guard.tx" x="224" y="256">
    <properties>
     <property name="IsPatrolling" type="bool" value="true"/>
@@ -45,7 +45,7 @@
   </object>
   <object id="14" template="Switch.tx" x="32" y="96">
    <properties>
-    <property name="lasers" value="5,6"/>
+    <property name="lasers" value="laser1"/>
    </properties>
   </object>
   <object id="15" template="Box1.tx" x="128" y="64"/>

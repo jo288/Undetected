@@ -33,7 +33,8 @@
 		"sensitiveRadius": 1.6,
 		"path": [ 16, 6, 16, 14 ],
 		"objectivepath": [],
-		"lightIndex": 0
+		"lightIndex": 0,
+		"sector": 0
 	},
 	{
 		"name": "guard",
@@ -43,7 +44,8 @@
 		"sensitiveRadius": 1.6,
 		"path": [],
 		"objectivepath": [],
-		"lightIndex": 1
+		"lightIndex": 1,
+		"sector": 0
 	}
 ],
 "exit": {

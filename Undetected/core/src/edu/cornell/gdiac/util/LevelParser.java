@@ -54,6 +54,7 @@ public class LevelParser {
         protected Array<Integer> path = new Array<Integer>();
         protected Array<Integer> objectivepath = new Array<Integer>();
         protected int lightIndex;
+        protected int sector = 0;
     }
 
     private class Exit{
@@ -72,6 +73,7 @@ public class LevelParser {
         protected int[] pos = new int[2];
         protected int[] size = new int[2];
         protected int timetolive = 0;
+        protected int sector = 0;
     }
 
     private class Objective{
@@ -258,8 +260,23 @@ public class LevelParser {
                     l.size = new int[] {1,e.getInt("height")/32};
                     l.pos = new int[] {Math.round(e.getFloat("x"))/32,testLevel.boardSize[1]-Math.round(e.getFloat("y"))/32};
                 }
-                if(e.hasChild("properties"))
-                    l.timetolive = e.getChildByNameRecursive("property").getInt("value");
+                if(e.hasChild("properties")) {
+                    Array<XmlReader.Element> properties = e.getChildrenByNameRecursively("property");
+                    for (XmlReader.Element property: properties){
+                        try {
+                            switch (property.get("name")) {
+                                case "sector":
+                                    l.sector = property.getInt("value");
+                                    break;
+                                case "timetolive":
+                                    l.timetolive = property.getInt("value");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        } catch (Exception ex) { System.err.println("laser property parsing error");}
+                    }
+                }
                 testLevel.lasers.add(l);
             }
             if(e.get("template").equals("Guard.tx")){
@@ -269,6 +286,9 @@ public class LevelParser {
                 for (XmlReader.Element property: properties){
                     try {
                         switch (property.get("name")) {
+                            case "sector":
+                                g.sector = property.getInt("value");
+                                break;
                             case "IsPatrolling":
                                 if (property.getBoolean("value")) g.status = "patrol";
                                 break;

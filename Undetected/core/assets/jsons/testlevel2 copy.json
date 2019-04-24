@@ -33,7 +33,8 @@
 		"sensitiveRadius": 1.6,
 		"path": [ 7, 2, 16, 2, 16, 5, 16, 2 ],
 		"objectivepath": [],
-		"lightIndex": 0
+		"lightIndex": 0,
+		"sector": 0
 	},
 	{
 		"name": "guard",
@@ -43,7 +44,8 @@
 		"sensitiveRadius": 0.8,
 		"path": [],
 		"objectivepath": [],
-		"lightIndex": 1
+		"lightIndex": 1,
+		"sector": 0
 	}
 ],
 "exit": {
@@ -73,55 +75,52 @@
 		"pos": [ 14, 9 ],
 		"switched": false,
 		"doors": [
-			"4",
-			"3",
-			"5",
-			"3",
-			"11",
-			"3",
-			"12",
-			"3"
+			"door1",
+			"door2",
+			"door3",
+			"door4"
 		],
 		"lasers": [
-			"8",
-			"4"
+			"laser1"
 		]
 	}
 ],
 "doors": [
 	{
-		"name": "door",
+		"name": "door2",
 		"pos": [ 5, 3 ],
 		"open": true
 	},
 	{
-		"name": "door",
+		"name": "door3",
 		"pos": [ 11, 3 ],
 		"open": true
 	},
 	{
-		"name": "door",
+		"name": "door4",
 		"pos": [ 12, 3 ],
 		"open": true
 	},
 	{
-		"name": "door",
+		"name": "door1",
 		"pos": [ 4, 3 ],
 		"open": true
 	}
 ],
 "lasers": [
 	{
-		"name": "laser",
+		"name": "laser1",
 		"pos": [ 8, 4 ],
 		"size": [ 1, 3 ],
-		"timetolive": 2
+		"timetolive": 2,
+		"sector": 0
 	},
 	{
 		"name": "laser",
 		"pos": [ 14, 7 ],
 		"size": [ 5, 1 ],
-		"timetolive": 3
+		"timetolive": 3,
+		"sector": 0
 	}
 ],
 "objective": {
