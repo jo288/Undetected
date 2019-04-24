@@ -35,6 +35,7 @@ public class Laser extends BoxObstacle {
 
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
+    private FilmStrip sidefilmstrip;
     int animateCool;
 
     public Laser(float x, float y) {
@@ -117,14 +118,25 @@ public class Laser extends BoxObstacle {
         setOrigin(origin.x, 0);
 
 
-
-		texture = JsonAssetManager.getInstance().getEntry("laserAnimation", TextureRegion.class);
-		try {
+        if (isHorizontal) {
+            texture = JsonAssetManager.getInstance().getEntry("sidelaserAnimation", TextureRegion.class);
+            try {
 //			filmstrip = (FilmStrip)texture;
-			filmstrip = new FilmStrip(texture.getTexture(), 1,6);
-		} catch (Exception e) {
-			filmstrip = null;
-		}
+                filmstrip = new FilmStrip(texture.getTexture(), 1, 6);
+            } catch (Exception e) {
+                filmstrip = null;
+            }
+        }else {
+            texture = JsonAssetManager.getInstance().getEntry("laserAnimation", TextureRegion.class);
+            try {
+//			filmstrip = (FilmStrip)texture;
+                filmstrip = new FilmStrip(texture.getTexture(), 1, 6);
+            } catch (Exception e) {
+                filmstrip = null;
+            }
+        }
+
+
 //		setTexture(texture);
     }
 
@@ -262,7 +274,8 @@ public class Laser extends BoxObstacle {
                 //draw transparent texture instead
                 canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x + getHeight()/2*drawScale.x,getY()*drawScale.y,getAngle(),1f,getHeight(),0.0f);
             }
-
+            canvas.draw(filmstrip, Color.WHITE, 16, 16, getX() * drawScale.x + getHeight()/2*drawScale.x, getY() * drawScale.y, 3.1415f, 1, 1);
+            canvas.draw(filmstrip, Color.WHITE, 16, 16, getX() * drawScale.x - getHeight()/2*drawScale.x, getY() * drawScale.y, 0, 1, 1);
         }
     }
 }

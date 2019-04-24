@@ -160,6 +160,16 @@
 				"first":	0
 			}
 		},
+		"sidelaserAnimation": {
+			"file": 	"textures/laserside.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		6,
+				"rows":		1,
+				"cols":		6,
+				"first":	0
+			}
+		},
 		"questionAnimation": {
 			"file": 	"textures/question_mark_on.png",
 			"wrap":  	false,
