@@ -90,6 +90,16 @@
 				"first":	0
 			}
 		},
+		"boxcharback": {
+			"file": 	"textures/boxdude_back.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
 		"charalert": {
 			"file": 	"textures/character_alert.png",
 			"wrap":  	false,

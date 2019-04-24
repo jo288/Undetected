@@ -344,15 +344,14 @@ public class DudeModel extends CharacterModel {
 		}
 		if (hasBox){
 			if (dir == 0) {
-				return;
-//				texture = JsonAssetManager.getInstance().getEntry("boxcharback", TextureRegion.class);
-//				try {
-//					filmstrip = (FilmStrip)texture;
-//					dudeanimation = filmstrip;
-//				} catch (Exception e) {
-//					filmstrip = null;
-//				}
-//				setTexture(texture);
+				texture = JsonAssetManager.getInstance().getEntry("boxcharback", TextureRegion.class);
+				try {
+					filmstrip = (FilmStrip)texture;
+					dudeanimation = filmstrip;
+				} catch (Exception e) {
+					filmstrip = null;
+				}
+				setTexture(texture);
 			} else if ((Math.round(dir * 100.0) / 100.0) == 3.14) {
 				texture = JsonAssetManager.getInstance().getEntry("boxcharfront", TextureRegion.class);
 				try {
