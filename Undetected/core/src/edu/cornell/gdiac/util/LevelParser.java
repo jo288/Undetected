@@ -55,6 +55,7 @@ public class LevelParser {
         protected Array<Integer> objectivepath = new Array<Integer>();
         protected int lightIndex;
         protected int sector = 0;
+        protected String direction = "up";
     }
 
     private class Exit{
@@ -324,6 +325,12 @@ public class LevelParser {
                                 l.color[0] = Integer.parseInt(t.substring(3, 5), 16) / 255f;
                                 l.color[1] = Integer.parseInt(t.substring(5, 7), 16) / 255f;
                                 l.color[2] = Integer.parseInt(t.substring(7, 9), 16) / 255f;
+                                break;
+                            case "direction":
+                                if (property.get("value").equals("up")||property.get("value").equals("down")||
+                                        property.get("value").equals("left")||property.get("value").equals("right"))
+                                    g.direction = property.get("value");
+                                break;
                             default:
                                 break;
                         }

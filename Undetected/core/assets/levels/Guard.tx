@@ -4,6 +4,7 @@
  <object type="guard" gid="1" width="32" height="48">
   <properties>
    <property name="IsPatrolling" type="bool" value="false"/>
+   <property name="direction" value="up"/>
    <property name="force" type="float" value="50"/>
    <property name="lightAngle" type="float" value="40"/>
    <property name="lightColor" type="color" value="#fffeba09"/>

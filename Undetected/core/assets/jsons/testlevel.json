@@ -34,7 +34,8 @@
 		"path": [ 16, 6, 16, 14 ],
 		"objectivepath": [],
 		"lightIndex": 0,
-		"sector": 0
+		"sector": 0,
+		"direction": "up"
 	},
 	{
 		"name": "guard",
@@ -45,7 +46,8 @@
 		"path": [],
 		"objectivepath": [],
 		"lightIndex": 1,
-		"sector": 0
+		"sector": 0,
+		"direction": "up"
 	}
 ],
 "exit": {

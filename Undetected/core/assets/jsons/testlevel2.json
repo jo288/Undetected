@@ -31,10 +31,11 @@
 		"status": "patrol",
 		"force": 40,
 		"sensitiveRadius": 1.6,
-		"path": [ 7, 2, 16, 2, 16, 5, 16, 2 ],
+		"path": [ 7, 2, 16, 2, 16, 5 ],
 		"objectivepath": [],
 		"lightIndex": 0,
-		"sector": 0
+		"sector": 0,
+		"direction": "up"
 	},
 	{
 		"name": "guard",
@@ -42,10 +43,11 @@
 		"status": "sleep",
 		"force": 40,
 		"sensitiveRadius": 0.8,
-		"path": [],
+		"path": [ 16, 11 ],
 		"objectivepath": [],
 		"lightIndex": 1,
-		"sector": 0
+		"sector": 0,
+		"direction": "up"
 	}
 ],
 "exit": {
@@ -89,6 +91,11 @@
 		"name": "door",
 		"pos": [ 5, 3 ],
 		"open": true
+	},
+	{
+		"name": "door",
+		"pos": [ 11, 3 ],
+		"open": false
 	}
 ],
 "lasers": [
