@@ -70,7 +70,7 @@
     <property name="timetolive" type="int" value="999"/>
    </properties>
   </object>
-  <object id="33" template="Switch.tx" x="384" y="160">
+  <object id="33" template="Switch.tx" x="320" y="160">
    <properties>
     <property name="doors" value="door1,door2"/>
    </properties>
