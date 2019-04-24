@@ -110,6 +110,7 @@ public class AIController {
 
     /** Sets the Guard to Alarmed state */
     public void setAlarmed() {
+        guard.getLight().setConeDegree(25);
         state = FSMState.ALERT;
         guard.setAlarmed(true);
     }

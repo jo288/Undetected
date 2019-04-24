@@ -519,7 +519,7 @@ public class GameController implements Screen, ContactListener {
 		//level.raycamera.update();
 		// Rotate the avatar to face the direction of movement
 
-		if (!failed) {
+		if (!failed && !complete) {
 			angleCache.set(input.getHorizontal(), input.getVertical());
 			if (angleCache.len2() > 0.0f) {
 				float angle = angleCache.angle();
@@ -534,7 +534,8 @@ public class GameController implements Screen, ContactListener {
 			avatar.setMovement(angleCache.x, angleCache.y);
 //		System.out.println(avatar.getMovement());
 			avatar.applyForce();
-		}else {
+		}
+		if (complete || failed) {
 			avatar.setMovement(0,0);
 			avatar.applyForce();
 		}
