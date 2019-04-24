@@ -249,7 +249,7 @@ public class AIController {
         Node closest = temp.poll();
         if (closest != null) currentGoal = new Vector2(board.boardToScreen(closest.x), board.boardToScreen(closest.y));
         board.clearMarks();
-        System.out.println(closest.x +  " " + closest.y);
+//        System.out.println(closest.x +  " " + closest.y);
     }
 
     /** Finds the shortest path to goal tile and changes the guard's velocity accordingly

@@ -32,6 +32,7 @@
 		"force": 40,
 		"sensitiveRadius": 1.6,
 		"path": [ 7, 2, 16, 2, 16, 5, 16, 2 ],
+		"objectivepath": [],
 		"lightIndex": 0
 	},
 	{
@@ -41,6 +42,7 @@
 		"force": 40,
 		"sensitiveRadius": 0.8,
 		"path": [],
+		"objectivepath": [],
 		"lightIndex": 1
 	}
 ],
