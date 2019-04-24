@@ -5,11 +5,11 @@
     		"wrap":		true
     	},
 		"wallvertical": {
-			"file":		"textures/BG_Wall_Vertical.png",
+			"file":		"textures/wallgreen.png",
 			"wrap":		false
 		},
 		"wallhorizontal": {
-			"file":		"textures/BG_Wall_Mid.png",
+			"file":		"textures/wallgreen.png",
 			"wrap":		false
 		},
 		"shadow": {

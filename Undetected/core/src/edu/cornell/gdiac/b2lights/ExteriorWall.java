@@ -37,8 +37,8 @@ public class ExteriorWall extends Obstacle{
         }
 
         public void initialize(JsonValue json, int posx, int posy){
-            setPosition(posx+0.5f,posy+0.5f);
-            setDimension(1,1);
+            setPosition(posx+0.5f,posy+1f);
+            setDimension(1,2);
 
             setBodyType(BodyDef.BodyType.StaticBody);
             setDensity(0);

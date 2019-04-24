@@ -38,7 +38,7 @@ public class LevelParser {
     private class Light{
         protected float[] color = {1f,1f,0,1f};
         protected float distance = 9;
-        protected float angle = 40;
+        protected float angle = 25;
     }
 
     private class Player{

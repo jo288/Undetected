@@ -902,6 +902,8 @@ public class LevelModel {
 			if(o instanceof ExteriorWall.WallBlock){
 				board.setOccupiedTiles(board.physicsToBoard(o.getX()),
 						board.physicsToBoard(o.getY()),1);
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()),
+						board.physicsToBoard(o.getY())+1,1);
 			}
 			if(o instanceof InteriorWall.WallBlock){
 				board.setOccupiedTiles(board.physicsToBoard(o.getX()),

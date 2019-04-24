@@ -13,7 +13,7 @@
 	{
 		"color": [ 1, 1, 0, 1 ],
 		"distance": 9,
-		"angle": 40
+		"angle": 25
 	}
 ],
 "avatar": {
@@ -27,6 +27,7 @@
 		"force": 40,
 		"sensitiveRadius": 1.6,
 		"path": [ 7, 2, 2, 2 ],
+		"objectivepath": [],
 		"lightIndex": 0
 	}
 ],
