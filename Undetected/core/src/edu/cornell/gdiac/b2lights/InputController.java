@@ -173,6 +173,15 @@ public class InputController {
 	}
 
 	/**
+	 * Returns true if the reset button is being hovered.
+	 *
+	 * @return true if the reset button is being hovered.
+	 */
+	public boolean didResetHover() {
+		return Gdx.input.getX() >= 710 && Gdx.input.getX() <= 800 && Gdx.input.getY() >= 5 && Gdx.input.getY() <= 45;
+	}
+
+	/**
 	 * Returns whether the space key is being held down or not.
 	 *
 	 * 1 = yes, 0 = no
@@ -324,5 +333,9 @@ public class InputController {
 			verticalG -= 1.0f;
 		}
 
+		if (didResetHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+			resetPressed = true;
+			resetPrevious = false;
+		}
 	}
 }

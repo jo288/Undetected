@@ -647,10 +647,12 @@ public class GameController implements Screen, ContactListener {
 			canvas.end();
 		}
 
-//		canvas.begin();
-//		TextureRegion texture = JsonAssetManager.getInstance().getEntry("restart", TextureRegion.class);
+		canvas.begin();
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("restart", TextureRegion.class);
+		InputController input = InputController.getInstance();
+		Color tint = input.didResetHover() ? Color.GRAY : Color.WHITE;
 //		Drawable drawable = new TextureRegionDrawable(texture);
-//		canvas.draw(texture,Color.WHITE,texture.getRegionWidth()/2f,texture.getRegionHeight()/2f,cam.position.x+350,cam.position.y+275,0,1.5f,1.5f);
+		canvas.draw(texture,tint,texture.getRegionWidth()/2f,texture.getRegionHeight()/2f,cam.position.x+350,cam.position.y+275,0,1.5f,1.5f);
 //		ImageButton button = new ImageButton(drawable);
 //		button.setPosition(cam.position.x+350, cam.position.y+275);
 //		button.setSize(texture.getRegionWidth(), texture.getRegionHeight());
@@ -658,7 +660,7 @@ public class GameController implements Screen, ContactListener {
 //
 //		};
 //		button.addListener(listener);
-//		canvas.end();
+		canvas.end();
 	}
 	
 	/**
