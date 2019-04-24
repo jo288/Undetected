@@ -463,7 +463,10 @@ public class GameController implements Screen, ContactListener {
 			countdown--;
 		} else if (countdown == 0) {
 //			reset();
-			nextFile = levelSelectFile;
+			if(failed)
+				reset();
+			else
+				nextFile = levelSelectFile;
 		}
 		
 		return true;
@@ -576,6 +579,7 @@ public class GameController implements Screen, ContactListener {
 		//load the next level if needed
 		if (nextFile!=null) {
 			levelFormat = jsonReader.parse(nextFile);
+			FileHandle lastFile = currentFile;
 			currentFile = nextFile;
 			LevelModel newLoad = new LevelModel();
 			newLoad.populate(levelFormat);
@@ -589,6 +593,20 @@ public class GameController implements Screen, ContactListener {
 			countdown = -1;
 			guardCollided = null;
 			lightController = new LightController(level);
+
+			System.out.println(lastFile.name());
+
+			if(currentFile.equals(levelSelectFile)){
+				ArrayList<DoorModel> doors = level.getDoors();
+				for (DoorModel d : doors) {
+					if ((d.getName()+".json").equals(lastFile.name())){
+						System.out.println("level1 door");
+						avatar = level.getAvatar();
+						avatar.setPosition(d.getPosition().x,d.getPosition().y-1);
+						avatar.setDirection(3.14f);
+					}
+				}
+			}
 
 			resetCamera();
 			nextFile = null;

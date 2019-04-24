@@ -30,7 +30,7 @@
 1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
@@ -64,7 +64,7 @@
   <object id="20" template="Box1.tx" x="128" y="64"/>
   <object id="21" template="Box2.tx" x="32" y="352"/>
   <object id="22" template="Box3.tx" x="192" y="64"/>
-  <object id="23" template="Laser.tx" x="256" y="352" width="3" height="96">
+  <object id="23" template="Laser.tx" name="laser1" x="256" y="352" width="3" height="96">
    <properties>
     <property name="timetolive" type="int" value="2"/>
    </properties>
@@ -75,15 +75,15 @@
    </properties>
   </object>
   <object id="34" template="HorizontalWall.tx" x="128" y="256" width="288" height="48"/>
-  <object id="35" template="DoorOpen.tx" x="160" y="384"/>
+  <object id="35" template="DoorOpen.tx" name="door2" x="160" y="384"/>
   <object id="36" template="Switch.tx" x="448" y="192">
    <properties>
-    <property name="doors" value="5,3"/>
-    <property name="lasers" value="8,4"/>
+    <property name="doors" value="door1,door2"/>
+    <property name="lasers" value="laser1"/>
    </properties>
   </object>
   <object id="37" template="HorizontalWall.tx" x="384" y="384" width="64" height="48"/>
   <object id="38" template="HorizontalWall.tx" x="96" y="384" width="64" height="48"/>
-  <object id="40" template="DoorClosed.tx" x="352" y="384"/>
+  <object id="40" template="DoorClosed.tx" name="door1" x="352" y="384"/>
  </objectgroup>
 </map>

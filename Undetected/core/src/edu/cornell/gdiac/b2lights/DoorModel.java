@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.utils.JsonValue;
 import edu.cornell.gdiac.physics.obstacle.BoxObstacle;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
+import edu.cornell.gdiac.util.FilmStrip;
 import edu.cornell.gdiac.util.JsonAssetManager;
 
 import java.lang.reflect.Field;
@@ -22,6 +23,7 @@ public class DoorModel extends BoxObstacle{
     private short closedMaskBits = (short)0xffff;
     private short closedCategoryBits = (short)0x0020;
     private boolean flaggedForDelete;
+    private FilmStrip filmstrip;
 
     public DoorModel(float x, float y) {
         super(x, y, DOOR_WIDTH, DOOR_HEIGHT);
@@ -131,18 +133,43 @@ public class DoorModel extends BoxObstacle{
         closedDoorTexture = closedTexture;
         TextureRegion openTexture = JsonAssetManager.getInstance().getEntry("doorOpen", TextureRegion.class);
         openDoorTexture = openTexture;
+        texture = JsonAssetManager.getInstance().getEntry("greendoor", TextureRegion.class);
+        try {
+            filmstrip = (FilmStrip)texture;
+        } catch (Exception e) {
+            filmstrip = null;
+        }
+
         Filter filter = new Filter();
         if (!open) {
             setTexture(closedTexture);
+//            filmstrip.setFrame(0);
+
+//            setTexture(filmstrip);
             filter.categoryBits = closedCategoryBits;
             filter.maskBits = closedMaskBits;
         } else {
             setTexture(openTexture);
+//            filmstrip.setFrame(11);
+
+//            setTexture(filmstrip);
             filter.categoryBits = openCategoryBits;
             filter.maskBits = openMaskBits;
         }
         setFilterData(filter);
         setOrigin(origin.x, 0);
+
+
+//        setTexture(filmstrip);
+
+//        if (open) {
+////            setTexture(offTexture);
+//            filmstrip.setFrame(11);
+//        } else {
+////            setTexture(onTexture);
+//            filmstrip.setFrame(0);
+//        }
+//        setOrigin(origin.x, 0);
     }
 
     /**

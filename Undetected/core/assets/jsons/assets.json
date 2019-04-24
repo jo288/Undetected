@@ -200,6 +200,26 @@
 				"first":	0
 			}
 		},
+		"greendoor": {
+			"file": 	"textures/greendoor.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		12,
+				"rows":		1,
+				"cols":		12,
+				"first":	0
+			}
+		},
+		"bluedoor": {
+			"file": 	"textures/bluedoor.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		12,
+				"rows":		1,
+				"cols":		12,
+				"first":	0
+			}
+		},
 		"question": {
 			"file":		"textures/question_mark.png",
 			"wrap":		false

@@ -198,6 +198,11 @@ public class LevelModel {
 	/**
 	 * Returns a reference to all the guards
 	 */
+	public ArrayList<DoorModel> getDoors() { return doors; }
+
+	/**
+	 * Returns a reference to all the guards
+	 */
 	public ArrayList<SwitchModel> getSwtiches() { return switches; }
 	public ArrayList<CameraModel> getCameras() { return cameras;}
 
