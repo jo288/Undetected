@@ -90,6 +90,7 @@ public class LightController {
                 }
                 clearIntersectionData();
                 guard.collidedAvatar(player);
+                guard.setAlarmed(true);
                 return true;
             }
         }

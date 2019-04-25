@@ -69,6 +69,9 @@ public class InputController {
 	private boolean decViewPressed;
 	/** Whether the home button is pressed or not */
 	private boolean homePressed;
+	/**mini map*/
+	private boolean mapPressed;
+	private boolean mapPrev;
 	/**Whether hot keys for translating camera was pressed */
 	private boolean cameraUp;
 	private boolean cameraLeft;
@@ -227,6 +230,10 @@ public class InputController {
 		return actionPressed && !actionPrevious;
 	}
 
+	/** Returns true if m is pressed
+	 */
+	public boolean didMap(){ return mapPressed; }
+	public boolean didMapPrev(){ return mapPrev;}
 	/**
 	 * Returns true if Z is pressed (for increasing guard's field of view
 	 */
@@ -264,6 +271,8 @@ public class InputController {
 		pausePrevious = pausePressed;
 		loadPrevious = loadPressed;
 		actionPrevious = actionPressed;
+		mapPrev = mapPressed;
+
 
 		// Check to see if a GamePad is connected
 		if (xbox.isConnected()) {
@@ -313,6 +322,7 @@ public class InputController {
 		pausePressed = (secondary && pausePressed) || (Gdx.input.isKeyPressed(Input.Keys.P));
 		loadPressed = (secondary && loadPressed) || (Gdx.input.isKeyPressed(Input.Keys.L));
 		nextPressed = (secondary && nextPressed) || (Gdx.input.isKeyPressed(Input.Keys.N));
+		mapPressed = (secondary && mapPressed) || (Gdx.input.isKeyPressed(Input.Keys.M));
 		exitPressed  = (secondary && exitPressed) || (Gdx.input.isKeyPressed(Input.Keys.ESCAPE));
 		actionPressed = (secondary && actionPressed) || (Gdx.input.isKeyPressed(Input.Keys.SPACE));
 		incViewPressed = (secondary && incViewPressed) || (Gdx.input.isKeyPressed(Input.Keys.Z));
@@ -367,5 +377,7 @@ public class InputController {
 		if (didHomeHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 			homePressed = true;
 		}
+
+
 	}
 }

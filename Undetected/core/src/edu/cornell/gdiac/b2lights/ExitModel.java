@@ -31,7 +31,8 @@ public class ExitModel extends BoxObstacle {
 	public static final String COLLIDE_BIT = "0010";
 	/** Default Width of Player */
 	public static final String EXCLUDE_BIT = "0000000000000000";
-
+	private boolean animationOn = false;
+	private float alpha = 1; //for drawing purposes
 	/**
 	 * Create a new ExitModel with degenerate settings
 	 */	
@@ -90,8 +91,19 @@ public class ExitModel extends BoxObstacle {
 		setOrigin(origin.x,0);
 	}
 
+	public boolean isAnimating(){return animationOn;}
+
 	public void open() {
+		animationOn = true;
 		setSensor(true);
+
+	}
+
+	public void animate(float dt){
+		alpha-=dt*0.6;
+		if(alpha<0){
+			animationOn = false;
+		}
 	}
 
 	/**
@@ -101,7 +113,7 @@ public class ExitModel extends BoxObstacle {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		if (texture != null) {
-			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f, alpha);
 		}
 	}
 }

@@ -1,12 +1,8 @@
 package edu.cornell.gdiac.b2lights;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import edu.cornell.gdiac.physics.obstacle.Obstacle;
@@ -20,12 +16,14 @@ public class MiniMap {
     private float height;
     private float alpha; //flashing objective
     private boolean showExit;
+    private boolean showObjective;
     LevelModel level;
 
     public MiniMap(float width, float height, LevelModel level){
         this.width = width;
         this.height = height;
         this.showExit = false;
+        this.showObjective = false;
         this.level = level;
         this.zoom = Math.max((level.bounds.width*level.scale.x)/800, (level.bounds.height*level.scale.y)/600);
         System.out.println("ZOOM "+zoom);
@@ -50,6 +48,7 @@ public class MiniMap {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         level.board.draw(canvas);
         for(Obstacle obj : level.objects) {
+            obj.draw(canvas);
             if(obj instanceof ObjectiveModel) {
                 if (!((ObjectiveModel) obj).getIsStolen()) {
                     alpha+=delta*2;
@@ -85,7 +84,6 @@ public class MiniMap {
 
         canvas.end();
         canvas.setCamera(bigCamera);
-
     }
 
 }

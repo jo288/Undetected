@@ -73,7 +73,8 @@ public class GameController implements Screen, ContactListener {
 	/** The JSON defining the level model */
 	private JsonValue  levelFormat;
 	private MiniMap miniMap;
-
+	private boolean showMiniMap = false;
+	private boolean showExit = false;
 
 	/** The font for giving messages to the player */
 	protected BitmapFont displayFont;
@@ -372,14 +373,8 @@ public class GameController implements Screen, ContactListener {
 		float playerY = level.getAvatar().getY();
 		//pan the canvas camera
 		OrthographicCamera cam = canvas.getCamera();
-//		float mincx = canvas.getHeight()/2;
-//		float mincy = canvas.getHeight()/2;
-//		float maxcx = level.bounds.width*level.scale.x - mincx;
-//		float maxcy = level.bounds.height*level.scale.y - mincy;
 		float cx = level.bounds.width*level.scale.x/2;
 		float cy = level.bounds.height*level.scale.y/2;
-
-		//cam.translate(input.getHorizontal(), input.getVertical());
 		float vw = cam.viewportWidth;
 		float vh = cam.viewportHeight;
 		float effectiveVW = vw * cam.zoom;
@@ -388,9 +383,14 @@ public class GameController implements Screen, ContactListener {
 		float dy = Math.abs((level.bounds.height*level.scale.y - effectiveVH)/2);
 		float sx = 32;
 		float sy = 32;
-		cam.position.x += (MathUtils.clamp(playerX*sx, cx-dx, cx + dx) - cam.position.x)*dt*2.8;
-		cam.position.y += (MathUtils.clamp(playerY*sy, cy-dy, cy + dy)  - cam.position.y)*dt*2.8;
-
+		if(!showExit) {
+			cam.position.x += (MathUtils.clamp(playerX * sx, cx - dx, cx + dx) - cam.position.x) * dt * 2.8;
+			cam.position.y += (MathUtils.clamp(playerY * sy, cy - dy, cy + dy) - cam.position.y) * dt * 2.8;
+		}
+		else{
+			cam.position.x += (MathUtils.clamp(level.getExit().getX() * sx, cx - dx, cx + dx) - cam.position.x) * dt * 2.8;
+			cam.position.y += (MathUtils.clamp(level.getExit().getY() * sy, cy - dy, cy + dy) - cam.position.y) * dt * 2.8;
+		}
 		//pan the rayhandler camera
 		OrthographicCamera rcam = level.raycamera;
 		rcam.position.x = cam.position.x/32;
@@ -499,18 +499,16 @@ public class GameController implements Screen, ContactListener {
 		if (input.didPause() && !paused) {
 			pause();
 		}
-
-		// LASER CHECK
-
-		/*if (input.didForward()) {
-			level.activateNextLight();
-		} else if (input.didBack()){
-			level.activatePrevLight();
-		}*/
+		if(input.didMap()){
+			showMiniMap = !showMiniMap;
+		}
 
 		avatar.animateDirection(avatar.getDirection());
-		for (GuardModel g : guards) {
-			g.animateDirection(g.getDirectionFloat());
+		//only animate guards if we are not showing the player the exit (after he takes objective)
+		if(!showExit) {
+			for (GuardModel g : guards) {
+				g.animateDirection(g.getDirectionFloat());
+			}
 		}
 
 		if(input.didAction() && avatar.getHasBox()){
@@ -522,15 +520,6 @@ public class GameController implements Screen, ContactListener {
 		} else if(input.didAction() && switchCollided != null) {
 			switchCollided.switchMode();
 		}
-
-		//camera follow player
-		//canvas.getCamera().translate(input.getHorizontal(), input.getVertical());
-		int cx = (int)canvas.getCamera().position.x;
-		int cy = (int)canvas.getCamera().position.y;
-		//level.rayhandler.useCustomViewport(cx,cy,800,600);
-		//level.raycamera.translate(input.getHorizontal(), input.getVertical());
-		//level.raycamera.update();
-		// Rotate the avatar to face the direction of movement
 
 		if (!failed && !complete) {
 			angleCache.set(input.getHorizontal(), input.getVertical());
@@ -578,9 +567,11 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		// Turn the physics engine crank.
-		level.update(dt);
-		if(lightController.detect() && !failed){
-			setFailure(true);
+		if(!showExit) {
+			level.update(dt);
+			if (lightController.detect() && !failed) {
+				setFailure(true);
+			}
 		}
 
 		//load the next level if needed
@@ -693,6 +684,13 @@ public class GameController implements Screen, ContactListener {
 			canvas.end();
 		}
 
+		if(showExit){
+			level.getExit().animate(delta);
+			if(!level.getExit().isAnimating()){
+				showExit = false;
+			}
+		}
+
 		if (paused) {
 			Texture pauseButton = new Texture(assetDirectory.get("textures").get("pause").getString("file"));
 			canvas.begin();
@@ -720,7 +718,9 @@ public class GameController implements Screen, ContactListener {
 //		};
 //		button.addListener(listener);
 			canvas.end();
-			miniMap.render(canvas, delta);
+			if(showMiniMap) {
+				miniMap.render(canvas, delta);
+			}
 		}
 	}
 	
@@ -899,6 +899,7 @@ public class GameController implements Screen, ContactListener {
                 }
 				hasObjective = true;
 				exit.open();
+				showExit = true;
 //				level.queueDestroyed(objective);
 			}
 
