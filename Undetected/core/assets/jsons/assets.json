@@ -200,6 +200,66 @@
 				"first":	0
 			}
 		},
+		"hostileFrontAnimation": {
+			"file": 	"textures/hostilefront.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"friendlyFrontAnimation": {
+			"file": 	"textures/friendlyfront.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"hostileLeftAnimation": {
+			"file": 	"textures/hostileleft.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"friendlyLeftAnimation": {
+			"file": 	"textures/friendlyleft.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"hostileRightAnimation": {
+			"file": 	"textures/hostileright.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"friendlyRightAnimation": {
+			"file": 	"textures/friendlyright.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
 		"greendoor": {
 			"file": 	"textures/greendoor.png",
 			"wrap":  	false,

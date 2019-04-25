@@ -16,6 +16,8 @@ public class DoorModel extends BoxObstacle{
     private static final float DOOR_WIDTH = 1f;
     private static final float DOOR_HEIGHT = 1f;
     private boolean open = false;
+    private boolean animateOn = false;
+    private boolean animateOff = false;
     private TextureRegion closedDoorTexture;
     private TextureRegion openDoorTexture;
     private short openCategoryBits = (short)0x0010;
@@ -62,11 +64,15 @@ public class DoorModel extends BoxObstacle{
         open = !open;
         Filter f = getFilterData();
         if (open) {
-            setTexture(openDoorTexture);
+//            setTexture(openDoorTexture);
+            animateOn = true;
+            animateOff = false;
             f.categoryBits = openCategoryBits;
             f.maskBits = openMaskBits;
         } else {
-            setTexture(closedDoorTexture);
+//            setTexture(closedDoorTexture);
+            animateOff = true;
+            animateOn = false;
             f.categoryBits = closedCategoryBits;
             f.maskBits = closedMaskBits;
         }
@@ -142,17 +148,17 @@ public class DoorModel extends BoxObstacle{
 
         Filter filter = new Filter();
         if (!open) {
-            setTexture(closedTexture);
-//            filmstrip.setFrame(0);
+//            setTexture(closedTexture);
+            filmstrip.setFrame(0);
 
-//            setTexture(filmstrip);
+            setTexture(filmstrip);
             filter.categoryBits = closedCategoryBits;
             filter.maskBits = closedMaskBits;
         } else {
-            setTexture(openTexture);
-//            filmstrip.setFrame(11);
+//            setTexture(openTexture);
+            filmstrip.setFrame(11);
 
-//            setTexture(filmstrip);
+            setTexture(filmstrip);
             filter.categoryBits = openCategoryBits;
             filter.maskBits = openMaskBits;
         }
@@ -170,6 +176,25 @@ public class DoorModel extends BoxObstacle{
 //            filmstrip.setFrame(0);
 //        }
 //        setOrigin(origin.x, 0);
+    }
+
+    public void update(float dt){
+        if (animateOff){
+            if(filmstrip.getFrame()<=0) {
+                animateOff = false;
+            }else{
+                System.out.println("off door frame "+filmstrip.getFrame());
+                filmstrip.setFrame(filmstrip.getFrame()-1);
+            }
+        }
+        if (animateOn){
+            if(filmstrip.getFrame()>=11) {
+                animateOn = false;
+            }else{
+                System.out.println("on door frame "+filmstrip.getFrame());
+                filmstrip.setFrame(filmstrip.getFrame()+1);
+            }
+        }
     }
 
     /**

@@ -956,6 +956,9 @@ public class LevelModel {
 			for (SwitchModel sw : switches) {
 				sw.update(dt);
 			}
+			for(DoorModel door: doors){
+				door.update(dt);
+			}
 
 			if(goalDoor!=null)
 				goalDoor.update(dt);

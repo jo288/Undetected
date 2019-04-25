@@ -381,7 +381,10 @@ public class GuardModel extends CharacterModel {
             }
             setTexture(texture);
         } else if ((Math.round(dir * 100.0) / 100.0) == 3.14) {
-            texture = JsonAssetManager.getInstance().getEntry("guardfront", TextureRegion.class);
+            texture = JsonAssetManager.getInstance().getEntry("friendlyFrontAnimation", TextureRegion.class);
+            if(isAlarmed){
+                texture = JsonAssetManager.getInstance().getEntry("hostileFrontAnimation", TextureRegion.class);
+            }
             try {
                 filmstrip = (FilmStrip)texture;
                 guardanimation = filmstrip;
@@ -390,7 +393,11 @@ public class GuardModel extends CharacterModel {
             }
             setTexture(texture);
         } else if ((Math.round(dir * 100.0) / 100.0) == -1.57) {
-            texture = JsonAssetManager.getInstance().getEntry("guardright", TextureRegion.class);
+            texture = JsonAssetManager.getInstance().getEntry("friendlyRightAnimation", TextureRegion.class);
+            if(isAlarmed){
+                texture = JsonAssetManager.getInstance().getEntry("hostileRightAnimation", TextureRegion.class);
+
+            }
             try {
                 filmstrip = (FilmStrip)texture;
                 guardanimation = filmstrip;
@@ -399,7 +406,11 @@ public class GuardModel extends CharacterModel {
             }
             setTexture(texture);
         } else if ((Math.round(dir * 100.0) / 100.0) == 1.57) {
-            texture = JsonAssetManager.getInstance().getEntry("guardleft", TextureRegion.class);
+            texture = JsonAssetManager.getInstance().getEntry("friendlyLeftAnimation", TextureRegion.class);
+            if(isAlarmed){
+                texture = JsonAssetManager.getInstance().getEntry("hostileLeftAnimation", TextureRegion.class);
+
+            }
             try {
                 filmstrip = (FilmStrip)texture;
                 guardanimation = filmstrip;
