@@ -36,7 +36,7 @@ public class ObjectiveModel extends BoxObstacle {
 	public static final String EXCLUDE_BIT = "0000000000000000";
 
 	/** Whether the objective is active or not */
-	private boolean isActive;
+	private boolean isStolen;
 	/** Whether the objective triggers alarm or not */
 	private boolean hasAlarm;
 	private ArrayList<Laser> lasers = new ArrayList<>();
@@ -64,6 +64,7 @@ public class ObjectiveModel extends BoxObstacle {
 		//change sprite
 		setTexture(stolenCardTexture);
 		setOrigin(origin.x,0);
+		setIsStolen(true);
 //		setBoxHeld(box);
 		alarmMode();
 		return true;
@@ -98,12 +99,12 @@ public class ObjectiveModel extends BoxObstacle {
 		}
 	}
 
-	public boolean getIsActive(){
-		return isActive;
+	public boolean getIsStolen(){
+		return isStolen;
 	}
 
-	public void setIsActive(boolean isActive){
-		this.isActive = isActive;
+	public void setIsStolen(boolean isStolen){
+		this.isStolen = isStolen;
 	}
 	
 	/**

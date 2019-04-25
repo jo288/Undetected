@@ -720,8 +720,7 @@ public class GameController implements Screen, ContactListener {
 //		};
 //		button.addListener(listener);
 			canvas.end();
-			miniMap.render(canvas);
-
+			miniMap.render(canvas, delta);
 		}
 	}
 	
