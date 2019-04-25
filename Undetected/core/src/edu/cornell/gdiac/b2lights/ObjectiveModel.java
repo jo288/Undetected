@@ -2,7 +2,7 @@
  * ExitModel.java
  *
  * This is a refactored version of the exit door from Lab 4.  We have made it a specialized
- * class so that we can import its properties from a JSON file.  
+ * class so that we can import its properties from a JSON file.
  *
  * Author: Walker M. White
  * Based on original PhysicsDemo Lab by Don Holden, 2007
@@ -106,11 +106,11 @@ public class ObjectiveModel extends BoxObstacle {
 	public void setIsStolen(boolean isStolen){
 		this.isStolen = isStolen;
 	}
-	
+
 	/**
 	 * Initializes the exit door via the given JSON value
 	 *
-	 * The JSON value has been parsed and is part of a bigger level file.  However, 
+	 * The JSON value has been parsed and is part of a bigger level file.  However,
 	 * this JSON value is limited to the exit subtree
 	 *
 	 * @param json	the JSON subtree defining the dude
@@ -122,27 +122,27 @@ public class ObjectiveModel extends BoxObstacle {
 		float[] size = json.get("size").asFloatArray();
 		setPosition(pos[0]+0.5f*(size[0]%2),pos[1]+0.5f*(size[1]%2));
 		setDimension(size[0],size[1]);
-		
+
 		// Technically, we should do error checking here.
 		// A JSON field might accidentally be missing
 		setBodyType(BodyDef.BodyType.StaticBody);
 		setDensity(0);
 		setFriction(0);
 		setRestitution(0);
-		
+
 		// Create the collision filter (used for light penetration)
-      	short collideBits = LevelModel.bitStringToShort(COLLIDE_BIT);
-      	short excludeBits = LevelModel.bitStringToComplement(EXCLUDE_BIT);
-      	Filter filter = new Filter();
-      	filter.categoryBits = collideBits;
-      	filter.maskBits = excludeBits;
-      	setFilterData(filter);
+		short collideBits = LevelModel.bitStringToShort(COLLIDE_BIT);
+		short excludeBits = LevelModel.bitStringToComplement(EXCLUDE_BIT);
+		Filter filter = new Filter();
+		filter.categoryBits = collideBits;
+		filter.maskBits = excludeBits;
+		setFilterData(filter);
 
 		// Reflection is best way to convert name to color
 		Color debugColor;
 		try {
-		    Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField("YELLOW");
-		    debugColor = new Color((Color)field.get(null));
+			Field field = Class.forName("com.badlogic.gdx.graphics.Color").getField("YELLOW");
+			debugColor = new Color((Color)field.get(null));
 		} catch (Exception e) {
 			debugColor = null; // Not defined
 		}
@@ -158,7 +158,7 @@ public class ObjectiveModel extends BoxObstacle {
 
 		texture = JsonAssetManager.getInstance().getEntry("stolencard", TextureRegion.class);
 		stolenCardTexture = texture;
-		
+
 		// Now get the texture from the AssetManager singleton
 //		String key = json.get("texture").asString();
 //		TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);

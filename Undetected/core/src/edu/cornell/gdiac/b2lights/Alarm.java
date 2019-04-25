@@ -34,7 +34,7 @@ public class Alarm extends ObstacleCanvas{
                            @Override
                            public void run() {
                                alpha+=flash_speed;
-                               if(alpha>1 || alpha<0){
+                               if((alpha > 1 && flash_speed > 0) || (alpha<0 && flash_speed < 0)){
                                    flash_speed*=-1;
                                }
                            }
@@ -44,6 +44,7 @@ public class Alarm extends ObstacleCanvas{
         );
     }
     public void draw(ObstacleCanvas canvas){
+        System.out.println("alarm alpha "+alpha);
         canvas.draw(alarmTexture, Color.WHITE, alarmTexture.getRegionWidth()/2,
                 alarmTexture.getRegionHeight()/2, canvas.getWidth(), canvas.getHeight(), 0, 5, 5, alpha);
     }

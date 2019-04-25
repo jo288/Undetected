@@ -298,6 +298,10 @@
 			"file": 	"textures/key.png",
 			"wrap": 	false
 		},
+		"greenkey": {
+			"file": 	"textures/greenkey.png",
+			"wrap": 	false
+		},
 		"stealcard": {
 			"file": 	"textures/Steal Card.png",
 			"wrap": 	false

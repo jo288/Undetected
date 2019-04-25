@@ -48,14 +48,12 @@ public class MiniMap {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         level.board.draw(canvas);
         for(Obstacle obj : level.objects) {
-            obj.draw(canvas);
             if(obj instanceof ObjectiveModel) {
                 if (!((ObjectiveModel) obj).getIsStolen()) {
                     alpha+=delta*2;
                     shapeRenderer.setColor(0.24f, 0.7f, 0.44f, alpha);
                     float x = obj.getX()*level.scale.x/zoom;
                     float y = obj.getY()*level.scale.y/zoom;
-                    System.out.println("objective " + x + " " + y);
                     shapeRenderer.circle(x, y, 20);
                     if(alpha>1){
                         alpha=0;

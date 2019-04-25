@@ -573,6 +573,12 @@ public class GameController implements Screen, ContactListener {
 				setFailure(true);
 			}
 		}
+		if(showExit){
+			level.getExit().animate(dt);
+			if(!level.getExit().isAnimating()){
+				showExit = false;
+			}
+		}
 
 		//load the next level if needed
 		if (nextFile!=null) {
@@ -591,6 +597,7 @@ public class GameController implements Screen, ContactListener {
 			countdown = -1;
 			guardCollided = null;
 			lightController = new LightController(level);
+			showExit = false;
 
 			System.out.println(lastFile.name());
 
@@ -679,15 +686,10 @@ public class GameController implements Screen, ContactListener {
 				alarm.turnOn();
 				alarm.start();
 			}
-			canvas.begin();
-			alarm.draw(canvas);
-			canvas.end();
-		}
-
-		if(showExit){
-			level.getExit().animate(delta);
-			if(!level.getExit().isAnimating()){
-				showExit = false;
+			if(!showExit) {
+				canvas.begin();
+				alarm.draw(canvas);
+				canvas.end();
 			}
 		}
 
