@@ -141,7 +141,7 @@ public class DoorModel extends BoxObstacle{
         openDoorTexture = openTexture;
         texture = JsonAssetManager.getInstance().getEntry("greendoor", TextureRegion.class);
         try {
-            filmstrip = (FilmStrip)texture;
+            filmstrip = new FilmStrip(texture.getTexture(), 1, 12);
         } catch (Exception e) {
             filmstrip = null;
         }
