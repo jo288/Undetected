@@ -29,6 +29,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Timer;
 import edu.cornell.gdiac.util.*;
 
 import edu.cornell.gdiac.physics.obstacle.*;
@@ -75,6 +76,7 @@ public class GameController implements Screen, ContactListener {
 	private MiniMap miniMap;
 	private boolean showMiniMap = false;
 	private boolean showExit = false;
+	private boolean panToPlayer = false; //pans back to player after showing exit
 
 	/** The font for giving messages to the player */
 	protected BitmapFont displayFont;
@@ -385,9 +387,21 @@ public class GameController implements Screen, ContactListener {
 		float dy = Math.abs((level.bounds.height*level.scale.y - effectiveVH)/2);
 		float sx = 32;
 		float sy = 32;
-		if(!showExit) {
-			cam.position.x += (MathUtils.clamp(playerX * sx, cx - dx, cx + dx) - cam.position.x) * dt * 2.8;
-			cam.position.y += (MathUtils.clamp(playerY * sy, cy - dy, cy + dy) - cam.position.y) * dt * 2.8;
+		if(!showExit || panToPlayer) {
+			float deltaX = (MathUtils.clamp(playerX * sx, cx - dx, cx + dx) - cam.position.x) * dt * 2.8f;
+			float deltaY = (MathUtils.clamp(playerY * sy, cy - dy, cy + dy) - cam.position.y) * dt * 2.8f;
+			if(panToPlayer){
+				if(Math.abs(deltaX)<=0.03 && Math.abs(deltaY)<=0.03){
+					showExit = false;
+					panToPlayer = false;
+				}
+				cam.position.x += deltaX;
+				cam.position.y += deltaY;
+			}
+			else {
+				cam.position.x += deltaX;
+				cam.position.y += deltaY;
+			}
 		}
 		else{
 			cam.position.x += (MathUtils.clamp(level.getExit().getX() * sx, cx - dx, cx + dx) - cam.position.x) * dt * 2.8;
@@ -582,8 +596,8 @@ public class GameController implements Screen, ContactListener {
 		}
 		if(showExit){
 			level.getExit().animate(dt);
-			if(!level.getExit().isAnimating()){
-				showExit = false;
+			if(!level.getExit().isAnimating() && !panToPlayer){
+				panToPlayer = true;
 			}
 		}
 

@@ -106,9 +106,11 @@ public class ExitModel extends BoxObstacle {
 	}
 
 	public void animate(float dt){
-		alpha-=dt*0.6;
-		if(alpha<0){
-			animationOn = false;
+		if(animationOn) {
+			alpha -= dt * 0.6;
+			if (alpha < 0) {
+				animationOn = false;
+			}
 		}
 	}
 	public void drawMiniMap(ObstacleCanvas canvas, float alpha){

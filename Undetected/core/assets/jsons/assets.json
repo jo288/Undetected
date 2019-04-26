@@ -20,6 +20,18 @@
 			"file": 	"textures/BG_Tile.png",
 			"wrap": 	true
 		},
+		"greenfloor": {
+			"file": 	"textures/BG_Tile2.png",
+			"wrap": 	true
+		},
+		"redfloor": {
+			"file": 	"textures/BG_Tile3.png",
+			"wrap": 	true
+		},
+		"purplefloor": {
+			"file": 	"textures/BG_Tile4.png",
+			"wrap": 	true
+		},
     	"charfront": {
     		"file": 	"textures/character_front.png",
     		"wrap":  	false,
