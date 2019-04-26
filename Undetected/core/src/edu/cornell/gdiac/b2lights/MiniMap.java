@@ -42,22 +42,17 @@ public class MiniMap {
     public void render(ObstacleCanvas canvas, float delta){
         OrthographicCamera bigCamera = canvas.getCamera();
         canvas.setCamera(this.miniCam);
-        ShapeRenderer shapeRenderer = new ShapeRenderer();
         miniViewport.apply();
         canvas.begin();
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         level.board.draw(canvas);
         for(Obstacle obj : level.objects) {
             if(obj instanceof ObjectiveModel) {
                 if (!((ObjectiveModel) obj).getIsStolen()) {
                     alpha+=delta*2;
-                    shapeRenderer.setColor(0.24f, 0.7f, 0.44f, alpha);
-                    float x = obj.getX()*level.scale.x/zoom;
-                    float y = obj.getY()*level.scale.y/zoom;
-                    shapeRenderer.circle(x, y, 20);
                     if(alpha>1){
                         alpha=0;
                     }
+                    ((ObjectiveModel) obj).drawMiniMap(canvas, alpha);
                 }
                 else{
                     if(!showExit){showExit = true;}
@@ -65,10 +60,7 @@ public class MiniMap {
             }
             else if(obj instanceof ExitModel && showExit){
                 alpha+=delta*2;
-                shapeRenderer.setColor(1, 0, 0, alpha);
-                float x = obj.getX()*level.scale.x/zoom;
-                float y = obj.getY()*level.scale.y/zoom;
-                shapeRenderer.circle(x, y, 20);
+                ((ExitModel) obj).drawMiniMap(canvas, alpha);
                 if(alpha>1){
                     alpha=0;
                 }
@@ -77,8 +69,6 @@ public class MiniMap {
                 obj.draw(canvas);
             }
         }
-
-        shapeRenderer.end();
 
         canvas.end();
         canvas.setCamera(bigCamera);

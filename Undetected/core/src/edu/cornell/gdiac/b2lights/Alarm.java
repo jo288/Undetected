@@ -33,10 +33,10 @@ public class Alarm extends ObstacleCanvas{
         Timer.schedule(new Timer.Task() {
                            @Override
                            public void run() {
-                               alpha+=flash_speed;
-                               if((alpha > 1 && flash_speed > 0) || (alpha<0 && flash_speed < 0)){
+                               if((alpha > 0.5 && flash_speed > 0) || (alpha<0 && flash_speed < 0)){
                                    flash_speed*=-1;
                                }
+                               alpha+=flash_speed;
                            }
                        }
                 , 0        //    (delay)

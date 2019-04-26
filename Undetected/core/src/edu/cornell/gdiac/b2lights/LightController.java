@@ -77,7 +77,7 @@ public class LightController {
             }
 
             //player is not in guard's cone light, but within their sensitive radius
-            else if(dist_to_player<=guard.getSensitiveRadius()){
+           /* else if(dist_to_player<=guard.getSensitiveRadius()){
                 level.getWorld().rayCast(ray, guard.getPosition(), player.getPosition());
                 for(int i=0; i<intersected.size(); i++){
                     Object b = intersected.get(i).getUserData();
@@ -92,7 +92,7 @@ public class LightController {
                 guard.collidedAvatar(player);
                 guard.setAlarmed(true);
                 return true;
-            }
+            }*/
         }
         //will probably group guards and cameras together later
         for(CameraModel cam: cameras) {

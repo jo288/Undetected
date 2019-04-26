@@ -528,7 +528,7 @@ public class GameController implements Screen, ContactListener {
 			}
 		}
 
-		if (!failed && !complete) {
+		if (!failed && !complete && !showExit) {
 			angleCache.set(input.getHorizontal(), input.getVertical());
 			if (angleCache.len2() > 0.0f) {
 				float angle = angleCache.angle();

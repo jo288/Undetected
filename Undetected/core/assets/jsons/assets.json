@@ -370,6 +370,14 @@
 			"file": 	"textures/Stolen Card.png",
 			"wrap": 	false
 		},
+		"objectiveIndicator": {
+			"file": "textures/objectiveIndicator.png",
+			"wrap": false
+		},
+		"exitIndicator": {
+			"file": "textures/exitIndicator.png",
+			"wrap": false
+		},
 		"pause":	{
 			"file":		"textures/temp_pause.png",
 			"wrap": 	false

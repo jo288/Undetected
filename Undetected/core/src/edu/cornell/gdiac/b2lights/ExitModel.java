@@ -31,7 +31,9 @@ public class ExitModel extends BoxObstacle {
 	public static final String COLLIDE_BIT = "0010";
 	/** Default Width of Player */
 	public static final String EXCLUDE_BIT = "0000000000000000";
+	private TextureRegion defaultExitTexture;
 	private boolean animationOn = false;
+	private TextureRegion circleTexture; //for minimap
 	private float alpha = 1; //for drawing purposes
 	/**
 	 * Create a new ExitModel with degenerate settings
@@ -87,8 +89,12 @@ public class ExitModel extends BoxObstacle {
 		// Now get the texture from the AssetManager singleton
 //		String key = json.get("texture").asString();
 		TextureRegion texture = JsonAssetManager.getInstance().getEntry("goal", TextureRegion.class);
+		defaultExitTexture = texture;
 		setTexture(texture);
 		setOrigin(origin.x,0);
+
+		texture = JsonAssetManager.getInstance().getEntry("exitIndicator", TextureRegion.class);
+		circleTexture = texture;
 	}
 
 	public boolean isAnimating(){return animationOn;}
@@ -104,6 +110,14 @@ public class ExitModel extends BoxObstacle {
 		if(alpha<0){
 			animationOn = false;
 		}
+	}
+	public void drawMiniMap(ObstacleCanvas canvas, float alpha){
+		setTexture(circleTexture);
+		setOrigin(origin.x,0);
+		canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f, alpha);
+		setTexture(defaultExitTexture);
+		setOrigin(origin.x,0);
+
 	}
 
 	/**

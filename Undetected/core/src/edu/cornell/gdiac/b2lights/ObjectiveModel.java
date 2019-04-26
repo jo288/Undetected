@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.utils.JsonValue;
 import edu.cornell.gdiac.physics.obstacle.BoxObstacle;
+import edu.cornell.gdiac.physics.obstacle.Obstacle;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.JsonAssetManager;
 
@@ -44,6 +45,7 @@ public class ObjectiveModel extends BoxObstacle {
 
 	private TextureRegion defaultCardTexture;
 	private TextureRegion stolenCardTexture;
+	private TextureRegion circleTexture; //for minimap
 
 	/**
 	 * Create a new ObjectiveModel with degenerate settings
@@ -159,11 +161,22 @@ public class ObjectiveModel extends BoxObstacle {
 		texture = JsonAssetManager.getInstance().getEntry("stolencard", TextureRegion.class);
 		stolenCardTexture = texture;
 
+		texture = JsonAssetManager.getInstance().getEntry("objectiveIndicator", TextureRegion.class);
+		circleTexture = texture;
+
 		// Now get the texture from the AssetManager singleton
 //		String key = json.get("texture").asString();
 //		TextureRegion texture = JsonAssetManager.getInstance().getEntry(key, TextureRegion.class);
 //		setTexture(texture);
 //		setOrigin(origin.x,0);
+	}
+	public void drawMiniMap(ObstacleCanvas canvas, float alpha){
+		setTexture(circleTexture);
+		setOrigin(origin.x,0);
+		canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f, alpha);
+		setTexture(defaultCardTexture);
+		setOrigin(origin.x,0);
+
 	}
 	/**
 	 * Draws the physics object.
@@ -175,4 +188,7 @@ public class ObjectiveModel extends BoxObstacle {
 			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
 		}
 	}
+	/** Draws a circle to represent objective for minimap
+	 *
+	 */
 }
