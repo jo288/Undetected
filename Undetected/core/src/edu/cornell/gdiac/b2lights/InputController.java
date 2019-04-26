@@ -232,7 +232,7 @@ public class InputController {
 
 	/** Returns true if m is pressed
 	 */
-	public boolean didMap(){ return mapPressed; }
+	public boolean didMap(){ return mapPressed && !mapPrev; }
 	public boolean didMapPrev(){ return mapPrev;}
 	/**
 	 * Returns true if Z is pressed (for increasing guard's field of view

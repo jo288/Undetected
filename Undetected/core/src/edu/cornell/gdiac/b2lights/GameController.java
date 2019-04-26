@@ -3,9 +3,9 @@
  *
  * This combines the WorldController with the mini-game specific PlatformController
  * in the last lab.  With that said, some of the work is now offloaded to the new
- * LevelModel class, which allows us to serialize and deserialize a level. 
- * 
- * This is a refactored version of WorldController from Lab 4.  It separate the 
+ * LevelModel class, which allows us to serialize and deserialize a level.
+ *
+ * This is a refactored version of WorldController from Lab 4.  It separate the
  * level out into a new class called LevelModel.  This model is, in turn, read
  * from a JSON file.
  *
@@ -52,7 +52,7 @@ import java.util.EventListener;
  * singleton asset manager to manage the various assets.
  */
 public class GameController implements Screen, ContactListener {
-	/** 
+	/**
 	 * Tracks the asset state.  Otherwise subclasses will try to load assets 
 	 */
 	protected enum AssetState {
@@ -65,15 +65,16 @@ public class GameController implements Screen, ContactListener {
 	}
 
 	private LightController lightController;
-	
+
 	/** The reader to process JSON files */
 	private JsonReader jsonReader;
-	 /** The JSON asset directory */
+	/** The JSON asset directory */
 	private JsonValue  assetDirectory;
 	/** The JSON defining the level model */
 	private JsonValue  levelFormat;
 	private MiniMap miniMap;
-
+	private boolean showMiniMap = false;
+	private boolean showExit = false;
 
 	/** The font for giving messages to the player */
 	protected BitmapFont displayFont;
@@ -145,7 +146,7 @@ public class GameController implements Screen, ContactListener {
 
 	/** Exit code for quitting the game */
 	public static final int EXIT_QUIT = 0;
-    /** How many frames after winning/losing do we continue? */
+	/** How many frames after winning/losing do we continue? */
 	public static final int EXIT_COUNT = 120;
 
 	/** Reference to the game canvas */
@@ -374,14 +375,8 @@ public class GameController implements Screen, ContactListener {
 		float playerY = level.getAvatar().getY();
 		//pan the canvas camera
 		OrthographicCamera cam = canvas.getCamera();
-//		float mincx = canvas.getHeight()/2;
-//		float mincy = canvas.getHeight()/2;
-//		float maxcx = level.bounds.width*level.scale.x - mincx;
-//		float maxcy = level.bounds.height*level.scale.y - mincy;
 		float cx = level.bounds.width*level.scale.x/2;
 		float cy = level.bounds.height*level.scale.y/2;
-
-		//cam.translate(input.getHorizontal(), input.getVertical());
 		float vw = cam.viewportWidth;
 		float vh = cam.viewportHeight;
 		float effectiveVW = vw * cam.zoom;
@@ -390,9 +385,14 @@ public class GameController implements Screen, ContactListener {
 		float dy = Math.abs((level.bounds.height*level.scale.y - effectiveVH)/2);
 		float sx = 32;
 		float sy = 32;
-		cam.position.x += (MathUtils.clamp(playerX*sx, cx-dx, cx + dx) - cam.position.x)*dt*2.8;
-		cam.position.y += (MathUtils.clamp(playerY*sy, cy-dy, cy + dy)  - cam.position.y)*dt*2.8;
-
+		if(!showExit) {
+			cam.position.x += (MathUtils.clamp(playerX * sx, cx - dx, cx + dx) - cam.position.x) * dt * 2.8;
+			cam.position.y += (MathUtils.clamp(playerY * sy, cy - dy, cy + dy) - cam.position.y) * dt * 2.8;
+		}
+		else{
+			cam.position.x += (MathUtils.clamp(level.getExit().getX() * sx, cx - dx, cx + dx) - cam.position.x) * dt * 2.8;
+			cam.position.y += (MathUtils.clamp(level.getExit().getY() * sy, cy - dy, cy + dy) - cam.position.y) * dt * 2.8;
+		}
 		//pan the rayhandler camera
 		OrthographicCamera rcam = level.raycamera;
 		rcam.position.x = cam.position.x/32;
@@ -501,18 +501,16 @@ public class GameController implements Screen, ContactListener {
 		if (input.didPause() && !paused) {
 			pause();
 		}
-
-		// LASER CHECK
-
-		/*if (input.didForward()) {
-			level.activateNextLight();
-		} else if (input.didBack()){
-			level.activatePrevLight();
-		}*/
+		if(input.didMap()){
+			showMiniMap = !showMiniMap;
+		}
 
 		avatar.animateDirection(avatar.getDirection());
-		for (GuardModel g : guards) {
-			g.animateDirection(g.getDirectionFloat());
+		//only animate guards if we are not showing the player the exit (after he takes objective)
+		if(!showExit) {
+			for (GuardModel g : guards) {
+				g.animateDirection(g.getDirectionFloat());
+			}
 		}
 
 		if(input.didAction() && avatar.getHasBox()){
@@ -529,15 +527,6 @@ public class GameController implements Screen, ContactListener {
 				}
 			}
 		}
-
-		//camera follow player
-		//canvas.getCamera().translate(input.getHorizontal(), input.getVertical());
-		int cx = (int)canvas.getCamera().position.x;
-		int cy = (int)canvas.getCamera().position.y;
-		//level.rayhandler.useCustomViewport(cx,cy,800,600);
-		//level.raycamera.translate(input.getHorizontal(), input.getVertical());
-		//level.raycamera.update();
-		// Rotate the avatar to face the direction of movement
 
 		if (!failed && !complete) {
 			angleCache.set(input.getHorizontal(), input.getVertical());
@@ -585,9 +574,17 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		// Turn the physics engine crank.
-		level.update(dt);
-		if(lightController.detect() && !failed){
-			setFailure(true);
+		if(!showExit) {
+			level.update(dt);
+			if (lightController.detect() && !failed) {
+				setFailure(true);
+			}
+		}
+		if(showExit){
+			level.getExit().animate(dt);
+			if(!level.getExit().isAnimating()){
+				showExit = false;
+			}
 		}
 
 		//load the next level if needed
@@ -607,6 +604,7 @@ public class GameController implements Screen, ContactListener {
 			countdown = -1;
 			guardCollided = null;
 			lightController = new LightController(level);
+			showExit = false;
 
 			System.out.println(lastFile.name());
 
@@ -695,12 +693,15 @@ public class GameController implements Screen, ContactListener {
 				alarm.turnOn();
 				alarm.start();
 			}
-			canvas.begin();
-			alarm.draw(canvas);
-			canvas.end();
+			if(!showExit) {
+				canvas.begin();
+				alarm.draw(canvas);
+				canvas.end();
+			}
 		}
 
 		if (paused) {
+			Texture pauseButton = new Texture(assetDirectory.get("textures").get("pause").getString("file"));
 			canvas.begin();
 			canvas.draw(pauseButton, Color.GRAY, pauseButton.getWidth()/2, pauseButton.getHeight()/2,
 					canvas.getWidth()/2, canvas.getHeight()/2, 0, 0.3f, 0.3f);
@@ -726,7 +727,9 @@ public class GameController implements Screen, ContactListener {
 //		};
 //		button.addListener(listener);
 			canvas.end();
-			miniMap.render(canvas, delta);
+			if(showMiniMap) {
+				miniMap.render(canvas, delta);
+			}
 		}
 	}
 
@@ -851,7 +854,7 @@ public class GameController implements Screen, ContactListener {
 			ArrayList<SwitchModel> switches = level.getSwtiches();
 			ObjectiveModel objective = level.getObjective();
 
-            if((guards.contains(bd1) && bd2==avatar ) || (bd1 == avatar && guards.contains(bd2))){
+			if((guards.contains(bd1) && bd2==avatar ) || (bd1 == avatar && guards.contains(bd2))){
 				if (guards.contains(bd1)) {
 					GuardModel guard = guards.get(guards.indexOf(bd1));
 					guardCollided = guard;
@@ -859,8 +862,8 @@ public class GameController implements Screen, ContactListener {
 					GuardModel guard = guards.get(guards.indexOf(bd2));
 					guardCollided = guard;
 				}
-                setFailure(true);
-            }
+				setFailure(true);
+			}
 
 			if((switches.contains(bd1) && bd2==avatar ) || (bd1 == avatar && switches.contains(bd2))){
 				if (switches.contains(bd1)) {
@@ -878,33 +881,34 @@ public class GameController implements Screen, ContactListener {
 			if((bd1==avatar && bd2 instanceof MoveableBox ) || (bd1 instanceof MoveableBox && bd2==avatar)){
 				avatarBoxCollision = true;
 				if (bd1 instanceof  MoveableBox) {
-				    avatar.setBoxInContact(bd1);
-                } else if (bd2 instanceof  MoveableBox) {
-				    avatar.setBoxInContact(bd2);
-                }
+					avatar.setBoxInContact(bd1);
+				} else if (bd2 instanceof  MoveableBox) {
+					avatar.setBoxInContact(bd2);
+				}
 			}
 
 			// Check for objective
 			if (((bd1 == avatar && bd2 == objective) || (bd1 == objective && bd2== avatar)) && !hasObjective){
-			    if(bd1 instanceof ObjectiveModel){
-			        ((ObjectiveModel) bd1).stealCard();
-                }if(bd2 instanceof ObjectiveModel){
-			        ((ObjectiveModel) bd2).stealCard();
-                }
-                for (AIController ai : level.getControl()) {
-                    if (ai.getObPath().length != 0) {
-                        ai.setPatrol();
-                        ai.setPath(ai.getObPath());
-                    }
-                }
+				if(bd1 instanceof ObjectiveModel){
+					((ObjectiveModel) bd1).stealCard();
+				}if(bd2 instanceof ObjectiveModel){
+					((ObjectiveModel) bd2).stealCard();
+				}
+				for (AIController ai : level.getControl()) {
+					if (ai.getObPath().length != 0) {
+						ai.setPatrol();
+						ai.setPath(ai.getObPath());
+					}
+				}
 				hasObjective = true;
 				exit.open();
+				showExit = true;
 //				level.queueDestroyed(objective);
 			}
 
 			// Check for win condition
 			if ((bd1 == avatar && bd2 == exit && hasObjective ) ||
-				(bd1 == exit   && bd2 == avatar && hasObjective)) {
+					(bd1 == exit   && bd2 == avatar && hasObjective)) {
 				setComplete(true);
 			}
 
@@ -941,7 +945,7 @@ public class GameController implements Screen, ContactListener {
 
 		if((bd1 == avatar && bd2 instanceof MoveableBox) || (bd1 instanceof MoveableBox && bd2==avatar)){
 			avatarBoxCollision = false;
-            avatar.setBoxInContact(null);
+			avatar.setBoxInContact(null);
 		}
 
 		if((switches.contains(bd1) && bd2==avatar ) || (bd1 == avatar && switches.contains(bd2))){
