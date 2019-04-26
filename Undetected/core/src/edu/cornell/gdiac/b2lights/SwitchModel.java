@@ -60,17 +60,6 @@ public class SwitchModel extends BoxObstacle{
             for (DoorModel door : doors) {
                 door.switchState();
             }
-            if (switched) {
-//                setTexture(switchOnTexture);
-//                filmstrip.setFrame(0);
-                animateOn = true;
-                animateOff = false;
-            } else {
-//                setTexture(switchOffTexture);
-//                filmstrip.setFrame(9);
-                animateOff = true;
-                animateOn = false;
-            }
             setOrigin(origin.x, 0);
         }
         if (lasers != null) {
@@ -83,36 +72,26 @@ public class SwitchModel extends BoxObstacle{
                     las.setOn(false);
                 }
             }
-            if (switched) {
-//                setTexture(switchOnTexture);
-//                filmstrip.setFrame(0);
-                animateOn = true;
-                animateOff = false;
-            } else {
-//                setTexture(switchOffTexture);
-//                filmstrip.setFrame(9);
-                animateOff = true;
-                animateOn = false;
-            }
             setOrigin(origin.x, 0);
         }
         if (cameras != null) {
             for (CameraModel cam : cameras) {
                 cam.toggle();
+            setOrigin(origin.x, 0);
             }
-            if (switched) {
+        }
+        if (switched) {
 //                setTexture(switchOnTexture);
 //                filmstrip.setFrame(0);
-                animateOn = true;
-                animateOff = false;
-            } else {
+            animateOn = true;
+            animateOff = false;
+        } else {
 //                setTexture(switchOffTexture);
 //                filmstrip.setFrame(9);
-                animateOff = true;
-                animateOn = false;
-            }
-            setOrigin(origin.x, 0);
+            animateOff = true;
+            animateOn = false;
         }
+        System.out.println("animate on: " + animateOn + "\nanimate off: " + animateOff);
     }
 
     public void addLaser(Laser laser) {
@@ -199,9 +178,10 @@ public class SwitchModel extends BoxObstacle{
         TextureRegion offTexture = JsonAssetManager.getInstance().getEntry("switchOff", TextureRegion.class);
         switchOffTexture = offTexture;
         TextureRegion onTexture = JsonAssetManager.getInstance().getEntry("switchOn", TextureRegion.class);
+        switchOnTexture = onTexture;
         texture = JsonAssetManager.getInstance().getEntry("switchAnimation", TextureRegion.class);
         try {
-            filmstrip = (FilmStrip)texture;
+            filmstrip = new FilmStrip(texture.getTexture(), 1, 10);
         } catch (Exception e) {
             filmstrip = null;
         }
@@ -243,7 +223,7 @@ public class SwitchModel extends BoxObstacle{
      */
     public void draw(ObstacleCanvas canvas) {
         if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,(getX()-getWidth()/2f)*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
         }
     }
 

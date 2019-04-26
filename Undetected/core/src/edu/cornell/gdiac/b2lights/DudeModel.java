@@ -536,6 +536,10 @@ public class DudeModel extends CharacterModel {
 
 	}
 
+	public void changeInvinc() {
+		setSensor(!isSensor());
+	}
+
 	/**
 	 * Applies the force to the body of this dude
 	 *

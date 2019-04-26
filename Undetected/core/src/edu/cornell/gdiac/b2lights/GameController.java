@@ -512,9 +512,14 @@ public class GameController implements Screen, ContactListener {
 		ArrayList<GuardModel> guards = level.getGuards();
 		InputController input = InputController.getInstance();
 
+		if (input.didInvinc()) {
+			avatar.changeInvinc(); //MAKES THE PLAYER ABLE TO WALK THROUGH WALLS, WE MUST REMOVE THIS LATER
+		}
+
 		if (input.didPause() && !paused) {
 			pause();
 		}
+
 		if(input.didMap()){
 			showMiniMap = !showMiniMap;
 		}
@@ -534,6 +539,7 @@ public class GameController implements Screen, ContactListener {
 			avatar.pickupBox();
 			level.queueDisabled(avatar.getBoxInContact());
 		} else if(input.didAction() && switchCollided != null) {
+			System.out.println(switchCollided);
 			switchCollided.switchMode();
 			for (AIController ai : level.getControl()) {
 				if (ai.getGuard().getAlarmed()) {
@@ -889,7 +895,6 @@ public class GameController implements Screen, ContactListener {
 				}
 //				TEST
 //				nextFile = Gdx.files.internal("jsons/testlevel2.json");
-
 			}
 
 			if((bd1==avatar && bd2 instanceof MoveableBox ) || (bd1 instanceof MoveableBox && bd2==avatar)){

@@ -64,6 +64,9 @@ public class InputController {
 	/** Whether the action button was pressed. */
 	private boolean actionPressed;
 	private boolean actionPrevious;
+	/** Whether the action button was pressed. */
+	private boolean invincPressed;
+	private boolean invincPrevious;
 	/** Whether hot key for changing guard's line of sight was pressed */
 	private boolean incViewPressed;
 	private boolean decViewPressed;
@@ -230,6 +233,10 @@ public class InputController {
 		return actionPressed && !actionPrevious;
 	}
 
+	public boolean didInvinc() {
+		return invincPressed && !invincPrevious;
+	}
+
 	/** Returns true if m is pressed
 	 */
 	public boolean didMap(){ return mapPressed && !mapPrev; }
@@ -272,6 +279,7 @@ public class InputController {
 		loadPrevious = loadPressed;
 		actionPrevious = actionPressed;
 		mapPrev = mapPressed;
+		invincPrevious = invincPressed;
 
 
 		// Check to see if a GamePad is connected
@@ -333,6 +341,7 @@ public class InputController {
 		cameraRight = (secondary && actionPressed) || (Gdx.input.isKeyPressed(Input.Keys.L));
 		zoomIn = (secondary && zoomIn) || (Gdx.input.isKeyPressed(Input.Keys.NUM_1));
 		zoomOut = (secondary && zoomOut) || (Gdx.input.isKeyPressed(Input.Keys.NUM_2));
+		invincPressed = (secondary && invincPressed) || (Gdx.input.isKeyPressed(Input.Keys.O));
 
 		// Directional controls
 		horizontal = (secondary ? horizontal : 0.0f);

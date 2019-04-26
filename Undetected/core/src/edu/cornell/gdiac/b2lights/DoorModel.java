@@ -56,7 +56,7 @@ public class DoorModel extends BoxObstacle{
             f.maskBits = closedMaskBits;
         }
         setFilterData(f);
-        System.out.println(open+" category bits "+f.categoryBits+" mask "+f.maskBits);
+//        System.out.println(open+" category bits "+f.categoryBits+" mask "+f.maskBits);
         setOrigin(origin.x, 0);
     }
 
@@ -77,7 +77,7 @@ public class DoorModel extends BoxObstacle{
             f.maskBits = closedMaskBits;
         }
         setFilterData(f);
-        System.out.println(open+" category bits "+f.categoryBits+" mask "+f.maskBits);
+//        System.out.println(open+" category bits "+f.categoryBits+" mask "+f.maskBits);
         setOrigin(origin.x, 0);
     }
 
@@ -183,7 +183,7 @@ public class DoorModel extends BoxObstacle{
             if(filmstrip.getFrame()<=0) {
                 animateOff = false;
             }else{
-                System.out.println("off door frame "+filmstrip.getFrame());
+//                System.out.println("off door frame "+filmstrip.getFrame());
                 filmstrip.setFrame(filmstrip.getFrame()-1);
             }
         }
@@ -191,7 +191,7 @@ public class DoorModel extends BoxObstacle{
             if(filmstrip.getFrame()>=11) {
                 animateOn = false;
             }else{
-                System.out.println("on door frame "+filmstrip.getFrame());
+//                System.out.println("on door frame "+filmstrip.getFrame());
                 filmstrip.setFrame(filmstrip.getFrame()+1);
             }
         }

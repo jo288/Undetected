@@ -956,6 +956,7 @@ public class LevelModel {
 			for (SwitchModel sw : switches) {
 				sw.update(dt);
 			}
+
 			for(DoorModel door: doors){
 				door.update(dt);
 			}
@@ -1037,8 +1038,13 @@ public class LevelModel {
 
 		board.draw(canvas);
 
+		for(SwitchModel s : getSwtiches()) {
+			s.draw(canvas);
+		}
 		for(Obstacle obj : objects) {
-			obj.draw(canvas);
+			if (!obj.getClass().equals(SwitchModel.class)) {
+				obj.draw(canvas);
+			}
 		}
 		canvas.end();
 

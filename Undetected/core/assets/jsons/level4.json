@@ -57,13 +57,20 @@
 "boxes": [],
 "switches": [
 	{
-		"name": "switch",
+		"name": "switch1",
 		"pos": [ 10, 15 ],
 		"switched": false,
 		"doors": [
 			"door1",
 			"door2"
 		],
+		"lasers": []
+	},
+	{
+		"name": "switch2",
+		"pos": [ 12, 15 ],
+		"switched": true,
+		"doors": [],
 		"lasers": []
 	}
 ],

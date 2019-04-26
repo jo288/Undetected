@@ -27,7 +27,7 @@
 		"force": 40,
 		"sensitiveRadius": 1.6,
 		"path": [ 2, 12 ],
-		"objectivepath": [ 8, 6, 8, 2 ],
+		"objectivepath": [],
 		"lightIndex": 0,
 		"sector": 0,
 		"direction": "left"

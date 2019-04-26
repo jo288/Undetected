@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="36">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="37">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="2" source="HorizontalWall.tsx"/>
  <tileset firstgid="3" source="VerticalWall.tsx"/>
@@ -70,7 +70,7 @@
     <property name="timetolive" type="int" value="999"/>
    </properties>
   </object>
-  <object id="33" template="Switch.tx" x="320" y="160">
+  <object id="33" template="Switch.tx" name="switch1" x="320" y="160">
    <properties>
     <property name="doors" value="door1,door2"/>
    </properties>
@@ -79,6 +79,11 @@
   <object id="35" template="Laser.tx" x="512" y="192" width="3" height="64">
    <properties>
     <property name="timetolive" type="int" value="999"/>
+   </properties>
+  </object>
+  <object id="36" template="Switch.tx" name="switch2" x="384" y="160">
+   <properties>
+    <property name="switched" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

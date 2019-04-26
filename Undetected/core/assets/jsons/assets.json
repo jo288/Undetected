@@ -341,7 +341,7 @@
 			"wrap":     	false
 		},
 		"switchAnimation": {
-			"file": 	"textures/switchanimation.png",
+			"file": 	"textures/switchFront.png",
 			"wrap":  	false,
 			"strip":	{
 				"size":		10,
