@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="20" height="11" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="28">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="20" height="11" tilewidth="32" tileheight="32" infinite="0" nextobjectid="28">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="2" source="HorizontalWall.tsx"/>
  <tileset firstgid="3" source="VerticalWall.tsx"/>
@@ -7,7 +7,7 @@
  <tileset firstgid="5" source="Objective.tsx"/>
  <tileset firstgid="6" source="Player.tsx"/>
  <tileset firstgid="7" source="Guard.tsx"/>
- <layer id="8" name="Tile Layer 1" width="20" height="11">
+ <layer name="Tile Layer 1" width="20" height="11">
   <data encoding="csv">
 0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -22,7 +22,7 @@
 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup id="3" name="Object Layer 1">
+ <objectgroup name="Object Layer 1">
   <object id="1" template="HorizontalWall.tx" x="128" y="32" width="64" height="48"/>
   <object id="6" template="HorizontalWall.tx" x="32" y="128" width="128" height="48"/>
   <object id="7" template="HorizontalWall.tx" x="96" y="352" width="544" height="48"/>
@@ -38,7 +38,7 @@
    <properties>
     <property name="direction" value="left"/>
     <property name="lightAngle" type="float" value="0"/>
-    <property name="objectivepath" value="[8,6,8,2]"/>
+    <property name="objectivepath" value="[8,5,8,2]"/>
     <property name="path" value="[5,12]"/>
    </properties>
   </object>

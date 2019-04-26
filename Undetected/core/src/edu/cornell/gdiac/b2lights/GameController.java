@@ -73,16 +73,16 @@ public class GameController implements Screen, ContactListener {
 	/** The JSON defining the level model */
 	private JsonValue  levelFormat;
 	private MiniMap miniMap;
-	private boolean showMiniMap = false;
-	private boolean showExit = false;
+
 
 	/** The font for giving messages to the player */
 	protected BitmapFont displayFont;
-	
+
 	/** Track asset loading from all instances and subclasses */
 	private AssetState assetState = AssetState.EMPTY;
 
 	private LevelParser levelparser = new LevelParser();
+	private Texture pauseButton;
 
 	/**
 	 * Preloads the assets for this controller.
@@ -91,14 +91,14 @@ public class GameController implements Screen, ContactListener {
 	 * this time.  However, we still want the assets themselves to be static.  So
 	 * we have an AssetState that determines the current loading state.  If the
 	 * assets are already loaded, this method will do nothing.
-	 * 
+	 *
 	 * //@param manager Reference to global asset manager.
-	 */	
+	 */
 	public void preLoadContent() {
 		if (assetState != AssetState.EMPTY) {
 			return;
 		}
-		
+
 		assetState = AssetState.LOADING;
 
 		jsonReader = new JsonReader();
@@ -114,26 +114,27 @@ public class GameController implements Screen, ContactListener {
 	 * this time.  However, we still want the assets themselves to be static.  So
 	 * we have an AssetState that determines the current loading state.  If the
 	 * assets are already loaded, this method will do nothing.
-	 * 
+	 *
 	 * //@param manager Reference to global asset manager.
 	 */
 	public void loadContent() {
 		if (assetState != AssetState.LOADING) {
 			return;
 		}
-		
+
 		JsonAssetManager.getInstance().allocateDirectory();
+		pauseButton = new Texture(assetDirectory.get("textures").get("pause").getString("file"));
 		displayFont = JsonAssetManager.getInstance().getEntry("display", BitmapFont.class);
 		assetState = AssetState.COMPLETE;
 	}
-	
 
-	/** 
+
+	/**
 	 * Unloads the assets for this game.
-	 * 
-	 * This method erases the static variables.  It also deletes the associated textures 
+	 *
+	 * This method erases the static variables.  It also deletes the associated textures
 	 * from the asset manager. If no assets are loaded, this method does nothing.
-	 * 
+	 *
 	 * //@param manager Reference to global asset manager.
 	 */
 	public void unloadContent() {
@@ -141,7 +142,7 @@ public class GameController implements Screen, ContactListener {
 		JsonAssetManager.clearInstance();
 	}
 
-	
+
 	/** Exit code for quitting the game */
 	public static final int EXIT_QUIT = 0;
     /** How many frames after winning/losing do we continue? */
@@ -154,7 +155,7 @@ public class GameController implements Screen, ContactListener {
 
 	/** Reference to the game level */
 	protected LevelModel level;
-		
+
 	/** Whether or not this is an active controller */
 	private boolean active;
 	/** Whether we have completed this level */
@@ -230,7 +231,7 @@ public class GameController implements Screen, ContactListener {
 		}
 		failed = value;
 	}
-	
+
 	/**
 	 * Returns true if this is the active screen
 	 *
@@ -250,7 +251,7 @@ public class GameController implements Screen, ContactListener {
 	public ObstacleCanvas getCanvas() {
 		return canvas;
 	}
-	
+
 	/**
 	 * Sets the canvas associated with this controller
 	 *
@@ -262,9 +263,9 @@ public class GameController implements Screen, ContactListener {
 	public void setCanvas(ObstacleCanvas canvas) {
 		this.canvas = canvas;
 	}
-	
+
 	/**
-	 * Creates a new game world 
+	 * Creates a new game world
 	 *
 	 * The physics bounds and drawing scale are now stored in the LevelModel and
 	 * defined by the appropriate JSON file.
@@ -286,7 +287,7 @@ public class GameController implements Screen, ContactListener {
 		setFailure(false);
 		sensorFixtures = new ObjectSet<Fixture>();
 	}
-	
+
 	/**
 	 * Dispose of all (non-static) resources allocated to this mode.
 	 */
@@ -296,21 +297,21 @@ public class GameController implements Screen, ContactListener {
 		canvas = null;
 		miniMap = null;
 	}
-	
+
 	/**
 	 * Resets the status of the game so that we can play again.
 	 *
-	 * This method disposes of the level and creates a new one. It will 
+	 * This method disposes of the level and creates a new one. It will
 	 * reread from the JSON file, allowing us to make changes on the fly.
 	 */
 	public void reset() {
 		level.dispose();
-		
+
 		setComplete(false);
 		setFailure(false);
 		hasObjective = false;
 		countdown = -1;
-		
+
 		// Reload the json each time
 		levelFormat = jsonReader.parse(currentFile);
 		level.populate(levelFormat);
@@ -373,8 +374,14 @@ public class GameController implements Screen, ContactListener {
 		float playerY = level.getAvatar().getY();
 		//pan the canvas camera
 		OrthographicCamera cam = canvas.getCamera();
+//		float mincx = canvas.getHeight()/2;
+//		float mincy = canvas.getHeight()/2;
+//		float maxcx = level.bounds.width*level.scale.x - mincx;
+//		float maxcy = level.bounds.height*level.scale.y - mincy;
 		float cx = level.bounds.width*level.scale.x/2;
 		float cy = level.bounds.height*level.scale.y/2;
+
+		//cam.translate(input.getHorizontal(), input.getVertical());
 		float vw = cam.viewportWidth;
 		float vh = cam.viewportHeight;
 		float effectiveVW = vw * cam.zoom;
@@ -383,14 +390,9 @@ public class GameController implements Screen, ContactListener {
 		float dy = Math.abs((level.bounds.height*level.scale.y - effectiveVH)/2);
 		float sx = 32;
 		float sy = 32;
-		if(!showExit) {
-			cam.position.x += (MathUtils.clamp(playerX * sx, cx - dx, cx + dx) - cam.position.x) * dt * 2.8;
-			cam.position.y += (MathUtils.clamp(playerY * sy, cy - dy, cy + dy) - cam.position.y) * dt * 2.8;
-		}
-		else{
-			cam.position.x += (MathUtils.clamp(level.getExit().getX() * sx, cx - dx, cx + dx) - cam.position.x) * dt * 2.8;
-			cam.position.y += (MathUtils.clamp(level.getExit().getY() * sy, cy - dy, cy + dy) - cam.position.y) * dt * 2.8;
-		}
+		cam.position.x += (MathUtils.clamp(playerX*sx, cx-dx, cx + dx) - cam.position.x)*dt*2.8;
+		cam.position.y += (MathUtils.clamp(playerY*sy, cy-dy, cy + dy)  - cam.position.y)*dt*2.8;
+
 		//pan the rayhandler camera
 		OrthographicCamera rcam = level.raycamera;
 		rcam.position.x = cam.position.x/32;
@@ -404,7 +406,7 @@ public class GameController implements Screen, ContactListener {
 		canvas.getCamera().zoom=1;
 		level.raycamera.zoom = 1;
 	}
-	
+
 	/**
 	 * Returns whether to process the update loop
 	 *
@@ -413,7 +415,7 @@ public class GameController implements Screen, ContactListener {
 	 * normally.
 	 *
 	 * //@param delta Number of seconds since last animation frame
-	 * 
+	 *
 	 * @return whether to process the update loop
 	 */
 	public boolean preUpdate(float dt) {
@@ -451,7 +453,7 @@ public class GameController implements Screen, ContactListener {
 //		else if(input.decreaseView()){
 //			guard.getLight().setConeDegree(degree-0.5f);
 //		}
-		
+
 		// Handle resets
 		if (input.didReset()) {
 			reset();
@@ -461,7 +463,7 @@ public class GameController implements Screen, ContactListener {
 		if (input.didLoad()){
 			loadLevel();
 		}
-		
+
 		// Now it is time to maybe switch screens.
 		if (input.didExit()) {
 			listener.exitScreen(this, EXIT_QUIT);
@@ -475,10 +477,10 @@ public class GameController implements Screen, ContactListener {
 			else
 				nextFile = levelSelectFile;
 		}
-		
+
 		return true;
 	}
-	
+
 	private Vector2 angleCache = new Vector2();
 	/**
 	 * The core gameplay loop of this world.
@@ -499,16 +501,18 @@ public class GameController implements Screen, ContactListener {
 		if (input.didPause() && !paused) {
 			pause();
 		}
-		if(input.didMap()){
-			showMiniMap = !showMiniMap;
-		}
+
+		// LASER CHECK
+
+		/*if (input.didForward()) {
+			level.activateNextLight();
+		} else if (input.didBack()){
+			level.activatePrevLight();
+		}*/
 
 		avatar.animateDirection(avatar.getDirection());
-		//only animate guards if we are not showing the player the exit (after he takes objective)
-		if(!showExit) {
-			for (GuardModel g : guards) {
-				g.animateDirection(g.getDirectionFloat());
-			}
+		for (GuardModel g : guards) {
+			g.animateDirection(g.getDirectionFloat());
 		}
 
 		if(input.didAction() && avatar.getHasBox()){
@@ -519,7 +523,21 @@ public class GameController implements Screen, ContactListener {
 			level.queueDisabled(avatar.getBoxInContact());
 		} else if(input.didAction() && switchCollided != null) {
 			switchCollided.switchMode();
+			for (AIController ai : level.getControl()) {
+				if (ai.getGuard().getAlarmed()) {
+					ai.setLastSwitch(switchCollided);
+				}
+			}
 		}
+
+		//camera follow player
+		//canvas.getCamera().translate(input.getHorizontal(), input.getVertical());
+		int cx = (int)canvas.getCamera().position.x;
+		int cy = (int)canvas.getCamera().position.y;
+		//level.rayhandler.useCustomViewport(cx,cy,800,600);
+		//level.raycamera.translate(input.getHorizontal(), input.getVertical());
+		//level.raycamera.update();
+		// Rotate the avatar to face the direction of movement
 
 		if (!failed && !complete) {
 			angleCache.set(input.getHorizontal(), input.getVertical());
@@ -567,17 +585,9 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		// Turn the physics engine crank.
-		if(!showExit) {
-			level.update(dt);
-			if (lightController.detect() && !failed) {
-				setFailure(true);
-			}
-		}
-		if(showExit){
-			level.getExit().animate(dt);
-			if(!level.getExit().isAnimating()){
-				showExit = false;
-			}
+		level.update(dt);
+		if(lightController.detect() && !failed){
+			setFailure(true);
 		}
 
 		//load the next level if needed
@@ -597,7 +607,6 @@ public class GameController implements Screen, ContactListener {
 			countdown = -1;
 			guardCollided = null;
 			lightController = new LightController(level);
-			showExit = false;
 
 			System.out.println(lastFile.name());
 
@@ -617,7 +626,7 @@ public class GameController implements Screen, ContactListener {
 			nextFile = null;
 		}
 	}
-	
+
 	/**
 	 * Draw the physics objects to the canvas
 	 *
@@ -630,7 +639,7 @@ public class GameController implements Screen, ContactListener {
 	 */
 	public void draw(float delta) {
 		canvas.clear();
-		
+
 		level.draw(canvas);
 //		framerate display
 //      displayFont.setColor(Color.YELLOW);
@@ -686,15 +695,12 @@ public class GameController implements Screen, ContactListener {
 				alarm.turnOn();
 				alarm.start();
 			}
-			if(!showExit) {
-				canvas.begin();
-				alarm.draw(canvas);
-				canvas.end();
-			}
+			canvas.begin();
+			alarm.draw(canvas);
+			canvas.end();
 		}
 
 		if (paused) {
-			Texture pauseButton = new Texture(assetDirectory.get("textures").get("pause").getString("file"));
 			canvas.begin();
 			canvas.draw(pauseButton, Color.GRAY, pauseButton.getWidth()/2, pauseButton.getHeight()/2,
 					canvas.getWidth()/2, canvas.getHeight()/2, 0, 0.3f, 0.3f);
@@ -720,16 +726,14 @@ public class GameController implements Screen, ContactListener {
 //		};
 //		button.addListener(listener);
 			canvas.end();
-			if(showMiniMap) {
-				miniMap.render(canvas, delta);
-			}
+			miniMap.render(canvas, delta);
 		}
 	}
-	
+
 	/**
-	 * Called when the Screen is resized. 
+	 * Called when the Screen is resized.
 	 *
-	 * This can happen at any point during a non-paused state but will never happen 
+	 * This can happen at any point during a non-paused state but will never happen
 	 * before a call to show().
 	 *
 	 * @param width  The new width in pixels
@@ -768,8 +772,8 @@ public class GameController implements Screen, ContactListener {
 
 	/**
 	 * Called when the Screen is paused.
-	 * 
-	 * This is usually when it's not active or visible on screen. An Application is 
+	 *
+	 * This is usually when it's not active or visible on screen. An Application is
 	 * also paused before it is destroyed.
 	 */
 	public void pause() {
@@ -792,7 +796,7 @@ public class GameController implements Screen, ContactListener {
 			l.resume();
 		}
 	}
-	
+
 	/**
 	 * Called when this screen becomes the current screen for a Game.
 	 */
@@ -821,7 +825,7 @@ public class GameController implements Screen, ContactListener {
 	/**
 	 * Callback method for the start of a collision
 	 *
-	 * This method is called when we first get a collision between two objects.  We use 
+	 * This method is called when we first get a collision between two objects.  We use
 	 * this method to test if it is the "right" kind of collision.  In particular, we
 	 * use it to test if we made it to the win door.
 	 *
@@ -836,7 +840,7 @@ public class GameController implements Screen, ContactListener {
 
 		Object fd1 = fix1.getUserData();
 		Object fd2 = fix2.getUserData();
-		
+
 		try {
 			Obstacle bd1 = (Obstacle)body1.getUserData();
 			Obstacle bd2 = (Obstacle)body2.getUserData();
@@ -862,15 +866,9 @@ public class GameController implements Screen, ContactListener {
 				if (switches.contains(bd1)) {
 					SwitchModel switchi = switches.get(switches.indexOf(bd1));
 					switchCollided = switchi;
-					for (AIController ai : level.getControl()) {
-						ai.setLastSwitch((SwitchModel) bd1);
-					}
 				} else if (switches.contains(bd2)) {
 					SwitchModel switchi = switches.get(switches.indexOf(bd2));
 					switchCollided = switchi;
-					for (AIController ai : level.getControl()) {
-						ai.setLastSwitch((SwitchModel) bd2);
-					}
 				}
 //				TEST
 //				nextFile = Gdx.files.internal("jsons/testlevel2.json");
@@ -901,7 +899,6 @@ public class GameController implements Screen, ContactListener {
                 }
 				hasObjective = true;
 				exit.open();
-				showExit = true;
 //				level.queueDestroyed(objective);
 			}
 

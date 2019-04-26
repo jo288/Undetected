@@ -52,6 +52,9 @@ public class AIController {
     /** Last Switch pulled by player*/
     private SwitchModel lastSwitch;
 
+    /** Last Goal, used only when lastSwitch is reopened */
+    private Vector2 lastGoal;
+
     /** Gets the guard's X position */
     public float getGuardX(){
         return guard.getX();
@@ -148,6 +151,17 @@ public class AIController {
                 int goaly = board.physicsToBoard(currentGoal.y);
                 int guardx = board.physicsToBoard(guard.getX());
                 int guardy = board.physicsToBoard(guard.getY());
+
+                if (lastSwitch != null && lastGoal != null) {
+                    currentGoal = lastGoal;
+                    goalx = board.physicsToBoard(currentGoal.x);
+                    goaly = board.physicsToBoard(currentGoal.y);
+                    board.clearMarks();
+                    board.setGoal(goalx, goaly);
+                    lastSwitch = null;
+                    lastGoal = null;
+                }
+
                 if (board.getOccupant(goalx, goaly) == 5) {
                     findClosest();
                     break;
@@ -159,15 +173,15 @@ public class AIController {
                                 guard.setAlarmed(false);
                             } else {
                                 if (timer > 150) {
-                                    guard.setDirection((float) Math.PI/2);
+                                    guard.setDirection((float) Math.PI / 2);
                                 } else if (timer > 100) {
                                     guard.setDirection(0);
                                 } else if (timer > 50) {
-                                    guard.setDirection((float) -Math.PI/2);
+                                    guard.setDirection((float) -Math.PI / 2);
                                 } else if (timer > 0) {
                                     guard.setDirection((float) Math.PI);
                                 }
-                                guard.setMovement(0,0);
+                                guard.setMovement(0, 0);
                                 guard.applyForce();
                                 guard.walking = false;
                                 timer++;
@@ -180,22 +194,23 @@ public class AIController {
                                 guard.setAlarmed(false);
                             } else {
                                 if (timer > 150) {
-                                    guard.setDirection((float) Math.PI/2);
+                                    guard.setDirection((float) Math.PI / 2);
                                 } else if (timer > 100) {
                                     guard.setDirection(0);
                                 } else if (timer > 50) {
-                                    guard.setDirection((float) -Math.PI/2);
+                                    guard.setDirection((float) -Math.PI / 2);
                                 } else if (timer > 0) {
                                     guard.setDirection((float) Math.PI);
                                 }
-                                guard.setMovement(0,0);
+                                guard.setMovement(0, 0);
                                 guard.applyForce();
                                 guard.walking = false;
                                 timer++;
                                 break;
                             }
                         }
-                        if (path.length == 1 && guardx == board.physicsToBoard(path[0].x) && guardy == board.physicsToBoard(path[0].y) && isGrid(guard)) {
+                        if (path.length == 1 && guardx == board.physicsToBoard(path[0].x) &&
+                                guardy == board.physicsToBoard(path[0].y) && isGrid(guard)) {
                             guard.setDirection(initialDirection);
                             state = FSMState.SLEEP;
                         }
@@ -209,6 +224,7 @@ public class AIController {
                         board.setGoal(goalx, goaly);
                     }
                 }
+
                 pathFind();
                 board.resetTiles();
                 break;
@@ -316,6 +332,8 @@ public class AIController {
 
         if (i == 0) {
             guard.walking = false;
+            guard.setMovement(0,0);
+            guard.applyForce();
         } else if (i == 1) {
             guard.setDirection(-(float) Math.PI/2);
             guard.setMovement(spd,0);
@@ -354,10 +372,14 @@ public class AIController {
         queue.add(start);
         int debug = 0;
         if (board.isGoal(startX, startY)) return 0;
+
+
+
         while (!queue.isEmpty()) {
             debug++;
             if (debug > board.getHeight() * board.getWidth()) {
                 if (lastSwitch != null) {
+                    lastGoal = currentGoal;
                     updateAISwitch();
                 }
 //                currentGoal = path[0];
