@@ -48,7 +48,7 @@ public class DudeModel extends CharacterModel {
 	/** Default Force of BOXDUDE */
 	public static final float BOXDUDE_FORCE = 80;
 	/** Default Force of Player */
-	public static final float DEFAULT_FORCE = 120;
+	public static final float DEFAULT_FORCE = 100;
 	/** Default Damping of Player */
 	public static final float DEFAULT_DAMPING = 10;
 	/** Default Damping of Player */

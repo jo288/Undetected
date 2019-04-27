@@ -105,6 +105,12 @@ public class LevelParser {
         private int[] pos = new int[2];
     }
 
+    private class Decorative{
+        protected int[] pos = new int[2];
+        protected String type = "desk";
+        protected String direction = "right";
+    }
+
     private class ExteriorWall{
         protected Array<Integer> pos = new Array<Integer>();
         protected Array<Integer> type = new Array<Integer>();

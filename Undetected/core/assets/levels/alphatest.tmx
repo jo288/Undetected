@@ -124,7 +124,7 @@
     <property name="sector" type="int" value="1"/>
    </properties>
   </object>
-  <object id="71" template="Guard.tx" x="768" y="128">
+  <object id="71" template="Guard.tx" gid="8" x="768" y="128">
    <properties>
     <property name="IsPatrolling" type="bool" value="true"/>
     <property name="path" value="[24,30,34,30]"/>
@@ -138,8 +138,8 @@
     <property name="sector" type="int" value="1"/>
    </properties>
   </object>
-  <object id="73" template="Box2.tx" name="box2" x="448" y="544"/>
-  <object id="74" template="KeyObjective.tx" x="928" y="992">
+  <object id="73" template="Box2.tx" name="box2" gid="9" x="448" y="544" rotation="0"/>
+  <object id="74" template="KeyObjective.tx" gid="10" x="928" y="992">
    <properties>
     <property name="doors" value="door2,door3"/>
     <property name="hasAlarm" type="bool" value="false"/>
@@ -151,7 +151,7 @@
     <property name="doors" value="door1"/>
    </properties>
   </object>
-  <object id="77" template="Switch.tx" x="1024" y="352">
+  <object id="77" template="Switch.tx" gid="11" x="1024" y="352" rotation="0">
    <properties>
     <property name="doors" value="door2,door3"/>
    </properties>

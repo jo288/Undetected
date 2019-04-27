@@ -1,9 +1,5 @@
 {
     "textures": {
-    	"earth": {
-    		"file":		"textures/wallvertical.png",
-    		"wrap":		true
-    	},
 		"wallvertical": {
 			"file":		"textures/wallgreen.png",
 			"wrap":		false
@@ -114,46 +110,6 @@
 		},
 		"charalert": {
 			"file": 	"textures/character_alert.png",
-			"wrap":  	false,
-			"strip":	{
-				"size":		8,
-				"rows":		1,
-				"cols":		8,
-				"first":	0
-			}
-		},
-		"boxdude": {
-			"file": 	"textures/boxdudeanimation.png",
-			"wrap":  	false,
-			"strip":	{
-				"size":		8,
-				"rows":		1,
-				"cols":		8,
-				"first":	0
-			}
-		},
-		"guardfront":{
-			"file": 	"textures/guard_front.png",
-			"wrap":  	false,
-			"strip":	{
-				"size":		8,
-				"rows":		1,
-				"cols":		8,
-				"first":	0
-			}
-		},
-		"guardleft":{
-			"file": 	"textures/guard_left.png",
-			"wrap":  	false,
-			"strip":	{
-				"size":		8,
-				"rows":		1,
-				"cols":		8,
-				"first":	0
-			}
-		},
-		"guardright":{
-			"file": 	"textures/guard_right.png",
 			"wrap":  	false,
 			"strip":	{
 				"size":		8,
@@ -347,6 +303,26 @@
 				"size":		10,
 				"rows":		1,
 				"cols":		10,
+				"first":	0
+			}
+		},
+		"deskAnimation": {
+			"file": 	"textures/desk.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		4,
+				"rows":		1,
+				"cols":		4,
+				"first":	0
+			}
+		},
+		"deskFrontAnimation": {
+			"file": 	"textures/deskfront.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		4,
+				"rows":		1,
+				"cols":		4,
 				"first":	0
 			}
 		},
