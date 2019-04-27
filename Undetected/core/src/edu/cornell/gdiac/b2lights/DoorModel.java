@@ -41,17 +41,15 @@ public class DoorModel extends BoxObstacle{
 
     public void setOpen(boolean val) {
         open = val;
-        TextureRegion closedTexture = JsonAssetManager.getInstance().getEntry("doorClosed", TextureRegion.class);
-        closedDoorTexture = closedTexture;
-        TextureRegion openTexture = JsonAssetManager.getInstance().getEntry("doorOpen", TextureRegion.class);
-        openDoorTexture = openTexture;
         Filter f = this.getFilterData();
         if (open) {
-            setTexture(openDoorTexture);
+            animateOn = true;
+            animateOff = false;
             f.categoryBits = openCategoryBits;
             f.maskBits = openMaskBits;
         } else {
-            setTexture(closedDoorTexture);
+            animateOff = true;
+            animateOn = false;
             f.categoryBits = closedCategoryBits;
             f.maskBits = closedMaskBits;
         }
@@ -139,9 +137,9 @@ public class DoorModel extends BoxObstacle{
         closedDoorTexture = closedTexture;
         TextureRegion openTexture = JsonAssetManager.getInstance().getEntry("doorOpen", TextureRegion.class);
         openDoorTexture = openTexture;
-        texture = JsonAssetManager.getInstance().getEntry("greendoor", TextureRegion.class);
+        texture = JsonAssetManager.getInstance().getEntry("bluedoor", TextureRegion.class);
         try {
-            filmstrip = new FilmStrip(texture.getTexture(), 1, 12);
+            filmstrip = new FilmStrip(texture.getTexture(), 1, 13);
         } catch (Exception e) {
             filmstrip = null;
         }
@@ -156,7 +154,7 @@ public class DoorModel extends BoxObstacle{
             filter.maskBits = closedMaskBits;
         } else {
 //            setTexture(openTexture);
-            filmstrip.setFrame(11);
+            filmstrip.setFrame(12);
 
             setTexture(filmstrip);
             filter.categoryBits = openCategoryBits;
@@ -188,7 +186,7 @@ public class DoorModel extends BoxObstacle{
             }
         }
         if (animateOn){
-            if(filmstrip.getFrame()>=11) {
+            if(filmstrip.getFrame()>=12) {
                 animateOn = false;
             }else{
 //                System.out.println("on door frame "+filmstrip.getFrame());

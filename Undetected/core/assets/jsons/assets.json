@@ -242,9 +242,9 @@
 			"file": 	"textures/bluedoor.png",
 			"wrap":  	false,
 			"strip":	{
-				"size":		12,
+				"size":		13,
 				"rows":		1,
-				"cols":		12,
+				"cols":		13,
 				"first":	0
 			}
 		},
@@ -288,14 +288,6 @@
 			"file": "textures/camera.png",
 			"wrap": false
 		},
-        "doorClosed": {
-          "file": 	    "textures/doorC.png",
-          "wrap":     	false
-        },
-		"doorOpen": {
-			"file": 	    "textures/doorCO.png",
-			"wrap":     	false
-		},
 		"switchAnimation": {
 			"file": 	"textures/switchFront.png",
 			"wrap":  	false,
@@ -325,14 +317,6 @@
 				"cols":		4,
 				"first":	0
 			}
-		},
-        "switchOff": {
-          "file": 	    "textures/switchOffReal.png",
-          "wrap":     	false
-        },
-		"switchOn": {
-			"file": 	"textures/switchOnReal.png",
-			"wrap":    	false
 		},
 		"laser": {
 			"file": 	"textures/laser.png",

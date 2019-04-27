@@ -42,16 +42,6 @@ public class SwitchModel extends BoxObstacle{
 
     public void setSwitch(boolean value) {
         switched = value;
-        TextureRegion offTexture = JsonAssetManager.getInstance().getEntry("switchOff", TextureRegion.class);
-        switchOffTexture = offTexture;
-        TextureRegion onTexture = JsonAssetManager.getInstance().getEntry("switchOn", TextureRegion.class);
-        switchOnTexture = onTexture;
-        if (switched) {
-            setTexture(switchOnTexture);
-        } else {
-            setTexture(switchOffTexture);
-        }
-        setOrigin(origin.x, 0);
     }
 
     public void switchMode() {
@@ -175,10 +165,6 @@ public class SwitchModel extends BoxObstacle{
         setDebugColor(debugColor);
 
         // Now get the texture from the AssetManager singleton
-        TextureRegion offTexture = JsonAssetManager.getInstance().getEntry("switchOff", TextureRegion.class);
-        switchOffTexture = offTexture;
-        TextureRegion onTexture = JsonAssetManager.getInstance().getEntry("switchOn", TextureRegion.class);
-        switchOnTexture = onTexture;
         texture = JsonAssetManager.getInstance().getEntry("switchAnimation", TextureRegion.class);
         try {
             filmstrip = new FilmStrip(texture.getTexture(), 1, 10);
@@ -187,7 +173,6 @@ public class SwitchModel extends BoxObstacle{
         }
         setTexture(filmstrip);
 
-        switchOnTexture = onTexture;
         if (!switched) {
 //            setTexture(offTexture);
             filmstrip.setFrame(9);
