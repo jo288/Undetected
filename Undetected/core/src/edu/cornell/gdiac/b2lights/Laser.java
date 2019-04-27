@@ -28,6 +28,7 @@ public class Laser extends BoxObstacle {
     private int time_store;
     /** how many seconds remaining until this laser turns off */
     private int time_to_live;
+    private int liveTimeReference;
     /** the maximum time this laser can stay on for */
     private static final int LIFESPAN = 240;
     /** Sector of the laser */
@@ -63,6 +64,18 @@ public class Laser extends BoxObstacle {
      */
     public String getSensorName() {
         return "laser" + x_pos + y_pos;
+    }
+
+    public void setLiveTimeReference() {
+        liveTimeReference = time_to_live;
+    }
+
+    public void turnOff() {
+        time_to_live = -1;
+    }
+
+    public void turnOn() {
+        time_to_live = liveTimeReference;
     }
 
     public void setTimeToLive(int t){time_to_live = t;}

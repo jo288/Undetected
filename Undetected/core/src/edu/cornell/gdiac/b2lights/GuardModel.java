@@ -105,6 +105,7 @@ public class GuardModel extends CharacterModel {
     private Vector2 direction;
     private float dirAngle;
 
+    private String name;
     /** Line of sight of guard */
     private ConeSource light;
 
@@ -188,11 +189,11 @@ public class GuardModel extends CharacterModel {
             if (value) {
                 animateOn = true;
                 animateOff = false;
-                this.getLight().setColor(1,0,0,1);
+                this.getLight().setColor(1, 0, 0, 1);
             } else {
                 animateOff = true;
                 animateOn = false;
-                this.getLight().setColor(1,1,0,1);
+                this.getLight().setColor(1, 1, 0, 1);
             }
         }
     }
@@ -313,6 +314,11 @@ public class GuardModel extends CharacterModel {
         maxspeed = value;
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
     /**
      * Returns the current animation frame of this dude.
      *
@@ -396,7 +402,6 @@ public class GuardModel extends CharacterModel {
             texture = JsonAssetManager.getInstance().getEntry("friendlyRightAnimation", TextureRegion.class);
             if(isAlarmed){
                 texture = JsonAssetManager.getInstance().getEntry("hostileRightAnimation", TextureRegion.class);
-
             }
             try {
                 filmstrip = (FilmStrip)texture;
@@ -409,7 +414,6 @@ public class GuardModel extends CharacterModel {
             texture = JsonAssetManager.getInstance().getEntry("friendlyLeftAnimation", TextureRegion.class);
             if(isAlarmed){
                 texture = JsonAssetManager.getInstance().getEntry("hostileLeftAnimation", TextureRegion.class);
-
             }
             try {
                 filmstrip = (FilmStrip)texture;
@@ -487,7 +491,7 @@ public class GuardModel extends CharacterModel {
 
         texture = JsonAssetManager.getInstance().getEntry("questionAnimation", TextureRegion.class);
         try {
-            filmstrip = (FilmStrip)texture;
+            filmstrip = new FilmStrip(texture.getTexture(), 1, 8);
             alertAnimation = filmstrip;
         } catch (Exception e) {
             filmstrip = null;
@@ -511,6 +515,7 @@ public class GuardModel extends CharacterModel {
         setTexture(texture);
         setOrigin(origin.x,0);
 
+        name = json.get("name").asString();
         sector = json.get("sector").asInt();
     }
 
@@ -555,6 +560,8 @@ public class GuardModel extends CharacterModel {
      * //@param delta Number of seconds since last animation frame
      */
     public void update(float dt) {
+        animateDirection(getDirectionFloat());
+
         if(animateOn){
             if (animateCool==0) {
                 if (alertAnimation.getFrame() >= 7) {
@@ -570,9 +577,10 @@ public class GuardModel extends CharacterModel {
 
         }
         // Animate if necessary
-        if (walking) {
+        if (getLinearVelocity().x != 0 || getLinearVelocity().y != 0) {
             animate = true;
         }
+
         if (animate && walkCool == 0) {
             if (filmstrip != null) {
                 int next = (filmstrip.getFrame()+1) % filmstrip.getSize();

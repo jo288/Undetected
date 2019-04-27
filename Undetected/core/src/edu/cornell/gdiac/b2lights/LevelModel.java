@@ -479,6 +479,7 @@ public class LevelModel {
 			Laser l = new Laser();
 			laserMap.put(laserName, l);
 			l.setTimeToLive(laserdata.get("timetolive").asInt());
+			l.setLiveTimeReference();
 			lasers.add(l);
 			l.initialize(laserdata);
 			if (l.getTexture().getRegionWidth()<tSize)

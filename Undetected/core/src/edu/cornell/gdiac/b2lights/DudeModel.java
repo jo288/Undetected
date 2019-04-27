@@ -52,7 +52,7 @@ public class DudeModel extends CharacterModel {
 	/** Default Damping of Player */
 	public static final float DEFAULT_DAMPING = 10;
 	/** Default Damping of Player */
-	public static final float DEFAULT_MAXSPEED = 1;
+	public static final float DEFAULT_MAXSPEED = 10;
 
 
 	// Physics constants
@@ -576,6 +576,8 @@ public class DudeModel extends CharacterModel {
 	 */
 	public void update(float dt) {
 		// Animate if necessary
+		animateDirection(getDirection());
+
 		if (animate && walkCool == 0) {
 			if (filmstrip != null) {
 				int next = (filmstrip.getFrame()+1) % filmstrip.getSize();
