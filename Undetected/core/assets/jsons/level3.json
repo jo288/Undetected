@@ -55,7 +55,13 @@
 		"sector": 0
 	}
 ],
-"decoratives": [],
+"decoratives": [
+	{
+		"pos": [ 1, 12 ],
+		"type": "desk",
+		"direction": "left"
+	}
+],
 "objective": {
 	"pos": [ 20, 8 ],
 	"size": [ 1, 1 ],

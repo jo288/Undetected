@@ -41,7 +41,13 @@
 "switches": [],
 "doors": [],
 "lasers": [],
-"decoratives": [],
+"decoratives": [
+	{
+		"pos": [ 4, 9 ],
+		"type": "desk",
+		"direction": "left"
+	}
+],
 "objective": {
 	"pos": [ 18, 4 ],
 	"size": [ 1, 1 ],

@@ -507,7 +507,7 @@ public class DudeModel extends CharacterModel {
 		texture = JsonAssetManager.getInstance().getEntry("shadow", TextureRegion.class);
 		shadowTexture = texture;
 
-		texture = JsonAssetManager.getInstance().getEntry("boxdude", TextureRegion.class);
+		texture = JsonAssetManager.getInstance().getEntry("boxcharfront", TextureRegion.class);
 		try {
 			filmstrip = (FilmStrip)texture;
 			boxdudeanimation = filmstrip;
