@@ -524,14 +524,6 @@ public class GameController implements Screen, ContactListener {
 			showMiniMap = !showMiniMap;
 		}
 
-		avatar.animateDirection(avatar.getDirection());
-		//only animate guards if we are not showing the player the exit (after he takes objective)
-		if(!showExit) {
-			for (GuardModel g : guards) {
-				g.animateDirection(g.getDirectionFloat());
-			}
-		}
-
 		if(input.didAction() && avatar.getHasBox()){
 			level.placeBox(avatar);
 		} else if(input.didAction() && !avatar.getHasBox() && avatarBoxCollision){
@@ -567,6 +559,11 @@ public class GameController implements Screen, ContactListener {
 		if (complete || failed) {
 			avatar.setMovement(0,0);
 			avatar.applyForce();
+		}
+		if (complete) {
+			for (GuardModel g : guards) {
+				g.setBodyType(BodyDef.BodyType.StaticBody);
+			}
 		}
 
 		if (input.didHome()) {

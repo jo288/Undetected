@@ -139,7 +139,6 @@ public class AIController {
                 // Do Nothing
                 guard.setMovement(0,0);
                 guard.applyForce();
-                guard.walking = false; //TEMPORARY FIX
                 currentGoal = path[0];
                 pathIndex = 0;
                 break;
@@ -183,7 +182,7 @@ public class AIController {
                                 }
                                 guard.setMovement(0, 0);
                                 guard.applyForce();
-                                guard.walking = false;
+                                guard.walking = true;
                                 timer++;
                                 break;
                             }
@@ -204,7 +203,7 @@ public class AIController {
                                 }
                                 guard.setMovement(0, 0);
                                 guard.applyForce();
-                                guard.walking = false;
+                                guard.walking = true;
                                 timer++;
                                 break;
                             }
@@ -315,7 +314,7 @@ public class AIController {
                 }
                 guard.setMovement(0,0);
                 guard.applyForce();
-                guard.walking = false;
+                guard.walking = true;
                 timer++;
                 i = 0;
             } else {
