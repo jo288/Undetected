@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="84">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="89">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="2" source="HorizontalWall.tsx"/>
  <tileset firstgid="3" source="VerticalWall.tsx"/>
@@ -13,6 +13,8 @@
  <tileset firstgid="11" source="Switch.tsx"/>
  <tileset firstgid="12" source="Laser.tsx"/>
  <tileset firstgid="13" source="InteriorWall.tsx"/>
+ <tileset firstgid="14" source="DeskRight.tsx"/>
+ <tileset firstgid="18" source="deskfront.tsx"/>
  <layer id="1" name="Tile Layer 1" width="40" height="34">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -162,5 +164,8 @@
     <property name="sector" type="int" value="1"/>
    </properties>
   </object>
+  <object id="84" template="DeskLeft.tx" gid="14" x="256" y="832"/>
+  <object id="85" template="DeskRight.tx" x="320" y="832"/>
+  <object id="88" template="DeskUp.tx" x="32" y="352"/>
  </objectgroup>
 </map>

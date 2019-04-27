@@ -456,6 +456,19 @@ public class LevelModel {
 			boxdata = boxdata.next();
 		}
 
+		JsonValue decodata = levelFormat.getChild("decoratives");
+		while (decodata!=null){
+			DecorativeModel deco = new DecorativeModel();
+			deco.initialize(decodata);
+			if (deco.getTexture().getRegionWidth()<tSize)
+				deco.setWidth(deco.getTexture().getRegionWidth()/scale.x);
+			if (deco.getTexture().getRegionHeight()<tSize)
+				deco.setHeight(deco.getTexture().getRegionHeight()/scale.y);
+			deco.setDrawScale(scale);
+			activate(deco);
+			decodata = decodata.next();
+		}
+
         cameras = new ArrayList<CameraModel>();
         JsonValue cameraData = levelFormat.getChild("cameras");
         while (cameraData!=null){

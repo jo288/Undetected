@@ -58,6 +58,7 @@
 "switches": [],
 "doors": [],
 "lasers": [],
+"decoratives": [],
 "objective": {
 	"pos": [ 16, 17 ],
 	"size": [ 1, 1 ],

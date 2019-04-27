@@ -78,6 +78,7 @@
 		"sector": 0
 	}
 ],
+"decoratives": [],
 "objective": {
 	"pos": [ 1, 2 ],
 	"size": [ 1, 1 ],

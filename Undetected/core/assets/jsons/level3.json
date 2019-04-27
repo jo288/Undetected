@@ -55,6 +55,7 @@
 		"sector": 0
 	}
 ],
+"decoratives": [],
 "objective": {
 	"pos": [ 20, 8 ],
 	"size": [ 1, 1 ],

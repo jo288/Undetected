@@ -5,6 +5,7 @@ import java.io.StringWriter;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.*;
+import edu.cornell.gdiac.b2lights.DecorativeModel;
 
 public class LevelParser {
 
@@ -22,6 +23,7 @@ public class LevelParser {
         protected Array<Switch> switches = new Array<Switch>();
         protected Array<Door> doors = new Array<Door>();
         protected Array<Laser> lasers = new Array<Laser>();
+        protected Array<Decorative> decoratives = new Array<Decorative>();
         protected Objective objective = new Objective();
         protected Array<Integer> invalidTiles = new Array<Integer>();
         protected ExteriorWall exteriorwall = new ExteriorWall();
@@ -256,6 +258,27 @@ public class LevelParser {
                 b3.texture = "box3";
                 b3.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
                 testLevel.boxes.add(b3);
+            }
+            if (e.get("template").equals("DeskLeft.tx")){
+                Decorative deskl = new Decorative();
+                deskl.type = "desk";
+                deskl.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                deskl.direction = "left";
+                testLevel.decoratives.add(deskl);
+            }
+            if (e.get("template").equals("DeskRight.tx")){
+                Decorative deskr = new Decorative();
+                deskr.type = "desk";
+                deskr.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                deskr.direction = "right";
+                testLevel.decoratives.add(deskr);
+            }
+            if (e.get("template").equals("DeskUp.tx")){
+                Decorative desku = new Decorative();
+                desku.type = "desk";
+                desku.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                desku.direction = "up";
+                testLevel.decoratives.add(desku);
             }
             if (e.get("template").equals("Laser.tx")){
                 Laser l = new Laser();

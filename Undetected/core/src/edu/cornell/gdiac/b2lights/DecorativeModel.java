@@ -17,11 +17,14 @@ public class DecorativeModel extends BoxObstacle{
     public static final String COLLIDE_BIT = "0010";
     /** Exclude Bit */
     public static final String EXCLUDE_BIT = "0000000000000000";
+    /** Animation stop length */
+    public static final int animationSpeed = 2;
 
     private TextureRegion decoTexture;
     private String decoType;
     private FilmStrip filmstrip;
-    private int animationFrame;
+    private int animationFrame = 0;
+    private boolean flip = false;
 
     public DecorativeModel() {
         super(1,1);
@@ -59,11 +62,13 @@ public class DecorativeModel extends BoxObstacle{
                 setWidth(1f);
                 setHeight(1f);
                 setFixedRotation(true);
-                texture = (json.get("direction").equals("up")?
+                texture = (json.get("direction").asString().equals("up")?
                         JsonAssetManager.getInstance().getEntry("deskFrontAnimation", TextureRegion.class):
                         JsonAssetManager.getInstance().getEntry("deskAnimation", TextureRegion.class));
+                if (json.get("direction").asString().equals("right"))
+                    flip = true;
                 try {
-                    filmstrip = new FilmStrip(texture.getTexture(), 1, 6);
+                    filmstrip = new FilmStrip(texture.getTexture(), 1, 4);
                 } catch (Exception e) {
                     filmstrip = null;
                 }
@@ -77,7 +82,7 @@ public class DecorativeModel extends BoxObstacle{
 
         // Now get the texture from the AssetManager singleton
         setTexture(filmstrip);
-        setOrigin(origin.x, 0);
+        setOrigin(0, 0);
     }
 
     /**
@@ -87,7 +92,10 @@ public class DecorativeModel extends BoxObstacle{
      */
     public void draw(ObstacleCanvas canvas) {
         if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+            if (!flip)
+                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x-getWidth()/2*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+            else
+                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+getWidth()/2*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),-1.0f,1.0f);
         }
     }
 

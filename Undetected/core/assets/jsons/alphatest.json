@@ -164,6 +164,23 @@
 		"sector": 1
 	}
 ],
+"decoratives": [
+	{
+		"pos": [ 8, 8 ],
+		"type": "desk",
+		"direction": "left"
+	},
+	{
+		"pos": [ 10, 8 ],
+		"type": "desk",
+		"direction": "right"
+	},
+	{
+		"pos": [ 1, 23 ],
+		"type": "desk",
+		"direction": "up"
+	}
+],
 "objective": {
 	"pos": [ 29, 3 ],
 	"size": [ 1, 1 ],
