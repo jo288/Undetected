@@ -24,6 +24,8 @@ public class DecorativeModel extends BoxObstacle{
     private String decoType;
     private FilmStrip filmstrip;
     private int animationFrame = 0;
+    private int animationRate = 4;
+    private int animationCount = 0;
     private boolean flip = false;
 
     public DecorativeModel() {
@@ -83,6 +85,13 @@ public class DecorativeModel extends BoxObstacle{
         // Now get the texture from the AssetManager singleton
         setTexture(filmstrip);
         setOrigin(0, 0);
+    }
+
+    @Override
+    public void update(float delta) {
+        super.update(delta);
+        filmstrip.setFrame(animationCount/animationRate);
+        animationCount = (animationCount+1)%(animationFrame*animationRate);
     }
 
     /**

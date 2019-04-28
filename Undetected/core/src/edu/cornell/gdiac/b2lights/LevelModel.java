@@ -971,6 +971,12 @@ public class LevelModel {
 			}
 			avatar.update(dt);
 
+			for (Obstacle o: objects){
+				if(o instanceof DecorativeModel){
+					o.update(dt);
+				}
+			}
+
 			for (SwitchModel sw : switches) {
 				sw.update(dt);
 			}
@@ -991,7 +997,7 @@ public class LevelModel {
 
             // System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
 			//Test for displaying board states
-			board.update();
+//			board.update();
 
 			for (AIController ai : controls) {
 				ai.update();

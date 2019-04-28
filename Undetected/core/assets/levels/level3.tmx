@@ -32,7 +32,6 @@
    <properties>
     <property name="direction" value="left"/>
     <property name="lightAngle" type="float" value="0"/>
-    <property name="objectivepath" value=""/>
     <property name="path" value="[2,12]"/>
    </properties>
   </object>

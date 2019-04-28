@@ -363,7 +363,7 @@ public class LevelParser {
                             default:
                                 break;
                         }
-                    } catch (Exception ex) { System.err.println("guard property parsing error");}
+                    } catch (Exception ex) { System.err.println("guard property parsing error"+fh.name()+"\n"+ex.getMessage());}
                 }
                 g.name = (e.hasAttribute("name")?e.getAttribute("name"):g.name);
                 g.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
