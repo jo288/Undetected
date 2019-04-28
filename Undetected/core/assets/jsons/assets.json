@@ -347,7 +347,7 @@
 			"wrap": false
 		},
 		"pause":	{
-			"file":		"textures/temp_pause.png",
+			"file":		"textures/paused.png",
 			"wrap": 	false
 		},
 		"alarmFlash": {
@@ -373,8 +373,12 @@
   			"size": 	64
   		},
 		"levelselect": {
-			"file": 	"fonts/MarkerFelt.ttf",
-			"size": 	50
+			"file": 	"fonts/RetroGame.ttf",
+			"size": 	40
+		},
+		"levelnumber": {
+			"file": 	"fonts/prstart.ttf",
+			"size": 	20
 		}
 	},
 }

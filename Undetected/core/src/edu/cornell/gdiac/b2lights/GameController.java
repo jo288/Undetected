@@ -80,6 +80,10 @@ public class GameController implements Screen, ContactListener {
 
 	/** The font for giving messages to the player */
 	protected BitmapFont displayFont;
+	protected BitmapFont levelselectfont;
+	protected BitmapFont levelnumfont;
+
+	private int floatframe = 40;
 
 	/** Track asset loading from all instances and subclasses */
 	private AssetState assetState = AssetState.EMPTY;
@@ -128,6 +132,8 @@ public class GameController implements Screen, ContactListener {
 		JsonAssetManager.getInstance().allocateDirectory();
 		pauseButton = new Texture(assetDirectory.get("textures").get("pause").getString("file"));
 		displayFont = JsonAssetManager.getInstance().getEntry("display", BitmapFont.class);
+		levelselectfont = JsonAssetManager.getInstance().getEntry("levelselect", BitmapFont.class);
+		levelnumfont = JsonAssetManager.getInstance().getEntry("levelnumber", BitmapFont.class);
 		assetState = AssetState.COMPLETE;
 	}
 
@@ -720,8 +726,8 @@ public class GameController implements Screen, ContactListener {
 		if (paused) {
 			Texture pauseButton = new Texture(assetDirectory.get("textures").get("pause").getString("file"));
 			canvas.begin();
-			canvas.draw(pauseButton, Color.GRAY, pauseButton.getWidth()/2, pauseButton.getHeight()/2,
-					canvas.getWidth()/2, canvas.getHeight()/2, 0, 0.3f, 0.3f);
+			canvas.draw(pauseButton, Color.WHITE, pauseButton.getWidth()/2, pauseButton.getHeight()/2,
+					cam.position.x,cam.position.y, 0, 1, 1);
 			canvas.end();
 		}
 
@@ -747,6 +753,20 @@ public class GameController implements Screen, ContactListener {
 			if(showMiniMap) {
 				miniMap.render(canvas, delta);
 			}
+		}else {
+			canvas.begin();
+      		levelselectfont.setColor(Color.YELLOW);
+			canvas.drawText("SELECT LEVEL", levelselectfont, cam.position.x-370, cam.position.y-250);
+
+			levelnumfont.setColor(Color.WHITE);
+			ArrayList<DoorModel> doors = level.getDoors();
+			for(int i=0;i<doors.size();i++){
+				int f = floatframe/4 + i;
+				int t = (f%10>5)?(10-f%10):f%10;
+				canvas.drawText(""+(i+1),levelnumfont,doors.get(i).getX()*32-10,doors.get(i).getY()*32+85+(t*3));
+			}
+			floatframe = (floatframe+1)%40;
+			canvas.end();
 		}
 	}
 
