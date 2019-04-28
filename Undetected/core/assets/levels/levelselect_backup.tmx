@@ -3,7 +3,6 @@
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="2" source="HorizontalWall.tsx"/>
  <tileset firstgid="3" source="VerticalWall.tsx"/>
- <tileset firstgid="4" source="DoorClosed.tsx"/>
  <tileset firstgid="5" source="Player.tsx"/>
  <layer id="3" name="Tile Layer 1" width="21" height="10">
   <data encoding="csv">

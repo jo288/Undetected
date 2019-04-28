@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
  <tileset firstgid="1" source="Objective.tsx"/>
- <object type="objective" gid="1" width="23" height="11">
+ <object type="objective" gid="1" width="32" height="50">
   <properties>
    <property name="doors" value=""/>
    <property name="hasAlarm" type="bool" value="false"/>

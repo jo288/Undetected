@@ -7,9 +7,7 @@
  <tileset firstgid="5" source="Player.tsx"/>
  <tileset firstgid="6" source="Laser.tsx"/>
  <tileset firstgid="7" source="Guard.tsx"/>
- <tileset firstgid="8" source="Switch.tsx"/>
  <tileset firstgid="9" source="Box1.tsx"/>
- <tileset firstgid="10" source="DoorOpen.tsx"/>
  <tileset firstgid="11" source="Objective.tsx"/>
  <layer id="1" name="Tile Layer 1" width="10" height="10">
   <data encoding="csv">

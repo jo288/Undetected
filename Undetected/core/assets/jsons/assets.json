@@ -326,10 +326,6 @@
 			"file": 	"textures/boxdude.png",
 			"wrap": 	false
 		},
-		"key": 		{
-			"file": 	"textures/key.png",
-			"wrap": 	false
-		},
 		"greenkey": {
 			"file": 	"textures/greenkey.png",
 			"wrap": 	false
@@ -376,5 +372,9 @@
   			"file": 	"fonts/MarkerFelt.ttf",
   			"size": 	64
   		},
-  	},
+		"levelselect": {
+			"file": 	"fonts/MarkerFelt.ttf",
+			"size": 	50
+		}
+	},
 }

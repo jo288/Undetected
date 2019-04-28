@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="20" height="11" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="29">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="20" height="11" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="89">
  <tileset firstgid="1" source="FloorTile.tsx"/>
- <tileset firstgid="2" source="HorizontalWall.tsx"/>
- <tileset firstgid="3" source="VerticalWall.tsx"/>
- <tileset firstgid="4" source="Exit.tsx"/>
- <tileset firstgid="5" source="Objective.tsx"/>
- <tileset firstgid="6" source="Player.tsx"/>
- <tileset firstgid="7" source="Guard.tsx"/>
- <tileset firstgid="8" source="DeskRight.tsx"/>
+ <tileset firstgid="2" source="Exit.tsx"/>
+ <tileset firstgid="3" source="Objective.tsx"/>
+ <tileset firstgid="4" source="Player.tsx"/>
+ <tileset firstgid="5" source="Guard.tsx"/>
+ <tileset firstgid="6" source="DeskRight.tsx"/>
+ <tileset firstgid="10" source="wallgreen.tsx"/>
  <layer id="1" name="Tile Layer 1" width="20" height="11">
   <data encoding="csv">
 0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -24,14 +23,6 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" template="HorizontalWall.tx" x="128" y="32" width="64" height="48"/>
-  <object id="6" template="HorizontalWall.tx" x="32" y="128" width="128" height="48"/>
-  <object id="7" template="HorizontalWall.tx" x="96" y="352" width="544" height="48"/>
-  <object id="8" template="HorizontalWall.tx" x="192" y="128" width="416" height="48"/>
-  <object id="12" template="VerticalWall.tx" x="192" y="96" width="32" height="96"/>
-  <object id="14" template="VerticalWall.tx" x="608" y="320" width="32" height="224"/>
-  <object id="15" template="VerticalWall.tx" x="0" y="320" width="32" height="224"/>
-  <object id="16" template="HorizontalWall.tx" x="0" y="352"/>
   <object id="17" template="Exit.tx" x="32" y="352"/>
   <object id="18" template="KeyObjective.tx" x="576" y="224"/>
   <object id="19" template="Player.tx" x="32" y="288"/>
@@ -43,7 +34,65 @@
     <property name="path" value="[5,12]"/>
    </properties>
   </object>
-  <object id="27" template="VerticalWall.tx" x="96" y="96" width="32" height="96"/>
   <object id="28" template="DeskLeft.tx" x="128" y="64"/>
+  <object id="29" template="HorizontalWall.tx" x="96" y="64"/>
+  <object id="30" template="HorizontalWall.tx" x="96" y="96"/>
+  <object id="31" template="HorizontalWall.tx" x="128" y="32"/>
+  <object id="32" template="HorizontalWall.tx" x="160" y="32"/>
+  <object id="33" template="HorizontalWall.tx" x="192" y="32"/>
+  <object id="34" template="HorizontalWall.tx" x="192" y="64"/>
+  <object id="35" template="HorizontalWall.tx" x="192" y="96"/>
+  <object id="36" template="HorizontalWall.tx" x="192" y="128"/>
+  <object id="37" template="HorizontalWall.tx" x="224" y="128"/>
+  <object id="38" template="HorizontalWall.tx" x="288" y="128"/>
+  <object id="39" template="HorizontalWall.tx" x="256" y="128"/>
+  <object id="40" template="HorizontalWall.tx" x="320" y="128"/>
+  <object id="41" template="HorizontalWall.tx" x="352" y="128"/>
+  <object id="42" template="HorizontalWall.tx" x="384" y="128"/>
+  <object id="43" template="HorizontalWall.tx" x="448" y="128"/>
+  <object id="44" template="HorizontalWall.tx" x="416" y="128"/>
+  <object id="45" template="HorizontalWall.tx" x="480" y="128"/>
+  <object id="46" template="HorizontalWall.tx" x="512" y="128"/>
+  <object id="47" template="HorizontalWall.tx" x="544" y="128"/>
+  <object id="48" template="HorizontalWall.tx" x="576" y="128"/>
+  <object id="49" template="HorizontalWall.tx" x="96" y="32"/>
+  <object id="50" template="HorizontalWall.tx" x="128" y="128"/>
+  <object id="51" template="HorizontalWall.tx" x="96" y="128"/>
+  <object id="52" template="HorizontalWall.tx" x="64" y="128"/>
+  <object id="53" template="HorizontalWall.tx" x="32" y="128"/>
+  <object id="54" template="HorizontalWall.tx" x="0" y="128"/>
+  <object id="55" template="HorizontalWall.tx" x="0" y="160"/>
+  <object id="56" template="HorizontalWall.tx" x="0" y="192"/>
+  <object id="57" template="HorizontalWall.tx" x="0" y="224"/>
+  <object id="58" template="HorizontalWall.tx" x="0" y="256"/>
+  <object id="59" template="HorizontalWall.tx" x="0" y="288"/>
+  <object id="60" template="HorizontalWall.tx" x="0" y="320"/>
+  <object id="62" template="HorizontalWall.tx" x="0" y="352"/>
+  <object id="63" template="HorizontalWall.tx" x="96" y="352"/>
+  <object id="64" template="HorizontalWall.tx" x="128" y="352"/>
+  <object id="65" template="HorizontalWall.tx" x="160" y="352"/>
+  <object id="66" template="HorizontalWall.tx" x="192" y="352"/>
+  <object id="67" template="HorizontalWall.tx" x="224" y="352"/>
+  <object id="68" template="HorizontalWall.tx" x="256" y="352"/>
+  <object id="69" template="HorizontalWall.tx" x="288" y="352"/>
+  <object id="70" template="HorizontalWall.tx" x="320" y="352"/>
+  <object id="71" template="HorizontalWall.tx" x="352" y="352"/>
+  <object id="72" template="HorizontalWall.tx" x="416" y="352"/>
+  <object id="73" template="HorizontalWall.tx" x="416" y="352"/>
+  <object id="74" template="HorizontalWall.tx" x="384" y="352"/>
+  <object id="75" template="HorizontalWall.tx" x="480" y="352"/>
+  <object id="76" template="HorizontalWall.tx" x="480" y="352"/>
+  <object id="77" template="HorizontalWall.tx" x="448" y="352"/>
+  <object id="78" template="HorizontalWall.tx" x="512" y="352"/>
+  <object id="79" template="HorizontalWall.tx" x="576" y="352"/>
+  <object id="80" template="HorizontalWall.tx" x="544" y="352"/>
+  <object id="81" template="HorizontalWall.tx" x="608" y="352"/>
+  <object id="82" template="HorizontalWall.tx" x="608" y="128"/>
+  <object id="83" template="HorizontalWall.tx" x="608" y="160"/>
+  <object id="84" template="HorizontalWall.tx" x="608" y="192"/>
+  <object id="85" template="HorizontalWall.tx" x="608" y="224"/>
+  <object id="86" template="HorizontalWall.tx" x="608" y="256"/>
+  <object id="87" template="HorizontalWall.tx" x="608" y="288"/>
+  <object id="88" template="HorizontalWall.tx" x="608" y="320"/>
  </objectgroup>
 </map>

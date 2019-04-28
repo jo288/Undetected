@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="89">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="406">
  <tileset firstgid="1" source="FloorTile.tsx"/>
- <tileset firstgid="2" source="HorizontalWall.tsx"/>
- <tileset firstgid="3" source="VerticalWall.tsx"/>
- <tileset firstgid="4" source="DoorOpen.tsx"/>
- <tileset firstgid="5" source="DoorClosed.tsx"/>
- <tileset firstgid="6" source="Exit.tsx"/>
- <tileset firstgid="7" source="Player.tsx"/>
- <tileset firstgid="8" source="Guard.tsx"/>
- <tileset firstgid="9" source="Box2.tsx"/>
- <tileset firstgid="10" source="Objective.tsx"/>
- <tileset firstgid="11" source="Switch.tsx"/>
- <tileset firstgid="12" source="Laser.tsx"/>
- <tileset firstgid="13" source="InteriorWall.tsx"/>
- <tileset firstgid="14" source="DeskRight.tsx"/>
- <tileset firstgid="18" source="deskfront.tsx"/>
+ <tileset firstgid="2" source="Exit.tsx"/>
+ <tileset firstgid="3" source="Player.tsx"/>
+ <tileset firstgid="4" source="Guard.tsx"/>
+ <tileset firstgid="5" source="Box2.tsx"/>
+ <tileset firstgid="6" source="Objective.tsx"/>
+ <tileset firstgid="6" source="Laser.tsx"/>
+ <tileset firstgid="7" source="InteriorWall.tsx"/>
+ <tileset firstgid="8" source="DeskRight.tsx"/>
+ <tileset firstgid="12" source="deskfront.tsx"/>
+ <tileset firstgid="16" source="wallgreen.tsx"/>
  <layer id="1" name="Tile Layer 1" width="40" height="34">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -54,57 +50,18 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" template="HorizontalWall.tx" x="160" y="448" width="160" height="48"/>
-  <object id="2" template="HorizontalWall.tx" x="128" y="672" width="224" height="48"/>
-  <object id="3" template="VerticalWall.tx" x="128" y="640" width="32" height="240"/>
-  <object id="5" template="VerticalWall.tx" x="320" y="640" width="32" height="240"/>
-  <object id="6" template="VerticalWall.tx" x="0" y="768" width="32" height="496"/>
-  <object id="7" template="VerticalWall.tx" x="448" y="480" width="32" height="208"/>
-  <object id="8" template="HorizontalWall.tx" x="0" y="800" width="96" height="48"/>
-  <object id="9" template="HorizontalWall.tx" x="384" y="800" width="96" height="48"/>
-  <object id="10" template="VerticalWall.tx" x="96" y="1056" width="32" height="304"/>
-  <object id="11" template="VerticalWall.tx" x="352" y="960" width="32" height="208"/>
-  <object id="16" template="VerticalWall.tx" x="224" y="1056" width="32" height="304"/>
-  <object id="17" template="HorizontalWall.tx" x="32" y="320" width="416" height="48"/>
-  <object id="19" template="HorizontalWall.tx" x="480" y="704" width="128" height="48"/>
-  <object id="20" template="VerticalWall.tx" x="448" y="768" width="32" height="112"/>
-  <object id="22" template="HorizontalWall.tx" x="448" y="512" width="448" height="48"/>
-  <object id="23" template="DoorOpen.tx" x="288" y="896"/>
+  <object id="23" template="DoorOpen.tx" x="288" y="896" width="32" height="64"/>
   <object id="24" template="HorizontalWall.tx" x="256" y="896"/>
   <object id="25" template="HorizontalWall.tx" x="320" y="896"/>
-  <object id="27" template="HorizontalWall.tx" x="352" y="992" width="288" height="48"/>
-  <object id="28" template="VerticalWall.tx" x="608" y="960" width="32" height="304"/>
   <object id="30" template="DoorClosed.tx" name="door1" x="672" y="704"/>
   <object id="31" template="HorizontalWall.tx" x="640" y="704"/>
   <object id="32" template="HorizontalWall.tx" x="704" y="704"/>
-  <object id="33" template="HorizontalWall.tx" x="224" y="1088" width="544" height="48"/>
-  <object id="34" template="VerticalWall.tx" x="736" y="1056" width="32" height="400"/>
-  <object id="35" template="HorizontalWall.tx" x="768" y="704" width="96" height="48"/>
-  <object id="36" template="VerticalWall.tx" x="864" y="1056" width="32" height="400"/>
-  <object id="37" template="VerticalWall.tx" x="992" y="1056" width="32" height="400"/>
-  <object id="38" template="HorizontalWall.tx" x="864" y="1088" width="160" height="48"/>
-  <object id="39" template="HorizontalWall.tx" x="96" y="1088" width="64" height="48"/>
-  <object id="42" template="Exit.tx" x="160" y="1088"/>
-  <object id="43" template="HorizontalWall.tx" x="1024" y="704" width="256" height="48"/>
-  <object id="44" template="VerticalWall.tx" x="1248" y="672" width="32" height="400"/>
-  <object id="45" template="HorizontalWall.tx" x="1024" y="320" width="224" height="48"/>
-  <object id="46" template="HorizontalWall.tx" x="992" y="576" width="160" height="48"/>
-  <object id="47" template="HorizontalWall.tx" x="1024" y="448" width="96" height="48"/>
-  <object id="48" template="VerticalWall.tx" x="1120" y="544" width="32" height="144"/>
-  <object id="49" template="VerticalWall.tx" x="992" y="544" width="32" height="144"/>
   <object id="52" template="DoorOpen.tx" name="door3" x="1184" y="448"/>
   <object id="53" template="DoorOpen.tx" name="door2" x="1184" y="576"/>
   <object id="54" template="HorizontalWall.tx" x="1216" y="576"/>
   <object id="55" template="HorizontalWall.tx" x="1216" y="448"/>
   <object id="56" template="HorizontalWall.tx" x="1152" y="448"/>
   <object id="57" template="HorizontalWall.tx" x="1152" y="576"/>
-  <object id="60" template="VerticalWall.tx" x="864" y="480" width="32" height="336"/>
-  <object id="61" template="VerticalWall.tx" x="992" y="320" width="32" height="176"/>
-  <object id="62" template="HorizontalWall.tx" x="704" y="192" width="160" height="48"/>
-  <object id="63" template="HorizontalWall.tx" x="736" y="64" width="416" height="48"/>
-  <object id="64" template="HorizontalWall.tx" x="1024" y="192" width="160" height="48"/>
-  <object id="65" template="VerticalWall.tx" x="1152" y="160" width="32" height="144"/>
-  <object id="66" template="VerticalWall.tx" x="704" y="160" width="32" height="144"/>
   <object id="67" template="Player.tx" x="160" y="1024"/>
   <object id="68" template="Guard.tx" x="64" y="736">
    <properties>
@@ -126,7 +83,7 @@
     <property name="sector" type="int" value="1"/>
    </properties>
   </object>
-  <object id="71" template="Guard.tx" gid="8" x="768" y="128">
+  <object id="71" template="Guard.tx" gid="4" x="768" y="128">
    <properties>
     <property name="IsPatrolling" type="bool" value="true"/>
     <property name="path" value="[24,30,34,30]"/>
@@ -140,8 +97,8 @@
     <property name="sector" type="int" value="1"/>
    </properties>
   </object>
-  <object id="73" template="Box2.tx" name="box2" gid="9" x="448" y="544" rotation="0"/>
-  <object id="74" template="KeyObjective.tx" gid="10" x="928" y="992">
+  <object id="73" template="Box2.tx" name="box2" gid="5" x="448" y="544" rotation="0"/>
+  <object id="74" template="KeyObjective.tx" x="928" y="992">
    <properties>
     <property name="doors" value="door2,door3"/>
     <property name="hasAlarm" type="bool" value="false"/>
@@ -153,19 +110,309 @@
     <property name="doors" value="door1"/>
    </properties>
   </object>
-  <object id="77" template="Switch.tx" gid="11" x="1024" y="352" rotation="0">
+  <object id="77" template="Switch.tx" x="1024" y="352" rotation="0">
    <properties>
     <property name="doors" value="door2,door3"/>
    </properties>
   </object>
-  <object id="79" template="HorizontalWall.tx" x="992" y="352"/>
   <object id="80" template="Laser.tx" name="laser1" x="1152" y="480.5" width="3" height="96" rotation="-270">
    <properties>
     <property name="sector" type="int" value="1"/>
    </properties>
   </object>
-  <object id="84" template="DeskLeft.tx" gid="14" x="256" y="832"/>
+  <object id="84" template="DeskLeft.tx" gid="8" x="256" y="832"/>
   <object id="85" template="DeskRight.tx" x="320" y="832"/>
   <object id="88" template="DeskUp.tx" x="32" y="352"/>
+  <object id="89" template="HorizontalWall.tx" x="32" y="320"/>
+  <object id="90" template="HorizontalWall.tx" x="64" y="320"/>
+  <object id="91" template="HorizontalWall.tx" x="96" y="320"/>
+  <object id="92" template="HorizontalWall.tx" x="160" y="320"/>
+  <object id="93" template="HorizontalWall.tx" x="128" y="320"/>
+  <object id="94" template="HorizontalWall.tx" x="192" y="320"/>
+  <object id="95" template="HorizontalWall.tx" x="224" y="320"/>
+  <object id="96" template="HorizontalWall.tx" x="256" y="320"/>
+  <object id="97" template="HorizontalWall.tx" x="320" y="320"/>
+  <object id="98" template="HorizontalWall.tx" x="288" y="320"/>
+  <object id="99" template="HorizontalWall.tx" x="352" y="320"/>
+  <object id="100" template="HorizontalWall.tx" x="384" y="320"/>
+  <object id="101" template="HorizontalWall.tx" x="416" y="320"/>
+  <object id="102" template="VerticalWall.tx" x="0" y="320"/>
+  <object id="103" template="VerticalWall.tx" x="0" y="352"/>
+  <object id="104" template="VerticalWall.tx" x="0" y="384"/>
+  <object id="105" template="VerticalWall.tx" x="0" y="416"/>
+  <object id="106" template="VerticalWall.tx" x="0" y="448"/>
+  <object id="107" template="VerticalWall.tx" x="0" y="480"/>
+  <object id="108" template="VerticalWall.tx" x="0" y="512"/>
+  <object id="112" template="VerticalWall.tx" x="0" y="544"/>
+  <object id="113" template="VerticalWall.tx" x="0" y="576"/>
+  <object id="114" template="VerticalWall.tx" x="0" y="608"/>
+  <object id="115" template="VerticalWall.tx" x="0" y="640"/>
+  <object id="116" template="VerticalWall.tx" x="0" y="672"/>
+  <object id="117" template="VerticalWall.tx" x="0" y="704"/>
+  <object id="118" template="VerticalWall.tx" x="0" y="736"/>
+  <object id="119" template="VerticalWall.tx" x="0" y="768"/>
+  <object id="120" template="VerticalWall.tx" x="0" y="800"/>
+  <object id="121" template="VerticalWall.tx" x="32" y="800"/>
+  <object id="122" template="VerticalWall.tx" x="64" y="800"/>
+  <object id="123" template="VerticalWall.tx" x="96" y="800"/>
+  <object id="130" template="VerticalWall.tx" x="96" y="832"/>
+  <object id="131" template="VerticalWall.tx" x="96" y="864"/>
+  <object id="132" template="VerticalWall.tx" x="96" y="864"/>
+  <object id="133" template="VerticalWall.tx" x="96" y="896"/>
+  <object id="134" template="VerticalWall.tx" x="96" y="928"/>
+  <object id="135" template="VerticalWall.tx" x="96" y="1056"/>
+  <object id="136" template="VerticalWall.tx" x="96" y="1024"/>
+  <object id="137" template="VerticalWall.tx" x="96" y="992"/>
+  <object id="138" template="VerticalWall.tx" x="96" y="960"/>
+  <object id="139" template="VerticalWall.tx" x="128" y="1088"/>
+  <object id="140" template="VerticalWall.tx" x="96" y="1088"/>
+  <object id="141" template="VerticalWall.tx" x="224" y="800"/>
+  <object id="142" template="VerticalWall.tx" x="224" y="832"/>
+  <object id="143" template="VerticalWall.tx" x="224" y="832"/>
+  <object id="144" template="VerticalWall.tx" x="224" y="864"/>
+  <object id="145" template="VerticalWall.tx" x="224" y="896"/>
+  <object id="146" template="VerticalWall.tx" x="224" y="928"/>
+  <object id="147" template="VerticalWall.tx" x="224" y="960"/>
+  <object id="148" template="VerticalWall.tx" x="224" y="992"/>
+  <object id="149" template="VerticalWall.tx" x="224" y="1024"/>
+  <object id="150" template="VerticalWall.tx" x="224" y="1056"/>
+  <object id="151" template="VerticalWall.tx" x="224" y="1088"/>
+  <object id="152" template="VerticalWall.tx" x="256" y="1088"/>
+  <object id="153" template="VerticalWall.tx" x="288" y="1088"/>
+  <object id="154" template="VerticalWall.tx" x="320" y="1088"/>
+  <object id="155" template="VerticalWall.tx" x="736" y="1088"/>
+  <object id="156" template="VerticalWall.tx" x="736" y="1088"/>
+  <object id="157" template="VerticalWall.tx" x="704" y="1088"/>
+  <object id="158" template="VerticalWall.tx" x="672" y="1088"/>
+  <object id="159" template="VerticalWall.tx" x="640" y="1088"/>
+  <object id="160" template="VerticalWall.tx" x="608" y="1088"/>
+  <object id="162" template="VerticalWall.tx" x="576" y="1088"/>
+  <object id="163" template="VerticalWall.tx" x="544" y="1088"/>
+  <object id="164" template="VerticalWall.tx" x="512" y="1088"/>
+  <object id="165" template="VerticalWall.tx" x="480" y="1088"/>
+  <object id="166" template="VerticalWall.tx" x="448" y="1088"/>
+  <object id="167" template="VerticalWall.tx" x="416" y="1088"/>
+  <object id="168" template="VerticalWall.tx" x="384" y="1088"/>
+  <object id="169" template="VerticalWall.tx" x="352" y="1088"/>
+  <object id="170" template="VerticalWall.tx" x="736" y="736"/>
+  <object id="171" template="VerticalWall.tx" x="736" y="704"/>
+  <object id="172" template="VerticalWall.tx" x="736" y="768"/>
+  <object id="173" template="VerticalWall.tx" x="736" y="800"/>
+  <object id="174" template="VerticalWall.tx" x="736" y="832"/>
+  <object id="176" template="VerticalWall.tx" x="736" y="864"/>
+  <object id="177" template="VerticalWall.tx" x="736" y="896"/>
+  <object id="178" template="VerticalWall.tx" x="736" y="928"/>
+  <object id="179" template="VerticalWall.tx" x="736" y="960"/>
+  <object id="180" template="VerticalWall.tx" x="736" y="1024"/>
+  <object id="181" template="VerticalWall.tx" x="736" y="1056"/>
+  <object id="182" template="VerticalWall.tx" x="736" y="992"/>
+  <object id="183" template="VerticalWall.tx" x="608" y="704"/>
+  <object id="184" template="VerticalWall.tx" x="608" y="736"/>
+  <object id="185" template="VerticalWall.tx" x="608" y="768"/>
+  <object id="186" template="VerticalWall.tx" x="608" y="800"/>
+  <object id="187" template="VerticalWall.tx" x="608" y="832"/>
+  <object id="188" template="VerticalWall.tx" x="608" y="864"/>
+  <object id="189" template="VerticalWall.tx" x="608" y="928"/>
+  <object id="190" template="VerticalWall.tx" x="608" y="960"/>
+  <object id="191" template="VerticalWall.tx" x="608" y="896"/>
+  <object id="192" template="VerticalWall.tx" x="608" y="992"/>
+  <object id="193" template="VerticalWall.tx" x="576" y="992"/>
+  <object id="195" template="VerticalWall.tx" x="544" y="992"/>
+  <object id="196" template="VerticalWall.tx" x="512" y="992"/>
+  <object id="197" template="VerticalWall.tx" x="480" y="992"/>
+  <object id="198" template="VerticalWall.tx" x="448" y="992"/>
+  <object id="199" template="VerticalWall.tx" x="416" y="992"/>
+  <object id="200" template="VerticalWall.tx" x="384" y="992"/>
+  <object id="201" template="VerticalWall.tx" x="352" y="992"/>
+  <object id="202" template="VerticalWall.tx" x="352" y="832"/>
+  <object id="203" template="VerticalWall.tx" x="352" y="864"/>
+  <object id="204" template="VerticalWall.tx" x="352" y="896"/>
+  <object id="205" template="VerticalWall.tx" x="352" y="928"/>
+  <object id="206" template="VerticalWall.tx" x="352" y="960"/>
+  <object id="207" template="VerticalWall.tx" x="352" y="800"/>
+  <object id="208" template="VerticalWall.tx" x="384" y="800"/>
+  <object id="209" template="VerticalWall.tx" x="416" y="800"/>
+  <object id="210" template="VerticalWall.tx" x="448" y="800"/>
+  <object id="211" template="VerticalWall.tx" x="448" y="768"/>
+  <object id="213" template="VerticalWall.tx" x="448" y="736"/>
+  <object id="214" template="VerticalWall.tx" x="448" y="704"/>
+  <object id="215" template="VerticalWall.tx" x="480" y="704"/>
+  <object id="216" template="VerticalWall.tx" x="512" y="704"/>
+  <object id="217" template="VerticalWall.tx" x="544" y="704"/>
+  <object id="218" template="VerticalWall.tx" x="576" y="704"/>
+  <object id="219" template="VerticalWall.tx" x="768" y="704"/>
+  <object id="220" template="VerticalWall.tx" x="832" y="704"/>
+  <object id="221" template="VerticalWall.tx" x="800" y="704"/>
+  <object id="222" template="VerticalWall.tx" x="864" y="704"/>
+  <object id="223" template="VerticalWall.tx" x="864" y="736"/>
+  <object id="224" template="VerticalWall.tx" x="864" y="768"/>
+  <object id="225" template="VerticalWall.tx" x="864" y="800"/>
+  <object id="226" template="VerticalWall.tx" x="864" y="832"/>
+  <object id="227" template="VerticalWall.tx" x="864" y="864"/>
+  <object id="228" template="VerticalWall.tx" x="864" y="896"/>
+  <object id="229" template="VerticalWall.tx" x="864" y="960"/>
+  <object id="230" template="VerticalWall.tx" x="864" y="928"/>
+  <object id="231" template="VerticalWall.tx" x="864" y="992"/>
+  <object id="232" template="VerticalWall.tx" x="864" y="1024"/>
+  <object id="233" template="VerticalWall.tx" x="864" y="1056"/>
+  <object id="234" template="VerticalWall.tx" x="864" y="1088"/>
+  <object id="235" template="VerticalWall.tx" x="896" y="1088"/>
+  <object id="236" template="VerticalWall.tx" x="928" y="1088"/>
+  <object id="237" template="VerticalWall.tx" x="960" y="1088"/>
+  <object id="238" template="VerticalWall.tx" x="992" y="1088"/>
+  <object id="239" template="VerticalWall.tx" x="992" y="704"/>
+  <object id="240" template="VerticalWall.tx" x="992" y="736"/>
+  <object id="241" template="VerticalWall.tx" x="992" y="768"/>
+  <object id="242" template="VerticalWall.tx" x="992" y="800"/>
+  <object id="243" template="VerticalWall.tx" x="992" y="864"/>
+  <object id="244" template="VerticalWall.tx" x="992" y="832"/>
+  <object id="245" template="VerticalWall.tx" x="992" y="896"/>
+  <object id="246" template="VerticalWall.tx" x="992" y="960"/>
+  <object id="247" template="VerticalWall.tx" x="992" y="992"/>
+  <object id="248" template="VerticalWall.tx" x="992" y="1024"/>
+  <object id="249" template="VerticalWall.tx" x="992" y="896"/>
+  <object id="250" template="VerticalWall.tx" x="992" y="928"/>
+  <object id="251" template="VerticalWall.tx" x="992" y="1056"/>
+  <object id="252" template="VerticalWall.tx" x="1024" y="704"/>
+  <object id="253" template="VerticalWall.tx" x="1056" y="704"/>
+  <object id="254" template="VerticalWall.tx" x="1088" y="704"/>
+  <object id="255" template="VerticalWall.tx" x="1152" y="704"/>
+  <object id="256" template="VerticalWall.tx" x="1120" y="704"/>
+  <object id="257" template="VerticalWall.tx" x="1216" y="704"/>
+  <object id="258" template="VerticalWall.tx" x="1184" y="704"/>
+  <object id="259" template="VerticalWall.tx" x="1248" y="704"/>
+  <object id="260" template="VerticalWall.tx" x="1248" y="672"/>
+  <object id="261" template="VerticalWall.tx" x="1248" y="640"/>
+  <object id="262" template="VerticalWall.tx" x="1248" y="608"/>
+  <object id="263" template="VerticalWall.tx" x="1248" y="576"/>
+  <object id="264" template="VerticalWall.tx" x="1248" y="512"/>
+  <object id="265" template="VerticalWall.tx" x="1248" y="544"/>
+  <object id="266" template="VerticalWall.tx" x="1248" y="480"/>
+  <object id="267" template="VerticalWall.tx" x="1248" y="416"/>
+  <object id="268" template="VerticalWall.tx" x="1248" y="352"/>
+  <object id="269" template="VerticalWall.tx" x="1248" y="384"/>
+  <object id="270" template="VerticalWall.tx" x="1248" y="448"/>
+  <object id="281" template="VerticalWall.tx" x="1248" y="320"/>
+  <object id="282" template="VerticalWall.tx" x="1120" y="448"/>
+  <object id="283" template="VerticalWall.tx" x="1088" y="448"/>
+  <object id="284" template="VerticalWall.tx" x="1056" y="448"/>
+  <object id="285" template="VerticalWall.tx" x="1024" y="448"/>
+  <object id="286" template="VerticalWall.tx" x="1024" y="448"/>
+  <object id="287" template="VerticalWall.tx" x="992" y="448"/>
+  <object id="288" template="VerticalWall.tx" x="992" y="480"/>
+  <object id="289" template="VerticalWall.tx" x="992" y="512"/>
+  <object id="290" template="VerticalWall.tx" x="992" y="544"/>
+  <object id="291" template="VerticalWall.tx" x="992" y="576"/>
+  <object id="292" template="VerticalWall.tx" x="1024" y="576"/>
+  <object id="293" template="VerticalWall.tx" x="1056" y="576"/>
+  <object id="294" template="VerticalWall.tx" x="1120" y="576"/>
+  <object id="295" template="VerticalWall.tx" x="1088" y="576"/>
+  <object id="296" template="VerticalWall.tx" x="1120" y="448"/>
+  <object id="297" template="VerticalWall.tx" x="1120" y="512"/>
+  <object id="298" template="VerticalWall.tx" x="1120" y="480"/>
+  <object id="299" template="VerticalWall.tx" x="1120" y="544"/>
+  <object id="300" template="VerticalWall.tx" x="1216" y="320"/>
+  <object id="301" template="VerticalWall.tx" x="1184" y="320"/>
+  <object id="302" template="VerticalWall.tx" x="1152" y="320"/>
+  <object id="303" template="VerticalWall.tx" x="1120" y="320"/>
+  <object id="304" template="VerticalWall.tx" x="1088" y="320"/>
+  <object id="305" template="VerticalWall.tx" x="1056" y="320"/>
+  <object id="306" template="VerticalWall.tx" x="1024" y="320"/>
+  <object id="307" template="VerticalWall.tx" x="992" y="352"/>
+  <object id="309" template="VerticalWall.tx" x="992" y="224"/>
+  <object id="310" template="VerticalWall.tx" x="992" y="192"/>
+  <object id="311" template="VerticalWall.tx" x="992" y="256"/>
+  <object id="312" template="VerticalWall.tx" x="992" y="288"/>
+  <object id="313" template="VerticalWall.tx" x="992" y="320"/>
+  <object id="314" template="VerticalWall.tx" x="1024" y="192"/>
+  <object id="315" template="VerticalWall.tx" x="1056" y="192"/>
+  <object id="316" template="VerticalWall.tx" x="1088" y="192"/>
+  <object id="317" template="VerticalWall.tx" x="1120" y="192"/>
+  <object id="318" template="VerticalWall.tx" x="1152" y="192"/>
+  <object id="319" template="VerticalWall.tx" x="1152" y="96"/>
+  <object id="320" template="VerticalWall.tx" x="1152" y="64"/>
+  <object id="321" template="VerticalWall.tx" x="1152" y="128"/>
+  <object id="322" template="VerticalWall.tx" x="1152" y="160"/>
+  <object id="323" template="VerticalWall.tx" x="1120" y="64"/>
+  <object id="324" template="VerticalWall.tx" x="1088" y="64"/>
+  <object id="325" template="VerticalWall.tx" x="1024" y="64"/>
+  <object id="326" template="VerticalWall.tx" x="1056" y="64"/>
+  <object id="327" template="VerticalWall.tx" x="992" y="64"/>
+  <object id="328" template="VerticalWall.tx" x="960" y="64"/>
+  <object id="329" template="VerticalWall.tx" x="928" y="64"/>
+  <object id="330" template="VerticalWall.tx" x="896" y="64"/>
+  <object id="331" template="VerticalWall.tx" x="864" y="64"/>
+  <object id="332" template="VerticalWall.tx" x="832" y="64"/>
+  <object id="333" template="VerticalWall.tx" x="800" y="64"/>
+  <object id="334" template="VerticalWall.tx" x="768" y="64"/>
+  <object id="335" template="VerticalWall.tx" x="736" y="64"/>
+  <object id="336" template="VerticalWall.tx" x="704" y="64"/>
+  <object id="337" template="VerticalWall.tx" x="704" y="96"/>
+  <object id="338" template="VerticalWall.tx" x="704" y="160"/>
+  <object id="339" template="VerticalWall.tx" x="704" y="128"/>
+  <object id="340" template="VerticalWall.tx" x="704" y="160"/>
+  <object id="341" template="VerticalWall.tx" x="704" y="192"/>
+  <object id="343" template="VerticalWall.tx" x="736" y="192"/>
+  <object id="344" template="VerticalWall.tx" x="768" y="192"/>
+  <object id="345" template="VerticalWall.tx" x="800" y="192"/>
+  <object id="346" template="VerticalWall.tx" x="832" y="192"/>
+  <object id="347" template="VerticalWall.tx" x="864" y="192"/>
+  <object id="349" template="VerticalWall.tx" x="864" y="224"/>
+  <object id="350" template="VerticalWall.tx" x="864" y="288"/>
+  <object id="351" template="VerticalWall.tx" x="864" y="256"/>
+  <object id="352" template="VerticalWall.tx" x="864" y="320"/>
+  <object id="353" template="VerticalWall.tx" x="864" y="352"/>
+  <object id="354" template="VerticalWall.tx" x="864" y="384"/>
+  <object id="355" template="VerticalWall.tx" x="864" y="416"/>
+  <object id="356" template="VerticalWall.tx" x="864" y="448"/>
+  <object id="357" template="VerticalWall.tx" x="864" y="480"/>
+  <object id="358" template="VerticalWall.tx" x="864" y="512"/>
+  <object id="359" template="VerticalWall.tx" x="832" y="512"/>
+  <object id="360" template="VerticalWall.tx" x="800" y="512"/>
+  <object id="361" template="VerticalWall.tx" x="768" y="512"/>
+  <object id="362" template="VerticalWall.tx" x="736" y="512"/>
+  <object id="363" template="VerticalWall.tx" x="704" y="512"/>
+  <object id="364" template="VerticalWall.tx" x="672" y="512"/>
+  <object id="365" template="VerticalWall.tx" x="640" y="512"/>
+  <object id="366" template="VerticalWall.tx" x="608" y="512"/>
+  <object id="367" template="VerticalWall.tx" x="576" y="512"/>
+  <object id="368" template="VerticalWall.tx" x="544" y="512"/>
+  <object id="369" template="VerticalWall.tx" x="512" y="512"/>
+  <object id="370" template="VerticalWall.tx" x="480" y="512"/>
+  <object id="371" template="VerticalWall.tx" x="448" y="512"/>
+  <object id="372" template="VerticalWall.tx" x="448" y="320"/>
+  <object id="373" template="VerticalWall.tx" x="448" y="352"/>
+  <object id="374" template="VerticalWall.tx" x="448" y="384"/>
+  <object id="375" template="VerticalWall.tx" x="448" y="416"/>
+  <object id="376" template="VerticalWall.tx" x="448" y="448"/>
+  <object id="377" template="VerticalWall.tx" x="448" y="480"/>
+  <object id="378" template="VerticalWall.tx" x="128" y="448"/>
+  <object id="379" template="VerticalWall.tx" x="128" y="480"/>
+  <object id="380" template="VerticalWall.tx" x="128" y="512"/>
+  <object id="381" template="VerticalWall.tx" x="128" y="544"/>
+  <object id="382" template="VerticalWall.tx" x="128" y="576"/>
+  <object id="383" template="VerticalWall.tx" x="128" y="608"/>
+  <object id="384" template="VerticalWall.tx" x="128" y="640"/>
+  <object id="385" template="VerticalWall.tx" x="128" y="672"/>
+  <object id="386" template="VerticalWall.tx" x="160" y="672"/>
+  <object id="387" template="VerticalWall.tx" x="192" y="672"/>
+  <object id="388" template="VerticalWall.tx" x="224" y="672"/>
+  <object id="389" template="VerticalWall.tx" x="256" y="672"/>
+  <object id="390" template="VerticalWall.tx" x="288" y="672"/>
+  <object id="391" template="VerticalWall.tx" x="320" y="672"/>
+  <object id="392" template="VerticalWall.tx" x="320" y="480"/>
+  <object id="393" template="VerticalWall.tx" x="320" y="448"/>
+  <object id="394" template="VerticalWall.tx" x="320" y="512"/>
+  <object id="395" template="VerticalWall.tx" x="320" y="544"/>
+  <object id="396" template="VerticalWall.tx" x="320" y="576"/>
+  <object id="397" template="VerticalWall.tx" x="320" y="608"/>
+  <object id="398" template="VerticalWall.tx" x="320" y="640"/>
+  <object id="399" template="VerticalWall.tx" x="160" y="448"/>
+  <object id="400" template="VerticalWall.tx" x="192" y="448"/>
+  <object id="401" template="VerticalWall.tx" x="256" y="448"/>
+  <object id="402" template="VerticalWall.tx" x="288" y="448"/>
+  <object id="403" template="VerticalWall.tx" x="256" y="448"/>
+  <object id="404" template="VerticalWall.tx" x="224" y="448"/>
+  <object id="405" template="Exit.tx" x="160" y="1088"/>
  </objectgroup>
 </map>

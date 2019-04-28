@@ -14,9 +14,6 @@
  <tileset firstgid="9" source="Box2.tsx"/>
  <tileset firstgid="10" source="Box3.tsx"/>
  <tileset firstgid="11" source="Laser.tsx"/>
- <tileset firstgid="12" source="DoorClosed.tsx"/>
- <tileset firstgid="13" source="DoorOpen.tsx"/>
- <tileset firstgid="14" source="Switch.tsx"/>
  <layer id="1" name="Tile Layer 1" width="20" height="15">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
