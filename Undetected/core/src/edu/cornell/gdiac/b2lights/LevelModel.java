@@ -913,6 +913,10 @@ public class LevelModel {
 				board.setOccupiedTiles(board.physicsToBoard(o.getX()),
 						board.physicsToBoard(o.getY()),1);
 			}
+			if(o instanceof DecorativeModel){
+				board.setOccupiedTiles(board.physicsToBoard(o.getX()),
+						board.physicsToBoard(o.getY()),1);
+			}
 			if(o instanceof DudeModel){
 				board.setOccupiedTiles(board.physicsToBoard(o.getX()+((DudeModel) o).getWidth()/2),
 						board.physicsToBoard(o.getY()+((DudeModel) o).getHeight()/2),3);
