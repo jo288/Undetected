@@ -171,6 +171,8 @@ public class GameController implements Screen, ContactListener {
 	private boolean complete;
 	/** Whether we have failed at this world (and need a reset) */
 	private boolean failed;
+	private boolean music = true;
+	private boolean sound = true;
 	/** Whether the level is paused or not */
 	private boolean paused;
 	/** Countdown active for winning or losing */
@@ -724,24 +726,71 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		if (paused) {
-			Texture pauseButton = new Texture(assetDirectory.get("textures").get("pause").getString("file"));
+			InputController input = InputController.getInstance();
+
+			TextureRegion overlayTexture = JsonAssetManager.getInstance().getEntry("overlay", TextureRegion.class);
+			Texture pauseButton = new Texture(assetDirectory.get("textures").get("pauseMenu").getString("file"));
+			TextureRegion continueButton = JsonAssetManager.getInstance().getEntry("continue", TextureRegion.class);
+			TextureRegion abortButton = JsonAssetManager.getInstance().getEntry("abort", TextureRegion.class);
+			TextureRegion musicButton;
+			TextureRegion soundButton;
+
+			if (input.didMusic()) {
+				music = !music;
+			}
+			if (input.didSound()) {
+				sound = !sound;
+			}
+			input.resetMusic();
+			input.resetSound();
+
+			if (music) {
+				musicButton = JsonAssetManager.getInstance().getEntry("musicOn", TextureRegion.class);
+			} else {
+				musicButton = JsonAssetManager.getInstance().getEntry("musicOff", TextureRegion.class);
+			}
+			if (sound) {
+				soundButton = JsonAssetManager.getInstance().getEntry("soundOn", TextureRegion.class);
+			} else {
+				soundButton = JsonAssetManager.getInstance().getEntry("soundOff", TextureRegion.class);
+			}
+
 			canvas.begin();
+
+			Color conTint = input.didContinueHover() ? Color.GRAY : Color.WHITE;
+			Color abortTint = input.didAbortHover() ? Color.GRAY : Color.WHITE;
+			Color musicTint = input.didMusicHover() ? Color.GRAY : Color.WHITE;
+			Color soundTint = input.didSoundHover() ? Color.GRAY : Color.WHITE;
+
+
+			canvas.draw(overlayTexture, Color.WHITE, overlayTexture.getRegionWidth()/2,
+					overlayTexture.getRegionHeight()/2, canvas.getWidth(), canvas.getHeight(), 0, 5, 5, 0.8f);
 			canvas.draw(pauseButton, Color.WHITE, pauseButton.getWidth()/2, pauseButton.getHeight()/2,
-					cam.position.x,cam.position.y, 0, 1, 1);
+					cam.position.x,cam.position.y, 0, 0.8f*cam.zoom, 0.8f*cam.zoom);
+			canvas.draw(continueButton, conTint, continueButton.getRegionWidth() / 2f, continueButton.getRegionHeight() / 2f,
+					cam.position.x - 10*cam.zoom, cam.position.y - 62*cam.zoom, 0, 1.6f*cam.zoom, 1.58f*cam.zoom);
+			canvas.draw(abortButton, abortTint, abortButton.getRegionWidth() / 2f, abortButton.getRegionHeight() / 2f,
+					cam.position.x - 10*cam.zoom, cam.position.y - 162*cam.zoom, 0, 1.6f*cam.zoom, 1.58f*cam.zoom);
+			canvas.draw(musicButton, musicTint, musicButton.getRegionWidth() / 2f, musicButton.getRegionHeight() / 2f,
+					cam.position.x - 64*cam.zoom, cam.position.y + 53*cam.zoom, 0, 1.6f*cam.zoom, 1.58f*cam.zoom);
+			canvas.draw(soundButton, soundTint, soundButton.getRegionWidth() / 2f, soundButton.getRegionHeight() / 2f,
+					cam.position.x + 46*cam.zoom, cam.position.y + 53*cam.zoom, 0, 1.6f*cam.zoom, 1.58f*cam.zoom);
 			canvas.end();
 		}
 
 
-		if (!currentFile.equals(levelSelectFile)) {
+		if (!currentFile.equals(levelSelectFile) && !paused) {
 			canvas.begin();
-			TextureRegion texture = JsonAssetManager.getInstance().getEntry("restart", TextureRegion.class);
-			TextureRegion tex = JsonAssetManager.getInstance().getEntry("home", TextureRegion.class);
+			TextureRegion restartButton = JsonAssetManager.getInstance().getEntry("restart", TextureRegion.class);
+			TextureRegion homeButton = JsonAssetManager.getInstance().getEntry("home", TextureRegion.class);
 			InputController input = InputController.getInstance();
 			Color tint = input.didResetHover() ? Color.GRAY : Color.WHITE;
 			Color tint2 = input.didHomeHover() ? Color.GRAY : Color.WHITE;
 //		Drawable drawable = new TextureRegionDrawable(texture);
-			canvas.draw(texture, tint, texture.getRegionWidth() / 2f, texture.getRegionHeight() / 2f, cam.position.x + 350, cam.position.y + 275, 0, 1.5f, 1.5f);
-			canvas.draw(tex, tint2, tex.getRegionWidth() / 2f, tex.getRegionHeight() / 2f, cam.position.x + 250, cam.position.y + 275, 0, 1.5f, 1.5f);
+			canvas.draw(restartButton, tint, restartButton.getRegionWidth() / 2f, restartButton.getRegionHeight() / 2f,
+					cam.position.x + 350*cam.zoom, cam.position.y + 275*cam.zoom, 0, 1.5f*cam.zoom, 1.5f*cam.zoom);
+			canvas.draw(homeButton, tint2, homeButton.getRegionWidth() / 2f, homeButton.getRegionHeight() / 2f,
+					cam.position.x + 250*cam.zoom, cam.position.y + 275*cam.zoom, 0, 1.5f*cam.zoom, 1.5f*cam.zoom);
 //		ImageButton button = new ImageButton(drawable);
 //		button.setPosition(cam.position.x+350, cam.position.y+275);
 //		button.setSize(texture.getRegionWidth(), texture.getRegionHeight());
@@ -753,7 +802,7 @@ public class GameController implements Screen, ContactListener {
 			if(showMiniMap) {
 				miniMap.render(canvas, delta);
 			}
-		}else {
+		} else if (!paused) {
 			canvas.begin();
       		levelselectfont.setColor(Color.YELLOW);
 			canvas.drawText("SELECT LEVEL", levelselectfont, cam.position.x-370, cam.position.y-250);
@@ -793,16 +842,17 @@ public class GameController implements Screen, ContactListener {
 	 */
 	public void render(float delta) {
 		if (active) {
+			InputController input = InputController.getInstance();
 			if (!paused) {
+				input.resetContinue();
 				if (preUpdate(delta)) {
 					update(delta);
 				}
 				draw(delta);
 			}
 			else {
-				InputController input = InputController.getInstance();
 				input.readInput();
-				if (input.didPause()) {
+				if (input.didPause() || input.didContinue()) {
 					resume();
 				}
 				draw(delta);

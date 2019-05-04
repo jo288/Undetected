@@ -1062,12 +1062,12 @@ public class LevelModel {
 
 		board.draw(canvas);
 
-		for(SwitchModel s : getSwtiches()) {
+		for(SwitchModel s : switches) {
 			s.draw(canvas);
 		}
 		for(Obstacle obj : objects) {
 			if (!obj.getClass().equals(SwitchModel.class)) {
-				obj.draw(canvas);
+			    obj.draw(canvas);
 			}
 		}
 		canvas.end();

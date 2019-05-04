@@ -42,6 +42,7 @@ public class ObjectiveModel extends BoxObstacle {
 	private boolean hasAlarm;
 	private ArrayList<Laser> lasers = new ArrayList<>();
 	private ArrayList<DoorModel> doors = new ArrayList<>();
+	private int floatframe = 40;
 
 	private TextureRegion defaultCardTexture;
 	private TextureRegion stolenCardTexture;
@@ -152,7 +153,7 @@ public class ObjectiveModel extends BoxObstacle {
 		debugColor.mul(opacity/255.0f);
 		setDebugColor(debugColor);
 
-		TextureRegion texture = JsonAssetManager.getInstance().getEntry("stealcard", TextureRegion.class);
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("greenkey", TextureRegion.class);
 		defaultCardTexture = texture;
 		texture.getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
 		setTexture(texture);
@@ -185,7 +186,11 @@ public class ObjectiveModel extends BoxObstacle {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		if (texture != null) {
-			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+			int f = floatframe/4;
+			int t = (f%10>5)?(10-f%10):f%10;
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x-6,
+					getY()*drawScale.y-getHeight()/2*drawScale.y+10+(t*3),getAngle()-((float)Math.PI/4),1.0f,1.0f);
+			floatframe = (floatframe+1)%40;
 		}
 	}
 	/** Draws a circle to represent objective for minimap

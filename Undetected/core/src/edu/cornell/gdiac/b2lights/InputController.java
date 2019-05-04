@@ -72,6 +72,14 @@ public class InputController {
 	private boolean decViewPressed;
 	/** Whether the home button is pressed or not */
 	private boolean homePressed;
+	private boolean continuePressed;
+	private boolean continuePrevious;
+	private boolean abortPressed;
+	private boolean abortPrevious;
+	private boolean musicPressed;
+	private boolean musicPrevious;
+	private boolean soundPressed;
+	private boolean soundPrevious;
 	/**mini map*/
 	private boolean mapPressed;
 	private boolean mapPrev;
@@ -198,11 +206,44 @@ public class InputController {
 	 */
 	public boolean didHome() {return homePressed;}
 
+	public boolean didContinue() {return continuePressed;}
+
+	public boolean didAbort() {return abortPressed;}
+
+	public boolean didMusic() {return musicPressed;}
+
+	public boolean didSound() {return soundPressed;}
+
+	public boolean didContinueHover() {
+		return Gdx.input.getX() >= 292 && Gdx.input.getX() <= 487 && Gdx.input.getY() >= 320 && Gdx.input.getY() <= 401;
+	}
+
+	public boolean didAbortHover() {
+		return Gdx.input.getX() >= 292 && Gdx.input.getX() <= 487 && Gdx.input.getY() >= 420 && Gdx.input.getY() <= 501;
+	}
+
+	public boolean didMusicHover() {
+		return Gdx.input.getX() >= 292 && Gdx.input.getX() <= 378 && Gdx.input.getY() >= 205 && Gdx.input.getY() <= 290;
+	}
+
+	public boolean didSoundHover() {
+		return Gdx.input.getX() >= 402 && Gdx.input.getX() <= 488 && Gdx.input.getY() >= 205 && Gdx.input.getY() <= 290;
+	}
+
+
 	/**
 	 * Resets Home Button
 	 *
 	 */
 	public void resetHome() {homePressed = false;}
+
+	public void resetContinue() {continuePressed = false;}
+
+	public void resetAbort() {abortPressed = false;}
+
+	public void resetMusic() {musicPressed = false;}
+
+	public void resetSound() {soundPressed = false;}
 
 	/**
 	 * Returns true if the home button is being hovered.
@@ -280,6 +321,8 @@ public class InputController {
 		actionPrevious = actionPressed;
 		mapPrev = mapPressed;
 		invincPrevious = invincPressed;
+		musicPrevious = mapPressed;
+		soundPrevious = soundPressed;
 
 
 		// Check to see if a GamePad is connected
@@ -378,15 +421,28 @@ public class InputController {
 			verticalG -= 1.0f;
 		}
 
-		if (didResetHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+		if (didResetHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.justTouched()) {
 			resetPressed = true;
-			resetPrevious = false;
 		}
 
-		if (didHomeHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+		if (didHomeHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.justTouched()) {
 			homePressed = true;
 		}
 
+		if (didContinueHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.justTouched()) {
+			continuePressed = true;
+		}
 
+		if (didAbortHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.justTouched()) {
+			abortPressed = true;
+		}
+
+		if (didMusicHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.justTouched()) {
+			musicPressed = true;
+		}
+
+		if (didSoundHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.justTouched()) {
+			soundPressed = true;
+		}
 	}
 }
