@@ -854,6 +854,11 @@ public class GameController implements Screen, ContactListener {
 				input.readInput();
 				if (input.didPause() || input.didContinue()) {
 					resume();
+				} else if (input.didAbort()) {
+					input.resetAbort();
+					nextFile = Gdx.files.internal("jsons/levelselect.json");
+					input.resetHome();
+					resume();
 				}
 				draw(delta);
 			}
