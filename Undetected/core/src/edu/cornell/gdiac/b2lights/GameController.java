@@ -729,7 +729,6 @@ public class GameController implements Screen, ContactListener {
 			InputController input = InputController.getInstance();
 
 			TextureRegion overlayTexture = JsonAssetManager.getInstance().getEntry("overlay", TextureRegion.class);
-			Texture pauseButton = new Texture(assetDirectory.get("textures").get("pauseMenu").getString("file"));
 			TextureRegion continueButton = JsonAssetManager.getInstance().getEntry("continue", TextureRegion.class);
 			TextureRegion abortButton = JsonAssetManager.getInstance().getEntry("abort", TextureRegion.class);
 			TextureRegion musicButton;
