@@ -25,7 +25,9 @@ public class DoorModel extends BoxObstacle{
     private short closedMaskBits = (short)0xffff;
     private short closedCategoryBits = (short)0x0020;
     private boolean flaggedForDelete;
+    private boolean isVertical;
     private FilmStrip filmstrip;
+    private int maxframe;
 
     public DoorModel(float x, float y) {
         super(x, y, DOOR_WIDTH, DOOR_HEIGHT);
@@ -104,12 +106,16 @@ public class DoorModel extends BoxObstacle{
     public void initialize(JsonValue json){
 //        setName(json.name());
         setName(json.get("name").asString());
-//        int[] pos  = json.get("pos").asIntArray();
-        float[] size = {1, 1};
-//        setPosition(pos[0]+0.5f,pos[1]+0.5f);
-        setWidth(size[0]);
-        setHeight(size[1]);
+        isVertical = json.get("isVertical").asBoolean();
+        int[] pos  = json.get("pos").asIntArray();
+        setPosition(pos[0]+0.5f,pos[1]+0.5f);
+        if (isVertical)
+            setWidth(1);
+        else
+            setWidth(0.3f);
+        setHeight(1);
         setFixedRotation(true);
+        setOpen(json.get("open").asBoolean());
 
         // Technically, we should do error checking here.
         // A JSON field might accidentally be missing
@@ -133,13 +139,22 @@ public class DoorModel extends BoxObstacle{
         setDebugColor(debugColor);
 
         // Now get the texture from the AssetManager singleton
-        TextureRegion closedTexture = JsonAssetManager.getInstance().getEntry("doorClosed", TextureRegion.class);
-        closedDoorTexture = closedTexture;
-        TextureRegion openTexture = JsonAssetManager.getInstance().getEntry("doorOpen", TextureRegion.class);
-        openDoorTexture = openTexture;
-        texture = JsonAssetManager.getInstance().getEntry("bluedoor", TextureRegion.class);
+//        TextureRegion closedTexture = JsonAssetManager.getInstance().getEntry("doorClosed", TextureRegion.class);
+//        closedDoorTexture = closedTexture;
+//        TextureRegion openTexture = JsonAssetManager.getInstance().getEntry("doorOpen", TextureRegion.class);
+//        openDoorTexture = openTexture;
+        if (isVertical) {
+            texture = JsonAssetManager.getInstance().getEntry("bluedoor", TextureRegion.class);
+            maxframe = 13;
+        }
+        else {
+            texture = JsonAssetManager.getInstance().getEntry("bluedoorside", TextureRegion.class);
+            maxframe = 12;
+            System.out.println("horizontal");
+        }
+
         try {
-            filmstrip = new FilmStrip(texture.getTexture(), 1, 13);
+            filmstrip = new FilmStrip(texture.getTexture(), 1, maxframe);
         } catch (Exception e) {
             filmstrip = null;
         }
@@ -154,7 +169,7 @@ public class DoorModel extends BoxObstacle{
             filter.maskBits = closedMaskBits;
         } else {
 //            setTexture(openTexture);
-            filmstrip.setFrame(12);
+            filmstrip.setFrame(maxframe-1);
 
             setTexture(filmstrip);
             filter.categoryBits = openCategoryBits;
@@ -162,18 +177,6 @@ public class DoorModel extends BoxObstacle{
         }
         setFilterData(filter);
         setOrigin(origin.x, 0);
-
-
-//        setTexture(filmstrip);
-
-//        if (open) {
-////            setTexture(offTexture);
-//            filmstrip.setFrame(11);
-//        } else {
-////            setTexture(onTexture);
-//            filmstrip.setFrame(0);
-//        }
-//        setOrigin(origin.x, 0);
     }
 
     public void update(float dt){
@@ -186,7 +189,7 @@ public class DoorModel extends BoxObstacle{
             }
         }
         if (animateOn){
-            if(filmstrip.getFrame()>=12) {
+            if(filmstrip.getFrame()>=maxframe-1) {
                 animateOn = false;
             }else{
 //                System.out.println("on door frame "+filmstrip.getFrame());
@@ -202,7 +205,10 @@ public class DoorModel extends BoxObstacle{
      */
     public void draw(ObstacleCanvas canvas) {
         if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+            if (isVertical)
+                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+            else
+                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y+8,getAngle(),1.0f,1.0f);
         }
     }
 

@@ -88,11 +88,13 @@
 "doors": [
 	{
 		"name": "door2",
+		"isVertical": true,
 		"pos": [ 5, 3 ],
 		"open": true
 	},
 	{
 		"name": "door1",
+		"isVertical": true,
 		"pos": [ 11, 3 ],
 		"open": false
 	}

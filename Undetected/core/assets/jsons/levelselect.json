@@ -21,26 +21,31 @@
 		"name": "level1",
 		"pos": [ 2, 9 ],
 		"open": false,
+		"isVertical": true
 	},
 	{
 		"name": "level2",
 		"pos": [ 6, 9 ],
-		"open": false
+		"open": false,
+		"isVertical": true
 	},
 	{
 		"name": "level3",
 		"pos": [ 10, 9 ],
-		"open": false
+		"open": false,
+		"isVertical": true
 	},
 	{
 		"name": "level4",
 		"pos": [ 14, 9 ],
-		"open": false
+		"open": false,
+		"isVertical": true
 	},
 	{
 		"name": "alphatest",
 		"pos": [ 18, 9 ],
-		"open": false
+		"open": false,
+		"isVertical": true
 	}
 ],
 "lasers": [],

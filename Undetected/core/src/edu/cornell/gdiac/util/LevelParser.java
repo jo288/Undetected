@@ -98,6 +98,7 @@ public class LevelParser {
 
     private class Door{
         protected String name = "door";
+        protected boolean isVertical = true;
         private int[] pos = new int[2];
         private boolean open = false;
     }
@@ -203,6 +204,7 @@ public class LevelParser {
                 d.name = (e.hasAttribute("name")?e.getAttribute("name"):d.name);
                 d.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
                 d.open = false;
+                d.isVertical = true;
                 testLevel.doors.add(d);
             }
             if(e.get("template").equals("DoorOpen.tx")){
@@ -210,6 +212,15 @@ public class LevelParser {
                 d.name = (e.hasAttribute("name")?e.getAttribute("name"):d.name);
                 d.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
                 d.open = true;
+                d.isVertical = true;
+                testLevel.doors.add(d);
+            }
+            if(e.get("template").equals("DoorClosedSide.tx")){
+                Door d = new Door();
+                d.name = (e.hasAttribute("name")?e.getAttribute("name"):d.name);
+                d.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                d.open = false;
+                d.isVertical = false;
                 testLevel.doors.add(d);
             }
             if(e.get("template").equals("Switch.tx")){

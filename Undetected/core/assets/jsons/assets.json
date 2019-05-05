@@ -248,6 +248,16 @@
 				"first":	0
 			}
 		},
+		"bluedoorside": {
+			"file": 	"textures/bluedoortop.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		12,
+				"rows":		1,
+				"cols":		12,
+				"first":	0
+			}
+		},
 		"question": {
 			"file":		"textures/question_mark.png",
 			"wrap":		false

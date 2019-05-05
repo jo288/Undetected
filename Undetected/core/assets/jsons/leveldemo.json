@@ -58,6 +58,7 @@
 "doors": [
 	{
 		"name": "door",
+		"isVertical": true,
 		"pos": [ 2, 4 ],
 		"open": true
 	}

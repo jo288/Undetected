@@ -23,26 +23,31 @@
 "doors": [
 	{
 		"name": "level1",
+		"isVertical": true,
 		"pos": [ 2, 9 ],
 		"open": false
 	},
 	{
 		"name": "level2",
+		"isVertical": true,
 		"pos": [ 6, 9 ],
 		"open": false
 	},
 	{
 		"name": "level3",
+		"isVertical": true,
 		"pos": [ 10, 9 ],
 		"open": false
 	},
 	{
 		"name": "level4",
+		"isVertical": true,
 		"pos": [ 14, 9 ],
 		"open": false
 	},
 	{
 		"name": "level5",
+		"isVertical": true,
 		"pos": [ 18, 9 ],
 		"open": false
 	}

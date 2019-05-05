@@ -70,19 +70,29 @@
 		"name": "switch2",
 		"pos": [ 12, 15 ],
 		"switched": true,
-		"doors": [],
+		"doors": [
+			"door3"
+		],
 		"lasers": []
 	}
 ],
 "doors": [
 	{
 		"name": "door1",
+		"isVertical": true,
 		"pos": [ 17, 12 ],
 		"open": false
 	},
 	{
 		"name": "door2",
+		"isVertical": true,
 		"pos": [ 17, 6 ],
+		"open": false
+	},
+	{
+		"name": "door3",
+		"isVertical": false,
+		"pos": [ 15, 3 ],
 		"open": false
 	}
 ],

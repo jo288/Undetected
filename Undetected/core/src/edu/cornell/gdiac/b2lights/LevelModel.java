@@ -508,18 +508,15 @@ public class LevelModel {
 		JsonValue doordata = levelFormat.getChild("doors");
 		int[] doorPositions;
 		while (doordata!=null){
-			doorPositions = doordata.get("pos").asIntArray();
 			String doorName = doordata.get("name").asString();
 			DoorModel door = new DoorModel();
 			doorMap.put(doorName, door);
-			door.setOpen(doordata.get("open").asBoolean());
 			doors.add(door);
 			door.initialize(doordata);
 			if (door.getTexture().getRegionWidth()<tSize)
 				door.setWidth(door.getTexture().getRegionWidth()/scale.x);
 			if (door.getTexture().getRegionHeight()<tSize)
 				door.setHeight(door.getTexture().getRegionHeight()/scale.y);
-			door.setPosition(doorPositions[0]+0.5f, doorPositions[1]+0.5f);
 			door.setDrawScale(scale);
 			activate(door);
 			doordata = doordata.next();
