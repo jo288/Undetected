@@ -603,7 +603,7 @@ public class DudeModel extends CharacterModel {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		if (texture != null) {
-			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),scale,scale);
+			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+(11f-origin.x),getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),scale,scale);
 		}
 		canvas.draw(shadowTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+4,getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.5f,1.5f);
 	}
