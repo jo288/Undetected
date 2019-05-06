@@ -55,6 +55,9 @@ public class InputController {
 	/** Whether the load button was pressed. */
 	private boolean loadPressed;
 	private boolean loadPrevious;
+	/** Whether the load button was pressed. */
+	private boolean loadXPressed;
+	private boolean loadXPrevious;
 	/** Whether the debug toggle was pressed. */
 	private boolean debugPressed;
 	private boolean debugPrevious;
@@ -171,7 +174,15 @@ public class InputController {
 	public boolean didLoad() {
 		return loadPressed && !loadPrevious;
 	}
-	
+
+	/**
+	 * Returns true if the player wants to go to the previous level.
+	 *
+	 * @return true if the player wants to go to the previous level.
+	 */
+	public boolean didLoadX() {
+		return loadXPressed && !loadXPrevious;
+	}
 	/**
 	 * Returns true if the player wants to go toggle the debug mode.
 	 *
@@ -318,6 +329,7 @@ public class InputController {
 		nextPrevious = nextPressed;
 		pausePrevious = pausePressed;
 		loadPrevious = loadPressed;
+		loadXPrevious = loadXPressed;
 		actionPrevious = actionPressed;
 		mapPrev = mapPressed;
 		invincPrevious = invincPressed;
@@ -341,8 +353,6 @@ public class InputController {
 	 * the drawing scale to convert screen coordinates to world coordinates.  The
 	 * bounds are for the crosshair.  They cannot go outside of this zone.
 	 *
-	 * @param bounds The input bounds for the crosshair.  
-	 * @param scale  The drawing scale
 	 */
 	private void readGamepad() {
 		resetPressed = xbox.getStart();
@@ -372,6 +382,7 @@ public class InputController {
 		debugPressed = (secondary && debugPressed) || (Gdx.input.isKeyPressed(Input.Keys.D));
 		pausePressed = (secondary && pausePressed) || (Gdx.input.isKeyPressed(Input.Keys.P));
 		loadPressed = (secondary && loadPressed) || (Gdx.input.isKeyPressed(Input.Keys.L));
+		loadXPressed = (secondary && loadXPressed) || (Gdx.input.isKeyPressed(Input.Keys.X));
 		nextPressed = (secondary && nextPressed) || (Gdx.input.isKeyPressed(Input.Keys.N));
 		mapPressed = (secondary && mapPressed) || (Gdx.input.isKeyPressed(Input.Keys.M));
 		exitPressed  = (secondary && exitPressed) || (Gdx.input.isKeyPressed(Input.Keys.ESCAPE));

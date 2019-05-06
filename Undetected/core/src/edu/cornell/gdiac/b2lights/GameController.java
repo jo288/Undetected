@@ -187,6 +187,7 @@ public class GameController implements Screen, ContactListener {
 	private SwitchModel switchCollided = null;
 	private FileHandle levelSelectFile = Gdx.files.internal("jsons/levelselect.json");
 	private FileHandle currentFile = Gdx.files.internal("jsons/levelselect.json");
+	private String currentLevelString = "";
 	private FileHandle nextFile;
 
 
@@ -328,7 +329,10 @@ public class GameController implements Screen, ContactListener {
 		countdown = -1;
 
 		// Reload the json each time
-		levelFormat = jsonReader.parse(currentFile);
+		if(currentFile!=null)
+			levelFormat = jsonReader.parse(currentFile);
+		else
+			levelFormat = jsonReader.parse(currentLevelString);
 		level.populate(levelFormat);
 		level.getWorld().setContactListener(this);
 		miniMap = new MiniMap(300, 225, level);
@@ -336,6 +340,50 @@ public class GameController implements Screen, ContactListener {
 		resetCamera();
 
 		guardCollided = null;
+	}
+
+	public void loadXMLLevel(){
+		JFileChooser chooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(
+				"TMX level files", "tmx");
+		chooser.setFileFilter(filter);
+		chooser.setCurrentDirectory(Gdx.files.internal("levels").file());
+		String loadFile = "";
+		JFrame f = new JFrame();
+		f.setVisible(true);
+		f.toFront();
+		f.setVisible(false);
+		int returnVal = chooser.showOpenDialog(f);
+		f.dispose();
+		if(returnVal == JFileChooser.APPROVE_OPTION) {
+			System.out.println("You chose to open this file: " +
+					chooser.getSelectedFile().getPath());
+			loadFile = chooser.getSelectedFile().getPath();
+		}
+
+		try{
+			levelFormat = jsonReader.parse(levelparser.readXml(Gdx.files.absolute(loadFile)));
+			currentFile = null;
+			currentLevelString = levelparser.readXml(Gdx.files.absolute(loadFile));
+			LevelModel newLoad = new LevelModel();
+			newLoad.populate(levelFormat);
+			level.dispose();
+			level = newLoad;
+			level.getWorld().setContactListener(this);
+
+			setComplete(false);
+			setFailure(false);
+			hasObjective = false;
+			countdown = -1;
+			guardCollided = null;
+			lightController = new LightController(level);
+			miniMap = new MiniMap(300, 225, level);
+
+			resetCamera();
+		}
+		catch (Exception e){
+			System.out.println("WRONG FILE");
+		}
 	}
 
 	public void loadLevel(){
@@ -488,6 +536,9 @@ public class GameController implements Screen, ContactListener {
 
 		if (input.didLoad()){
 			loadLevel();
+		}
+		if (input.didLoadX()){
+			loadXMLLevel();
 		}
 
 		// Now it is time to maybe switch screens.
@@ -787,7 +838,7 @@ public class GameController implements Screen, ContactListener {
 		}
 
 
-		if (!currentFile.equals(levelSelectFile) && !paused) {
+		if ((currentFile==null) || !currentFile.equals(levelSelectFile) && !paused) {
 			canvas.begin();
 			TextureRegion restartButton = JsonAssetManager.getInstance().getEntry("restart", TextureRegion.class);
 			TextureRegion homeButton = JsonAssetManager.getInstance().getEntry("home", TextureRegion.class);

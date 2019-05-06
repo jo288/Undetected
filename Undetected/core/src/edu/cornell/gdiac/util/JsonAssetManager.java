@@ -296,6 +296,7 @@ public class JsonAssetManager extends AssetManager {
 			region = film;
 		}
 		region.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+//		region.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
 		
 		if (json.getBoolean("wrap")) {
 			region.getTexture().setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
