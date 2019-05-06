@@ -4,8 +4,8 @@
   <property name="lighting" type="color" value="#ffa9a9a9"/>
  </properties>
  <tileset firstgid="1" source="FloorTile.tsx"/>
- <tileset firstgid="2" source="HorizontalWall.tsx"/>
- <tileset firstgid="3" source="VerticalWall.tsx"/>
+ <tileset firstgid="2" source="GreenWall.tsx"/>
+ <tileset firstgid="3" source="GreenWall.tsx"/>
  <tileset firstgid="4" source="Player.tsx"/>
  <tileset firstgid="5" source="Exit.tsx"/>
  <tileset firstgid="6" source="Objective.tsx"/>
@@ -34,14 +34,14 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" template="HorizontalWall.tx" x="128" y="128" width="288" height="48"/>
-  <object id="8" template="HorizontalWall.tx" x="192" y="384" width="160" height="48"/>
-  <object id="9" template="HorizontalWall.tx" x="0" y="480" width="640" height="48"/>
-  <object id="10" template="VerticalWall.tx" x="416" y="352" width="32" height="272"/>
-  <object id="11" template="VerticalWall.tx" x="96" y="352" width="32" height="272"/>
-  <object id="12" template="VerticalWall.tx" x="0" y="448" width="32" height="464"/>
-  <object id="13" template="VerticalWall.tx" x="608" y="448" width="32" height="464"/>
-  <object id="14" template="HorizontalWall.tx" x="96" y="32" width="512" height="48"/>
+  <object id="1" template="GreenWall.tx" x="128" y="128" width="288" height="48"/>
+  <object id="8" template="GreenWall.tx" x="192" y="384" width="160" height="48"/>
+  <object id="9" template="GreenWall.tx" x="0" y="480" width="640" height="48"/>
+  <object id="10" template="GreenWall.tx" x="416" y="352" width="32" height="272"/>
+  <object id="11" template="GreenWall.tx" x="96" y="352" width="32" height="272"/>
+  <object id="12" template="GreenWall.tx" x="0" y="448" width="32" height="464"/>
+  <object id="13" template="GreenWall.tx" x="608" y="448" width="32" height="464"/>
+  <object id="14" template="GreenWall.tx" x="96" y="32" width="512" height="48"/>
   <object id="15" template="Player.tx" x="32" y="64"/>
   <object id="16" template="Exit.tx" x="32" y="32"/>
   <object id="17" template="KeyObjective.tx" x="512" y="384"/>
@@ -71,7 +71,7 @@
     <property name="timetolive" type="int" value="3"/>
    </properties>
   </object>
-  <object id="34" template="HorizontalWall.tx" x="128" y="256" width="288" height="48"/>
+  <object id="34" template="GreenWall.tx" x="128" y="256" width="288" height="48"/>
   <object id="35" template="DoorOpen.tx" name="door2" x="160" y="384"/>
   <object id="36" template="Switch.tx" x="448" y="192">
    <properties>
@@ -79,8 +79,8 @@
     <property name="lasers" value="laser1"/>
    </properties>
   </object>
-  <object id="37" template="HorizontalWall.tx" x="384" y="384" width="64" height="48"/>
-  <object id="38" template="HorizontalWall.tx" x="96" y="384" width="64" height="48"/>
+  <object id="37" template="GreenWall.tx" x="384" y="384" width="64" height="48"/>
+  <object id="38" template="GreenWall.tx" x="96" y="384" width="64" height="48"/>
   <object id="40" template="DoorClosed.tx" name="door1" x="352" y="384"/>
  </objectgroup>
 </map>

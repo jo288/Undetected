@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="21" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="16">
  <tileset firstgid="1" source="FloorTile.tsx"/>
- <tileset firstgid="2" source="HorizontalWall.tsx"/>
- <tileset firstgid="3" source="VerticalWall.tsx"/>
+ <tileset firstgid="2" source="GreenWall.tsx"/>
+ <tileset firstgid="3" source="GreenWall.tsx"/>
  <tileset firstgid="5" source="Player.tsx"/>
  <layer id="3" name="Tile Layer 1" width="21" height="10">
   <data encoding="csv">
@@ -19,19 +19,19 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" template="HorizontalWall.tx" x="32" y="32" width="32" height="48"/>
-  <object id="2" template="VerticalWall.tx" x="0" y="320" width="32" height="336"/>
-  <object id="3" template="VerticalWall.tx" x="640" y="320" width="32" height="336"/>
+  <object id="1" template="GreenWall.tx" x="32" y="32" width="32" height="48"/>
+  <object id="2" template="GreenWall.tx" x="0" y="320" width="32" height="336"/>
+  <object id="3" template="GreenWall.tx" x="640" y="320" width="32" height="336"/>
   <object id="4" template="DoorClosed.tx" name="level1" x="64" y="32"/>
   <object id="5" template="DoorClosed.tx" name="level2" x="192" y="32"/>
   <object id="6" template="DoorClosed.tx" name="level3" x="320" y="32"/>
   <object id="7" template="DoorClosed.tx" name="level4" x="448" y="32"/>
   <object id="8" template="DoorClosed.tx" name="level5" x="576" y="32"/>
-  <object id="9" template="HorizontalWall.tx" x="96" y="32" width="96" height="48"/>
-  <object id="10" template="HorizontalWall.tx" x="224" y="32" width="96" height="48"/>
-  <object id="11" template="HorizontalWall.tx" x="352" y="32" width="96" height="48"/>
-  <object id="12" template="HorizontalWall.tx" x="480" y="32" width="96" height="48"/>
-  <object id="13" template="HorizontalWall.tx" x="608" y="32"/>
+  <object id="9" template="GreenWall.tx" x="96" y="32" width="96" height="48"/>
+  <object id="10" template="GreenWall.tx" x="224" y="32" width="96" height="48"/>
+  <object id="11" template="GreenWall.tx" x="352" y="32" width="96" height="48"/>
+  <object id="12" template="GreenWall.tx" x="480" y="32" width="96" height="48"/>
+  <object id="13" template="GreenWall.tx" x="608" y="32"/>
   <object id="14" template="Player.tx" x="320" y="288"/>
  </objectgroup>
 </map>

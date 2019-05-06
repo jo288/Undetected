@@ -168,31 +168,21 @@ public class LevelParser {
 
         Array<XmlReader.Element> objects = xmlLevel.getChildrenByNameRecursively("object");
         for (XmlReader.Element e:objects){
-            if(e.get("template").equals("HorizontalWall.tx")){
-                int h = testLevel.boardSize[1]-e.getInt("y")/32;
-                for(int i=e.getInt("x")/32;i<e.getInt("x")/32+e.getInt("width",32)/32;i++){
-                    testLevel.exteriorwall.pos.add(i);
-                    testLevel.exteriorwall.pos.add(h);
-                    testLevel.exteriorwall.type.add(0);
-//                    deleteFromCoordinateArrays(i,h,testLevel.invalidTiles);
-                    testLevel.tiles.set((testLevel.boardSize[1]-h-1)*testLevel.boardSize[0]+i, 1);
-                    if (0<(testLevel.boardSize[1]-h-2)*testLevel.boardSize[0]+i){
-                        testLevel.tiles.set((testLevel.boardSize[1]-h-2)*testLevel.boardSize[0]+i, 1);
-                    }
-                }
+            if(e.get("template").equals("GreenWall.tx")){
+                parseWall(e, testLevel);
+                testLevel.exteriorwall.type.add(0);
             }
-            if(e.get("template").equals("VerticalWall.tx")){
-                int w = e.getInt("x")/32;
-                for(int i=testLevel.boardSize[1]-e.getInt("y")/32;i<testLevel.boardSize[1]-e.getInt("y")/32+e.getInt("height",32)/32;i++){
-                    testLevel.exteriorwall.pos.add(w);
-                    testLevel.exteriorwall.pos.add(i);
-                    testLevel.exteriorwall.type.add(1);
-//                    deleteFromCoordinateArrays(w,i,testLevel.invalidTiles);
-                    testLevel.tiles.set((testLevel.boardSize[1]-i-1)*testLevel.boardSize[0]+w, 1);
-                    if (0<((testLevel.boardSize[1]-i-2)*testLevel.boardSize[0]+w)){
-                        testLevel.tiles.set((testLevel.boardSize[1]-i-2)*testLevel.boardSize[0]+w, 1);
-                    }
-                }
+            if(e.get("template").equals("BlueWall.tx")){
+                parseWall(e, testLevel);
+                testLevel.exteriorwall.type.add(1);
+            }
+            if(e.get("template").equals("OrangeWall.tx")){
+                parseWall(e, testLevel);
+                testLevel.exteriorwall.type.add(2);
+            }
+            if(e.get("template").equals("RedWall.tx")){
+                parseWall(e, testLevel);
+                testLevel.exteriorwall.type.add(3);
             }
             if(e.get("template").equals("KeyObjective.tx")){
                 try {
@@ -482,6 +472,18 @@ public class LevelParser {
             }
         }
         return false;
+    }
+
+    private void parseWall(XmlReader.Element e, Level testLevel){
+        int h = e.getInt("y")/32;
+        int i = e.getInt("x")/32;
+        testLevel.exteriorwall.pos.add(i);
+        testLevel.exteriorwall.pos.add(testLevel.boardSize[1]-h);
+//                testLevel.tiles.set((testLevel.boardSize[1]-h-1)*testLevel.boardSize[0]+i, 1);
+        testLevel.tiles.set((h-1)*testLevel.boardSize[0]+i, 1);
+        if (0<=(h-2)*testLevel.boardSize[0]+i && (h-2)*testLevel.boardSize[0]+i<testLevel.tiles.size){
+            testLevel.tiles.set((h-2)*testLevel.boardSize[0]+i, 1);
+        }
     }
 
 

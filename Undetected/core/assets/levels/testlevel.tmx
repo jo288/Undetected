@@ -29,16 +29,16 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" template="HorizontalWall.tx" x="448" y="640" width="160" height="48"/>
-  <object id="21" template="HorizontalWall.tx" x="96" y="32" width="480" height="48"/>
-  <object id="22" template="HorizontalWall.tx" x="0" y="352" width="448" height="48"/>
-  <object id="23" template="HorizontalWall.tx" x="64" y="288" width="416" height="48"/>
-  <object id="24" template="HorizontalWall.tx" x="96" y="160" width="352" height="48"/>
-  <object id="25" template="VerticalWall.tx" x="576" y="608" width="32" height="624"/>
-  <object id="27" template="VerticalWall.tx" x="448" y="608" width="32" height="304"/>
-  <object id="28" template="VerticalWall.tx" x="0" y="320" width="32" height="336"/>
-  <object id="29" template="VerticalWall.tx" x="448" y="256" width="32" height="144"/>
-  <object id="30" template="VerticalWall.tx" x="64" y="256" width="32" height="144"/>
+  <object id="1" template="GreenWall.tx" x="448" y="640" width="160" height="48"/>
+  <object id="21" template="GreenWall.tx" x="96" y="32" width="480" height="48"/>
+  <object id="22" template="GreenWall.tx" x="0" y="352" width="448" height="48"/>
+  <object id="23" template="GreenWall.tx" x="64" y="288" width="416" height="48"/>
+  <object id="24" template="GreenWall.tx" x="96" y="160" width="352" height="48"/>
+  <object id="25" template="GreenWall.tx" x="576" y="608" width="32" height="624"/>
+  <object id="27" template="GreenWall.tx" x="448" y="608" width="32" height="304"/>
+  <object id="28" template="GreenWall.tx" x="0" y="320" width="32" height="336"/>
+  <object id="29" template="GreenWall.tx" x="448" y="256" width="32" height="144"/>
+  <object id="30" template="GreenWall.tx" x="64" y="256" width="32" height="144"/>
   <object id="31" template="KeyObjective.tx" x="512" y="96">
    <properties>
     <property name="hasAlarm" type="bool" value="false"/>

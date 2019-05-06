@@ -18,13 +18,13 @@ public class ExteriorWall extends Obstacle{
 
     /** A complex physics object has multiple bodies */
     protected Array<Obstacle> bodies;
-    protected Array<TextureRegion> textures;
+    protected TextureRegion[] textures;
 
     private Array<Integer> positions;
 
     public ExteriorWall(){
         bodies = new Array<Obstacle>();
-        textures = new Array<TextureRegion>();
+        textures = new TextureRegion[4];
         positions = new Array<Integer>();
     }
 
@@ -87,15 +87,16 @@ public class ExteriorWall extends Obstacle{
     public void initialize(JsonValue json){
         int[] positions = json.get("pos").asIntArray();
         int[] types = json.get("type").asIntArray();
-        textures.add(JsonAssetManager.getInstance().getEntry("wallhorizontal", TextureRegion.class));
-        textures.add(JsonAssetManager.getInstance().getEntry("wallvertical", TextureRegion.class));
+        TextureRegion texture = JsonAssetManager.getInstance().getEntry("walls", TextureRegion.class);
+        textures = texture.split(32,72)[0];
+
 
         for (int i = 0;i<positions.length;i+=2){
             WallBlock wb = new WallBlock();
             wb.initialize(json,positions[i],positions[i+1]);
             if (i/2<types.length)
                 wb.walltype = types[i/2];
-            wb.setWallTexture(textures.get(wb.walltype));
+            wb.setWallTexture(textures[wb.walltype]);
             bodies.add(wb);
             this.positions.add(positions[i]);
             this.positions.add(positions[i+1]);
