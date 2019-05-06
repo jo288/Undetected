@@ -347,9 +347,10 @@ public class LevelModel {
 
 		world = new World(Vector2.Zero,false);
 		board = new Board(bSize[0],bSize[1],tSize);
-		board.setTileTexture(JsonAssetManager.getInstance().getEntry("floor", TextureRegion.class));
+		board.setTileTexture(JsonAssetManager.getInstance().getEntry("floors", TextureRegion.class));
 		int[] invalidTiles = levelFormat.get("invalidTiles").asIntArray();
-		board.setInvalidTiles(invalidTiles);
+//		board.setInvalidTiles(invalidTiles);
+		board.setTiles(levelFormat.get("tiles").asIntArray());
 		bounds = new Rectangle(0,0,pSize[0],pSize[1]);
 		scale.x = gSize[0]/pSize[0];
 		scale.y = gSize[1]/pSize[1];

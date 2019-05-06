@@ -14,6 +14,7 @@ public class LevelParser {
         protected int[] boardSize = {20,20};
         protected int tileSize = 32;
         protected int[] fpsRange = {20,60};
+        protected Array<Integer> tiles = new Array<Integer>();
         protected Lighting lighting = new Lighting();
         protected Array<Light> lights = new Array<Light>();
         protected Player avatar = new Player();
@@ -149,6 +150,12 @@ public class LevelParser {
                 && !searchCoordinateArrays(i % testLevel.boardSize[0],testLevel.boardSize[1] - 1 - (i / testLevel.boardSize[0]),testLevel.interiorwall.pos)) {
                     testLevel.invalidTiles.add(i % testLevel.boardSize[0]);
                     testLevel.invalidTiles.add(testLevel.boardSize[1] - 1 - (i / testLevel.boardSize[0]));
+                }
+                if (searchCoordinateArrays(i % testLevel.boardSize[0],testLevel.boardSize[1] - 1 - (i / testLevel.boardSize[0]),testLevel.exteriorwall.pos)
+                        || searchCoordinateArrays(i % testLevel.boardSize[0],testLevel.boardSize[1] - 1 - (i / testLevel.boardSize[0]),testLevel.interiorwall.pos)){
+                    testLevel.tiles.add(0);
+                }else{
+                    testLevel.tiles.add(Integer.parseInt(String.valueOf(tileData.charAt(i))));
                 }
             }
         } catch (Exception e){}

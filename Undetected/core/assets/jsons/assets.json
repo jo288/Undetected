@@ -407,6 +407,10 @@
 		"home": {
 			"file": 	"textures/home.png",
 			"wrap": 	false
+		},
+		"floors": {
+			"file": 	"textures/floors.png",
+			"wrap":  	false
 		}
 	},
   	"fonts": {

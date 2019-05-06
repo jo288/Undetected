@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="20" height="11" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="89">
  <tileset firstgid="1" source="FloorTile.tsx"/>
- <tileset firstgid="2" source="Exit.tsx"/>
- <tileset firstgid="3" source="Objective.tsx"/>
- <tileset firstgid="4" source="Player.tsx"/>
- <tileset firstgid="5" source="Guard.tsx"/>
- <tileset firstgid="6" source="DeskRight.tsx"/>
- <tileset firstgid="10" source="wallgreen.tsx"/>
+ <tileset firstgid="5" source="Exit.tsx"/>
+ <tileset firstgid="6" source="Objective.tsx"/>
+ <tileset firstgid="7" source="Player.tsx"/>
+ <tileset firstgid="8" source="Guard.tsx"/>
+ <tileset firstgid="9" source="DeskRight.tsx"/>
+ <tileset firstgid="13" source="wallgreen.tsx"/>
  <layer id="1" name="Tile Layer 1" width="20" height="11">
   <data encoding="csv">
 0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,

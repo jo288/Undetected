@@ -61,6 +61,7 @@ public class Board {
 		public boolean goal = false;
 		/** Has this tile been visited (used for pathfinding)? */
 		public boolean visited = false;
+		public int textureIndex = 0;
 	}
 
 	
@@ -81,6 +82,7 @@ public class Board {
 	private TileState[] tiles;
 	/** Texture of valid tile */
 	private TextureRegion tileTexture;
+	private TextureRegion[] tileTextures;
 
 	/**
 	 * Creates a new board of the given size
@@ -109,6 +111,17 @@ public class Board {
 	public void setInvalidTiles(int[] invalidTiles) {
 		for(int i=0;i<invalidTiles.length;i+=2){
 			getTileState(invalidTiles[i],invalidTiles[i+1]).isValid = false;
+		}
+	}
+
+	public void setTiles(int[] tiles){
+		for (int i=0;i<tiles.length;i++){
+			int xindex = i%width;
+			int yindex = height - (i/width) - 1;
+			if (tiles[i] == 0)
+				getTileState(xindex,yindex).isValid = false;
+			else
+				getTileState(xindex,yindex).textureIndex = tiles[i] - 1;
 		}
 	}
 
@@ -209,7 +222,8 @@ public class Board {
 	 * @param texture the textured mesh for each tile.
 	 */
 	public void setTileTexture(TextureRegion texture) {
-		tileTexture = texture;
+		tileTextures = texture.split(32,32)[0];
+		tileTexture = tileTextures[0];
 	}
 
 
@@ -320,7 +334,7 @@ public class Board {
 		//This one does the same thing as the line below
 		//canvas.draw(tileTexture, Color.WHITE, tileTexture.getRegionWidth()/2, tileTexture.getRegionHeight()/2,
 		//		TILE_WIDTH * (x + 0.5f), TILE_WIDTH * (y + 0.5f), 0, 1.0f, 1.0f);
-		canvas.draw(tileTexture, Color.WHITE, 0, 0,
+		canvas.draw(tileTextures[tile.textureIndex], Color.WHITE, 0, 0,
 				TILE_WIDTH * x, TILE_WIDTH * y, 0, TILE_WIDTH/tileTexture.getRegionWidth(), TILE_WIDTH/tileTexture.getRegionHeight());
 	}
 
