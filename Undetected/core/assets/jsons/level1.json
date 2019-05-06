@@ -42,6 +42,7 @@
 "switches": [],
 "doors": [],
 "lasers": [],
+"cameras": [],
 "decoratives": [
 	{
 		"pos": [ 4, 9 ],

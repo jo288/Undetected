@@ -6,7 +6,7 @@
    <property name="IsPatrolling" type="bool" value="false"/>
    <property name="direction" value="up"/>
    <property name="force" type="float" value="50"/>
-   <property name="lightAngle" type="float" value="40"/>
+   <property name="lightAngle" type="float" value="25"/>
    <property name="lightColor" type="color" value="#fffeba09"/>
    <property name="lightRadius" type="float" value="9"/>
    <property name="objectivepath" value="[]"/>

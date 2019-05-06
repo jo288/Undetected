@@ -116,6 +116,7 @@
 		"sector": 0
 	}
 ],
+"cameras": [],
 "decoratives": [],
 "objective": {
 	"pos": [ 16, 3 ],

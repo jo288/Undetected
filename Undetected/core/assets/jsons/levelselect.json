@@ -10,13 +10,27 @@
 	"diffuse": true,
 	"blur": 3
 },
-"lights": [],
+"lights": [
+	{
+		"color": [ 1, 1, 0, 1 ],
+		"distance": 9,
+		"angle": 30
+	}
+],
 "avatar": {
 	"pos": [ 10, 1 ]
 },
 "guards": [],
 "boxes": [],
 "switches": [],
+"cameras": [{
+	"name": "camera1",
+	"pos":[1,5],
+	"on": true,
+	"rotationSpeed": 0.5,
+	"direction": [1,1],
+	"lightIndex": 0
+}],
 "doors": [
 	{
 		"name": "level1",

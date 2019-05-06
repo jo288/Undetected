@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="147">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="151">
  <tileset firstgid="1" source="FloorTile.tsx"/>
- <tileset firstgid="2" source="Exit.tsx"/>
- <tileset firstgid="3" source="Objective.tsx"/>
- <tileset firstgid="4" source="Guard.tsx"/>
- <tileset firstgid="5" source="Laser.tsx"/>
- <tileset firstgid="6" source="Player.tsx"/>
- <tileset firstgid="7" source="wallgreen.tsx"/>
- <tileset firstgid="8" source="horizontaldoor.tsx"/>
+ <tileset firstgid="5" source="Exit.tsx"/>
+ <tileset firstgid="6" source="Objective.tsx"/>
+ <tileset firstgid="7" source="Guard.tsx"/>
+ <tileset firstgid="8" source="Laser.tsx"/>
+ <tileset firstgid="9" source="Player.tsx"/>
+ <tileset firstgid="10" source="wallgreen.tsx"/>
+ <tileset firstgid="11" source="horizontaldoor.tsx"/>
+ <tileset firstgid="23" source="camera.tsx"/>
  <layer id="3" name="Tile Layer 1" width="30" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -33,13 +34,13 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="16" template="KeyObjective.tx" gid="3" x="800" y="544" rotation="360"/>
-  <object id="17" template="Guard.tx" gid="4" x="672" y="576" rotation="360">
+  <object id="16" template="KeyObjective.tx" gid="6" x="800" y="544" rotation="360"/>
+  <object id="17" template="Guard.tx" gid="7" x="672" y="576" rotation="360">
    <properties>
     <property name="path" value="[21,3]"/>
    </properties>
   </object>
-  <object id="18" template="Guard.tx" gid="4" x="736" y="480" rotation="360">
+  <object id="18" template="Guard.tx" gid="7" x="736" y="480" rotation="360">
    <properties>
     <property name="direction" value="down"/>
     <property name="path" value="[23,6]"/>
@@ -50,7 +51,7 @@
   <object id="24" template="HorizontalWall.tx" x="576" y="256"/>
   <object id="25" template="HorizontalWall.tx" x="512" y="448"/>
   <object id="26" template="HorizontalWall.tx" x="576" y="448"/>
-  <object id="28" template="Laser.tx" gid="5" x="512" y="320" width="3" height="96" rotation="90">
+  <object id="28" template="Laser.tx" gid="8" x="512" y="320" width="3" height="96" rotation="90">
    <properties>
     <property name="timetolive" type="int" value="999"/>
    </properties>
@@ -171,5 +172,16 @@
   <object id="139" template="Exit.tx" x="128" y="128"/>
   <object id="140" template="HorizontalWall.tx" x="672" y="640"/>
   <object id="141" template="DoorClosedSide.tx" name="door3" type="door" x="480" y="544"/>
+  <object id="149" template="Camera.tx" x="192" y="576"/>
+  <object id="150" template="Camera.tx" x="320" y="576">
+   <properties>
+    <property name="directionX" type="int" value="1"/>
+    <property name="directionY" type="int" value="1"/>
+    <property name="lightAngle" type="float" value="30"/>
+    <property name="lightColor" type="color" value="#ffffe626"/>
+    <property name="lightRadius" type="float" value="7"/>
+    <property name="rotationSpeed" type="float" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

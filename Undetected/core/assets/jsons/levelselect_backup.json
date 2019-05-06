@@ -54,6 +54,7 @@
 	}
 ],
 "lasers": [],
+"cameras": [],
 "decoratives": [],
 "objective": {
 	"pos": [ 0, 0 ],

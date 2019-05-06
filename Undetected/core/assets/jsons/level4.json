@@ -20,6 +20,16 @@
 		"color": [ 1, 1, 0, 1 ],
 		"distance": 9,
 		"angle": 25
+	},
+	{
+		"color": [ 1, 1, 0, 1 ],
+		"distance": 9,
+		"angle": 25
+	},
+	{
+		"color": [ 1, 0.9019608, 0.14901961, 1 ],
+		"distance": 7,
+		"angle": 30
 	}
 ],
 "avatar": {
@@ -111,6 +121,24 @@
 		"size": [ 1, 2 ],
 		"timetolive": 999,
 		"sector": 0
+	}
+],
+"cameras": [
+	{
+		"name": "camera",
+		"pos": [ 6, 2 ],
+		"on": true,
+		"rotationSpeed": 0.8,
+		"direction": [ 0, 0 ],
+		"lightIndex": 2
+	},
+	{
+		"name": "camera",
+		"pos": [ 10, 2 ],
+		"on": true,
+		"rotationSpeed": 1,
+		"direction": [ 1, 1 ],
+		"lightIndex": 3
 	}
 ],
 "decoratives": [],

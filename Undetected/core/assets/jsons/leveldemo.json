@@ -80,6 +80,7 @@
 		"sector": 0
 	}
 ],
+"cameras": [],
 "decoratives": [],
 "objective": {
 	"pos": [ 1, 2 ],

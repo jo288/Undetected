@@ -24,6 +24,7 @@ public class LevelParser {
         protected Array<Switch> switches = new Array<Switch>();
         protected Array<Door> doors = new Array<Door>();
         protected Array<Laser> lasers = new Array<Laser>();
+        protected Array<Camera> cameras = new Array<Camera>();
         protected Array<Decorative> decoratives = new Array<Decorative>();
         protected Objective objective = new Objective();
         protected Array<Integer> invalidTiles = new Array<Integer>();
@@ -107,6 +108,10 @@ public class LevelParser {
     private class Camera{
         protected String name = "camera";
         private int[] pos = new int[2];
+        private boolean on = true;
+        private float rotationSpeed = 0.8f;
+        private int[] direction = new int[2];
+        private int lightIndex = 0;
     }
 
     private class Decorative{
@@ -335,6 +340,54 @@ public class LevelParser {
                 }
                 testLevel.lasers.add(l);
             }
+            if(e.get("template").equals("Camera.tx")){
+                Camera c = new Camera();
+                Light l = new Light();
+                Array<XmlReader.Element> properties = e.getChildrenByNameRecursively("property");
+                for (XmlReader.Element property: properties){
+                    try {
+                        switch (property.get("name")) {
+                            case "on":
+                                c.on = property.getBoolean("value");
+                                break;
+                            case "rotationSpeed":
+                                c.rotationSpeed = property.getFloat("value");
+                                break;
+                            case "directionX":
+                                c.direction[0] = property.getInt("value");
+                                break;
+                            case "directionY":
+                                c.direction[1] = property.getInt("value");
+                                break;
+                            case "lightAngle":
+                                l.angle = property.getFloat("value");
+                                break;
+                            case "lightRadius":
+                                l.distance = property.getFloat("value");
+                                break;
+                            case "lightColor":
+                                String t = property.get("value");
+                                l.color[3] = Integer.parseInt(t.substring(1, 3), 16) / 255f;
+                                l.color[0] = Integer.parseInt(t.substring(3, 5), 16) / 255f;
+                                l.color[1] = Integer.parseInt(t.substring(5, 7), 16) / 255f;
+                                l.color[2] = Integer.parseInt(t.substring(7, 9), 16) / 255f;
+                                break;
+//                            case "direction":
+//                                if (property.get("value").equals("up")||property.get("value").equals("down")||
+//                                        property.get("value").equals("left")||property.get("value").equals("right"))
+//                                    g.direction = property.get("value");
+//                                break;
+                            default:
+                                break;
+                        }
+                    } catch (Exception ex) { System.err.println("camera property parsing error"+fh.name()+"\n"+ex.getMessage());}
+                }
+                c.name = (e.hasAttribute("name")?e.getAttribute("name"):c.name);
+                c.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                c.lightIndex = testLevel.guards.size + testLevel.cameras.size;
+                testLevel.cameras.add(c);
+                testLevel.lights.add(l);
+            }
             if(e.get("template").equals("Guard.tx")){
                 Guard g = new Guard();
                 Light l = new Light();
@@ -393,7 +446,7 @@ public class LevelParser {
                 }
                 g.name = (e.hasAttribute("name")?e.getAttribute("name"):g.name);
                 g.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
-                g.lightIndex = testLevel.guards.size;
+                g.lightIndex = testLevel.guards.size + testLevel.cameras.size;
                 //check original position in path
                 if (!searchCoordinateArrays(g.pos[0],g.pos[1],g.path)){
                     g.path.add(g.pos[0]);
@@ -402,6 +455,7 @@ public class LevelParser {
                 testLevel.guards.add(g);
                 testLevel.lights.add(l);
             }
+
         }
 
 
