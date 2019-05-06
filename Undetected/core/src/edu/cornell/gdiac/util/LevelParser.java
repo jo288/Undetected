@@ -84,7 +84,7 @@ public class LevelParser {
     private class Objective{
         protected int[] pos = new int[2];
         protected int[] size = {1,1};
-        protected String texture = "key";
+        protected int textureIndex = 0;
         protected boolean hasAlarm = false;
         protected Array<String> doors = new Array<String>();
         protected Array<String> lasers = new Array<String>();
@@ -184,27 +184,21 @@ public class LevelParser {
                 parseWall(e, testLevel);
                 testLevel.exteriorwall.type.add(3);
             }
-            if(e.get("template").equals("KeyObjective.tx")){
-                try {
-                    testLevel.objective.hasAlarm = e.getChildByNameRecursive("property").getBoolean("value", false);
-                }catch (Exception ex){}
-                testLevel.objective.texture = "key";
-                testLevel.objective.size = new int[] {1,1};
-                testLevel.objective.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
-                if (e.hasChildRecursive("property")){
-                    Array<XmlReader.Element> properties = e.getChildrenByNameRecursively("property");
-                    for (XmlReader.Element p: properties){
-                        if (p.get("name").equals("doors")){
-                            String[] ds = p.get("value").split(",");
-                            //for(String d:ds){ s.doors.add(Integer.parseInt(d));}
-                            for(String d:ds){ testLevel.objective.doors.add(d);}
-                        } else if (p.get("name").equals("lasers")){
-                            String[] ds = p.get("value").split(",");
-                            //for(String d:ds){ s.lasers.add(Integer.parseInt(d));}
-                            for(String d:ds){ testLevel.objective.lasers.add(d);}
-                        }
-                    }
-                }
+            if(e.get("template").equals("GreenKey.tx")){
+                testLevel.objective.textureIndex = 0;
+                parseObjective(e, testLevel);
+            }
+            if(e.get("template").equals("BlueKey.tx")){
+                testLevel.objective.textureIndex = 1;
+                parseObjective(e, testLevel);
+            }
+            if(e.get("template").equals("RedKey.tx")){
+                testLevel.objective.textureIndex = 2;
+                parseObjective(e, testLevel);
+            }
+            if(e.get("template").equals("PurpleKey.tx")){
+                testLevel.objective.textureIndex = 3;
+                parseObjective(e, testLevel);
             }
             if(e.get("template").equals("Exit.tx")) {
                 testLevel.exit.pos = new int[] {e.getInt("x")/32+1,testLevel.boardSize[1]-e.getInt("y")/32};
@@ -483,6 +477,28 @@ public class LevelParser {
         testLevel.tiles.set((h-1)*testLevel.boardSize[0]+i, 1);
         if (0<=(h-2)*testLevel.boardSize[0]+i && (h-2)*testLevel.boardSize[0]+i<testLevel.tiles.size){
             testLevel.tiles.set((h-2)*testLevel.boardSize[0]+i, 1);
+        }
+    }
+
+    private void parseObjective(XmlReader.Element e, Level testLevel){
+        try {
+            testLevel.objective.hasAlarm = e.getChildByNameRecursive("property").getBoolean("value", false);
+        }catch (Exception ex){}
+        testLevel.objective.size = new int[] {1,1};
+        testLevel.objective.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+        if (e.hasChildRecursive("property")){
+            Array<XmlReader.Element> properties = e.getChildrenByNameRecursively("property");
+            for (XmlReader.Element p: properties){
+                if (p.get("name").equals("doors")){
+                    String[] ds = p.get("value").split(",");
+                    //for(String d:ds){ s.doors.add(Integer.parseInt(d));}
+                    for(String d:ds){ testLevel.objective.doors.add(d);}
+                } else if (p.get("name").equals("lasers")){
+                    String[] ds = p.get("value").split(",");
+                    //for(String d:ds){ s.lasers.add(Integer.parseInt(d));}
+                    for(String d:ds){ testLevel.objective.lasers.add(d);}
+                }
+            }
         }
     }
 

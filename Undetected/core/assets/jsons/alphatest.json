@@ -190,7 +190,7 @@
 "objective": {
 	"pos": [ 29, 3 ],
 	"size": [ 1, 1 ],
-	"texture": "key",
+	"textureIndex": 0,
 	"hasAlarm": false,
 	"doors": [
 		"door2",

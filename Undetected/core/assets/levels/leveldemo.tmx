@@ -48,6 +48,6 @@
   </object>
   <object id="15" template="Box1.tx" x="128" y="64"/>
   <object id="16" template="DoorOpen.tx" x="64" y="192"/>
-  <object id="17" template="KeyObjective.tx" x="32" y="256"/>
+  <object id="17" template="GreenKey.tx" x="32" y="256"/>
  </objectgroup>
 </map>

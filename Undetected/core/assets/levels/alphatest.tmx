@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="428">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="429">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="5" source="Exit.tsx"/>
  <tileset firstgid="6" source="Player.tsx"/>
@@ -91,7 +91,7 @@
    </properties>
   </object>
   <object id="73" template="Box2.tx" name="box2" gid="8" x="448" y="544" rotation="0"/>
-  <object id="74" template="KeyObjective.tx" x="928" y="992">
+  <object id="74" template="GreenKey.tx" x="928" y="992">
    <properties>
     <property name="doors" value="door2,door3"/>
     <property name="hasAlarm" type="bool" value="false"/>

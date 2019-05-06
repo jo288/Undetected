@@ -28,7 +28,7 @@
 "objective": {
 	"pos": [ 0, 0 ],
 	"size": [ 1, 1 ],
-	"texture": "key",
+	"textureIndex": 0,
 	"hasAlarm": false,
 	"doors": [],
 	"lasers": []

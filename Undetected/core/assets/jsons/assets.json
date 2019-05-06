@@ -415,6 +415,10 @@
 		"walls": {
 			"file": 	"textures/walls.png",
 			"wrap":  	false
+		},
+		"keys": {
+			"file": 	"textures/keys.png",
+			"wrap":  	false
 		}
 	},
   	"fonts": {

@@ -44,7 +44,7 @@
   <object id="14" template="HorizontalWall.tx" x="96" y="32" width="512" height="48"/>
   <object id="15" template="Player.tx" x="32" y="64"/>
   <object id="16" template="Exit.tx" x="32" y="32"/>
-  <object id="17" template="KeyObjective.tx" x="512" y="384"/>
+  <object id="17" template="GreenKey.tx" x="512" y="384"/>
   <object id="19" template="Guard.tx" x="224" y="416">
    <properties>
     <property name="IsPatrolling" type="bool" value="true"/>

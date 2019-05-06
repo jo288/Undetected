@@ -61,7 +61,7 @@
 "objective": {
 	"pos": [ 1, 13 ],
 	"size": [ 1, 1 ],
-	"texture": "key",
+	"textureIndex": 0,
 	"hasAlarm": false,
 	"doors": [],
 	"lasers": []

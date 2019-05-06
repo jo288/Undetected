@@ -154,10 +154,10 @@ public class ObjectiveModel extends BoxObstacle {
 		debugColor.mul(opacity/255.0f);
 		setDebugColor(debugColor);
 
-		TextureRegion texture = JsonAssetManager.getInstance().getEntry("greenkey", TextureRegion.class);
-		defaultCardTexture = texture;
+		TextureRegion texture = JsonAssetManager.getInstance().getEntry("keys", TextureRegion.class);
+		defaultCardTexture = texture.split(32,32)[0][json.get("textureIndex").asInt()];
 		texture.getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-		setTexture(texture);
+		setTexture(defaultCardTexture);
 		setOrigin(origin.x,0);
 
 		texture = JsonAssetManager.getInstance().getEntry("stolencard", TextureRegion.class);
