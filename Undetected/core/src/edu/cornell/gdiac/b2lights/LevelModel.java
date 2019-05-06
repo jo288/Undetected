@@ -348,7 +348,7 @@ public class LevelModel {
 		world = new World(Vector2.Zero,false);
 		board = new Board(bSize[0],bSize[1],tSize);
 		board.setTileTexture(JsonAssetManager.getInstance().getEntry("floors", TextureRegion.class));
-		int[] invalidTiles = levelFormat.get("invalidTiles").asIntArray();
+//		int[] invalidTiles = levelFormat.get("invalidTiles").asIntArray();
 //		board.setInvalidTiles(invalidTiles);
 		board.setTiles(levelFormat.get("tiles").asIntArray());
 		bounds = new Rectangle(0,0,pSize[0],pSize[1]);
@@ -991,7 +991,7 @@ public class LevelModel {
 
             // System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
 			//Test for displaying board states
-//			board.update();
+			board.update();
 
 			for (AIController ai : controls) {
 				ai.update();

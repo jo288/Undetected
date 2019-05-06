@@ -169,7 +169,11 @@ public class LevelParser {
                     testLevel.exteriorwall.pos.add(i);
                     testLevel.exteriorwall.pos.add(h);
                     testLevel.exteriorwall.type.add(0);
-                    deleteFromCoordinateArrays(i,h,testLevel.invalidTiles);
+//                    deleteFromCoordinateArrays(i,h,testLevel.invalidTiles);
+                    testLevel.tiles.set((testLevel.boardSize[1]-h-1)*testLevel.boardSize[0]+i, 1);
+                    if (0<(testLevel.boardSize[1]-h-2)*testLevel.boardSize[0]+i){
+                        testLevel.tiles.set((testLevel.boardSize[1]-h-2)*testLevel.boardSize[0]+i, 1);
+                    }
                 }
             }
             if(e.get("template").equals("VerticalWall.tx")){
@@ -178,7 +182,11 @@ public class LevelParser {
                     testLevel.exteriorwall.pos.add(w);
                     testLevel.exteriorwall.pos.add(i);
                     testLevel.exteriorwall.type.add(1);
-                    deleteFromCoordinateArrays(w,i,testLevel.invalidTiles);
+//                    deleteFromCoordinateArrays(w,i,testLevel.invalidTiles);
+                    testLevel.tiles.set((testLevel.boardSize[1]-i-1)*testLevel.boardSize[0]+w, 1);
+                    if (0<((testLevel.boardSize[1]-i-2)*testLevel.boardSize[0]+w)){
+                        testLevel.tiles.set((testLevel.boardSize[1]-i-2)*testLevel.boardSize[0]+w, 1);
+                    }
                 }
             }
             if(e.get("template").equals("KeyObjective.tx")){
