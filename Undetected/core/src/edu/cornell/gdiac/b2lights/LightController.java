@@ -17,6 +17,7 @@ public class LightController {
     static float dist_to_player;
     static Vector2 lightPos;
     static short maskBits;
+    static short collideBits;
     private static List<Body> intersected = new ArrayList<Body>();
     private static List<Vector2> contact_points = new ArrayList<Vector2>();
     final RayCastCallback ray = new RayCastCallback() {
@@ -25,11 +26,15 @@ public class LightController {
                                             Vector2 normal, float fraction) {
             Body b = fixture.getBody();
             Object o = b.getUserData();
-            if((maskBits & fixture.getFilterData().categoryBits) !=0){
+            if((maskBits & fixture.getFilterData().categoryBits) !=0 && (collideBits & fixture.getFilterData().maskBits)!=0){
                 intersected.add(fixture.getBody());
                 contact_points.add(point);
+                //System.out.println("collided with "+fixture.getUserData());
             }
-            if(!(o instanceof DudeModel) &&point.dst(lightPos)<dist_to_player){
+            else{
+                //System.out.println("collided with nothing");
+            }
+            if(!(o instanceof DudeModel) && point.dst(lightPos)<dist_to_player){
                 return 0;
             }
             return 1;
@@ -49,6 +54,7 @@ public class LightController {
             Vector2 playerPos = new Vector2(player.getX(), player.getY());
             ConeSource light = guard.getLight();
             maskBits = light.getContactFilter().maskBits;
+            collideBits = light.getContactFilter().categoryBits;
             lightPos = light.getPosition();
             float range = ((ConeSource)light).getDistance();
             //a vector from the guard to the player

@@ -15,12 +15,13 @@ public class Alarm extends ObstacleCanvas{
     private static float flash_speed = 0.05f;
     private boolean isOn = false;
     private TextureRegion alarmTexture;
+    private BitmapFont displayFont;
 
     public Alarm(){
         alpha = 1;
         timeLeft = 120;
         alarmTexture = JsonAssetManager.getInstance().getEntry("alarmFlash", TextureRegion.class);
-
+        displayFont = JsonAssetManager.getInstance().getEntry("display", BitmapFont.class);
     }
 
     public float getAlpha(){
@@ -55,8 +56,8 @@ public class Alarm extends ObstacleCanvas{
         if(timeLeft%60<10){
             seconds = "0"+seconds;
         }
-        BitmapFont displayFont = JsonAssetManager.getInstance().getEntry("display", BitmapFont.class);
         if(timeLeft>=0) {
+            displayFont.setColor(Color.WHITE);
             canvas.drawText((int) (timeLeft / 60) + ":" + seconds, displayFont, cam.position.x - 30 * cam.zoom, cam.position.y + 280 * cam.zoom);
         }
     }

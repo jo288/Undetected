@@ -542,7 +542,6 @@ public class GuardModel extends CharacterModel {
         // Only walk or spin if we allow it
         setLinearVelocity(Vector2.Zero);
         setAngularVelocity(0.0f);
-
         // Apply force for movement
         if (getMovement().len2() > 0f) {
             forceCache.set(getMovement());
