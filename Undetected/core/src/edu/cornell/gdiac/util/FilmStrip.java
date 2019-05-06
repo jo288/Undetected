@@ -122,4 +122,9 @@ public class FilmStrip extends TextureRegion {
 		setRegion(x,y,rwidth,rheight);
 	}
 
+	public void setRegion (TextureRegion region) {
+		super.setRegion(region);
+		this.rwidth = region.getTexture().getWidth()/cols;
+	}
+
 }

@@ -377,51 +377,60 @@ public class GuardModel extends CharacterModel {
     }
 
     public void animateDirection(float dir) {
+        TextureRegion tex;
         if (dir == 0) {
-            texture = JsonAssetManager.getInstance().getEntry("guardback", TextureRegion.class);
+            tex = JsonAssetManager.getInstance().getEntry("guardback", TextureRegion.class);
             try {
-                filmstrip = (FilmStrip)texture;
-                guardanimation = filmstrip;
+                if(getTexture() != tex) {
+                    guardanimation.setRegion(tex);
+                    guardanimation.setFrame(0);
+                    setTexture(tex);
+                }
             } catch (Exception e) {
                 filmstrip = null;
             }
-            setTexture(texture);
         } else if ((Math.round(dir * 100.0) / 100.0) == 3.14) {
-            texture = JsonAssetManager.getInstance().getEntry("friendlyFrontAnimation", TextureRegion.class);
+            tex = JsonAssetManager.getInstance().getEntry("friendlyFrontAnimation", TextureRegion.class);
             if(isAlarmed){
-                texture = JsonAssetManager.getInstance().getEntry("hostileFrontAnimation", TextureRegion.class);
+                tex = JsonAssetManager.getInstance().getEntry("hostileFrontAnimation", TextureRegion.class);
             }
             try {
-                filmstrip = (FilmStrip)texture;
-                guardanimation = filmstrip;
+                if(getTexture()!=tex) {
+                    guardanimation.setRegion(tex);
+                    guardanimation.setFrame(0);
+                    setTexture(tex);
+                }
             } catch (Exception e) {
                 filmstrip = null;
             }
-            setTexture(texture);
         } else if ((Math.round(dir * 100.0) / 100.0) == -1.57) {
-            texture = JsonAssetManager.getInstance().getEntry("friendlyRightAnimation", TextureRegion.class);
+            tex = JsonAssetManager.getInstance().getEntry("friendlyRightAnimation", TextureRegion.class);
             if(isAlarmed){
-                texture = JsonAssetManager.getInstance().getEntry("hostileRightAnimation", TextureRegion.class);
+                tex = JsonAssetManager.getInstance().getEntry("hostileRightAnimation", TextureRegion.class);
             }
             try {
-                filmstrip = (FilmStrip)texture;
-                guardanimation = filmstrip;
+                if(getTexture()!=tex) {
+                    guardanimation.setRegion(tex);
+                    guardanimation.setFrame(0);
+                    setTexture(tex);
+                }
             } catch (Exception e) {
                 filmstrip = null;
             }
-            setTexture(texture);
         } else if ((Math.round(dir * 100.0) / 100.0) == 1.57) {
-            texture = JsonAssetManager.getInstance().getEntry("friendlyLeftAnimation", TextureRegion.class);
+            tex = JsonAssetManager.getInstance().getEntry("friendlyLeftAnimation", TextureRegion.class);
             if(isAlarmed){
-                texture = JsonAssetManager.getInstance().getEntry("hostileLeftAnimation", TextureRegion.class);
+                tex = JsonAssetManager.getInstance().getEntry("hostileLeftAnimation", TextureRegion.class);
             }
             try {
-                filmstrip = (FilmStrip)texture;
-                guardanimation = filmstrip;
+                if(getTexture()!=tex) {
+                    guardanimation.setRegion(tex);
+                    guardanimation.setFrame(0);
+                    setTexture(tex);
+                }
             } catch (Exception e) {
                 filmstrip = null;
             }
-            setTexture(texture);
         }
         setOrigin(origin.x,0);
     }
@@ -508,7 +517,7 @@ public class GuardModel extends CharacterModel {
         texture = JsonAssetManager.getInstance().getEntry("guardback", TextureRegion.class);
         try {
             filmstrip = (FilmStrip)texture;
-            guardanimation = filmstrip;
+            guardanimation = new FilmStrip(texture.getTexture(), 1, 8);
         } catch (Exception e) {
             filmstrip = null;
         }
@@ -582,16 +591,16 @@ public class GuardModel extends CharacterModel {
         }
 
         if (animate && walkCool == 0) {
-            if (filmstrip != null) {
-                int next = (filmstrip.getFrame()+1) % filmstrip.getSize();
-                filmstrip.setFrame(next);
+            if (guardanimation != null) {
+                int next = (guardanimation.getFrame()+1) % guardanimation.getSize();
+                guardanimation.setFrame(next);
             }
             walkCool = walkLimit;
         } else if (walkCool > 0) {
             walkCool--;
         } else if (!animate) {
-            if (filmstrip != null) {
-                filmstrip.setFrame(startFrame);
+            if (guardanimation != null) {
+                guardanimation.setFrame(startFrame);
             }
             walkCool = 0;
         }
@@ -605,8 +614,8 @@ public class GuardModel extends CharacterModel {
      * @param canvas Drawing context
      */
     public void draw(ObstacleCanvas canvas) {
-        if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,0f,scale,scale);
+        if (guardanimation != null) {
+            canvas.draw(guardanimation,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,0f,scale,scale);
         }
 
         if(animateOn){

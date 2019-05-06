@@ -1,14 +1,16 @@
 package edu.cornell.gdiac.b2lights;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Timer;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.util.JsonAssetManager;
 
 public class Alarm extends ObstacleCanvas{
-    //time left for the player to get to the exit
-    private int timeLeft;
+    //time left (in seconds) for the player to get to the exit
+    private float timeLeft;
     private float alpha;
     private static float flash_speed = 0.05f;
     private boolean isOn = false;
@@ -16,6 +18,7 @@ public class Alarm extends ObstacleCanvas{
 
     public Alarm(){
         alpha = 1;
+        timeLeft = 120;
         alarmTexture = JsonAssetManager.getInstance().getEntry("alarmFlash", TextureRegion.class);
 
     }
@@ -28,7 +31,7 @@ public class Alarm extends ObstacleCanvas{
     public void turnOn(){isOn = true;}
     public void turnOff(){isOn = false;}
 
-    public int getTimeLeft(){return timeLeft;}
+    public float getTimeLeft(){return timeLeft;}
     public void start(){
         Timer.schedule(new Timer.Task() {
                            @Override
@@ -37,6 +40,7 @@ public class Alarm extends ObstacleCanvas{
                                    flash_speed*=-1;
                                }
                                alpha+=flash_speed;
+                               timeLeft-=0.1f;
                            }
                        }
                 , 0        //    (delay)
@@ -44,7 +48,16 @@ public class Alarm extends ObstacleCanvas{
         );
     }
     public void draw(ObstacleCanvas canvas){
+        OrthographicCamera cam = canvas.getCamera();
         canvas.draw(alarmTexture, Color.WHITE, alarmTexture.getRegionWidth()/2,
                 alarmTexture.getRegionHeight()/2, canvas.getWidth(), canvas.getHeight(), 0, 5, 5, alpha);
+        String seconds = ""+(int)(timeLeft%60);
+        if(timeLeft%60<10){
+            seconds = "0"+seconds;
+        }
+        BitmapFont displayFont = JsonAssetManager.getInstance().getEntry("display", BitmapFont.class);
+        if(timeLeft>=0) {
+            canvas.drawText((int) (timeLeft / 60) + ":" + seconds, displayFont, cam.position.x - 30 * cam.zoom, cam.position.y + 280 * cam.zoom);
+        }
     }
 }

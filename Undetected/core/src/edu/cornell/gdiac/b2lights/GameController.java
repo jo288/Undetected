@@ -399,7 +399,7 @@ public class GameController implements Screen, ContactListener {
 			float deltaX = (MathUtils.clamp(playerX * sx, cx - dx, cx + dx) - cam.position.x) * dt * 2.8f;
 			float deltaY = (MathUtils.clamp(playerY * sy, cy - dy, cy + dy) - cam.position.y) * dt * 2.8f;
 			if(panToPlayer){
-				if(Math.abs(deltaX)<=0.03 && Math.abs(deltaY)<=0.03){
+				if(Math.abs(deltaX)<=0.09 && Math.abs(deltaY)<=0.09){
 					showExit = false;
 					panToPlayer = false;
 				}
@@ -412,8 +412,8 @@ public class GameController implements Screen, ContactListener {
 			}
 		}
 		else{
-			cam.position.x += (MathUtils.clamp(level.getExit().getX() * sx, cx - dx, cx + dx) - cam.position.x) * dt * 2.8;
-			cam.position.y += (MathUtils.clamp(level.getExit().getY() * sy, cy - dy, cy + dy) - cam.position.y) * dt * 2.8;
+			cam.position.x += (MathUtils.clamp(level.getExit().getX() * sx, cx - dx, cx + dx) - cam.position.x) * dt * 3.2;
+			cam.position.y += (MathUtils.clamp(level.getExit().getY() * sy, cy - dy, cy + dy) - cam.position.y) * dt * 3.2;
 		}
 		//pan the rayhandler camera
 		OrthographicCamera rcam = level.raycamera;
@@ -722,6 +722,9 @@ public class GameController implements Screen, ContactListener {
 				canvas.begin();
 				alarm.draw(canvas);
 				canvas.end();
+			}
+			if(alarm.getTimeLeft()<=0 && !failed){
+				setFailure(true);
 			}
 		}
 
