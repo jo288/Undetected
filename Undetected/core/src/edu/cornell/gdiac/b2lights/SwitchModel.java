@@ -81,7 +81,7 @@ public class SwitchModel extends BoxObstacle{
             animateOff = true;
             animateOn = false;
         }
-        System.out.println("animate on: " + animateOn + "\nanimate off: " + animateOff);
+//        System.out.println("animate on: " + animateOn + "\nanimate off: " + animateOff);
     }
 
     public void addLaser(Laser laser) {

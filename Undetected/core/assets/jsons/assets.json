@@ -336,6 +336,10 @@
 			"file": 	"textures/boxdude.png",
 			"wrap": 	false
 		},
+		"ring": {
+			"file": 	"textures/position_circle.png",
+			"wrap": 	false
+		},
 		"greenkey": {
 			"file": 	"textures/greenkey.png",
 			"wrap": 	false
@@ -419,4 +423,12 @@
 			"size": 	20
 		}
 	},
+	"sounds": {
+		"openDoor": {
+			"file": 	"sounds/door_open.mp3"
+		},
+		"closeDoor": {
+			"file": 	"sounds/door_close.mp3"
+		}
+	}
 }

@@ -97,6 +97,7 @@ public class GuardModel extends CharacterModel {
     private FilmStrip filmstrip;
     /** The current animation frame of the avatar */
     private int startFrame;
+    private TextureRegion ringTexture;
 
     /** Cache for internal force calculations */
     private Vector2 forceCache = new Vector2();
@@ -492,6 +493,8 @@ public class GuardModel extends CharacterModel {
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
 
+        ringTexture = JsonAssetManager.getInstance().getEntry("ring", TextureRegion.class);
+
         texture = JsonAssetManager.getInstance().getEntry("shadow", TextureRegion.class);
         shadowTexture = texture;
 
@@ -630,5 +633,12 @@ public class GuardModel extends CharacterModel {
 
 //        canvas.draw(alertTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
         canvas.draw(shadowTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+4,getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.5f,1.5f);
+//        if (getDirectionFloat() == 0 || (Math.round(getDirectionFloat() * 100.0) / 100.0) == 3.14) {
+//            canvas.draw(ringTexture, Color.RED, origin.x + (DEFAULT_WIDTH / 2) * drawScale.x, origin.y + (DEFAULT_HEIGHT / 2) * drawScale.y + 2,
+//                    getX() * drawScale.x + (DEFAULT_WIDTH / 2) * drawScale.x, getY() * drawScale.y - (DEFAULT_HEIGHT / 2) * drawScale.y - getHeight() / 2f * drawScale.y, getAngle(), 1.5f, 1.5f);
+//        } else {
+//            canvas.draw(ringTexture, Color.RED, origin.x + (DEFAULT_WIDTH / 2) * drawScale.x + 4, origin.y + (DEFAULT_HEIGHT / 2) * drawScale.y + 2,
+//                    getX() * drawScale.x + (DEFAULT_WIDTH / 2) * drawScale.x, getY() * drawScale.y - (DEFAULT_HEIGHT / 2) * drawScale.y - getHeight() / 2f * drawScale.y, getAngle(), 1.5f, 1.5f);
+//        }
     }
 }

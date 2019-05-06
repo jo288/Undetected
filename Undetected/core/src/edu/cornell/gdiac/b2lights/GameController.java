@@ -16,6 +16,8 @@
 package edu.cornell.gdiac.b2lights;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
@@ -988,8 +990,10 @@ public class GameController implements Screen, ContactListener {
 			if (((bd1 == avatar && bd2 == objective) || (bd1 == objective && bd2== avatar)) && !hasObjective){
 				if(bd1 instanceof ObjectiveModel){
 					((ObjectiveModel) bd1).stealCard();
+					level.queueDestroyed(bd1);
 				}if(bd2 instanceof ObjectiveModel){
 					((ObjectiveModel) bd2).stealCard();
+					level.queueDestroyed(bd2);
 				}
 				for (AIController ai : level.getControl()) {
 					if (ai.getObPath().length != 0) {

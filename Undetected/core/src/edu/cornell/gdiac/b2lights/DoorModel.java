@@ -1,5 +1,7 @@
 package edu.cornell.gdiac.b2lights;
 
+import com.badlogic.gdx.Audio;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -28,6 +30,10 @@ public class DoorModel extends BoxObstacle{
     private boolean isVertical;
     private FilmStrip filmstrip;
     private int maxframe;
+
+    private Sound openSound;
+    private Sound closeSound;
+    private long sndcue;
 
     public DoorModel(float x, float y) {
         super(x, y, DOOR_WIDTH, DOOR_HEIGHT);
@@ -63,22 +69,32 @@ public class DoorModel extends BoxObstacle{
     public void switchState() {
         open = !open;
         Filter f = getFilterData();
+
         if (open) {
 //            setTexture(openDoorTexture);
             animateOn = true;
             animateOff = false;
+            play(openSound);
             f.categoryBits = openCategoryBits;
             f.maskBits = openMaskBits;
         } else {
 //            setTexture(closedDoorTexture);
             animateOff = true;
             animateOn = false;
+            play(closeSound);
             f.categoryBits = closedCategoryBits;
             f.maskBits = closedMaskBits;
         }
         setFilterData(f);
 //        System.out.println(open+" category bits "+f.categoryBits+" mask "+f.maskBits);
         setOrigin(origin.x, 0);
+    }
+
+    public void play(Sound sound) {
+        if (sndcue != -1) {
+            sound.stop(sndcue);
+        }
+        sndcue = sound.play(0.1f);
     }
 
     public void setFlaggedForDelete () {
@@ -137,6 +153,10 @@ public class DoorModel extends BoxObstacle{
         int opacity = 200;
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
+
+        openSound = JsonAssetManager.getInstance().getEntry("openDoor", Sound.class);
+        closeSound = JsonAssetManager.getInstance().getEntry("closeDoor", Sound.class);
+        sndcue = -1;
 
         // Now get the texture from the AssetManager singleton
 //        TextureRegion closedTexture = JsonAssetManager.getInstance().getEntry("doorClosed", TextureRegion.class);
