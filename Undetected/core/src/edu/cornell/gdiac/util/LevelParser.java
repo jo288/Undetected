@@ -379,6 +379,11 @@ public class LevelParser {
                 g.name = (e.hasAttribute("name")?e.getAttribute("name"):g.name);
                 g.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
                 g.lightIndex = testLevel.guards.size;
+                //check original position in path
+                if (!searchCoordinateArrays(g.pos[0],g.pos[1],g.path)){
+                    g.path.add(g.pos[0]);
+                    g.path.add(g.pos[1]);
+                }
                 testLevel.guards.add(g);
                 testLevel.lights.add(l);
             }

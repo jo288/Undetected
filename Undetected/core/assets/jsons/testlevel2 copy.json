@@ -43,7 +43,7 @@
 		"status": "sleep",
 		"force": 40,
 		"sensitiveRadius": 0.8,
-		"path": [],
+		"path": [ 16, 11 ],
 		"objectivepath": [],
 		"lightIndex": 1,
 		"sector": 0,
