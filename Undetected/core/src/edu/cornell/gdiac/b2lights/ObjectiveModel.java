@@ -124,7 +124,8 @@ public class ObjectiveModel extends BoxObstacle {
 		float[] pos  = json.get("pos").asFloatArray();
 		float[] size = json.get("size").asFloatArray();
 		setPosition(pos[0]+0.5f*(size[0]%2),pos[1]+0.5f*(size[1]%2));
-		setDimension(size[0],size[1]);
+//		setDimension(size[0],size[1]);
+		setDimension(0.6f,0.6f);
 
 		// Technically, we should do error checking here.
 		// A JSON field might accidentally be missing
@@ -186,10 +187,10 @@ public class ObjectiveModel extends BoxObstacle {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		if (texture != null) {
-			int f = floatframe/4;
-			int t = (f%10>5)?(10-f%10):f%10;
+			int f = floatframe/2;
+			int t = (f%20>10)?(20-f%20):f%20;
 			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x-6,
-					getY()*drawScale.y-getHeight()/2*drawScale.y+10+(t*3),getAngle()-((float)Math.PI/4),1.0f,1.0f);
+					getY()*drawScale.y-getHeight()/2*drawScale.y+10+(t),getAngle()-((float)Math.PI/4),0.8f,0.8f);
 			floatframe = (floatframe+1)%40;
 		}
 	}
