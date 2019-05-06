@@ -85,6 +85,7 @@ public class LevelModel {
 	private ArrayList<GuardModel> guards;
 	/** Guard AI */
 	private ArrayList<AIController> controls;
+	private ArrayList<MoveableBox> boxes;
 
 	/** Whether or not the level is in debug more (showing off physics) */	
 	private boolean debug;
@@ -244,14 +245,7 @@ public class LevelModel {
 	 *
 	 * @return a reference to a box
 	 */
-	public Obstacle getBox() {
-		for (Obstacle o : objects) {
-			if (o.getName() == "box") {
-				return o;
-			}
-		}
-		return null;
-	}
+	public ArrayList<MoveableBox> getBoxes() {return boxes;}
 
 	/**
 	 * Returns whether this level is currently in debug node
@@ -444,8 +438,10 @@ public class LevelModel {
 
 
 		JsonValue boxdata = levelFormat.getChild("boxes");
+		boxes = new ArrayList<MoveableBox>();
 		while (boxdata!=null){
 			MoveableBox box = new MoveableBox();
+			boxes.add(box);
 			box.initialize(boxdata);
 			if (box.getTexture().getRegionWidth()<tSize)
 				box.setWidth(box.getTexture().getRegionWidth()/scale.x);

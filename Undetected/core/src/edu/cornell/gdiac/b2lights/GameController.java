@@ -40,6 +40,7 @@ import java.awt.*;
 import java.security.Guard;
 import java.util.ArrayList;
 import java.util.EventListener;
+import java.util.HashSet;
 
 /**
  * Gameplay controller for the game.
@@ -87,9 +88,10 @@ public class GameController implements Screen, ContactListener {
 
 	/** Track asset loading from all instances and subclasses */
 	private AssetState assetState = AssetState.EMPTY;
-
 	private LevelParser levelparser = new LevelParser();
 	private Texture pauseButton;
+
+	private HashSet<Obstacle> boxes = new HashSet<>();
 
 	/**
 	 * Preloads the assets for this controller.
@@ -130,7 +132,7 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		JsonAssetManager.getInstance().allocateDirectory();
-		pauseButton = new Texture(assetDirectory.get("textures").get("pause").getString("file"));
+		pauseButton = new Texture(assetDirectory.get("textures").get("pauseMenu").getString("file"));
 		displayFont = JsonAssetManager.getInstance().getEntry("display", BitmapFont.class);
 		levelselectfont = JsonAssetManager.getInstance().getEntry("levelselect", BitmapFont.class);
 		levelnumfont = JsonAssetManager.getInstance().getEntry("levelnumber", BitmapFont.class);
@@ -533,13 +535,14 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		if(input.didAction() && avatar.getHasBox()){
+			Obstacle box = avatar.getBoxHeld();
 			level.placeBox(avatar);
 		} else if(input.didAction() && !avatar.getHasBox() && avatarBoxCollision){
 			avatar.setBoxHeld(avatar.getBoxInContact());
 			avatar.pickupBox();
 			level.queueDisabled(avatar.getBoxInContact());
+			boxes.clear();
 		} else if(input.didAction() && switchCollided != null) {
-			System.out.println(switchCollided);
 			switchCollided.switchMode();
 			for (AIController ai : level.getControl()) {
 				if (ai.getGuard().getAlarmed()) {
@@ -631,7 +634,7 @@ public class GameController implements Screen, ContactListener {
 			lightController = new LightController(level);
 			showExit = false;
 
-			System.out.println(lastFile.name());
+//			System.out.println(lastFile.name());
 
 			if(currentFile.equals(levelSelectFile)){
 				ArrayList<DoorModel> doors = level.getDoors();
@@ -669,6 +672,7 @@ public class GameController implements Screen, ContactListener {
 //      canvas.begin(); // DO NOT SCALE
 //      canvas.drawTextCentered(""+(int)(1f/delta), displayFont, 0.0f);
 //      canvas.end();
+
 		OrthographicCamera cam = canvas.getCamera();
 
 		DudeModel avatar = level.getAvatar();
@@ -732,7 +736,6 @@ public class GameController implements Screen, ContactListener {
 			InputController input = InputController.getInstance();
 
 			TextureRegion overlayTexture = JsonAssetManager.getInstance().getEntry("overlay", TextureRegion.class);
-			Texture pauseButton = new Texture(assetDirectory.get("textures").get("pauseMenu").getString("file"));
 			TextureRegion continueButton = JsonAssetManager.getInstance().getEntry("continue", TextureRegion.class);
 			TextureRegion abortButton = JsonAssetManager.getInstance().getEntry("abort", TextureRegion.class);
 			TextureRegion musicButton;
@@ -1007,10 +1010,8 @@ public class GameController implements Screen, ContactListener {
 			}
 
 			if (currentFile.equals(levelSelectFile)) {
-				System.out.println("levellll");
 				if ((bd1 == avatar && bd2 instanceof DoorModel) || (bd2 == avatar && bd1 instanceof DoorModel)) {
 					nextFile = Gdx.files.internal("jsons/" + (bd1 instanceof DoorModel ? bd1.getName() : bd2.getName()) + ".json");
-					System.out.println("contactdoor");
 				}
 			}
 
@@ -1083,35 +1084,44 @@ public class GameController implements Screen, ContactListener {
 //					if(!failed){
 //						setFailure(true);
 //					}
+					if (boxes.contains(bd2) && bd2 instanceof MoveableBox) {
+						return;
+					}
 					for (AIController ai : level.getControl()) {
 						if (ai.getGuard().sector == ((Laser) bd1).sector) {
 							ai.setAlarmed();
 							ai.setProtect(bd1);
-//							System.out.println("laser");
 						}
+					}
+					if (!boxes.contains(bd2) && bd2 instanceof MoveableBox) {
+						boxes.add(bd2);
 					}
 				}
 				else {
-					avatarLaserCollision =false;
+					avatarLaserCollision = false;
 				}
 			}
-			else{
+			else {
 				if (((Laser) bd2).isTurnedOn()) {
 					avatarLaserCollision = true;
 //					avatar.alertCharacter();
 //					if(!failed){
 //						setFailure(true);
 //					}
+					if (boxes.contains(bd1) && bd1 instanceof MoveableBox) {
+						return;
+					}
 					for (AIController ai : level.getControl()) {
-
 						if (ai.getGuard().sector == ((Laser) bd2).sector) {
 							ai.setAlarmed();
 							ai.setProtect(bd2);
-//							System.out.println("laser");
 						}
 					}
+					if (!boxes.contains(bd1) && bd1 instanceof MoveableBox) {
+						boxes.add(bd1);
+					}
 				}
-				else{
+				else {
 					avatarLaserCollision = false;
 				}
 			}

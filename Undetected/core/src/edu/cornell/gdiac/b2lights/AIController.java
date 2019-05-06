@@ -430,10 +430,8 @@ public class AIController {
                 closest = door;
             }
         }
-        System.out.println(closest.getX() + " " + closest.getY());
         setProtect(closest);
         findClosest();
-        System.out.println(currentGoal);
     }
 
     /** Private class for keeping track of board tiles */
