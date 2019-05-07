@@ -37,13 +37,13 @@
  <objectgroup id="2" name="Object Layer 1">
   <object id="17" template="Guard.tx" gid="7" x="672" y="576" rotation="360">
    <properties>
-    <property name="path" value="[21,3]"/>
+    <property name="path" value=""/>
    </properties>
   </object>
   <object id="18" template="Guard.tx" gid="7" x="736" y="480" rotation="360">
    <properties>
     <property name="direction" value="down"/>
-    <property name="path" value="[23,6]"/>
+    <property name="path" value=""/>
    </properties>
   </object>
   <object id="22" template="DoorClosed.tx" name="door1" x="544" y="256"/>

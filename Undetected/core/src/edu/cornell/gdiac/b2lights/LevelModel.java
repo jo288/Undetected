@@ -30,6 +30,7 @@ package edu.cornell.gdiac.b2lights;
 
 import box2dLight.*;
 
+import java.security.Guard;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -1066,17 +1067,22 @@ public class LevelModel {
 //			if (!obj.getClass().equals(SwitchModel.class)) {
 //			    obj.draw(canvas);
 //			}
-			if(!obj.equals(avatar) &&
-					Math.abs(board.physicsToBoard(obj.getX())-board.physicsToBoard(avatar.getX()))<=1 &&
-					board.physicsToBoard(obj.getY())==board.physicsToBoard(avatar.getY())){
+			if(!obj.equals(avatar) && !obj.getClass().equals(GuardModel.class)){
 				obj.draw(canvas);
-				avatar.draw(canvas);
-				avatarDrawn = true;
-			} else if (obj.equals(avatar)&&avatarDrawn){
-
-			}else {
+					if(Math.abs(board.physicsToBoard(obj.getX())-board.physicsToBoard(avatar.getX()))<=1 &&
+					board.physicsToBoard(obj.getY())==board.physicsToBoard(avatar.getY())) {
+						avatar.draw(canvas);
+						avatarDrawn = true;
+					}
+					for(GuardModel g: guards){
+						if(Math.abs(board.physicsToBoard(obj.getX())-board.physicsToBoard(g.getX()))<=1 &&
+								board.physicsToBoard(obj.getY())==board.physicsToBoard(g.getY())) {
+							g.draw(canvas);
+						}
+					}
+			} else if (!obj.equals(avatar)||!avatarDrawn){
 				obj.draw(canvas);
-			}
+			} 
 		}
 		canvas.end();
 
