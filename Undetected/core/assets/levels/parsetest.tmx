@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="20">
+ <tileset firstgid="1" source="FloorTile.tsx"/>
+ <tileset firstgid="5" source="walls.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="20" height="10">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="1" template="GreenWall.tx" x="96" y="32"/>
+  <object id="2" template="GreenWall.tx" x="128" y="32"/>
+  <object id="3" template="GreenWall.tx" x="160" y="32"/>
+  <object id="4" template="GreenWall.tx" x="224" y="32"/>
+  <object id="5" template="GreenWall.tx" x="192" y="32"/>
+  <object id="6" template="GreenWall.tx" x="256" y="32"/>
+  <object id="7" template="GreenWall.tx" x="320" y="32"/>
+  <object id="8" template="GreenWall.tx" x="288" y="32"/>
+  <object id="11" template="GreenWall.tx" x="128" y="320"/>
+  <object id="12" template="GreenWall.tx" x="160" y="320"/>
+  <object id="13" template="GreenWall.tx" x="224" y="320"/>
+  <object id="14" template="GreenWall.tx" x="192" y="320"/>
+  <object id="15" template="GreenWall.tx" x="256" y="320"/>
+  <object id="16" template="GreenWall.tx" x="320" y="320"/>
+  <object id="17" template="GreenWall.tx" x="288" y="320"/>
+  <object id="19" template="GreenWall.tx" x="96" y="320"/>
+ </objectgroup>
+</map>
