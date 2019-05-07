@@ -43,7 +43,7 @@
 		"pos": [ 16, 3 ],
 		"status": "sleep",
 		"force": 40,
-		"sensitiveRadius": 1.6,
+		"sensitiveRadius": 0.8,
 		"path": [ 16, 3 ],
 		"objectivepath": [],
 		"lightIndex": 1,
