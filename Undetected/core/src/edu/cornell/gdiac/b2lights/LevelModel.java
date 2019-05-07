@@ -1067,7 +1067,8 @@ public class LevelModel {
 //			if (!obj.getClass().equals(SwitchModel.class)) {
 //			    obj.draw(canvas);
 //			}
-			if(!obj.equals(avatar) && !obj.getClass().equals(GuardModel.class)){
+//			if(!obj.equals(avatar) && !obj.getClass().equals(GuardModel.class)){
+			if(obj.getClass().equals(SwitchModel.class)||obj.getClass().equals(DoorModel.class)||obj.getClass().equals(CameraModel.class)){
 				obj.draw(canvas);
 					if(Math.abs(board.physicsToBoard(obj.getX())-board.physicsToBoard(avatar.getX()))<=1 &&
 					board.physicsToBoard(obj.getY())==board.physicsToBoard(avatar.getY())) {
@@ -1080,6 +1081,12 @@ public class LevelModel {
 							g.draw(canvas);
 						}
 					}
+			} else if (obj.getClass().equals(Laser.class) &&
+					Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(avatar.getX()))<=1 &&
+					board.physicsToBoard(obj.getY()+((Laser) obj).getLaserHeight()/2f) == board.physicsToBoard(avatar.getY())){
+					obj.draw(canvas);
+					avatar.draw(canvas);
+					avatarDrawn = true;
 			} else if (!obj.equals(avatar)||!avatarDrawn){
 				obj.draw(canvas);
 			}
