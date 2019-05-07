@@ -62,6 +62,9 @@ public class Board {
 		/** Has this tile been visited (used for pathfinding)? */
 		public boolean visited = false;
 		public int textureIndex = 0;
+
+		/** Has this tile been recently marked?*/
+		public int temp = 0;
 	}
 
 	
@@ -83,6 +86,8 @@ public class Board {
 	/** Texture of valid tile */
 	private TextureRegion tileTexture;
 	private TextureRegion[] tileTextures;
+
+	private int temp = 0;
 
 	/**
 	 * Creates a new board of the given size
@@ -334,7 +339,11 @@ public class Board {
 		//This one does the same thing as the line below
 		//canvas.draw(tileTexture, Color.WHITE, tileTexture.getRegionWidth()/2, tileTexture.getRegionHeight()/2,
 		//		TILE_WIDTH * (x + 0.5f), TILE_WIDTH * (y + 0.5f), 0, 1.0f, 1.0f);
-		canvas.draw(tileTextures[tile.textureIndex], Color.WHITE, 0, 0,
+		Color filter;
+
+		filter = Color.WHITE;
+
+		canvas.draw(tileTextures[tile.textureIndex], filter, 0, 0,
 				TILE_WIDTH * x, TILE_WIDTH * y, 0, TILE_WIDTH/tileTexture.getRegionWidth(), TILE_WIDTH/tileTexture.getRegionHeight());
 	}
 
