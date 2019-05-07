@@ -573,6 +573,7 @@ public class GameController implements Screen, ContactListener {
 		// Process actions in object model
 		DudeModel avatar = level.getAvatar();
 		ArrayList<GuardModel> guards = level.getGuards();
+		ArrayList<CameraModel> cameras = level.getCameras();
 		InputController input = InputController.getInstance();
 
 		if (input.didInvinc()) {
@@ -657,8 +658,19 @@ public class GameController implements Screen, ContactListener {
 		// Turn the physics engine crank.
 		if(!showExit) {
 			level.update(dt);
-			if (lightController.detect() && !failed) {
+			if (lightController.detectedByGuards(guards) && !failed) {
 				setFailure(true);
+			}
+			else{
+				CameraModel cam = lightController.detectedByCameras(cameras);
+				if(cam!=null) {
+					for (AIController ai : level.getControl()) {
+						if (ai.getGuard().sector == cam.sector) {
+							ai.setAlarmed();
+							ai.setProtect(cam);
+						}
+					}
+				}
 			}
 		}
 		if(showExit){
@@ -730,16 +742,16 @@ public class GameController implements Screen, ContactListener {
 
 		DudeModel avatar = level.getAvatar();
 		if (avatar.getHasBox()) {
-			TextureRegion gBox = JsonAssetManager.getInstance().getEntry("box2", TextureRegion.class);
+			TextureRegion gBox = JsonAssetManager.getInstance().getEntry("boxselect", TextureRegion.class);
 			canvas.begin();
 			if (level.canPlaceBoxAt()) {
 				canvas.draw(gBox, Color.WHITE, gBox.getRegionWidth() / 2, 0,
 						level.boxGhost().x * 32, level.boxGhost().y * 32 - 1f / 2 * 32,
-						0, 1, 1, 0.5f);
+						0, 1, 1, 0.9f);
 			}else {
 				canvas.draw(gBox, Color.RED, gBox.getRegionWidth() / 2, 0,
 						level.boxGhost().x * 32, level.boxGhost().y * 32 - 1f / 2 * 32,
-						0, 1, 1, 0.5f);
+						0, 1, 1, 0.9f);
 			}
 			canvas.end();
 		}

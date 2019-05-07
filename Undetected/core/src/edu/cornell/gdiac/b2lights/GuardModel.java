@@ -616,6 +616,12 @@ public class GuardModel extends CharacterModel {
      * @param canvas Drawing context
      */
     public void draw(ObstacleCanvas canvas) {
+        canvas.draw(shadowTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+(-7.5f+origin.x),getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.5f,1.5f);
+
+        canvas.draw(ringTexture, Color.RED, ringTexture.getRegionWidth() / 2 , ringTexture.getRegionHeight() / 2,
+                getX() * drawScale.x , getY() * drawScale.y - getHeight() / 2f * drawScale.y, 0,
+                64f*sensitiveRadius/ringTexture.getRegionWidth(), 64f*sensitiveRadius/ringTexture.getRegionHeight(), 0.4f);
+
         if (guardanimation != null) {
             canvas.draw(guardanimation,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,0f,scale,scale);
         }
@@ -632,13 +638,10 @@ public class GuardModel extends CharacterModel {
         }
 
 //        canvas.draw(alertTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
-        canvas.draw(shadowTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+4,getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.5f,1.5f);
 //        if (getDirectionFloat() == 0 || (Math.round(getDirectionFloat() * 100.0) / 100.0) == 3.14) {
 //            canvas.draw(ringTexture, Color.RED, origin.x + (DEFAULT_WIDTH / 2) * drawScale.x, origin.y + (DEFAULT_HEIGHT / 2) * drawScale.y + 2,
 //                    getX() * drawScale.x + (DEFAULT_WIDTH / 2) * drawScale.x, getY() * drawScale.y - (DEFAULT_HEIGHT / 2) * drawScale.y - getHeight() / 2f * drawScale.y, getAngle(), 1.5f, 1.5f);
 //        } else {
-//            canvas.draw(ringTexture, Color.RED, origin.x + (DEFAULT_WIDTH / 2) * drawScale.x + 4, origin.y + (DEFAULT_HEIGHT / 2) * drawScale.y + 2,
-//                    getX() * drawScale.x + (DEFAULT_WIDTH / 2) * drawScale.x, getY() * drawScale.y - (DEFAULT_HEIGHT / 2) * drawScale.y - getHeight() / 2f * drawScale.y, getAngle(), 1.5f, 1.5f);
-//        }
+            //        }
     }
 }

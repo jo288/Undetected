@@ -154,7 +154,12 @@ public class Laser extends BoxObstacle {
         }
 
 
+
 //		setTexture(texture);
+    }
+
+    public float getLaserHeight(){
+        return getHeight();
     }
 
 //    public  void switchState() {

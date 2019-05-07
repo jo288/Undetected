@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="152">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="153">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="5" source="Exit.tsx"/>
  <tileset firstgid="6" source="Objective.tsx"/>
@@ -37,13 +37,13 @@
  <objectgroup id="2" name="Object Layer 1">
   <object id="17" template="Guard.tx" gid="7" x="672" y="576" rotation="360">
    <properties>
-    <property name="path" value="[21,3]"/>
+    <property name="path" value=""/>
    </properties>
   </object>
   <object id="18" template="Guard.tx" gid="7" x="736" y="480" rotation="360">
    <properties>
     <property name="direction" value="down"/>
-    <property name="path" value="[23,6]"/>
+    <property name="path" value=""/>
    </properties>
   </object>
   <object id="22" template="DoorClosed.tx" name="door1" x="544" y="256"/>
@@ -172,11 +172,10 @@
   <object id="139" template="Exit.tx" x="128" y="128"/>
   <object id="140" template="GreenWall.tx" x="672" y="640"/>
   <object id="141" template="DoorClosedSide.tx" name="door3" type="door" x="480" y="544"/>
-  <object id="149" template="Camera.tx" x="192" y="576"/>
-  <object id="150" template="Camera.tx" x="320" y="576">
+  <object id="150" template="Camera.tx" x="224" y="256">
    <properties>
-    <property name="directionX" type="int" value="1"/>
-    <property name="directionY" type="int" value="1"/>
+    <property name="directionX" type="int" value="0"/>
+    <property name="directionY" type="int" value="-1"/>
     <property name="lightAngle" type="float" value="30"/>
     <property name="lightColor" type="color" value="#ffffe626"/>
     <property name="lightRadius" type="float" value="7"/>
@@ -184,5 +183,15 @@
    </properties>
   </object>
   <object id="151" template="PurpleKey.tx" x="800" y="544"/>
+  <object id="152" template="Camera.tx" x="448" y="416">
+   <properties>
+    <property name="directionX" type="int" value="-1"/>
+    <property name="directionY" type="int" value="0"/>
+    <property name="lightAngle" type="float" value="30"/>
+    <property name="lightColor" type="color" value="#ffffe626"/>
+    <property name="lightRadius" type="float" value="7"/>
+    <property name="rotationSpeed" type="float" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

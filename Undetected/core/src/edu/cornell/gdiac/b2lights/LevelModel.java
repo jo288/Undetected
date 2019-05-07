@@ -30,6 +30,7 @@ package edu.cornell.gdiac.b2lights;
 
 import box2dLight.*;
 
+import java.security.Guard;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -65,7 +66,7 @@ public class LevelModel {
 	public static final int WORLD_POSIT = 2;
 	/** Exclude bits for raycasting */
 	public static final short LIGHT_COLLIDEBITS = (short)0x1000;
-	public static final short LIGHT_MASKBITS = (short)0xefcf;
+	public static final short LIGHT_MASKBITS = (short)0xefaf;
 
 	// Physics objects for the game
 	/** Reference to the character avatar */
@@ -993,7 +994,7 @@ public class LevelModel {
 
             // System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
 			//Test for displaying board states
-			board.update();
+//			board.update();
 
 			for (AIController ai : controls) {
 				ai.update();
@@ -1069,15 +1070,27 @@ public class LevelModel {
 //			if (!obj.getClass().equals(SwitchModel.class)) {
 //			    obj.draw(canvas);
 //			}
-			if(!obj.equals(avatar) &&
-					Math.abs(board.physicsToBoard(obj.getX())-board.physicsToBoard(avatar.getX()))<=1 &&
-					board.physicsToBoard(obj.getY())==board.physicsToBoard(avatar.getY())){
+//			if(!obj.equals(avatar) && !obj.getClass().equals(GuardModel.class)){
+			if(obj.getClass().equals(SwitchModel.class)||obj.getClass().equals(DoorModel.class)||obj.getClass().equals(CameraModel.class)){
 				obj.draw(canvas);
-				avatar.draw(canvas);
-				avatarDrawn = true;
-			} else if (obj.equals(avatar)&&avatarDrawn){
-
-			}else {
+					if(Math.abs(board.physicsToBoard(obj.getX())-board.physicsToBoard(avatar.getX()))<=1 &&
+					board.physicsToBoard(obj.getY())==board.physicsToBoard(avatar.getY())) {
+						avatar.draw(canvas);
+						avatarDrawn = true;
+					}
+					for(GuardModel g: guards){
+						if(Math.abs(board.physicsToBoard(obj.getX())-board.physicsToBoard(g.getX()))<=1 &&
+								board.physicsToBoard(obj.getY())==board.physicsToBoard(g.getY())) {
+							g.draw(canvas);
+						}
+					}
+			} else if (obj.getClass().equals(Laser.class) &&
+					Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(avatar.getX()))<=1 &&
+					board.physicsToBoard(obj.getY()+((Laser) obj).getLaserHeight()/2f) == board.physicsToBoard(avatar.getY())){
+					obj.draw(canvas);
+					avatar.draw(canvas);
+					avatarDrawn = true;
+			} else if (!obj.equals(avatar)||!avatarDrawn){
 				obj.draw(canvas);
 			}
 //			if (!obj.equals(avatar) && board.physicsToBoard(obj.getX()) == board.physicsToBoard(avatar.getX())

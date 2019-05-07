@@ -449,6 +449,10 @@
 		"keys": {
 			"file": 	"textures/keys.png",
 			"wrap":  	false
+		},
+		"boxselect": {
+			"file": 	"textures/tileselect.png",
+			"wrap": 	false
 		}
 	},
   	"fonts": {
