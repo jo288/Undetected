@@ -161,8 +161,13 @@ public class AIController {
                     lastGoal = null;
                 }
 
-                if (board.getOccupant(goalx, goaly) == 5) {
+                if (board.getOccupant(goalx, goaly) == 5 && isGrid(guard)) {
+
                     findClosest();
+                    board.clearMarks();
+
+                    guard.setMovement(0, 0);
+                    guard.applyForce();
                     break;
                 } else {
                     if (goalx == guardx && goaly == guardy) {
@@ -225,6 +230,7 @@ public class AIController {
                 }
 
                 pathFind();
+
                 board.resetTiles();
                 break;
         }
@@ -278,7 +284,6 @@ public class AIController {
         Node closest = temp.poll();
         if (closest != null) currentGoal = new Vector2(board.boardToScreen(closest.x) , board.boardToScreen(closest.y));
         board.clearMarks();
-//        System.out.println(closest.x +  " " + closest.y);
     }
 
     /** Finds the shortest path to goal tile and changes the guard's velocity accordingly
@@ -381,7 +386,7 @@ public class AIController {
                     lastGoal = currentGoal;
                     updateAISwitch();
                 }
-//                currentGoal = path[0];
+
                 pathIndex = 0;
                 return 0;
             }
@@ -430,10 +435,8 @@ public class AIController {
                 closest = door;
             }
         }
-        System.out.println(closest.getX() + " " + closest.getY());
         setProtect(closest);
         findClosest();
-        System.out.println(currentGoal);
     }
 
     /** Private class for keeping track of board tiles */
