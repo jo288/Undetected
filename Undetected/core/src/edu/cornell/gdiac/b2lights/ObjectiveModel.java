@@ -175,7 +175,7 @@ public class ObjectiveModel extends BoxObstacle {
 	public void drawMiniMap(ObstacleCanvas canvas, float alpha){
 		setTexture(circleTexture);
 		setOrigin(origin.x,0);
-		canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f, alpha);
+		canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.3f,1.3f, alpha);
 		setTexture(defaultCardTexture);
 		setOrigin(origin.x,0);
 
