@@ -200,8 +200,8 @@ public class CameraModel extends BoxObstacle{
      * @param canvas Drawing context
      */
     public void draw(ObstacleCanvas canvas) {
-        if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+        if (cameraAnimation != null) {
+            canvas.draw(cameraAnimation,Color.WHITE,origin.x,origin.y,(getX()-0.5f)*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),0.7f,0.7f);
         }
     }
 

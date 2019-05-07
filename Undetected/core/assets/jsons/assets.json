@@ -298,6 +298,36 @@
 			"file": "textures/camera.png",
 			"wrap": false
 		},
+		"camerafront":{
+			"file": 	"textures/camerafront.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		17,
+				"rows":		1,
+				"cols":		17,
+				"first":	0
+			}
+		},
+		"cameraleft":{
+			"file": 	"textures/cameraleft.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		10,
+				"rows":		1,
+				"cols":		10,
+				"first":	0
+			}
+		},
+		"cameraright":{
+			"file": 	"textures/cameraright.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		10,
+				"rows":		1,
+				"cols":		10,
+				"first":	0
+			}
+		},
 		"switchAnimation": {
 			"file": 	"textures/switchFront.png",
 			"wrap":  	false,
