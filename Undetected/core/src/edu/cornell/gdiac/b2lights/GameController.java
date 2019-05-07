@@ -1031,9 +1031,9 @@ public class GameController implements Screen, ContactListener {
 			if((bd1==avatar && bd2 instanceof MoveableBox ) || (bd1 instanceof MoveableBox && bd2==avatar)){
 				avatarBoxCollision = true;
 				if (bd1 instanceof  MoveableBox) {
-					avatar.setBoxInContact(bd1);
+					avatar.setBoxInContact((MoveableBox)bd1);
 				} else if (bd2 instanceof  MoveableBox) {
-					avatar.setBoxInContact(bd2);
+					avatar.setBoxInContact((MoveableBox)bd2);
 				}
 			}
 

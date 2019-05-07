@@ -471,6 +471,9 @@
 		},
 		"closeDoor": {
 			"file": 	"sounds/door_close.mp3"
+		},
+		"dropBox": {
+			"file": 	"sounds/drop_box.mp3"
 		}
 	}
 }

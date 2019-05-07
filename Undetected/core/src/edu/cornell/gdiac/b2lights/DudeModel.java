@@ -66,9 +66,9 @@ public class DudeModel extends CharacterModel {
 	// Box interactions
 	/** Whether player has a box */
 	private boolean hasBox;
-	private Obstacle boxContact;
-	private Obstacle boxHeld;
-	private Obstacle lastBoxHeld;
+	private MoveableBox boxContact;
+	private MoveableBox boxHeld;
+	private MoveableBox lastBoxHeld;
 
 	// Character states
 	/** Whether player is alive */
@@ -423,25 +423,25 @@ public class DudeModel extends CharacterModel {
 		}
 	}
 
-	public void setBoxInContact(Obstacle box) {
+	public void setBoxInContact(MoveableBox box) {
 		boxContact = box;
 	}
 
-	public Obstacle getBoxInContact() {
+	public MoveableBox getBoxInContact() {
 		return boxContact;
 	}
 
-	public Obstacle getLastBoxHeld() {
+	public MoveableBox getLastBoxHeld() {
 		return lastBoxHeld;
 	}
 
-	public void setBoxHeld(Obstacle box) {
+	public void setBoxHeld(MoveableBox box) {
 		if (!hasBox) {
 			boxHeld = box;
 		}
 	}
 
-	public Obstacle getBoxHeld() { return boxHeld; }
+	public MoveableBox getBoxHeld() { return boxHeld; }
 
 	/**
 	 * Initializes the dude via the given JSON value
