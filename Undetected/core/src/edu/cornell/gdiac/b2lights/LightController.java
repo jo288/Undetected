@@ -59,6 +59,7 @@ public class LightController {
             player_guard_angle = player_guard_angle > 180 ? 360 - player_guard_angle : player_guard_angle;
 
             //if player is within the cone light region, raycast from guard to player
+
             if (dist_to_player <= range && player_guard_angle <= light.getConeDegree()) {
                 level.getWorld().rayCast(ray, guard.getPosition(), player.getPosition());
                 for (int i = 0; i < intersected.size(); i++) {
@@ -74,6 +75,7 @@ public class LightController {
                 }
                 clearIntersectionData();
                 return true;
+
             }
         }
         clearIntersectionData();

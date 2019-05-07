@@ -54,7 +54,7 @@ public class LevelParser {
         protected int[] pos = new int[2];
         protected String status = "sleep";
         protected float force = 40f;
-        protected float sensitiveRadius = 1.6f;
+        protected float sensitiveRadius = 0.8f;
         protected Array<Integer> path = new Array<Integer>();
         protected Array<Integer> objectivepath = new Array<Integer>();
         protected int lightIndex;

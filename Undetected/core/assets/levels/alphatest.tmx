@@ -74,6 +74,7 @@
     <property name="direction" value="down"/>
     <property name="path" value="[9,8]"/>
     <property name="sector" type="int" value="1"/>
+    <property name="sensitiveRadius" type="float" value="1"/>
    </properties>
   </object>
   <object id="71" template="Guard.tx" gid="7" x="768" y="128">

@@ -1082,7 +1082,7 @@ public class LevelModel {
 					}
 			} else if (!obj.equals(avatar)||!avatarDrawn){
 				obj.draw(canvas);
-			} 
+			}
 		}
 		canvas.end();
 
