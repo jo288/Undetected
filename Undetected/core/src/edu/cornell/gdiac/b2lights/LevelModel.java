@@ -574,12 +574,13 @@ public class LevelModel {
 
 	public void placeBox(DudeModel player) {
 		float dir = player.getDirection();
-		Obstacle b = player.getBoxHeld();
+		MoveableBox b = player.getBoxHeld();
 		float bx = (board.getTileSize() * board.screenToBoard(player.getX()-(float)Math.sin(dir)) + 0.5f);
 		float by = (board.getTileSize() * board.screenToBoard(player.getY()+(float)Math.cos(dir)) + 0.5f);
 		int o = board.getOccupantAt(board.physicsToBoard(bx), board.physicsToBoard(by));
 		if (o==0||o==3||o==4) {
 			b.setPosition(bx, by);
+			b.playDrop();
 			avatar.dropBox();
 			queueEnabled(b);
 		}
@@ -796,6 +797,9 @@ public class LevelModel {
 				avatar.dropBox();
 				objects.add(avatar.getLastBoxHeld());
 			}
+//			if (obj.getClass().equals(Laser.class)) {
+//
+//			}
 			obj.deactivatePhysics(world);
 			obj.dispose();
 		}
@@ -993,7 +997,7 @@ public class LevelModel {
 
             // System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
 			//Test for displaying board states
-			board.update();
+//			board.update();
 
 			for (AIController ai : controls) {
 				ai.update();
@@ -1049,6 +1053,8 @@ public class LevelModel {
 	 * @param canvas	the drawing context
 	 */
 	public void draw(ObstacleCanvas canvas) {
+		boolean avatarOnTop = false;
+
 		canvas.clear();
 
 		boolean avatarDrawn = false;
@@ -1090,6 +1096,17 @@ public class LevelModel {
 			} else if (!obj.equals(avatar)||!avatarDrawn){
 				obj.draw(canvas);
 			}
+//			if (!obj.equals(avatar) && board.physicsToBoard(obj.getX()) == board.physicsToBoard(avatar.getX())
+//								&& board.physicsToBoard(obj.getY()) == board.physicsToBoard(avatar.getY())) {
+//				obj.draw(canvas);
+//				avatar.draw(canvas);
+//				avatarOnTop = true;
+//			} else {
+//				obj.draw(canvas);
+//			}
+//			if (obj.equals(avatar) && !avatarOnTop) {
+//				obj.draw(canvas);
+//			}
 		}
 		canvas.end();
 

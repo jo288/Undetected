@@ -1,5 +1,8 @@
 package edu.cornell.gdiac.b2lights;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
@@ -41,6 +44,9 @@ public class Laser extends BoxObstacle {
     private FilmStrip sidefilmstrip;
     int animateCool;
 
+    private Music alarmSound;
+    private long sndcue;
+
     public Laser(float x, float y) {
         super(x, y, LAZER_WIDTH, LAZER_HEIGHT);
         x_pos = x;
@@ -76,6 +82,28 @@ public class Laser extends BoxObstacle {
 
     public void turnOn() {
         time_to_live = liveTimeReference;
+    }
+
+    public void playAlarm() {
+//        if (sndcue != -1) {
+//            alarmSound.stop(sndcue);
+//        }
+//        sndcue = alarmSound.play(0.3f);
+
+        if (!alarmSound.isPlaying()) {
+            alarmSound.play();
+        }
+    }
+
+    @Override
+    public void dispose() {
+        disposeAlarm();
+        super.dispose();
+    }
+
+    public void disposeAlarm() {
+        alarmSound.stop();
+        alarmSound.dispose();
     }
 
     public void setTimeToLive(int t){time_to_live = t;}
@@ -127,6 +155,11 @@ public class Laser extends BoxObstacle {
         int opacity = 200;
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
+
+//        alarmSound = JsonAssetManager.getInstance().getEntry("laserAlarm", Music.class);
+        alarmSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/laser_alarm_ext.mp3"));
+        alarmSound.setVolume(0.3f);
+//        sndcue = -1;
 
         // Now get the texture from the AssetManager singleton
 //        String key = json.get("texture").asString();

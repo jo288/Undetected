@@ -1,5 +1,6 @@
 package edu.cornell.gdiac.b2lights;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
@@ -23,6 +24,10 @@ public class MoveableBox extends BoxObstacle{
     private TextureRegion boxTexture;
     private boolean flaggedForDelete;
 
+    private Sound dropSound;
+    private Sound pickupSound;
+    private long sndcue;
+
     public MoveableBox(float x, float y) {
         super(x, y, BOX_SIZE, BOX_SIZE);
     }
@@ -45,6 +50,19 @@ public class MoveableBox extends BoxObstacle{
 
     public boolean isFlaggedForDelete () {
         return flaggedForDelete;
+    }
+
+    public void playDrop() {
+        if (sndcue != -1) {
+            dropSound.stop(sndcue);
+        }
+        sndcue = dropSound.play(0.3f);
+    }
+    public void playPickup() {
+        if (sndcue != -1) {
+            pickupSound.stop(sndcue);
+        }
+        sndcue = pickupSound.play(0.3f);
     }
 
     public void initialize(){
@@ -89,6 +107,10 @@ public class MoveableBox extends BoxObstacle{
         int opacity = 200;
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
+
+        dropSound = JsonAssetManager.getInstance().getEntry("dropBox", Sound.class);
+        pickupSound = JsonAssetManager.getInstance().getEntry("pickupBox", Sound.class);
+        sndcue = -1;
 
         // Now get the texture from the AssetManager singleton
         String key = json.get("texture").asString();
