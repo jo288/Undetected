@@ -148,9 +148,13 @@ public class LevelParser {
         try {
             XmlReader.Element tileLayer = xmlLevel.getChildByName("layer");
             String tileData = tileLayer.getChildByName("data").getText();
-            tileData = tileData.replaceAll("[,\r\n]", "");
-            for (int i = 0; i < tileData.length(); i++) {
-                if (tileData.charAt(i) == '0' &&
+//            tileData = tileData.replaceAll("[,\r\n]", "");
+            String[] tileDataArray = tileData.split("[,\r\n]");
+            for (int i = 0; i < tileDataArray.length; i++) {
+                if(tileDataArray[i].equals("")){
+                    continue;
+                }
+                if (tileDataArray[i].equals("0") &&
                 !searchCoordinateArrays(i % testLevel.boardSize[0],testLevel.boardSize[1] - 1 - (i / testLevel.boardSize[0]),testLevel.exteriorwall.pos)
                 && !searchCoordinateArrays(i % testLevel.boardSize[0],testLevel.boardSize[1] - 1 - (i / testLevel.boardSize[0]),testLevel.interiorwall.pos)) {
                     testLevel.invalidTiles.add(i % testLevel.boardSize[0]);
@@ -160,7 +164,7 @@ public class LevelParser {
                         || searchCoordinateArrays(i % testLevel.boardSize[0],testLevel.boardSize[1] - 1 - (i / testLevel.boardSize[0]),testLevel.interiorwall.pos)){
                     testLevel.tiles.add(0);
                 }else{
-                    testLevel.tiles.add(Integer.parseInt(String.valueOf(tileData.charAt(i))));
+                    testLevel.tiles.add(Integer.parseInt(String.valueOf(tileDataArray[i])));
                 }
             }
         } catch (Exception e){}

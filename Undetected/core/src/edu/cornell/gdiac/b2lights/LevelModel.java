@@ -354,6 +354,7 @@ public class LevelModel {
 		bounds = new Rectangle(0,0,pSize[0],pSize[1]);
 		scale.x = gSize[0]/pSize[0];
 		scale.y = gSize[1]/pSize[1];
+
 		
 		// Compute the FPS
 		int[] fps = levelFormat.get("fpsRange").asIntArray();
@@ -991,7 +992,7 @@ public class LevelModel {
 
             // System.out.println(board.isSafeAt(board.screenToBoard(avatar.getX()), board.screenToBoard(avatar.getY())));
 			//Test for displaying board states
-//			board.update();
+			board.update();
 
 			for (AIController ai : controls) {
 				ai.update();
