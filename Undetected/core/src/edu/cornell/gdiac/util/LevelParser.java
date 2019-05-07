@@ -231,6 +231,14 @@ public class LevelParser {
                 d.isVertical = false;
                 testLevel.doors.add(d);
             }
+            if(e.get("template").equals("DoorOpenSide.tx")){
+                Door d = new Door();
+                d.name = (e.hasAttribute("name")?e.getAttribute("name"):d.name);
+                d.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                d.open = true;
+                d.isVertical = false;
+                testLevel.doors.add(d);
+            }
             if(e.get("template").equals("Switch.tx")){
                 Switch s = new Switch();
                 s.name = (e.hasAttribute("name")?e.getAttribute("name"):s.name);

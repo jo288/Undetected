@@ -76,6 +76,21 @@ public class LightController {
                 clearIntersectionData();
                 return true;
 
+            }else if(dist_to_player<=guard.getSensitiveRadius()){
+                level.getWorld().rayCast(ray, guard.getPosition(), player.getPosition());
+                for(int i=0; i<intersected.size(); i++){
+                    Object b = intersected.get(i).getUserData();
+                    if(!(b instanceof DudeModel && (Obstacle)b==player)){
+                        if(guard.getPosition().dst(contact_points.get(i))<dist_to_player){
+                            clearIntersectionData();
+                            return false;
+                        }
+                    }
+                }
+                clearIntersectionData();
+                guard.collidedAvatar(player);
+                guard.setAlarmed(true);
+                return true;
             }
         }
         clearIntersectionData();
