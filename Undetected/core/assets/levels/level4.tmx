@@ -8,9 +8,8 @@
  <tileset firstgid="9" source="Player.tsx"/>
  <tileset firstgid="10" source="wallgreen.tsx"/>
  <tileset firstgid="11" source="horizontaldoor.tsx"/>
- <tileset firstgid="35" source="camera.tsx"/>
- <tileset firstgid="36" source="keys.tsx"/>
- <tileset firstgid="40" source="../../../../../../UNDETECTED/undetected/Undetected/core/assets/levels/FloorTile.tsx"/>
+ <tileset firstgid="23" source="camera.tsx"/>
+ <tileset firstgid="24" source="keys.tsx"/>
  <layer id="3" name="Tile Layer 1" width="30" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -29,7 +28,7 @@
 0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,
 0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,
 0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,
-0,0,0,1,1,1,1,1,1,1,40,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,
+0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,
 0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,
 0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,
 0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0
@@ -173,7 +172,7 @@
   <object id="139" template="Exit.tx" x="128" y="128"/>
   <object id="140" template="GreenWall.tx" x="672" y="640"/>
   <object id="141" template="DoorClosedSide.tx" name="door3" type="door" x="480" y="544"/>
-  <object id="150" template="Camera.tx" x="288" y="256">
+  <object id="150" template="Camera.tx" x="224" y="256">
    <properties>
     <property name="directionX" type="int" value="0"/>
     <property name="directionY" type="int" value="-1"/>

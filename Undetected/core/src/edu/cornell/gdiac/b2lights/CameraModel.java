@@ -145,8 +145,10 @@ public class CameraModel extends BoxObstacle{
         setBodyType(BodyDef.BodyType.StaticBody);
 
         // Create the collision filter (used for light penetration)
-        short collideBits = LevelModel.bitStringToShort("10001");
-        short excludeBits = LevelModel.bitStringToComplement("0000");
+//        short collideBits = (short)0x0040;
+        short collideBits = LevelModel.bitStringToShort("10000");
+//        short excludeBits = LevelModel.bitStringToComplement("0000");
+        short excludeBits = LevelModel.bitStringToComplement("0000000000000000");
         Filter filter = new Filter();
         filter.categoryBits = collideBits;
         filter.maskBits = excludeBits;
