@@ -869,13 +869,37 @@ public class GameController implements Screen, ContactListener {
 
 			if (music) {
 				musicButton = JsonAssetManager.getInstance().getEntry("musicOn", TextureRegion.class);
+				theme.setVolume(0.5f);
+				preHeist.setVolume(0.5f);
+				postHeist.setVolume(0.5f);
 			} else {
 				musicButton = JsonAssetManager.getInstance().getEntry("musicOff", TextureRegion.class);
+				theme.setVolume(0f);
+				preHeist.setVolume(0f);
+				postHeist.setVolume(0f);
 			}
 			if (sound) {
 				soundButton = JsonAssetManager.getInstance().getEntry("soundOn", TextureRegion.class);
+				for (DoorModel d : level.getDoors()) {
+					d.unmute();
+				}
+				for (Laser l : level.getLasers()) {
+					l.unmute();
+				}
+				for (MoveableBox b : level.getBoxes()) {
+					b.unmute();
+				}
 			} else {
 				soundButton = JsonAssetManager.getInstance().getEntry("soundOff", TextureRegion.class);
+				for (DoorModel d : level.getDoors()) {
+					d.mute();
+				}
+				for (Laser l : level.getLasers()) {
+					l.mute();
+				}
+				for (MoveableBox b : level.getBoxes()) {
+					b.mute();
+				}
 			}
 
 			canvas.begin();

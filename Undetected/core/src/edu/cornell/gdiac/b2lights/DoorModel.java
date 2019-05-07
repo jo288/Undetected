@@ -17,6 +17,7 @@ import java.lang.reflect.Field;
 public class DoorModel extends BoxObstacle{
     private static final float DOOR_WIDTH = 1f;
     private static final float DOOR_HEIGHT = 1f;
+    private static final float VOLUME = 0.2f;
     private boolean open = false;
     private boolean animateOn = false;
     private boolean animateOff = false;
@@ -34,6 +35,7 @@ public class DoorModel extends BoxObstacle{
     private Sound openSound;
     private Sound closeSound;
     private long sndcue;
+    private float volume;
 
     public DoorModel(float x, float y) {
         super(x, y, DOOR_WIDTH, DOOR_HEIGHT);
@@ -90,11 +92,19 @@ public class DoorModel extends BoxObstacle{
         setOrigin(origin.x, 0);
     }
 
+    public void mute() {
+        volume = 0;
+    }
+
+    public void unmute() {
+        volume = VOLUME;
+    }
+
     public void play(Sound sound) {
         if (sndcue != -1) {
             sound.stop(sndcue);
         }
-        sndcue = sound.play(0.2f);
+        sndcue = sound.play(volume);
     }
 
     public void setFlaggedForDelete () {
@@ -157,6 +167,7 @@ public class DoorModel extends BoxObstacle{
         openSound = JsonAssetManager.getInstance().getEntry("openDoor", Sound.class);
         closeSound = JsonAssetManager.getInstance().getEntry("closeDoor", Sound.class);
         sndcue = -1;
+        volume = VOLUME;
 
         // Now get the texture from the AssetManager singleton
 //        TextureRegion closedTexture = JsonAssetManager.getInstance().getEntry("doorClosed", TextureRegion.class);

@@ -24,6 +24,7 @@ public class Laser extends BoxObstacle {
 
     private static final float LAZER_HEIGHT = 5f;
     private static final float LAZER_WIDTH = 0.01f;
+    private static final float VOLUME = 0.3f;
     private float x_pos;
     private float y_pos;
     private boolean isOn;
@@ -82,6 +83,14 @@ public class Laser extends BoxObstacle {
 
     public void turnOn() {
         time_to_live = liveTimeReference;
+    }
+
+    public void mute() {
+        alarmSound.setVolume(0);
+    }
+
+    public void unmute() {
+        alarmSound.setVolume(VOLUME);
     }
 
     public void playAlarm() {
@@ -158,7 +167,7 @@ public class Laser extends BoxObstacle {
 
 //        alarmSound = JsonAssetManager.getInstance().getEntry("laserAlarm", Music.class);
         alarmSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/laser_alarm_ext.mp3"));
-        alarmSound.setVolume(0.3f);
+        alarmSound.setVolume(VOLUME);
 //        sndcue = -1;
 
         // Now get the texture from the AssetManager singleton
