@@ -20,6 +20,7 @@ public class MoveableBox extends BoxObstacle{
     public static final String EXCLUDE_BIT = "0000000000000000";
 
     private static final float BOX_SIZE = 0.5f;
+    private static final float VOLUME = 0.3f;
     private boolean held = false;
     private TextureRegion boxTexture;
     private boolean flaggedForDelete;
@@ -27,6 +28,7 @@ public class MoveableBox extends BoxObstacle{
     private Sound dropSound;
     private Sound pickupSound;
     private long sndcue;
+    private float volume;
 
     public MoveableBox(float x, float y) {
         super(x, y, BOX_SIZE, BOX_SIZE);
@@ -52,17 +54,25 @@ public class MoveableBox extends BoxObstacle{
         return flaggedForDelete;
     }
 
+    public void mute() {
+        volume = 0;
+    }
+
+    public void unmute() {
+        volume = VOLUME;
+    }
+
     public void playDrop() {
         if (sndcue != -1) {
             dropSound.stop(sndcue);
         }
-        sndcue = dropSound.play(0.3f);
+        sndcue = dropSound.play(volume);
     }
     public void playPickup() {
         if (sndcue != -1) {
             pickupSound.stop(sndcue);
         }
-        sndcue = pickupSound.play(0.3f);
+        sndcue = pickupSound.play(volume);
     }
 
     public void initialize(){
@@ -111,6 +121,7 @@ public class MoveableBox extends BoxObstacle{
         dropSound = JsonAssetManager.getInstance().getEntry("dropBox", Sound.class);
         pickupSound = JsonAssetManager.getInstance().getEntry("pickupBox", Sound.class);
         sndcue = -1;
+        volume = VOLUME;
 
         // Now get the texture from the AssetManager singleton
         String key = json.get("texture").asString();
