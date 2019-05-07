@@ -1050,6 +1050,8 @@ public class LevelModel {
 	public void draw(ObstacleCanvas canvas) {
 		canvas.clear();
 
+		boolean avatarDrawn = false;
+
 		objects.sort((Obstacle o1, Obstacle o2) -> Float.compare(o2.getY(),o1.getY()));
 		
 		// Draw the sprites first (will be hidden by shadows)
@@ -1061,8 +1063,19 @@ public class LevelModel {
 			s.draw(canvas);
 		}
 		for(Obstacle obj : objects) {
-			if (!obj.getClass().equals(SwitchModel.class)) {
-			    obj.draw(canvas);
+//			if (!obj.getClass().equals(SwitchModel.class)) {
+//			    obj.draw(canvas);
+//			}
+			if(!obj.equals(avatar) &&
+					Math.abs(board.physicsToBoard(obj.getX())-board.physicsToBoard(avatar.getX()))<=1 &&
+					board.physicsToBoard(obj.getY())==board.physicsToBoard(avatar.getY())){
+				obj.draw(canvas);
+				avatar.draw(canvas);
+				avatarDrawn = true;
+			} else if (obj.equals(avatar)&&avatarDrawn){
+
+			}else {
+				obj.draw(canvas);
 			}
 		}
 		canvas.end();
