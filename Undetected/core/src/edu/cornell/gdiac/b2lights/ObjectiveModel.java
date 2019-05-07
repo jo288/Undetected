@@ -32,7 +32,7 @@ import java.util.*;
  */
 public class ObjectiveModel extends BoxObstacle {
 	/** Collide Bit */
-	public static final String COLLIDE_BIT = "0010";
+	public static final String COLLIDE_BIT = "100000";
 	/** Default Width of Player */
 	public static final String EXCLUDE_BIT = "0000000000000000";
 
