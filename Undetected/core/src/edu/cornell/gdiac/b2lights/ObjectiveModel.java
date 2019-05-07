@@ -135,7 +135,7 @@ public class ObjectiveModel extends BoxObstacle {
 		setRestitution(0);
 
 		// Create the collision filter (used for light penetration)
-		short collideBits = LevelModel.bitStringToShort(COLLIDE_BIT);
+		short collideBits = (short)0x0040;
 		short excludeBits = LevelModel.bitStringToComplement(EXCLUDE_BIT);
 		Filter filter = new Filter();
 		filter.categoryBits = collideBits;

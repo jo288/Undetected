@@ -66,7 +66,7 @@ public class LevelModel {
 	public static final int WORLD_POSIT = 2;
 	/** Exclude bits for raycasting */
 	public static final short LIGHT_COLLIDEBITS = (short)0x1000;
-	public static final short LIGHT_MASKBITS = (short)0xefcf;
+	public static final short LIGHT_MASKBITS = (short)0xefaf;
 
 	// Physics objects for the game
 	/** Reference to the character avatar */

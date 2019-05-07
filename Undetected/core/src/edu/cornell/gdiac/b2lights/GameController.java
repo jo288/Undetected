@@ -573,6 +573,7 @@ public class GameController implements Screen, ContactListener {
 		// Process actions in object model
 		DudeModel avatar = level.getAvatar();
 		ArrayList<GuardModel> guards = level.getGuards();
+		ArrayList<CameraModel> cameras = level.getCameras();
 		InputController input = InputController.getInstance();
 
 		if (input.didInvinc()) {
@@ -657,8 +658,19 @@ public class GameController implements Screen, ContactListener {
 		// Turn the physics engine crank.
 		if(!showExit) {
 			level.update(dt);
-			if (lightController.detect() && !failed) {
+			if (lightController.detectedByGuards(guards) && !failed) {
 				setFailure(true);
+			}
+			else{
+				CameraModel cam = lightController.detectedByCameras(cameras);
+				if(cam!=null) {
+					for (AIController ai : level.getControl()) {
+						if (ai.getGuard().sector == cam.sector) {
+							ai.setAlarmed();
+							ai.setProtect(cam);
+						}
+					}
+				}
 			}
 		}
 		if(showExit){
