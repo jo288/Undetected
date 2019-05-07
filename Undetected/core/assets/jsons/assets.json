@@ -449,6 +449,10 @@
 		"keys": {
 			"file": 	"textures/keys.png",
 			"wrap":  	false
+		},
+		"boxselect": {
+			"file": 	"textures/tileselect.png",
+			"wrap": 	false
 		}
 	},
   	"fonts": {
@@ -471,6 +475,29 @@
 		},
 		"closeDoor": {
 			"file": 	"sounds/door_close.mp3"
+		},
+		"dropBox": {
+			"file": 	"sounds/drop_box.mp3"
+		},
+		"pickupBox": {
+			"file": 	"sounds/pickup_box.mp3"
+		},
+        "laserAlarm": {
+          "file": 	"sounds/laser_alarm_ext.mp3"
+        },
+		"guardWalk": {
+			"file": 	"sounds/guard_footstep.mp3"
+		}
+	},
+	"music": {
+		"theme": {
+			"file": 	"music/theme.mp3"
+		},
+		"preHeist": {
+			"file": 	"music/pre_heist.mp3"
+		},
+		"postHeist": {
+			"file": 	"music/post_heist.mp3"
 		}
 	}
 }

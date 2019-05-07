@@ -18,6 +18,7 @@ package edu.cornell.gdiac.b2lights;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
@@ -81,6 +82,11 @@ public class GameController implements Screen, ContactListener {
 	private boolean showExit = false;
 	private boolean panToPlayer = false; //pans back to player after showing exit
 
+	private Music theme;
+	private Music preHeist;
+	private Music postHeist;
+	private Music currentSong;
+
 	/** The font for giving messages to the player */
 	protected BitmapFont displayFont;
 	protected BitmapFont levelselectfont;
@@ -116,6 +122,13 @@ public class GameController implements Screen, ContactListener {
 		assetDirectory = jsonReader.parse(Gdx.files.internal("jsons/assets.json"));
 
 		JsonAssetManager.getInstance().loadDirectory(assetDirectory);
+
+		initMusic();
+
+		if (!theme.isPlaying()) {
+			currentSong = theme;
+			play(theme);
+		}
 	}
 
 	/**
@@ -593,6 +606,7 @@ public class GameController implements Screen, ContactListener {
 			level.placeBox(avatar);
 		} else if(input.didAction() && !avatar.getHasBox() && avatarBoxCollision){
 			avatar.setBoxHeld(avatar.getBoxInContact());
+			avatar.getBoxHeld().playPickup();
 			avatar.pickupBox();
 			level.queueDisabled(avatar.getBoxInContact());
 			boxes.clear();
@@ -680,6 +694,39 @@ public class GameController implements Screen, ContactListener {
 			}
 		}
 
+		if(currentFile.equals(levelSelectFile)) {
+			if (!theme.isPlaying()) {
+				currentSong.stop();
+				currentSong = theme;
+				play(currentSong);
+			}
+		} else {
+			if (!hasObjective) {
+				if (currentSong != null) {
+					if (!currentSong.equals(preHeist)) {
+						currentSong.stop();
+						currentSong = preHeist;
+						play(currentSong);
+					}
+				} else {
+					currentSong = preHeist;
+					play(currentSong);
+				}
+			} else {
+				if (currentSong != null) {
+					if (!currentSong.equals(postHeist)) {
+						currentSong.stop();
+						currentSong = postHeist;
+						play(currentSong);
+					}
+				} else {
+					currentSong = postHeist;
+					play(currentSong);
+				}
+			}
+		}
+
+
 		//load the next level if needed
 		if (nextFile!=null) {
 			levelFormat = jsonReader.parse(nextFile);
@@ -701,13 +748,18 @@ public class GameController implements Screen, ContactListener {
 
 //			System.out.println(lastFile.name());
 
-			if(currentFile.equals(levelSelectFile)){
+			if(currentFile.equals(levelSelectFile)) {
+				if (!theme.isPlaying()) {
+					currentSong.stop();
+					currentSong = theme;
+					play(currentSong);
+				}
 				ArrayList<DoorModel> doors = level.getDoors();
 				for (DoorModel d : doors) {
-					if ((d.getName()+".json").equals(lastFile.name())){
+					if ((d.getName() + ".json").equals(lastFile.name())) {
 						System.out.println("level1 door");
 						avatar = level.getAvatar();
-						avatar.setPosition(d.getPosition().x,d.getPosition().y-1);
+						avatar.setPosition(d.getPosition().x, d.getPosition().y - 1);
 						avatar.setDirection(3.14f);
 					}
 				}
@@ -742,16 +794,16 @@ public class GameController implements Screen, ContactListener {
 
 		DudeModel avatar = level.getAvatar();
 		if (avatar.getHasBox()) {
-			TextureRegion gBox = JsonAssetManager.getInstance().getEntry("box2", TextureRegion.class);
+			TextureRegion gBox = JsonAssetManager.getInstance().getEntry("boxselect", TextureRegion.class);
 			canvas.begin();
 			if (level.canPlaceBoxAt()) {
 				canvas.draw(gBox, Color.WHITE, gBox.getRegionWidth() / 2, 0,
 						level.boxGhost().x * 32, level.boxGhost().y * 32 - 1f / 2 * 32,
-						0, 1, 1, 0.5f);
+						0, 1, 1, 0.9f);
 			}else {
 				canvas.draw(gBox, Color.RED, gBox.getRegionWidth() / 2, 0,
 						level.boxGhost().x * 32, level.boxGhost().y * 32 - 1f / 2 * 32,
-						0, 1, 1, 0.5f);
+						0, 1, 1, 0.9f);
 			}
 			canvas.end();
 		}
@@ -817,13 +869,37 @@ public class GameController implements Screen, ContactListener {
 
 			if (music) {
 				musicButton = JsonAssetManager.getInstance().getEntry("musicOn", TextureRegion.class);
+				theme.setVolume(0.5f);
+				preHeist.setVolume(0.5f);
+				postHeist.setVolume(0.5f);
 			} else {
 				musicButton = JsonAssetManager.getInstance().getEntry("musicOff", TextureRegion.class);
+				theme.setVolume(0f);
+				preHeist.setVolume(0f);
+				postHeist.setVolume(0f);
 			}
 			if (sound) {
 				soundButton = JsonAssetManager.getInstance().getEntry("soundOn", TextureRegion.class);
+				for (DoorModel d : level.getDoors()) {
+					d.unmute();
+				}
+				for (Laser l : level.getLasers()) {
+					l.unmute();
+				}
+				for (MoveableBox b : level.getBoxes()) {
+					b.unmute();
+				}
 			} else {
 				soundButton = JsonAssetManager.getInstance().getEntry("soundOff", TextureRegion.class);
+				for (DoorModel d : level.getDoors()) {
+					d.mute();
+				}
+				for (Laser l : level.getLasers()) {
+					l.mute();
+				}
+				for (MoveableBox b : level.getBoxes()) {
+					b.mute();
+				}
 			}
 
 			canvas.begin();
@@ -936,6 +1012,29 @@ public class GameController implements Screen, ContactListener {
 		}
 	}
 
+	public void initMusic() {
+		theme = Gdx.audio.newMusic(Gdx.files.internal("music/theme.mp3"));
+		theme.setLooping(true);
+		theme.setVolume(0.5f);
+		preHeist = Gdx.audio.newMusic(Gdx.files.internal("music/pre_heist.mp3"));
+		preHeist.setLooping(true);
+		preHeist.setVolume(0.5f);
+		postHeist = Gdx.audio.newMusic(Gdx.files.internal("music/post_heist.mp3"));
+		postHeist.setLooping(true);
+		postHeist.setVolume(0.5f);
+	}
+
+	public void play(Music song) {
+		if (currentSong != null) {
+			if (currentSong.isPlaying()) {
+				currentSong.stop();
+			}
+		}
+		if (!song.isPlaying()) {
+			song.play();
+		}
+	}
+
 	/**
 	 * Called when the Screen is paused.
 	 *
@@ -947,6 +1046,10 @@ public class GameController implements Screen, ContactListener {
 		ArrayList<Laser> lasers = level.getLasers();
 		for (Laser l : lasers) {
 			l.pause();
+		}
+		if (!theme.isPlaying()) {
+			currentSong.pause();
+			play(theme);
 		}
 	}
 
@@ -960,6 +1063,10 @@ public class GameController implements Screen, ContactListener {
 		ArrayList<Laser> lasers = level.getLasers();
 		for (Laser l : lasers) {
 			l.resume();
+		}
+		if (!currentFile.equals(levelSelectFile)) {
+			theme.stop();
+			currentSong.play();
 		}
 	}
 
@@ -1043,9 +1150,9 @@ public class GameController implements Screen, ContactListener {
 			if((bd1==avatar && bd2 instanceof MoveableBox ) || (bd1 instanceof MoveableBox && bd2==avatar)){
 				avatarBoxCollision = true;
 				if (bd1 instanceof  MoveableBox) {
-					avatar.setBoxInContact(bd1);
+					avatar.setBoxInContact((MoveableBox)bd1);
 				} else if (bd2 instanceof  MoveableBox) {
-					avatar.setBoxInContact(bd2);
+					avatar.setBoxInContact((MoveableBox)bd2);
 				}
 			}
 
@@ -1137,6 +1244,7 @@ public class GameController implements Screen, ContactListener {
 		Obstacle bd1 = (Obstacle)body1.getUserData();
 		Obstacle bd2 = (Obstacle)body2.getUserData();
 		DudeModel avatar = level.getAvatar();
+
 		if(bd1 instanceof Laser || bd2 instanceof Laser){
 			contact.setEnabled(false);
 		}
@@ -1147,10 +1255,6 @@ public class GameController implements Screen, ContactListener {
 			if (bd1 instanceof Laser) {
 				if (((Laser) bd1).isTurnedOn()) {
 					avatarLaserCollision = true;
-//					avatar.alertCharacter();
-//					if(!failed){
-//						setFailure(true);
-//					}
 					if (boxes.contains(bd2) && bd2 instanceof MoveableBox) {
 						return;
 					}
@@ -1158,6 +1262,7 @@ public class GameController implements Screen, ContactListener {
 						if (ai.getGuard().sector == ((Laser) bd1).sector) {
 							ai.setAlarmed();
 							ai.setProtect(bd1);
+							((Laser) bd1).playAlarm();
 						}
 					}
 					if (!boxes.contains(bd2) && bd2 instanceof MoveableBox) {
@@ -1171,10 +1276,6 @@ public class GameController implements Screen, ContactListener {
 			else {
 				if (((Laser) bd2).isTurnedOn()) {
 					avatarLaserCollision = true;
-//					avatar.alertCharacter();
-//					if(!failed){
-//						setFailure(true);
-//					}
 					if (boxes.contains(bd1) && bd1 instanceof MoveableBox) {
 						return;
 					}
@@ -1182,6 +1283,7 @@ public class GameController implements Screen, ContactListener {
 						if (ai.getGuard().sector == ((Laser) bd2).sector) {
 							ai.setAlarmed();
 							ai.setProtect(bd2);
+							((Laser) bd2).playAlarm();
 						}
 					}
 					if (!boxes.contains(bd1) && bd1 instanceof MoveableBox) {

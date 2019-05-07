@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
  <tileset firstgid="1" source="horizontaldoor.tsx"/>
- <object type="door" gid="13" width="32" height="32"/>
+ <object type="door" gid="24" width="32" height="32"/>
 </template>

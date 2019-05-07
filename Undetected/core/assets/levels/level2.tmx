@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="13" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="90">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="13" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="92">
  <tileset firstgid="1" source="FloorTile.tsx"/>
- <tileset firstgid="2" source="Objective.tsx"/>
- <tileset firstgid="3" source="Player.tsx"/>
- <tileset firstgid="4" source="Guard.tsx"/>
- <tileset firstgid="5" source="Exit.tsx"/>
- <tileset firstgid="6" source="Laser.tsx"/>
- <tileset firstgid="7" source="DeskRight.tsx"/>
- <tileset firstgid="11" source="wallgreen.tsx"/>
+ <tileset firstgid="5" source="Objective.tsx"/>
+ <tileset firstgid="6" source="Player.tsx"/>
+ <tileset firstgid="7" source="Guard.tsx"/>
+ <tileset firstgid="8" source="Exit.tsx"/>
+ <tileset firstgid="9" source="Laser.tsx"/>
+ <tileset firstgid="10" source="DeskRight.tsx"/>
+ <tileset firstgid="14" source="wallgreen.tsx"/>
+ <tileset firstgid="15" source="walls.tsx"/>
  <layer id="6" name="Tile Layer 1" width="13" height="16">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,0,0,0,
@@ -105,5 +106,7 @@
   <object id="87" template="GreenWall.tx" x="160" y="288"/>
   <object id="88" template="GreenWall.tx" x="128" y="288"/>
   <object id="89" template="GreenWall.tx" x="96" y="288"/>
+  <object id="90" template="GreenWall.tx" x="128" y="256"/>
+  <object id="91" template="GreenWall.tx" x="160" y="256"/>
  </objectgroup>
 </map>

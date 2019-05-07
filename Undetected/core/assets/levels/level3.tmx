@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="24" height="14" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="91">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="24" height="14" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="93">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="5" source="Guard.tsx"/>
  <tileset firstgid="6" source="Player.tsx"/>
@@ -112,6 +112,10 @@
   <object id="87" template="GreenWall.tx" x="96" y="32"/>
   <object id="88" template="GreenWall.tx" x="32" y="32"/>
   <object id="89" template="GreenWall.tx" x="64" y="32"/>
-  <object id="90" template="RedKey.tx" x="640" y="192"/>
+  <object id="90" template="RedKey.tx" x="640" y="192">
+   <properties>
+    <property name="lasers" value="laser1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -15,6 +15,9 @@
  */
 package edu.cornell.gdiac.b2lights;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
@@ -99,6 +102,8 @@ public class GuardModel extends CharacterModel {
     private int startFrame;
     private TextureRegion ringTexture;
 
+    private Music walkSound;
+
     /** Cache for internal force calculations */
     private Vector2 forceCache = new Vector2();
 
@@ -154,6 +159,18 @@ public class GuardModel extends CharacterModel {
      */
     public void changeY(float speed) {
         setMovement(movement.x, movement.y + speed);
+    }
+
+    public void playWalk() {
+        if (!walkSound.isPlaying()) {
+            walkSound.play();
+        }
+    }
+
+    public void stopWalk() {
+        if (walkSound.isPlaying()) {
+            walkSound.stop();
+        }
     }
 
     /**
@@ -493,6 +510,11 @@ public class GuardModel extends CharacterModel {
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
 
+
+        walkSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/guard_footstep.mp3"));
+        walkSound.setLooping(true);
+
+
         ringTexture = JsonAssetManager.getInstance().getEntry("ring", TextureRegion.class);
 
         texture = JsonAssetManager.getInstance().getEntry("shadow", TextureRegion.class);
@@ -591,6 +613,12 @@ public class GuardModel extends CharacterModel {
         if (getLinearVelocity().x != 0 || getLinearVelocity().y != 0) {
             animate = true;
         }
+
+//        if (animate) {
+//            playWalk();
+//        } else {
+//            stopWalk();
+//        }
 
         if (animate && walkCool == 0) {
             if (guardanimation != null) {

@@ -1,5 +1,8 @@
 package edu.cornell.gdiac.b2lights;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.graphics.*;
@@ -21,6 +24,7 @@ public class Laser extends BoxObstacle {
 
     private static final float LAZER_HEIGHT = 5f;
     private static final float LAZER_WIDTH = 0.01f;
+    private static final float VOLUME = 0.3f;
     private float x_pos;
     private float y_pos;
     private boolean isOn;
@@ -40,6 +44,9 @@ public class Laser extends BoxObstacle {
     private FilmStrip filmstrip;
     private FilmStrip sidefilmstrip;
     int animateCool;
+
+    private Music alarmSound;
+    private long sndcue;
 
     public Laser(float x, float y) {
         super(x, y, LAZER_WIDTH, LAZER_HEIGHT);
@@ -76,6 +83,36 @@ public class Laser extends BoxObstacle {
 
     public void turnOn() {
         time_to_live = liveTimeReference;
+    }
+
+    public void mute() {
+        alarmSound.setVolume(0);
+    }
+
+    public void unmute() {
+        alarmSound.setVolume(VOLUME);
+    }
+
+    public void playAlarm() {
+//        if (sndcue != -1) {
+//            alarmSound.stop(sndcue);
+//        }
+//        sndcue = alarmSound.play(0.3f);
+
+        if (!alarmSound.isPlaying()) {
+            alarmSound.play();
+        }
+    }
+
+    @Override
+    public void dispose() {
+        disposeAlarm();
+        super.dispose();
+    }
+
+    public void disposeAlarm() {
+        alarmSound.stop();
+        alarmSound.dispose();
     }
 
     public void setTimeToLive(int t){time_to_live = t;}
@@ -128,6 +165,11 @@ public class Laser extends BoxObstacle {
         debugColor.mul(opacity/255.0f);
         setDebugColor(debugColor);
 
+//        alarmSound = JsonAssetManager.getInstance().getEntry("laserAlarm", Music.class);
+        alarmSound = Gdx.audio.newMusic(Gdx.files.internal("sounds/laser_alarm_ext.mp3"));
+        alarmSound.setVolume(VOLUME);
+//        sndcue = -1;
+
         // Now get the texture from the AssetManager singleton
 //        String key = json.get("texture").asString();
         TextureRegion texture = JsonAssetManager.getInstance().getEntry("laser", TextureRegion.class);
@@ -154,7 +196,12 @@ public class Laser extends BoxObstacle {
         }
 
 
+
 //		setTexture(texture);
+    }
+
+    public float getLaserHeight(){
+        return getHeight();
     }
 
 //    public  void switchState() {
