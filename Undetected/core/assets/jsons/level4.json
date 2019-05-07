@@ -129,7 +129,7 @@
 		"pos": [ 7, 12 ],
 		"on": true,
 		"rotationSpeed": 1,
-		"direction": [ 0, -1 ],
+		"direction": [ -1, 0 ],
 		"lightIndex": 2
 	},
 	{
