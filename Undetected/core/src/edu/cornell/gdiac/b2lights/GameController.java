@@ -951,8 +951,9 @@ public class GameController implements Screen, ContactListener {
 			}
 		} else if (!paused) {
 			canvas.begin();
-      		levelselectfont.setColor(Color.YELLOW);
-			canvas.drawText("SELECT LEVEL", levelselectfont, cam.position.x-370, cam.position.y-250);
+      		levelselectfont.setColor(Color.GOLDENROD);
+//			canvas.drawText("SELECT LEVEL", levelselectfont, cam.position.x-370, cam.position.y-250);
+			canvas.drawText("SELECT LEVEL", levelselectfont, cam.position.x-190, cam.position.y-200);
 
 			levelnumfont.setColor(Color.WHITE);
 			ArrayList<DoorModel> doors = level.getDoors();
