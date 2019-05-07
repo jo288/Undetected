@@ -30,6 +30,7 @@ public class CameraModel extends BoxObstacle{
     private TextureRegion cameraTexture;
     private FilmStrip cameraAnimation;
     private int animateCool;
+    public int sector;
 
     public CameraModel(float x, float y) {
         super(x, y, CAMERA_WIDTH, CAMERA_HEIGHT);
@@ -63,7 +64,6 @@ public class CameraModel extends BoxObstacle{
         else{
             update();
         }
-        System.out.println("CAM STATE "+isOn);
     }
 
     public void setRotationSpeed(float speed){
@@ -102,9 +102,6 @@ public class CameraModel extends BoxObstacle{
             }
             this.light.setDirection(angle);
             this.setDirection(new Vector2((float) Math.cos(angle * MathUtils.degreesToRadians), (float) Math.sin(angle * MathUtils.degreesToRadians)));
-            System.out.println("cam angle "+angle);
-            System.out.println("light angle "+light.getDirection());
-            System.out.println("light deg "+light.getConeDegree());
             animateCamera();
         }
         else{
