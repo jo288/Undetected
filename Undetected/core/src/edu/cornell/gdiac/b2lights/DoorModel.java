@@ -94,7 +94,7 @@ public class DoorModel extends BoxObstacle{
         if (sndcue != -1) {
             sound.stop(sndcue);
         }
-        sndcue = sound.play(0.1f);
+        sndcue = sound.play(0.2f);
     }
 
     public void setFlaggedForDelete () {

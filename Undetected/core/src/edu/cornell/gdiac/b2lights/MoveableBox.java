@@ -25,6 +25,7 @@ public class MoveableBox extends BoxObstacle{
     private boolean flaggedForDelete;
 
     private Sound dropSound;
+    private Sound pickupSound;
     private long sndcue;
 
     public MoveableBox(float x, float y) {
@@ -55,7 +56,13 @@ public class MoveableBox extends BoxObstacle{
         if (sndcue != -1) {
             dropSound.stop(sndcue);
         }
-        sndcue = dropSound.play(0.2f);
+        sndcue = dropSound.play(0.3f);
+    }
+    public void playPickup() {
+        if (sndcue != -1) {
+            pickupSound.stop(sndcue);
+        }
+        sndcue = pickupSound.play(0.3f);
     }
 
     public void initialize(){
@@ -102,6 +109,7 @@ public class MoveableBox extends BoxObstacle{
         setDebugColor(debugColor);
 
         dropSound = JsonAssetManager.getInstance().getEntry("dropBox", Sound.class);
+        pickupSound = JsonAssetManager.getInstance().getEntry("pickupBox", Sound.class);
         sndcue = -1;
 
         // Now get the texture from the AssetManager singleton

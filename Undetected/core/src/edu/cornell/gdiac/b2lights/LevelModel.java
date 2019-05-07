@@ -797,6 +797,9 @@ public class LevelModel {
 				avatar.dropBox();
 				objects.add(avatar.getLastBoxHeld());
 			}
+//			if (obj.getClass().equals(Laser.class)) {
+//
+//			}
 			obj.deactivatePhysics(world);
 			obj.dispose();
 		}
