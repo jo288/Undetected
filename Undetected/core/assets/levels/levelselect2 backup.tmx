@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="80" height="8" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="527">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="80" height="8" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="544">
  <tileset firstgid="1" source="walls.tsx"/>
  <tileset firstgid="5" source="Door.tsx"/>
  <tileset firstgid="18" source="FloorTile.tsx"/>
  <tileset firstgid="22" source="Player.tsx"/>
+ <tileset firstgid="23" source="Exit.tsx"/>
  <layer id="5" name="Tile Layer 1" width="80" height="8">
   <data encoding="csv">
 19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,
