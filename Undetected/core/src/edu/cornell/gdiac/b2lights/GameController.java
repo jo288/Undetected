@@ -734,47 +734,53 @@ public class GameController implements Screen, ContactListener {
 			}
 		}
 
+		try {
+			//load the next level if needed
+			if (nextFile != null) {
+				levelFormat = jsonReader.parse(nextFile);
+				FileHandle lastFile = currentFile;
+				currentFile = nextFile;
+				LevelModel newLoad = new LevelModel();
+				newLoad.populate(levelFormat);
+				level.dispose();
+				level = newLoad;
+				level.getWorld().setContactListener(this);
 
-		//load the next level if needed
-		if (nextFile!=null) {
-			levelFormat = jsonReader.parse(nextFile);
-			FileHandle lastFile = currentFile;
-			currentFile = nextFile;
-			LevelModel newLoad = new LevelModel();
-			newLoad.populate(levelFormat);
-			level.dispose();
-			level = newLoad;
-			level.getWorld().setContactListener(this);
-
-			setComplete(false);
-			setFailure(false);
-			hasObjective = false;
-			countdown = -1;
-			guardCollided = null;
-			lightController = new LightController(level);
-			showExit = false;
+				setComplete(false);
+				setFailure(false);
+				hasObjective = false;
+				countdown = -1;
+				guardCollided = null;
+				lightController = new LightController(level);
+				showExit = false;
 
 //			System.out.println(lastFile.name());
 
-			if(currentFile.equals(levelSelectFile)) {
-				if (!theme.isPlaying()) {
-					currentSong.stop();
-					currentSong = theme;
-					play(currentSong);
-				}
-				ArrayList<DoorModel> doors = level.getDoors();
-				for (DoorModel d : doors) {
-					if ((d.getName() + ".json").equals(lastFile.name())) {
-						System.out.println("level1 door");
-						avatar = level.getAvatar();
-						avatar.setPosition(d.getPosition().x, d.getPosition().y - 1);
-						avatar.setDirection(3.14f);
+				if (currentFile.equals(levelSelectFile)) {
+					if (!theme.isPlaying()) {
+						currentSong.stop();
+						currentSong = theme;
+						play(currentSong);
+					}
+					ArrayList<DoorModel> doors = level.getDoors();
+					//TODO: CHANGE FOR RELEASE, TEMP
+//				for (DoorModel d : doors) {
+					for (int i = 0; i < 10; i++) {
+						DoorModel d = doors.get(i);
+						if ((d.getName() + ".json").equals(lastFile.name())) {
+							System.out.println("level1 door");
+							avatar = level.getAvatar();
+							avatar.setPosition(d.getPosition().x, d.getPosition().y - 1);
+							avatar.setDirection(3.14f);
+						}
 					}
 				}
+				miniMap = new MiniMap(300, 225, level);
+				resetCamera();
+				nextFile = null;
 			}
-			miniMap = new MiniMap(300, 225, level);
-			resetCamera();
-			nextFile = null;
+		}catch (Exception e){
+			
 		}
 	}
 
@@ -965,7 +971,8 @@ public class GameController implements Screen, ContactListener {
 
 			levelnumfont.setColor(Color.WHITE);
 			ArrayList<DoorModel> doors = level.getDoors();
-			for(int i=0;i<doors.size();i++){
+//			for(int i=0;i<doors.size();i++){
+			for(int i=0;i<10;i++){
 				int f = floatframe/4 + i;
 				int t = (f%10>5)?(10-f%10):f%10;
 				canvas.drawText(""+(i+1),levelnumfont,doors.get(i).getX()*32-10,doors.get(i).getY()*32+85+(t*3));

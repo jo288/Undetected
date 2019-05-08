@@ -79,31 +79,31 @@
 		"open": false
 	},
 	{
-		"name": "door",
+		"name": "level",
 		"isVertical": true,
 		"pos": [ 57, 7 ],
 		"open": false
 	},
 	{
-		"name": "door",
+		"name": "level",
 		"isVertical": true,
 		"pos": [ 62, 7 ],
 		"open": false
 	},
 	{
-		"name": "door",
+		"name": "level",
 		"isVertical": true,
 		"pos": [ 67, 7 ],
 		"open": false
 	},
 	{
-		"name": "door",
+		"name": "level",
 		"isVertical": true,
 		"pos": [ 72, 7 ],
 		"open": false
 	},
 	{
-		"name": "door",
+		"name": "level",
 		"isVertical": true,
 		"pos": [ 77, 7 ],
 		"open": false
