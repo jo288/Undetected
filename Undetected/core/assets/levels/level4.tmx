@@ -174,7 +174,7 @@
   <object id="150" template="Camera.tx" x="288" y="256">
    <properties>
     <property name="directionX" type="int" value="0"/>
-    <property name="directionY" type="int" value="0"/>
+    <property name="directionY" type="int" value="-1"/>
     <property name="lightAngle" type="float" value="30"/>
     <property name="lightColor" type="color" value="#ffffe626"/>
     <property name="lightRadius" type="float" value="7"/>

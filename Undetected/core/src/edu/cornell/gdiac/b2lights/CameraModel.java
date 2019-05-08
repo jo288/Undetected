@@ -27,6 +27,7 @@ public class CameraModel extends BoxObstacle{
     private float rotationSpeed;
     private float minAngle;
     private float maxAngle;
+    private float[] angles;
     private TextureRegion cameraTexture;
     private FilmStrip cameraAnimation;
     private int animateCool;
@@ -82,9 +83,9 @@ public class CameraModel extends BoxObstacle{
         animateCool++;
         if(animateCool==animateMax){
             animateCool=0;
-            int next = (cameraAnimation.getFrame()+1) % cameraAnimation.getSize();
-            System.out.println("next frame "+next);
+            int next = (cameraAnimation.getFrame() + 1) % cameraAnimation.getSize();
             cameraAnimation.setFrame(next);
+            this.rotationSpeed = (angles[(next+1)%cameraAnimation.getSize()]-angles[next])/animateMax;
         }
     }
 
@@ -93,20 +94,12 @@ public class CameraModel extends BoxObstacle{
         if (this.isOn && this.light!=null) {
             animateCamera();
             this.light.setDistance(onRadius);
-            Vector2 newDir = this.direction.rotate(rotationSpeed);
-            float angle = newDir.angle();
-            if (angle >= maxAngle && rotationSpeed > 0) {
-                //angle = 135;
-                rotationSpeed *= -1;
-            } else if (angle <= minAngle && rotationSpeed < 0) {
-                //angle = 45;
-                rotationSpeed *= -1;
-            }
+            /*Vector2 newDir = this.direction.rotate(rotationSpeed);
+            float angle = newDir.angle();*/
+            float angle = angles[cameraAnimation.getFrame()];
             this.light.setDirection(angle);
             this.setDirection(new Vector2((float) Math.cos(angle * MathUtils.degreesToRadians), (float) Math.sin(angle * MathUtils.degreesToRadians)));
-            /*System.out.println("cam angle "+angle);
-            System.out.println("light angle "+light.getDirection());
-            System.out.println("light deg "+light.getConeDegree());*/
+
         }
         else{
             if(this.light!=null&&this.light.getDistance()!=0){
@@ -175,34 +168,28 @@ public class CameraModel extends BoxObstacle{
 
         TextureRegion tex = JsonAssetManager.getInstance().getEntry("camerafront", TextureRegion.class);
         //camera facing front
-        if(direction.x==0 && direction.y<0) {
+        //(0,-1)
+        if(direction.x==0 && (direction.y==0 || direction.y<0)) {
             cameraAnimation = new FilmStrip(tex.getTexture(), 1, 17);
-            this.maxAngle = 310;
-            this.minAngle = 200;
-            this.rotationSpeed *= -1;
-            this.animateMax = 14;
+            this.animateMax = 10;
+            this.angles = new float[]{270,250,230,220,200,210,230,250,270,290,300,315,330,310,300,290,270};
             this.setDirection(new Vector2((float) Math.cos(270 * MathUtils.degreesToRadians), (float) Math.sin(270 * MathUtils.degreesToRadians)));
         }
-        //(-1,0) camera on left wall (facing right)
+        //(1,0) camera on left wall (facing right)
         if(direction.x>0 && direction.y==0){
-            System.out.println("left");
             tex = JsonAssetManager.getInstance().getEntry("cameraleft", TextureRegion.class);
             cameraAnimation = new FilmStrip(tex.getTexture(), 1, 10);
-            this.maxAngle = 45;
-            this.minAngle = -45;
-            this.animateMax=17;
+            this.animateMax=12;
+            this.angles = new float[]{-60, -45, -20, 10, 30, 55, 30, 15, -10, -30};
             this.setDirection(new Vector2((float) Math.cos(minAngle * MathUtils.degreesToRadians), (float) Math.sin(minAngle * MathUtils.degreesToRadians)));
         }
-        //(1, 0) camera on right wall (facing left)
+        //(-1, 0) camera on right wall (facing left)
         else if(direction.x<0 && direction.y==0){
-            System.out.println("right");
             tex = JsonAssetManager.getInstance().getEntry("cameraright", TextureRegion.class);
             cameraAnimation = new FilmStrip(tex.getTexture(), 1, 10);
-            this.maxAngle = 225;
-            this.minAngle = 135;
-            this.animateMax=17;
-            this.rotationSpeed*=-1;
-            this.setDirection(new Vector2((float) Math.cos(minAngle * MathUtils.degreesToRadians), (float) Math.sin(minAngle * MathUtils.degreesToRadians)));
+            this.animateMax=12;
+            this.angles = new float[]{220, 215, 205, 160, 140, 120, 130, 170, 190, 210};
+            this.setDirection(new Vector2((float) Math.cos(230 * MathUtils.degreesToRadians), (float) Math.sin(230 * MathUtils.degreesToRadians)));
         }
     }
 
@@ -212,8 +199,8 @@ public class CameraModel extends BoxObstacle{
      * @param canvas Drawing context
      */
     public void draw(ObstacleCanvas canvas) {
-        if (cameraTexture != null) {
-            canvas.draw(cameraTexture,Color.WHITE,origin.x,origin.y,(getX())*drawScale.x,getY()*drawScale.y,getAngle(),1.5f,1.5f);
+        if (cameraAnimation != null) {
+            canvas.draw(cameraAnimation,Color.WHITE,origin.x,origin.y,(getX()-0.5f)*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),0.7f,0.7f);
         }
     }
 
