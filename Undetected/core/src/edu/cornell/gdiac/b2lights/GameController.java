@@ -672,8 +672,8 @@ public class GameController implements Screen, ContactListener {
 		// Turn the physics engine crank.
 		if(!showExit) {
 			level.update(dt);
-			if (lightController.detectedByGuards(guards) && !failed) {
-				setFailure(true);
+			if (lightController.detectedByGuards(guards) && !failed && !avatar.isElectrocuted()) {
+				avatar.electrocute();
 			}
 			else{
 				CameraModel cam = lightController.detectedByCameras(cameras);
@@ -686,6 +686,7 @@ public class GameController implements Screen, ContactListener {
 					}
 				}
 			}
+			if(!avatar.getIsAlive() && !failed){setFailure(true);}
 		}
 		if(showExit){
 			level.getExit().animate(dt);
@@ -1133,7 +1134,8 @@ public class GameController implements Screen, ContactListener {
 					GuardModel guard = guards.get(guards.indexOf(bd2));
 					guardCollided = guard;
 				}
-				setFailure(true);
+				//setFailure(true);
+				if(!avatar.isElectrocuted()){avatar.electrocute();}
 			}
 
 			if((switches.contains(bd1) && bd2==avatar ) || (bd1 == avatar && switches.contains(bd2))){

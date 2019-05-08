@@ -73,6 +73,7 @@ public class DudeModel extends CharacterModel {
 	// Character states
 	/** Whether player is alive */
 	private boolean isAlive;
+	private boolean electrocuted;
 	
 	/** The current horizontal movement of the character */
 	private Vector2 movement = new Vector2();
@@ -85,6 +86,8 @@ public class DudeModel extends CharacterModel {
 	/** The standard number of frames to wait until we can walk again */
 	private int walkLimit;
 
+	private int deathCool;
+
 	/** Texture of character */
 	private TextureRegion defaultCharTexture;
 	/** Texture of character with box */
@@ -96,6 +99,7 @@ public class DudeModel extends CharacterModel {
 	/** FilmStrip pointer to the box dude animation */
 	private FilmStrip boxdudeanimation;
 	private FilmStrip alerteddudeanimation;
+	private FilmStrip deathAnimation;
 
 	/** FilmStrip pointer to the texture region */
 	private FilmStrip filmstrip;
@@ -272,6 +276,8 @@ public class DudeModel extends CharacterModel {
 	public void setIsAlive(boolean isAlive){
 		this.isAlive = isAlive;
 	}
+
+	public boolean isElectrocuted(){return electrocuted;}
 	
 	/**
 	 * Creates a new dude with degenerate settings
@@ -480,6 +486,7 @@ public class DudeModel extends CharacterModel {
       	filter.categoryBits = collideBits;
 		filter.maskBits = MASK_BIT;
 		setFilterData(filter);
+		isAlive = true;
       	
 		// Reflection is best way to convert name to color
 		Color debugColor;
@@ -519,6 +526,14 @@ public class DudeModel extends CharacterModel {
 		try {
 			filmstrip = (FilmStrip)texture;
 			alerteddudeanimation = filmstrip;
+		} catch (Exception e) {
+			filmstrip = null;
+		}
+
+		texture = JsonAssetManager.getInstance().getEntry("electrified", TextureRegion.class);
+		try {
+			filmstrip = (FilmStrip)texture;
+			deathAnimation = filmstrip;
 		} catch (Exception e) {
 			filmstrip = null;
 		}
@@ -566,6 +581,13 @@ public class DudeModel extends CharacterModel {
 			animate = false;
 		}
 	}
+
+	public void electrocute(){
+		electrocuted = true;
+		filmstrip = deathAnimation;
+		filmstrip.setFrame(0);
+		setTexture(filmstrip);
+	}
 	
 	/**
 	 * Updates the object's physics state (NOT GAME LOGIC).
@@ -576,23 +598,40 @@ public class DudeModel extends CharacterModel {
 	 */
 	public void update(float dt) {
 		// Animate if necessary
-		animateDirection(getDirection());
-
-		if (animate && walkCool == 0) {
-			if (filmstrip != null) {
-				int next = (filmstrip.getFrame()+1) % filmstrip.getSize();
-				filmstrip.setFrame(next);
+		if(electrocuted) {
+			if(deathAnimation != null){
+				deathCool++;
+				if(deathAnimation.getFrame()==deathAnimation.getSize()-1){
+					isAlive = false;
+					deathCool = 0;
+				}
+				else {
+					if(deathCool>10) {
+						System.out.println("dying");
+						int next = (deathAnimation.getFrame() + 1) % deathAnimation.getSize();
+						deathAnimation.setFrame(next);
+						deathCool = 0;
+					}
+				}
 			}
-			walkCool = walkLimit;
-		} else if (walkCool > 0) {
-			walkCool--;
-		} else if (!animate) {
-			if (filmstrip != null) {
-				filmstrip.setFrame(startFrame);
-			}
-			walkCool = 0;
 		}
-		
+		else {
+			animateDirection(getDirection());
+			if (animate && walkCool == 0) {
+				if (filmstrip != null) {
+					int next = (filmstrip.getFrame() + 1) % filmstrip.getSize();
+					filmstrip.setFrame(next);
+				}
+				walkCool = walkLimit;
+			} else if (walkCool > 0) {
+				walkCool--;
+			} else if (!animate) {
+				if (filmstrip != null) {
+					filmstrip.setFrame(startFrame);
+				}
+				walkCool = 0;
+			}
+		}
 		super.update(dt);
 	}
 
@@ -603,7 +642,6 @@ public class DudeModel extends CharacterModel {
 	 */
 	public void draw(ObstacleCanvas canvas) {
 		canvas.draw(shadowTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+(-7.5f+origin.x),getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.5f,1.5f);
-
 		if (texture != null) {
 			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),scale,scale);
 		}

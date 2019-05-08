@@ -118,6 +118,16 @@
 				"first":	0
 			}
 		},
+		"electrified": {
+			"file": 	"textures/deathanim.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		15,
+				"rows":		1,
+				"cols":		15,
+				"first":	0
+			}
+		},
 		"guardback":{
 			"file": 	"textures/guard_back.png",
 			"wrap":  	false,
