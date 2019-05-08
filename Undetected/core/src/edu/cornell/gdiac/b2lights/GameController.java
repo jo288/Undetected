@@ -618,6 +618,7 @@ public class GameController implements Screen, ContactListener {
 				}
 			}
 		}
+		System.out.println(dt);
 
 		if (!failed && !complete && !showExit) {
 			angleCache.set(input.getHorizontal(), input.getVertical());
@@ -633,7 +634,13 @@ public class GameController implements Screen, ContactListener {
 			angleCache.scl(avatar.getForce());
 			avatar.setMovement(angleCache.x, angleCache.y);
 //		System.out.println(avatar.getMovement());
-			avatar.applyForce();
+			if (dt>0.016f) {
+				avatar.applyForce();
+			}
+//			for (int i=0; i<(dt/0.015f)-1;i++){
+//				System.out.println(i);
+//				avatar.applyForce();
+//			}
 		}
 		if (complete || failed) {
 			avatar.setMovement(0,0);

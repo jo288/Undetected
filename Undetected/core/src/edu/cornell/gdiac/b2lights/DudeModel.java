@@ -561,9 +561,6 @@ public class DudeModel extends CharacterModel {
 	 * This method should be called after the force attribute is set.
 	 */
 	public void applyForce() {
-		if (!isActive()) {
-			return;
-		}
 		
 		// Only walk or spin if we allow it
 		setLinearVelocity(Vector2.Zero);
@@ -597,42 +594,42 @@ public class DudeModel extends CharacterModel {
 	 * //@param delta Number of seconds since last animation frame
 	 */
 	public void update(float dt) {
-		// Animate if necessary
-		if(electrocuted) {
-			if(deathAnimation != null){
-				deathCool++;
-				if(deathAnimation.getFrame()==deathAnimation.getSize()-1){
-					isAlive = false;
-					deathCool = 0;
-				}
-				else {
-					if(deathCool>10) {
-						System.out.println("dying");
-						int next = (deathAnimation.getFrame() + 1) % deathAnimation.getSize();
-						deathAnimation.setFrame(next);
+//			for (int i=0; i< (dt/0.015); i++) {
+			// Animate if necessary
+			if (electrocuted) {
+				if (deathAnimation != null) {
+					deathCool++;
+					if (deathAnimation.getFrame() == deathAnimation.getSize() - 1) {
+						isAlive = false;
 						deathCool = 0;
+					} else {
+						if (deathCool > 10) {
+							System.out.println("dying");
+							int next = (deathAnimation.getFrame() + 1) % deathAnimation.getSize();
+							deathAnimation.setFrame(next);
+							deathCool = 0;
+						}
 					}
 				}
-			}
-		}
-		else {
-			animateDirection(getDirection());
-			if (animate && walkCool == 0) {
-				if (filmstrip != null) {
-					int next = (filmstrip.getFrame() + 1) % filmstrip.getSize();
-					filmstrip.setFrame(next);
+			} else {
+				animateDirection(getDirection());
+				if (animate && walkCool == 0) {
+					if (filmstrip != null) {
+						int next = (filmstrip.getFrame() + 1) % filmstrip.getSize();
+						filmstrip.setFrame(next);
+					}
+					walkCool = walkLimit;
+				} else if (walkCool > 0) {
+					walkCool--;
+				} else if (!animate) {
+					if (filmstrip != null) {
+						filmstrip.setFrame(startFrame);
+					}
+					walkCool = 0;
 				}
-				walkCool = walkLimit;
-			} else if (walkCool > 0) {
-				walkCool--;
-			} else if (!animate) {
-				if (filmstrip != null) {
-					filmstrip.setFrame(startFrame);
-				}
-				walkCool = 0;
 			}
-		}
-		super.update(dt);
+			super.update(dt);
+//		}
 	}
 
 	/**
