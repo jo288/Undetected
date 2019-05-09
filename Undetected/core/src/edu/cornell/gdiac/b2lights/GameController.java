@@ -620,7 +620,7 @@ public class GameController implements Screen, ContactListener {
 		}
 		System.out.println(dt);
 
-		if (!failed && !complete && !showExit) {
+		if (!failed && !complete && !showExit &&!avatar.isElectrocuted()) {
 			angleCache.set(input.getHorizontal(), input.getVertical());
 			if (angleCache.len2() > 0.0f) {
 				float angle = angleCache.angle();
@@ -642,11 +642,11 @@ public class GameController implements Screen, ContactListener {
 //				avatar.applyForce();
 //			}
 		}
-		if (complete || failed) {
+		if (complete || failed || avatar.isElectrocuted()) {
 			avatar.setMovement(0,0);
 			avatar.applyForce();
 		}
-		if (complete) {
+		if (complete || avatar.isElectrocuted()) {
 			for (GuardModel g : guards) {
 				g.setBodyType(BodyDef.BodyType.StaticBody);
 			}
@@ -780,7 +780,7 @@ public class GameController implements Screen, ContactListener {
 				nextFile = null;
 			}
 		}catch (Exception e){
-			
+
 		}
 	}
 

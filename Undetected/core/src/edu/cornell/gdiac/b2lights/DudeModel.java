@@ -584,6 +584,7 @@ public class DudeModel extends CharacterModel {
 		filmstrip = deathAnimation;
 		filmstrip.setFrame(0);
 		setTexture(filmstrip);
+		setOrigin(origin.x,0);
 	}
 	
 	/**
