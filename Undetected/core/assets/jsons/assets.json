@@ -339,12 +339,12 @@
 			}
 		},
 		"switchAnimation": {
-			"file": 	"textures/switchFront.png",
+			"file": 	"textures/groundbutton.png",
 			"wrap":  	false,
 			"strip":	{
-				"size":		10,
+				"size":		4,
 				"rows":		1,
-				"cols":		10,
+				"cols":		4,
 				"first":	0
 			}
 		},

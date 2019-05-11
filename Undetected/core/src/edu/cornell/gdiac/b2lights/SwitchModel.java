@@ -18,6 +18,7 @@ public class SwitchModel extends BoxObstacle{
     private boolean switched = false;
     private boolean animateOn = false;
     private boolean animateOff = false;
+    private int animateCool = 3;
     private TextureRegion switchOffTexture;
     private TextureRegion switchOnTexture;
     private FilmStrip filmstrip;
@@ -167,7 +168,7 @@ public class SwitchModel extends BoxObstacle{
         // Now get the texture from the AssetManager singleton
         texture = JsonAssetManager.getInstance().getEntry("switchAnimation", TextureRegion.class);
         try {
-            filmstrip = new FilmStrip(texture.getTexture(), 1, 10);
+            filmstrip = new FilmStrip(texture.getTexture(), 1, 4);
         } catch (Exception e) {
             filmstrip = null;
         }
@@ -175,7 +176,7 @@ public class SwitchModel extends BoxObstacle{
 
         if (!switched) {
 //            setTexture(offTexture);
-            filmstrip.setFrame(9);
+            filmstrip.setFrame(3);
         } else {
 //            setTexture(onTexture);
             filmstrip.setFrame(0);
@@ -185,8 +186,12 @@ public class SwitchModel extends BoxObstacle{
     }
 
     public void update(float dt){
+        if(animateCool!=0){
+            animateCool--;
+            return;
+        }
         if (animateOff){
-            if(filmstrip.getFrame()>=9) {
+            if(filmstrip.getFrame()>=3) {
                 animateOff = false;
             }else{
                 filmstrip.setFrame(filmstrip.getFrame()+1);
@@ -199,6 +204,7 @@ public class SwitchModel extends BoxObstacle{
                 filmstrip.setFrame(filmstrip.getFrame()-1);
             }
         }
+        animateCool = 3;
     }
 
     /**
@@ -208,7 +214,7 @@ public class SwitchModel extends BoxObstacle{
      */
     public void draw(ObstacleCanvas canvas) {
         if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/4*drawScale.y,getAngle(),1.0f,1.0f);
         }
     }
 
