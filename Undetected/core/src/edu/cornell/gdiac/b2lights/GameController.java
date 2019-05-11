@@ -197,6 +197,7 @@ public class GameController implements Screen, ContactListener {
 	/** Whether the player reached the objective or not */
 	private boolean hasObjective;
 	private GuardModel guardCollided = null;
+	private GuardModel guardCaught = null;
 	private SwitchModel switchCollided = null;
 	private FileHandle levelSelectFile = Gdx.files.internal("jsons/levelselect.json");
 	private FileHandle currentFile = Gdx.files.internal("jsons/levelselect.json");
@@ -353,6 +354,7 @@ public class GameController implements Screen, ContactListener {
 		resetCamera();
 
 		guardCollided = null;
+		guardCaught = null;
 	}
 
 	public void loadXMLLevel(){
@@ -389,6 +391,7 @@ public class GameController implements Screen, ContactListener {
 			hasObjective = false;
 			countdown = -1;
 			guardCollided = null;
+			guardCaught = null;
 			lightController = new LightController(level);
 			miniMap = new MiniMap(300, 225, level);
 
@@ -433,6 +436,7 @@ public class GameController implements Screen, ContactListener {
 			hasObjective = false;
 			countdown = -1;
 			guardCollided = null;
+			guardCaught = null;
 			lightController = new LightController(level);
 			miniMap = new MiniMap(300, 225, level);
 
@@ -618,7 +622,7 @@ public class GameController implements Screen, ContactListener {
 				}
 			}
 		}
-		System.out.println(dt);
+//		System.out.println(dt);
 
 		if (!failed && !complete && !showExit &&!avatar.isElectrocuted()) {
 			angleCache.set(input.getHorizontal(), input.getVertical());
@@ -657,19 +661,6 @@ public class GameController implements Screen, ContactListener {
 			input.resetHome();
 		}
 
-		//only used if we are manually controlling one guard for demo purposes
-//		GuardModel guard = guards.get(0);
-//		Vector2 guardAngle = new Vector2(input.getHorizontalG(),input.getVerticalG());
-//		if (guardAngle.len2() > 0.0f) {
-//			float angle = guardAngle.angle();
-//			// Convert to radians with up as 0
-//			angle = (float)Math.PI*(angle-90.0f)/180.0f;
-//			guard.setDirection(angle);
-//		}
-//		guardAngle.scl(guard.getForce());
-//		guard.setMovement(guardAngle.x,guardAngle.y);
-//		guard.applyForce();
-
 		cameraPan(dt);
 
 		if (guardCollided != null) {
@@ -679,8 +670,23 @@ public class GameController implements Screen, ContactListener {
 		// Turn the physics engine crank.
 		if(!showExit) {
 			level.update(dt);
-			if (lightController.detectedByGuards(guards) && !failed && !avatar.isElectrocuted()) {
+			if (lightController.detectedByGuards(guards)!=null && !failed && !avatar.isElectrocuted()) {
 				avatar.electrocute();
+				guardCaught = lightController.detectedByGuards(guards);
+				guardCaught.animateDirection((float)(Math.round(Math.atan2(
+						avatar.getX()-guardCaught.getX(),
+						avatar.getY()-guardCaught.getY()
+				)/(Math.PI/2))*Math.PI/2));
+				System.out.println((float)(Math.round(Math.atan2(
+						avatar.getX()-guardCaught.getX(),
+						avatar.getY()-guardCaught.getY()
+				)/(Math.PI/2))*Math.PI/2));
+				System.out.println("Raw:"+Math.atan2(
+						avatar.getX()-guardCaught.getX(),
+						avatar.getY()-guardCaught.getY()
+				));
+				guardCaught.getLight().setConeDegree(0f);
+				guardCaught.setHasCaught(true);
 			}
 			else{
 				CameraModel cam = lightController.detectedByCameras(cameras);
@@ -751,6 +757,7 @@ public class GameController implements Screen, ContactListener {
 				hasObjective = false;
 				countdown = -1;
 				guardCollided = null;
+				guardCaught = null;
 				lightController = new LightController(level);
 				showExit = false;
 
@@ -844,6 +851,22 @@ public class GameController implements Screen, ContactListener {
 			TextureRegion texture = JsonAssetManager.getInstance().getEntry("defeat", TextureRegion.class);
 			canvas.draw(texture,Color.WHITE,texture.getRegionWidth()/2f,texture.getRegionHeight()/2f,cam.position.x,cam.position.y,0,1.5f,1.5f);
 //			canvas.drawText("FAILURE!", displayFont, cam.position.x, cam.position.y);
+			canvas.end();
+		}
+
+		if (guardCaught!=null && !failed){
+			canvas.begin();
+			TextureRegion texture = JsonAssetManager.getInstance().getEntry("taseLaser", TextureRegion.class);
+			TextureRegion[][] taseTextures = texture.split(10,14);
+			float angle = (float)(Math.atan2(
+					avatar.getY() - guardCaught.getY(),
+					avatar.getX() - guardCaught.getX()
+			) + Math.PI/2);
+			float length = avatar.getPosition().dst(guardCaught.getPosition())*32;
+			canvas.draw(taseTextures[0][0],Color.WHITE,taseTextures[0][0].getRegionWidth()/2f,taseTextures[0][0].getRegionHeight(),
+					guardCaught.getX()*32,guardCaught.getY()*32,angle,1f,(length-14)/14);
+			canvas.draw(taseTextures[1][0],Color.WHITE,taseTextures[1][0].getRegionWidth()/2f,0,
+					guardCaught.getX()*32+(avatar.getX() - guardCaught.getX())*32,guardCaught.getY()*32 + (avatar.getY() - guardCaught.getY())*32,angle,1f,1f);
 			canvas.end();
 		}
 

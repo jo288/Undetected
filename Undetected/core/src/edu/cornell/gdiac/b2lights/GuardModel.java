@@ -70,6 +70,8 @@ public class GuardModel extends CharacterModel {
     private boolean isAlarmed;
     /** Whether the guard has been collided with */
     private boolean isCollided;
+    /** Whether the guard has caught the player or not */
+    private boolean hasCaught = false;
 
     /** The current horizontal movement of the character */
     private Vector2 movement = new Vector2();
@@ -181,6 +183,10 @@ public class GuardModel extends CharacterModel {
         return isActive;
     }
 
+    public void setHasCaught(boolean value){
+        hasCaught = value;
+    }
+
     /**
      * Sets whether the Guard is Active or not
      *
@@ -233,6 +239,7 @@ public class GuardModel extends CharacterModel {
     public Vector2 getDirection(){ return direction; }
 
     public void setDirection(float angle){
+        if (hasCaught) { return; }
         dirAngle = angle;
         float adjustedAng = angle+(float)Math.PI/2.0f;
         this.light.setDirection(adjustedAng*MathUtils.radiansToDegrees);
@@ -407,7 +414,7 @@ public class GuardModel extends CharacterModel {
             } catch (Exception e) {
                 filmstrip = null;
             }
-        } else if ((Math.round(dir * 100.0) / 100.0) == 3.14) {
+        } else if ((Math.round(dir * 100.0) / 100.0) == 3.14 || (Math.round(dir * 100.0) / 100.0) == -3.14) {
             tex = JsonAssetManager.getInstance().getEntry("friendlyFrontAnimation", TextureRegion.class);
             if(isAlarmed){
                 tex = JsonAssetManager.getInstance().getEntry("hostileFrontAnimation", TextureRegion.class);
@@ -594,7 +601,6 @@ public class GuardModel extends CharacterModel {
      */
     public void update(float dt) {
         animateDirection(getDirectionFloat());
-
         if(animateOn){
             if (animateCool==0) {
                 if (alertAnimation.getFrame() >= 7) {

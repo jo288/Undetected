@@ -39,7 +39,8 @@ public class LightController {
         this.level = level;
     }
 
-    public boolean detectedByGuards(ArrayList<GuardModel> guards){
+//    public boolean detectedByGuards(ArrayList<GuardModel> guards){
+    public GuardModel detectedByGuards(ArrayList<GuardModel> guards){
         DudeModel player = this.level.getAvatar();
 
         for(GuardModel guard: guards) {
@@ -67,14 +68,17 @@ public class LightController {
                     if (!(b instanceof DudeModel && (Obstacle) b == player)) {
                         if (light.getPosition().dst(contact_points.get(i)) < dist_to_player) {
                             clearIntersectionData();
-                            return false;
+//                            return false;
+                            return null;
                         }
                     }
                     if (b instanceof DudeModel && intersected.size() == 1) {
                     }
                 }
                 clearIntersectionData();
-                return true;
+//                guard.getLight().setColor(0,0,0,0);
+//                return true;
+                return guard;
 
             }else if(dist_to_player<=guard.getSensitiveRadius()){
                 level.getWorld().rayCast(ray, guard.getPosition(), player.getPosition());
@@ -83,18 +87,21 @@ public class LightController {
                     if(!(b instanceof DudeModel && (Obstacle)b==player)){
                         if(guard.getPosition().dst(contact_points.get(i))<dist_to_player){
                             clearIntersectionData();
-                            return false;
+//                            return false;
+                            return guard;
                         }
                     }
                 }
                 clearIntersectionData();
                 guard.collidedAvatar(player);
                 guard.setAlarmed(true);
-                return true;
+//                return true;
+                return guard;
             }
         }
         clearIntersectionData();
-        return false;
+//        return false;
+        return null;
         //player is not in guard's cone light, but within their sensitive radius
         /**else if(dist_to_player<=guard.getSensitiveRadius()){
          level.getWorld().rayCast(ray, guard.getPosition(), player.getPosition());

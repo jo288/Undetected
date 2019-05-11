@@ -463,6 +463,10 @@
 		"boxselect": {
 			"file": 	"textures/tileselect.png",
 			"wrap": 	false
+		},
+		"taseLaser": {
+			"file": 	"textures/tase_laser.png",
+			"wrap": 	false
 		}
 	},
   	"fonts": {

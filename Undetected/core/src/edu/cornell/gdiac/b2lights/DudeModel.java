@@ -605,7 +605,7 @@ public class DudeModel extends CharacterModel {
 						deathCool = 0;
 					} else {
 						if (deathCool > 10) {
-							System.out.println("dying");
+//							System.out.println("dying");
 							int next = (deathAnimation.getFrame() + 1) % deathAnimation.getSize();
 							deathAnimation.setFrame(next);
 							deathCool = 0;

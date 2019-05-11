@@ -209,7 +209,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 			FileHandle[] xmlLevels = Gdx.files.internal("levels").list("tmx");
 			for (int i=0;i<xmlLevels.length;i++){
 				String jsonLevel = lp.readXml(xmlLevels[i]);
-				System.out.println(lp.readXml(xmlLevels[i]));
+//				System.out.println(lp.readXml(xmlLevels[i]));
 				FileHandle jsonLevelFile = Gdx.files.local("jsons/"+xmlLevels[i].nameWithoutExtension()+".json");
 				jsonLevelFile.writeString(jsonLevel,false);
 			}
