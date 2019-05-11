@@ -226,19 +226,24 @@ public class InputController {
 	public boolean didSound() {return soundPressed;}
 
 	public boolean didContinueHover() {
-		return Gdx.input.getX() >= 292 && Gdx.input.getX() <= 487 && Gdx.input.getY() >= 320 && Gdx.input.getY() <= 401;
+//		return Gdx.input.getX() >= 292 && Gdx.input.getX() <= 487 && Gdx.input.getY() >= 320 && Gdx.input.getY() <= 401;
+		return Gdx.input.getX() >= 485 && Gdx.input.getX() <= 485+122 && Gdx.input.getY() >= 335-27 && Gdx.input.getY() <= 335+27;
 	}
 
+
 	public boolean didAbortHover() {
-		return Gdx.input.getX() >= 292 && Gdx.input.getX() <= 487 && Gdx.input.getY() >= 420 && Gdx.input.getY() <= 501;
+//		return Gdx.input.getX() >= 292 && Gdx.input.getX() <= 487 && Gdx.input.getY() >= 420 && Gdx.input.getY() <= 501;
+		return Gdx.input.getX() >= 485 && Gdx.input.getX() <= 485+122 && Gdx.input.getY() >= 400-27 && Gdx.input.getY() <= 400+27;
 	}
 
 	public boolean didMusicHover() {
-		return Gdx.input.getX() >= 292 && Gdx.input.getX() <= 378 && Gdx.input.getY() >= 205 && Gdx.input.getY() <= 290;
+//		return Gdx.input.getX() >= 292 && Gdx.input.getX() <= 378 && Gdx.input.getY() >= 205 && Gdx.input.getY() <= 290;
+		return Gdx.input.getX() >= 485 && Gdx.input.getX() <= 485+54 && Gdx.input.getY() >= 270-27 && Gdx.input.getY() <= 270+27;
 	}
 
 	public boolean didSoundHover() {
-		return Gdx.input.getX() >= 402 && Gdx.input.getX() <= 488 && Gdx.input.getY() >= 205 && Gdx.input.getY() <= 290;
+//		return Gdx.input.getX() >= 402 && Gdx.input.getX() <= 488 && Gdx.input.getY() >= 205 && Gdx.input.getY() <= 290;
+		return Gdx.input.getX() >= 553 && Gdx.input.getX() <= 553+54 && Gdx.input.getY() >= 270-27 && Gdx.input.getY() <= 270+27;
 	}
 
 

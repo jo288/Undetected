@@ -895,6 +895,7 @@ public class GameController implements Screen, ContactListener {
 			TextureRegion musicButton;
 			TextureRegion soundButton;
 
+
 			if (input.didMusic()) {
 				music = !music;
 			}
@@ -946,19 +947,37 @@ public class GameController implements Screen, ContactListener {
 			Color musicTint = input.didMusicHover() ? Color.GRAY : Color.WHITE;
 			Color soundTint = input.didSoundHover() ? Color.GRAY : Color.WHITE;
 
+			BitmapFont pauseTitle = JsonAssetManager.getInstance().getEntry("pauseTitle",BitmapFont.class);
+			BitmapFont pauseDesc = JsonAssetManager.getInstance().getEntry("pauseDesc",BitmapFont.class);
+			pauseTitle.setColor(Color.WHITE);
+			pauseDesc.setColor(Color.WHITE);
+			String pauseDescription[] = {"Arrow Keys:","Move","Space:","Interact","M:","Minimap","R:","Restart","P:","Pause","Esc:","Exit Game"};
 
 			canvas.draw(overlayTexture, Color.WHITE, overlayTexture.getRegionWidth()/2,
-					overlayTexture.getRegionHeight()/2, canvas.getWidth(), canvas.getHeight(), 0, 5, 5, 0.8f);
-			canvas.draw(pauseButton, Color.WHITE, pauseButton.getWidth()/2, pauseButton.getHeight()/2,
-					cam.position.x,cam.position.y, 0, 0.8f*cam.zoom, 0.8f*cam.zoom);
-			canvas.draw(continueButton, conTint, continueButton.getRegionWidth() / 2f, continueButton.getRegionHeight() / 2f,
-					cam.position.x - 10*cam.zoom, cam.position.y - 62*cam.zoom, 0, 1.6f*cam.zoom, 1.58f*cam.zoom);
-			canvas.draw(abortButton, abortTint, abortButton.getRegionWidth() / 2f, abortButton.getRegionHeight() / 2f,
-					cam.position.x - 10*cam.zoom, cam.position.y - 162*cam.zoom, 0, 1.6f*cam.zoom, 1.58f*cam.zoom);
-			canvas.draw(musicButton, musicTint, musicButton.getRegionWidth() / 2f, musicButton.getRegionHeight() / 2f,
-					cam.position.x - 64*cam.zoom, cam.position.y + 53*cam.zoom, 0, 1.6f*cam.zoom, 1.58f*cam.zoom);
-			canvas.draw(soundButton, soundTint, soundButton.getRegionWidth() / 2f, soundButton.getRegionHeight() / 2f,
-					cam.position.x + 46*cam.zoom, cam.position.y + 53*cam.zoom, 0, 1.6f*cam.zoom, 1.58f*cam.zoom);
+					overlayTexture.getRegionHeight()/2, cam.position.x, cam.position.y, 0, 1, 1, 1f);
+//			canvas.draw(pauseButton, Color.WHITE, pauseButton.getWidth()/2, pauseButton.getHeight()/2,
+//					cam.position.x,cam.position.y, 0, 0.8f*cam.zoom, 0.8f*cam.zoom);
+			canvas.draw(continueButton, conTint, 0, continueButton.getRegionHeight() / 2f,
+					cam.position.x + 85*cam.zoom, cam.position.y - 35*cam.zoom, 0, 1f*cam.zoom, 1f*cam.zoom);
+			canvas.draw(abortButton, abortTint, 0, abortButton.getRegionHeight() / 2f,
+					cam.position.x + 85*cam.zoom, cam.position.y - 100*cam.zoom, 0, 1f*cam.zoom, 1f*cam.zoom);
+			canvas.draw(musicButton, musicTint, 0, musicButton.getRegionHeight() / 2f,
+					cam.position.x + 85*cam.zoom, cam.position.y + 30*cam.zoom, 0, 1f*cam.zoom, 1f*cam.zoom);
+			canvas.draw(soundButton, soundTint, 0, soundButton.getRegionHeight() / 2f,
+					cam.position.x + 153*cam.zoom, cam.position.y + 30*cam.zoom, 0, 1f*cam.zoom, 1f*cam.zoom);
+			canvas.drawText("PAUSED",pauseTitle,cam.position.x-120,cam.position.y+115);
+			for (int i=0; i<pauseDescription.length;i+=2){
+				canvas.drawText(pauseDescription[i],pauseDesc,cam.position.x-220,cam.position.y+46-i*26/2);
+				canvas.drawText(pauseDescription[i+1],pauseDesc,cam.position.x-50,cam.position.y+46-i*26/2);
+			}
+//			canvas.draw(continueButton, conTint, continueButton.getRegionWidth() / 2f, continueButton.getRegionHeight() / 2f,
+//					cam.position.x - 10*cam.zoom, cam.position.y - 62*cam.zoom, 0, 1.6f*cam.zoom, 1.58f*cam.zoom);
+//			canvas.draw(abortButton, abortTint, abortButton.getRegionWidth() / 2f, abortButton.getRegionHeight() / 2f,
+//					cam.position.x - 10*cam.zoom, cam.position.y - 162*cam.zoom, 0, 1.6f*cam.zoom, 1.58f*cam.zoom);
+//			canvas.draw(musicButton, musicTint, musicButton.getRegionWidth() / 2f, musicButton.getRegionHeight() / 2f,
+//					cam.position.x - 64*cam.zoom, cam.position.y + 53*cam.zoom, 0, 1.6f*cam.zoom, 1.58f*cam.zoom);
+//			canvas.draw(soundButton, soundTint, soundButton.getRegionWidth() / 2f, soundButton.getRegionHeight() / 2f,
+//					cam.position.x + 46*cam.zoom, cam.position.y + 53*cam.zoom, 0, 1.6f*cam.zoom, 1.58f*cam.zoom);
 			canvas.end();
 		}
 

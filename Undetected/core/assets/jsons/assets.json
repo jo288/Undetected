@@ -409,27 +409,27 @@
 			"wrap": 	false
 		},
 		"continue":	{
-			"file":		"textures/continue.png",
+			"file":		"textures/pause_menu/pause_continue.png",
 			"wrap": 	false
 		},
 		"abort":	{
-			"file":		"textures/abort.png",
+			"file":		"textures/pause_menu/pause_homelong.png",
 			"wrap": 	false
 		},
 		"musicOff":	{
-			"file":		"textures/music_off.png",
+			"file":		"textures/pause_menu/pause_music_off.png",
 			"wrap": 	false
 		},
 		"musicOn":	{
-			"file":		"textures/music_on.png",
+			"file":		"textures/pause_menu/pause_music_on.png",
 			"wrap": 	false
 		},
 		"soundOff":	{
-			"file":		"textures/sound_off.png",
+			"file":		"textures/pause_menu/pause_sound_off.png",
 			"wrap": 	false
 		},
 		"soundOn":	{
-			"file":		"textures/sound_on.png",
+			"file":		"textures/pause_menu/pause_sound_on.png",
 			"wrap": 	false
 		},
 		"alarmFlash": {
@@ -437,7 +437,7 @@
 			"wrap": 	false
 		},
 		"overlay": {
-			"file": 	"textures/overlay_mask.png",
+			"file": 	"textures/pause_menu/pause_tintbox.png",
 			"wrap": 	false
 		},
 		"restart": {
@@ -480,6 +480,14 @@
 		},
 		"levelnumber": {
 			"file": 	"fonts/prstart.ttf",
+			"size": 	20
+		},
+		"pauseTitle": {
+			"file": 	"fonts/slkscrb.ttf",
+			"size": 	54
+		},
+		"pauseDesc": {
+			"file": 	"fonts/slkscr.ttf",
 			"size": 	20
 		}
 	},
