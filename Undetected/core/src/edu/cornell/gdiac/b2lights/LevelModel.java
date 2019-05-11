@@ -241,6 +241,15 @@ public class LevelModel {
 		return lasers;
 	}
 
+	public boolean alarmStoppedPlaying() {
+		for (Laser l : lasers) {
+			if (l.stillPlaying()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * Returns a reference to a box
 	 *

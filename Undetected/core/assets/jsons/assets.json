@@ -509,6 +509,9 @@
         },
 		"guardWalk": {
 			"file": 	"sounds/guard_footstep.mp3"
+		},
+		"stealKey": {
+			"file": 	"sounds/grab_key.mp3"
 		}
 	},
 	"music": {
