@@ -547,7 +547,7 @@ public class GameController implements Screen, ContactListener {
 //		}
 
 		// Handle resets
-		if (input.didReset()) {
+		if (input.didReset()&&!currentFile.equals(levelSelectFile)) {
 			reset();
 		}
 
@@ -652,6 +652,22 @@ public class GameController implements Screen, ContactListener {
 			for (AIController ai : level.getControl()) {
 				if (ai.getGuard().getAlarmed()) {
 					ai.setLastSwitch(switchCollided);
+				}
+			}
+		}
+
+		if (currentFile.equals(levelSelectFile)) {
+			ArrayList<DoorModel> doors = level.getDoors();
+			//TODO: CHANGE FOR RELEASE, TEMP
+//				for (DoorModel d : doors) {
+			for (int i = 0; i < 10; i++) {
+				DoorModel d = doors.get(i);
+				if (d.getPosition().dst(avatar.getPosition())<0.3f){
+					nextFile = Gdx.files.internal("jsons/" + (d.getName()) + ".json");
+				} else if (d.getPosition().dst(avatar.getPosition())<3f&&!d.getOpen()){
+					d.switchState();
+				}else if(d.getPosition().dst(avatar.getPosition())>=3f&&d.getOpen()){
+					d.switchState();
 				}
 			}
 		}
@@ -1282,11 +1298,11 @@ public class GameController implements Screen, ContactListener {
 				setComplete(true);
 			}
 
-			if (currentFile.equals(levelSelectFile)) {
-				if ((bd1 == avatar && bd2 instanceof DoorModel) || (bd2 == avatar && bd1 instanceof DoorModel)) {
-					nextFile = Gdx.files.internal("jsons/" + (bd1 instanceof DoorModel ? bd1.getName() : bd2.getName()) + ".json");
-				}
-			}
+//			if (currentFile.equals(levelSelectFile)) {
+//				if ((bd1 == avatar && bd2 instanceof DoorModel) || (bd2 == avatar && bd1 instanceof DoorModel)) {
+//					nextFile = Gdx.files.internal("jsons/" + (bd1 instanceof DoorModel ? bd1.getName() : bd2.getName()) + ".json");
+//				}
+//			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
