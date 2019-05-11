@@ -405,16 +405,22 @@ public class LevelParser {
                                 break;
                             case "path":
                                 String p = property.get("value");
-                                String[] pSplit = p.substring(1, p.length() - 1).split("[^0-9]");
-                                for (String s : pSplit) {
-                                    g.path.add(Integer.parseInt(s));
+                                if (p.length()>0) {
+                                    String[] pSplit = p.substring(1, p.length() - 1).split("[^0-9]");
+                                    for (String s : pSplit) {
+                                        if (s.length() > 0)
+                                            g.path.add(Integer.parseInt(s));
+                                    }
                                 }
                                 break;
                             case "objectivepath":
                                 String op = property.get("value");
-                                String[] opSplit = op.substring(1, op.length() - 1).split("[^0-9]");
-                                for (String s : opSplit) {
-                                    g.objectivepath.add(Integer.parseInt(s));
+                                if (op.length()>0) {
+                                    String[] opSplit = op.substring(1, op.length() - 1).split("[^0-9]");
+                                    for (String s : opSplit) {
+                                        if (s.length() > 0)
+                                            g.objectivepath.add(Integer.parseInt(s));
+                                    }
                                 }
                                 break;
                             case "lightAngle":
