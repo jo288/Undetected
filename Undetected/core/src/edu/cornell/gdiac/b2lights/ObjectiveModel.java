@@ -10,6 +10,7 @@
  */
 package edu.cornell.gdiac.b2lights;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -36,6 +37,7 @@ public class ObjectiveModel extends BoxObstacle {
 	/** Default Width of Player */
 	public static final String EXCLUDE_BIT = "0000000000000000";
 
+	private static final float VOLUME = 0.2f;
 	/** Whether the objective is active or not */
 	private boolean isStolen;
 	/** Whether the objective triggers alarm or not */
@@ -47,6 +49,10 @@ public class ObjectiveModel extends BoxObstacle {
 	private TextureRegion defaultCardTexture;
 	private TextureRegion stolenCardTexture;
 	private TextureRegion circleTexture; //for minimap
+
+	private Sound stealSound;
+	private long sndcue;
+	private float volume;
 
 	/**
 	 * Create a new ObjectiveModel with degenerate settings
@@ -61,6 +67,21 @@ public class ObjectiveModel extends BoxObstacle {
 	public ObjectiveModel(boolean hasAlarm) {
 		super(0,0,1,1);
 		this.hasAlarm = hasAlarm;
+	}
+
+	public void mute() {
+		volume = 0;
+	}
+
+	public void unmute() {
+		volume = VOLUME;
+	}
+
+	public void playSteal() {
+		if (sndcue != -1) {
+			stealSound.stop(sndcue);
+		}
+		sndcue = stealSound.play(volume);
 	}
 
 	public boolean stealCard(){
@@ -153,6 +174,10 @@ public class ObjectiveModel extends BoxObstacle {
 		int opacity = 200;
 		debugColor.mul(opacity/255.0f);
 		setDebugColor(debugColor);
+
+		stealSound = JsonAssetManager.getInstance().getEntry("stealKey", Sound.class);
+		sndcue = -1;
+		volume = VOLUME;
 
 		TextureRegion texture = JsonAssetManager.getInstance().getEntry("keys", TextureRegion.class);
 		defaultCardTexture = texture.split(32,32)[0][json.get("textureIndex").asInt()];

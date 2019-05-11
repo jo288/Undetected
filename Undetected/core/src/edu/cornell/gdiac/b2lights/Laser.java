@@ -104,6 +104,10 @@ public class Laser extends BoxObstacle {
         }
     }
 
+    public boolean stillPlaying() {
+        return alarmSound.isPlaying();
+    }
+
     @Override
     public void dispose() {
         disposeAlarm();

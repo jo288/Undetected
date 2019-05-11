@@ -173,6 +173,7 @@ public class GameController implements Screen, ContactListener {
 	public static final int EXIT_QUIT = 0;
 	/** How many frames after winning/losing do we continue? */
 	public static final int EXIT_COUNT = 120;
+	public static  final float DEFAULT_VOL = 0.5f;
 
 	/** Reference to the game canvas */
 	protected ObstacleCanvas canvas;
@@ -601,6 +602,38 @@ public class GameController implements Screen, ContactListener {
 			pause();
 		}
 
+		if (sound) {
+			for (DoorModel d : level.getDoors()) {
+				d.unmute();
+			}
+			for (Laser l : level.getLasers()) {
+				l.unmute();
+			}
+			for (MoveableBox b : level.getBoxes()) {
+				b.unmute();
+			}
+			if (level.getObjective() != null) {
+				level.getObjective().unmute();
+			}
+		} else {
+			for (DoorModel d : level.getDoors()) {
+				d.mute();
+			}
+			for (Laser l : level.getLasers()) {
+				l.mute();
+			}
+			for (MoveableBox b : level.getBoxes()) {
+				b.mute();
+			}
+			if (level.getObjective() != null) {
+				level.getObjective().mute();
+			}
+		}
+
+		if (level.alarmStoppedPlaying()) {
+			currentSong.setVolume(DEFAULT_VOL);
+		}
+
 		if(input.didMap()){
 			showMiniMap = !showMiniMap;
 		}
@@ -927,6 +960,9 @@ public class GameController implements Screen, ContactListener {
 				for (MoveableBox b : level.getBoxes()) {
 					b.unmute();
 				}
+				if (level.getObjective() != null) {
+                    level.getObjective().unmute();
+                }
 			} else {
 				soundButton = JsonAssetManager.getInstance().getEntry("soundOff", TextureRegion.class);
 				for (DoorModel d : level.getDoors()) {
@@ -938,6 +974,9 @@ public class GameController implements Screen, ContactListener {
 				for (MoveableBox b : level.getBoxes()) {
 					b.mute();
 				}
+				if (level.getObjective() != null) {
+                    level.getObjective().mute();
+                }
 			}
 
 			canvas.begin();
@@ -1230,6 +1269,7 @@ public class GameController implements Screen, ContactListener {
 						ai.setPath(ai.getObPath());
 					}
 				}
+				level.getObjective().playSteal();
 				hasObjective = true;
 				exit.open();
 				showExit = true;
@@ -1321,6 +1361,9 @@ public class GameController implements Screen, ContactListener {
 						if (ai.getGuard().sector == ((Laser) bd1).sector) {
 							ai.setAlarmed();
 							ai.setProtect(bd1);
+							if (music) {
+								currentSong.setVolume(DEFAULT_VOL/3);
+							}
 							((Laser) bd1).playAlarm();
 						}
 					}
@@ -1342,6 +1385,9 @@ public class GameController implements Screen, ContactListener {
 						if (ai.getGuard().sector == ((Laser) bd2).sector) {
 							ai.setAlarmed();
 							ai.setProtect(bd2);
+							if (music) {
+								currentSong.setVolume(DEFAULT_VOL/3);
+							}
 							((Laser) bd2).playAlarm();
 						}
 					}

@@ -652,6 +652,7 @@ public class GuardModel extends CharacterModel {
     public void draw(ObstacleCanvas canvas) {
         canvas.draw(shadowTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+(-7.5f+origin.x),getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.5f,1.5f);
 
+        ringTexture.getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         canvas.draw(ringTexture, Color.RED, ringTexture.getRegionWidth() / 2 , ringTexture.getRegionHeight() / 2,
                 getX() * drawScale.x , getY() * drawScale.y - getHeight() / 2f * drawScale.y, 0,
                 64f*sensitiveRadius/ringTexture.getRegionWidth(), 64f*sensitiveRadius/ringTexture.getRegionHeight(), 0.4f);
