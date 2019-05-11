@@ -214,7 +214,7 @@ public class SwitchModel extends BoxObstacle{
      */
     public void draw(ObstacleCanvas canvas) {
         if (texture != null) {
-            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/4*drawScale.y,getAngle(),1.0f,1.0f);
+            canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+1,getY()*drawScale.y-getHeight()/4*drawScale.y,getAngle(),1.0f,1.0f);
         }
     }
 

@@ -295,9 +295,11 @@ public class JsonAssetManager extends AssetManager {
 			film.setFrame(first);
 			region = film;
 		}
-		region.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-//		region.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
-		
+		if (json.has("isLinear")){
+			region.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+		}else {
+			region.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+		}
 		if (json.getBoolean("wrap")) {
 			region.getTexture().setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 		}

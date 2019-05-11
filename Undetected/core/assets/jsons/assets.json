@@ -31,6 +31,7 @@
     	"charfront": {
     		"file": 	"textures/character_front.png",
     		"wrap":  	false,
+			"isLinear": true,
     		"strip":	{
     			"size":		8,
     			"rows":		1,
@@ -41,6 +42,7 @@
 		"charleft": {
 			"file": 	"textures/character_left.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -51,6 +53,7 @@
 		"charright": {
 			"file": 	"textures/character_right.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -61,6 +64,7 @@
 		"charback": {
 			"file": 	"textures/character_back.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -71,6 +75,7 @@
 		"boxcharfront": {
 			"file": 	"textures/boxdude_front.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -81,6 +86,7 @@
 		"boxcharleft": {
 			"file": 	"textures/boxdude_left.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -91,6 +97,7 @@
 		"boxcharright": {
 			"file": 	"textures/boxdude_right.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -101,6 +108,7 @@
 		"boxcharback": {
 			"file": 	"textures/boxdude_back.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -131,6 +139,7 @@
 		"guardback":{
 			"file": 	"textures/guard_back.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -181,6 +190,7 @@
 		"hostileFrontAnimation": {
 			"file": 	"textures/hostilefront.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -191,6 +201,7 @@
 		"friendlyFrontAnimation": {
 			"file": 	"textures/friendlyfront.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -201,6 +212,7 @@
 		"hostileLeftAnimation": {
 			"file": 	"textures/hostileleft.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -211,6 +223,7 @@
 		"friendlyLeftAnimation": {
 			"file": 	"textures/friendlyleft.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -221,6 +234,7 @@
 		"hostileRightAnimation": {
 			"file": 	"textures/hostileright.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -231,6 +245,7 @@
 		"friendlyRightAnimation": {
 			"file": 	"textures/friendlyright.png",
 			"wrap":  	false,
+			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
