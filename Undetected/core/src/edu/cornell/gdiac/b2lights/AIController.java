@@ -70,10 +70,24 @@ public class AIController {
     public Vector2 getCurrentGoal() {return currentGoal;}
 
     /** Last Camera */
-    public CameraModel lastCamera;
+    public CameraModel lastCamera = null;
 
     /** Queued Goal */
     public Obstacle queuedGoal = null;
+
+    /** Time for a guard to turn to next direction */
+    private int turn = 0;
+
+    /** Boolean that is true when the guard is turning */
+    private boolean turning = false;
+
+    /** Direction of the guard prior to turning */
+    private int next_dir = 0;
+
+    private float previous = 0;
+
+
+    private boolean justGoal = false;
 
     /** Initialize with current Guard */
     public AIController(Board board, GuardModel guard) {
@@ -147,11 +161,6 @@ public class AIController {
 
     /** Main function to update the guard's velocity */
     public void update(){
-        if (queuedGoal != null) {
-            setProtect(queuedGoal);
-            queuedGoal = null;
-        }
-//        System.out.println(guard.getX() + " " + guard.getY() + " : " + currentGoal);
         switch (state) {
             case SLEEP:
                 // Do Nothing
@@ -177,6 +186,52 @@ public class AIController {
                     board.setGoal(goalx, goaly);
                     lastSwitch = null;
                     lastGoal = null;
+                }
+
+                if (queuedGoal != null) {
+                    setProtect(queuedGoal);
+                    queuedGoal = null;
+                }
+
+                if (turning) {
+                    if (turn >= 50) {
+                        turning = false;
+                        turn = 0;
+                        break;
+                    }
+
+                    int next = next_dir;
+                    float next_dir = 0;
+                    if (next == 1) {
+                        next_dir = ((float) (Math.PI/2f) * 3f);
+                    } else if (next == -1) {
+                        next_dir = ((float) Math.PI/2);
+                    } else if (next == 2) {
+                        next_dir = 0;
+                    } else if (next == -2){
+                        next_dir = ((float) Math.PI);
+                    }
+
+                    if (previous < 0f) previous += (2f * Math.PI);
+                    if (previous == 0f) {
+                        if (Math.abs(next_dir - previous) > Math.abs(next_dir - ((float) Math.PI) * 2)) {
+                            previous = (float) Math.PI * 2;
+                        }
+                    }
+                    if (next_dir == 0f) {
+                        if (Math.abs(next_dir - previous) > Math.abs((((float) Math.PI) * 2) - previous)) {
+                            next_dir = (float) Math.PI * 2;
+                        }
+                    }
+
+                    float total = next_dir - previous;
+                    float floaty = (float) turn;
+                    guard.setDirection(previous + (total * (floaty/50f)));
+
+                    guard.setMovement(0,0);
+                    guard.applyForce();
+                    turn++;
+                    return;
                 }
 
                 if (board.getOccupant(goalx, goaly) == 5 && isGrid(guard)) {
@@ -239,6 +294,7 @@ public class AIController {
                         }
                         pathIndex = (pathIndex + 1) % path.length;
                         currentGoal = path[pathIndex];
+                        justGoal = true;
                         goalx = board.physicsToBoard(currentGoal.x);
                         goaly = board.physicsToBoard(currentGoal.y);
                         board.setGoal(goalx, goaly);
@@ -353,6 +409,13 @@ public class AIController {
             spd = 20;
         }
 
+        if (turning) {
+            board.clearMarks();
+            guard.setMovement(0,0);
+            guard.applyForce();
+            return;
+        }
+
         if (i == 0) {
             guard.walking = false;
             guard.setMovement(0,0);
@@ -396,8 +459,6 @@ public class AIController {
         int debug = 0;
         if (board.isGoal(startX, startY)) return 0;
 
-
-
         while (!queue.isEmpty()) {
             debug++;
             if (debug > board.getHeight() * board.getWidth()) {
@@ -412,6 +473,13 @@ public class AIController {
             Node n = queue.poll();
             board.setVisited(n.x, n.y);
             if (board.isGoal(n.x, n.y)) {
+                if (n.act != prev && isGrid(guard) && justGoal && !guard.getAlarmed()) {
+                    turning = true;
+                    justGoal = false;
+                    turn = 0;
+                    next_dir = n.act;
+                    previous = guard.getDirectionFloat();
+                }
                 prev = n.act;
                 return n.act;
             }
