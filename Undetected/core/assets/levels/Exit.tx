@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
- <tileset firstgid="1" source="Exit.tsx"/>
- <object type="exit" gid="1" width="64" height="85"/>
+ <tileset firstgid="1" source="Door.tsx"/>
+ <object type="exit" gid="1" width="32" height="72"/>
 </template>

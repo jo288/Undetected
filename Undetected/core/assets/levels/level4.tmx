@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="157">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="159">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="5" source="Exit.tsx"/>
  <tileset firstgid="6" source="Objective.tsx"/>
@@ -184,5 +184,6 @@
   </object>
   <object id="151" template="PurpleKey.tx" x="800" y="544"/>
   <object id="155" template="DoorOpenSide.tx" name="door3" x="480" y="544"/>
+  <object id="158" template="GreenWall.tx" x="160" y="128"/>
  </objectgroup>
 </map>

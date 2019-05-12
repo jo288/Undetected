@@ -630,7 +630,7 @@ public class GameController implements Screen, ContactListener {
 			}
 		}
 
-		if (level.alarmStoppedPlaying()) {
+		if (music && level.alarmStoppedPlaying()) {
 			currentSong.setVolume(DEFAULT_VOL);
 		}
 
@@ -679,14 +679,12 @@ public class GameController implements Screen, ContactListener {
 				float angle = angleCache.angle();
 				// Convert to radians with up as 0
 				angle = (float) Math.PI * (angle - 90.0f) / 180.0f;
-//			avatar.setAngle(angle);
 				avatar.setDirection(angle);
 			}
 			if (angleCache.x != 0f && angleCache.y != 0f)
 				angleCache.set(angleCache.x * 0.7071f, angleCache.y * 0.7071f);
 			angleCache.scl(avatar.getForce());
 			avatar.setMovement(angleCache.x, angleCache.y);
-//		System.out.println(avatar.getMovement());
 			if (dt>0.016f) {
 				avatar.applyForce();
 			}
@@ -916,6 +914,11 @@ public class GameController implements Screen, ContactListener {
 					guardCaught.getX()*32,guardCaught.getY()*32,angle,1f,(length-14)/14);
 			canvas.draw(taseTextures[1][0],Color.WHITE,taseTextures[1][0].getRegionWidth()/2f,0,
 					guardCaught.getX()*32+(avatar.getX() - guardCaught.getX())*32,guardCaught.getY()*32 + (avatar.getY() - guardCaught.getY())*32,angle,1f,1f);
+			if(avatar.getY()-guardCaught.getY()<0){
+				avatar.draw(canvas);
+			}else{
+				guardCaught.draw(canvas);
+			}
 			canvas.end();
 		}
 
@@ -1289,7 +1292,9 @@ public class GameController implements Screen, ContactListener {
 				hasObjective = true;
 				exit.open();
 				showExit = true;
-//				level.queueDestroyed(objective);
+				for(GuardModel g: guards){
+					g.setAlarmed2(true);
+				}
 			}
 
 			// Check for win condition

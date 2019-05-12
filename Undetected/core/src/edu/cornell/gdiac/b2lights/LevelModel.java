@@ -390,6 +390,18 @@ public class LevelModel {
 			if (goalDoor.getTexture().getRegionHeight() < tSize)
 				goalDoor.setHeight(goalDoor.getTexture().getRegionHeight() / scale.y);
 			goalDoor.setDrawScale(scale);
+			//Check for goal door direction
+			int tx = board.physicsToBoard(goalDoor.getX());
+			int ty = board.physicsToBoard(goalDoor.getY());
+			if (!board.isSafeAt(tx+1,ty)){
+				goalDoor.setExitDirection(-(float)Math.PI/2);
+			}else if (!board.isSafeAt(tx-1,ty)){
+				goalDoor.setExitDirection((float)Math.PI/2);
+			}else if (!board.isSafeAt(tx,ty+1)){
+				goalDoor.setExitDirection(0);
+			}else{
+				goalDoor.setExitDirection((float)Math.PI);
+			}
 			activate(goalDoor);
 		}
 
@@ -1096,12 +1108,19 @@ public class LevelModel {
 							g.draw(canvas);
 						}
 					}
-			} else if (obj.getClass().equals(Laser.class) &&
-					Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(avatar.getX()))<=1 &&
-					board.physicsToBoard(obj.getY()+((Laser) obj).getLaserHeight()/2f) == board.physicsToBoard(avatar.getY())){
-					obj.draw(canvas);
+			} else if (obj.getClass().equals(Laser.class)){
+				obj.draw(canvas);
+				if (Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(avatar.getX()))<=1 &&
+						Math.abs(board.physicsToBoard(obj.getY()+((Laser) obj).getLaserHeight()/2f) - board.physicsToBoard(avatar.getY()))<=((Laser) obj).getLaserHeight()/2f) {
 					avatar.draw(canvas);
 					avatarDrawn = true;
+				}
+				for(GuardModel g: guards){
+					if(Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(g.getX()))<=1.5f &&
+							Math.abs(board.physicsToBoard(obj.getY()+((Laser) obj).getLaserHeight()/2f) - board.physicsToBoard(g.getY()))<=((Laser) obj).getLaserHeight()/2f) {
+						g.draw(canvas);
+					}
+				}
 			} else if (!obj.equals(avatar)||!avatarDrawn){
 				obj.draw(canvas);
 			}

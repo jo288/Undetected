@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="42" height="40" tilewidth="32" tileheight="32" infinite="0" nextobjectid="452">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="42" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="453">
  <tileset firstgid="1" source="walls.tsx"/>
  <tileset firstgid="5" source="horizontaldoor.tsx"/>
  <tileset firstgid="29" source="Exit.tsx"/>
@@ -12,7 +12,7 @@
  <tileset firstgid="57" source="Player.tsx"/>
  <tileset firstgid="58" source="switchfront.tsx"/>
  <tileset firstgid="68" source="Laser.tsx"/>
- <layer name="Tile Layer 1" width="42" height="40">
+ <layer id="1" name="Tile Layer 1" width="42" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -56,7 +56,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Object Layer 1">
+ <objectgroup id="2" name="Object Layer 1">
   <object id="1" template="RedWall.tx" x="96" y="448"/>
   <object id="2" template="RedWall.tx" x="96" y="480"/>
   <object id="4" template="RedWall.tx" x="96" y="512"/>
@@ -452,5 +452,6 @@
   <object id="448" template="BlueWall.tx" x="384" y="1056"/>
   <object id="449" template="BlueWall.tx" x="320" y="1056"/>
   <object id="451" template="BlueWall.tx" x="224" y="1056"/>
+  <object id="452" template="BlueWall.tx" x="384" y="320"/>
  </objectgroup>
 </map>

@@ -13,7 +13,7 @@
  <tileset firstgid="67" source="Box2.tsx"/>
  <tileset firstgid="68" source="FloorTile.tsx"/>
  <tileset firstgid="72" source="Player.tsx"/>
- <layer name="Tile Layer 1" width="60" height="50">
+ <layer id="1" name="Tile Layer 1" width="60" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -67,7 +67,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Object Layer 1">
+ <objectgroup id="2" name="Object Layer 1">
   <object id="1" template="Exit.tx" x="128" y="512"/>
   <object id="2" template="GreenWall.tx" x="192" y="512"/>
   <object id="3" template="GreenWall.tx" x="224" y="512"/>
@@ -521,6 +521,7 @@
     <property name="timetolive" type="int" value="0"/>
    </properties>
   </object>
+  <object id="605" template="GreenWall.tx" x="160" y="512"/>
   <object id="605" template="DoorOpenSide.tx" name="door1" x="448" y="1024"/>
   <object id="606" template="DoorOpenSide.tx" name="door2" x="448" y="1056"/>
   <object id="608" template="DoorOpenSide.tx" name="door4" x="832" y="1024"/>

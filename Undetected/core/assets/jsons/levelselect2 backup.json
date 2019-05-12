@@ -17,7 +17,7 @@
 "guards": [],
 "exit": {
 	"pos": [ 0, 0 ],
-	"size": [ 2, 1 ]
+	"size": [ 1, 1 ]
 },
 "boxes": [],
 "switches": [],
@@ -26,91 +26,106 @@
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 7, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 12, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 17, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 22, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 27, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 32, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 37, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 42, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 47, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 52, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 57, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 62, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 67, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 72, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 77, 7 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	}
 ],
 "lasers": [],
