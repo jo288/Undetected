@@ -630,7 +630,7 @@ public class GameController implements Screen, ContactListener {
 			}
 		}
 
-		if (level.alarmStoppedPlaying()) {
+		if (music && level.alarmStoppedPlaying()) {
 			currentSong.setVolume(DEFAULT_VOL);
 		}
 
