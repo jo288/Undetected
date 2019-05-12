@@ -68,6 +68,8 @@ public class GuardModel extends CharacterModel {
     private boolean isActive;
     /** Whether Guard is Alarmed */
     private boolean isAlarmed;
+    /** Whether the objective was taken */
+    private boolean isAlarmed2;
     /** Whether the guard has been collided with */
     private boolean isCollided;
     /** Whether the guard has caught the player or not */
@@ -88,14 +90,14 @@ public class GuardModel extends CharacterModel {
     private TextureRegion shadowTexture;
     private TextureRegion alertTexture;
 
-    private int animateCool = 3;
+    private int animateCool = 18;
     private boolean animateOn = false;
     private boolean animateOff = false;
 
     /** FilmStrip pointer to the dude animation */
     private FilmStrip alertAnimation;
     /** FilmStrip pointer to the dude animation */
-    private FilmStrip alertAnimationReverse;
+    private FilmStrip alert2Animation;
     /** FilmStrip pointer to the dude animation */
     private FilmStrip guardanimation;
     /** FilmStrip pointer to the texture region */
@@ -220,6 +222,10 @@ public class GuardModel extends CharacterModel {
                 this.getLight().setColor(1, 1, 0, 1);
             }
         }
+    }
+
+    public void setAlarmed2(boolean value){
+        isAlarmed2 = true;
     }
 
     /**
@@ -530,18 +536,18 @@ public class GuardModel extends CharacterModel {
         texture = JsonAssetManager.getInstance().getEntry("question", TextureRegion.class);
         alertTexture = texture;
 
-        texture = JsonAssetManager.getInstance().getEntry("questionAnimation", TextureRegion.class);
+        texture = JsonAssetManager.getInstance().getEntry("questionMark", TextureRegion.class);
         try {
-            filmstrip = new FilmStrip(texture.getTexture(), 1, 8);
+            filmstrip = new FilmStrip(texture.getTexture(), 1, 2);
             alertAnimation = filmstrip;
         } catch (Exception e) {
             filmstrip = null;
         }
 
-        texture = JsonAssetManager.getInstance().getEntry("questionAnimationReverse", TextureRegion.class);
+        texture = JsonAssetManager.getInstance().getEntry("exclamationMark", TextureRegion.class);
         try {
-            filmstrip = (FilmStrip)texture;
-            alertAnimationReverse = filmstrip;
+            filmstrip = new FilmStrip(texture.getTexture(), 1, 2);
+            alert2Animation = filmstrip;
         } catch (Exception e) {
             filmstrip = null;
         }
@@ -603,18 +609,32 @@ public class GuardModel extends CharacterModel {
         animateDirection(getDirectionFloat());
         if(animateOn){
             if (animateCool==0) {
-                if (alertAnimation.getFrame() >= 7) {
-                    animateOn = false;
+                if (alertAnimation.getFrame() >= 1) {
+//                    animateOn = false;
                     alertAnimation.setFrame(0);
                 } else {
                     alertAnimation.setFrame(alertAnimation.getFrame() + 1);
                 }
-                animateCool=3;
+                animateCool=12;
             }else{
                 animateCool--;
             }
 
         }
+
+        if(isAlarmed2&&!animateOn){
+            if(animateCool<=0){
+                if (alert2Animation.getFrame()>=1){
+                    alert2Animation.setFrame(0);
+                } else {
+                    alert2Animation.setFrame(alert2Animation.getFrame()+1);
+                }
+                animateCool=12;
+            }else{
+                animateCool-=2;
+            }
+        }
+
         // Animate if necessary
         if (getLinearVelocity().x != 0 || getLinearVelocity().y != 0) {
             animate = true;
@@ -652,7 +672,6 @@ public class GuardModel extends CharacterModel {
     public void draw(ObstacleCanvas canvas) {
         canvas.draw(shadowTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+(-7.5f+origin.x),getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.5f,1.5f);
 
-        ringTexture.getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         canvas.draw(ringTexture, Color.RED, ringTexture.getRegionWidth() / 2 , ringTexture.getRegionHeight() / 2,
                 getX() * drawScale.x , getY() * drawScale.y - getHeight() / 2f * drawScale.y, 0,
                 64f*sensitiveRadius/ringTexture.getRegionWidth(), 64f*sensitiveRadius/ringTexture.getRegionHeight(), 0.4f);
@@ -661,22 +680,15 @@ public class GuardModel extends CharacterModel {
             canvas.draw(guardanimation,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,0f,scale,scale);
         }
 
-        if(animateOn){
-            canvas.draw(alertAnimation,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
-//            System.out.println("isAlarmedAnimated");
-        }else if(isAlarmed){
-            canvas.draw(alertTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
+//        if(animateOn){
+//            canvas.draw(alertAnimation,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
+//        }else
+        if(isAlarmed){
+            canvas.draw(alertAnimation,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+guardanimation.getRegionWidth()/2,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
 //            System.out.println("isAlarmed");
-        }else {
-//            canvas.draw(alertTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
-//            System.out.println("isntAlarmed");
-        }
+        }else if(isAlarmed2) {
+            canvas.draw(alert2Animation,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+guardanimation.getRegionWidth()/2,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
 
-//        canvas.draw(alertTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+10,getY()*drawScale.y+getHeight()*3*drawScale.y,0f,1.3f,1.3f);
-//        if (getDirectionFloat() == 0 || (Math.round(getDirectionFloat() * 100.0) / 100.0) == 3.14) {
-//            canvas.draw(ringTexture, Color.RED, origin.x + (DEFAULT_WIDTH / 2) * drawScale.x, origin.y + (DEFAULT_HEIGHT / 2) * drawScale.y + 2,
-//                    getX() * drawScale.x + (DEFAULT_WIDTH / 2) * drawScale.x, getY() * drawScale.y - (DEFAULT_HEIGHT / 2) * drawScale.y - getHeight() / 2f * drawScale.y, getAngle(), 1.5f, 1.5f);
-//        } else {
-            //        }
+        }
     }
 }

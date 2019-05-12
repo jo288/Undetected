@@ -35,8 +35,8 @@
 	}
 ],
 "exit": {
-	"pos": [ 12, 2 ],
-	"size": [ 2, 1 ]
+	"pos": [ 11, 2 ],
+	"size": [ 1, 1 ]
 },
 "boxes": [
 	{
@@ -62,25 +62,29 @@
 		"name": "door3",
 		"isVertical": false,
 		"pos": [ 7, 9 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door4",
 		"isVertical": false,
 		"pos": [ 7, 8 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door1",
 		"isVertical": false,
 		"pos": [ 13, 9 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	},
 	{
 		"name": "door2",
 		"isVertical": false,
 		"pos": [ 13, 8 ],
-		"open": false
+		"open": false,
+		"color": "blue"
 	}
 ],
 "lasers": [

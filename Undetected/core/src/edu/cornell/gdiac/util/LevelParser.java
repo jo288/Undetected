@@ -64,7 +64,7 @@ public class LevelParser {
 
     private class Exit{
         protected int[] pos = new int[2];
-        protected int[] size = {2,1};
+        protected int[] size = {1,1};
     }
 
     private class Box{
@@ -103,6 +103,7 @@ public class LevelParser {
         protected boolean isVertical = true;
         private int[] pos = new int[2];
         private boolean open = false;
+        private String color = "blue";
     }
 
     private class Camera{
@@ -205,7 +206,7 @@ public class LevelParser {
                 parseObjective(e, testLevel);
             }
             if(e.get("template").equals("Exit.tx")) {
-                testLevel.exit.pos = new int[] {e.getInt("x")/32+1,testLevel.boardSize[1]-e.getInt("y")/32};
+                testLevel.exit.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
             }
             if(e.get("template").equals("DoorClosed.tx")){
                 Door d = new Door();

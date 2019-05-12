@@ -482,6 +482,20 @@
 		"taseLaser": {
 			"file": 	"textures/tase_laser.png",
 			"wrap": 	false
+		},
+		"questionMark": {
+			"file": 	"textures/questionmark.png",
+			"isLinear": true,
+			"wrap": 	false
+		},
+		"exclamationMark": {
+			"file": 	"textures/exclamationmark.png",
+			"isLinear": true,
+			"wrap": 	false
+		},
+		"exitArrows": {
+			"file": 	"textures/exitarrows.png",
+			"wrap": 	false
 		}
 	},
   	"fonts": {

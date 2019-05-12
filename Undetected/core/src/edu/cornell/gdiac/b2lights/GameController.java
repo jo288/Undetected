@@ -679,14 +679,12 @@ public class GameController implements Screen, ContactListener {
 				float angle = angleCache.angle();
 				// Convert to radians with up as 0
 				angle = (float) Math.PI * (angle - 90.0f) / 180.0f;
-//			avatar.setAngle(angle);
 				avatar.setDirection(angle);
 			}
 			if (angleCache.x != 0f && angleCache.y != 0f)
 				angleCache.set(angleCache.x * 0.7071f, angleCache.y * 0.7071f);
 			angleCache.scl(avatar.getForce());
 			avatar.setMovement(angleCache.x, angleCache.y);
-//		System.out.println(avatar.getMovement());
 			if (dt>0.016f) {
 				avatar.applyForce();
 			}
@@ -1289,7 +1287,9 @@ public class GameController implements Screen, ContactListener {
 				hasObjective = true;
 				exit.open();
 				showExit = true;
-//				level.queueDestroyed(objective);
+				for(GuardModel g: guards){
+					g.setAlarmed2(true);
+				}
 			}
 
 			// Check for win condition

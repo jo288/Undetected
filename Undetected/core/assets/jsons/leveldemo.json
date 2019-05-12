@@ -35,8 +35,8 @@
 	}
 ],
 "exit": {
-	"pos": [ 2, 9 ],
-	"size": [ 2, 1 ]
+	"pos": [ 1, 9 ],
+	"size": [ 1, 1 ]
 },
 "boxes": [
 	{
@@ -61,7 +61,8 @@
 		"name": "door",
 		"isVertical": true,
 		"pos": [ 2, 4 ],
-		"open": true
+		"open": true,
+		"color": "blue"
 	}
 ],
 "lasers": [

@@ -181,7 +181,6 @@ public class DoorModel extends BoxObstacle{
         else {
             texture = JsonAssetManager.getInstance().getEntry("bluedoorside", TextureRegion.class);
             maxframe = 12;
-//            System.out.println("horizontal");
         }
 
         try {

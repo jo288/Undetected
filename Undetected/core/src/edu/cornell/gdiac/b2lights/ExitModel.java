@@ -35,12 +35,23 @@ public class ExitModel extends BoxObstacle {
 	private boolean animationOn = false;
 	private TextureRegion circleTexture; //for minimap
 	private float alpha = 1; //for drawing purposes
+	private int maxframe;
+	private FilmStrip filmstrip;
+	private FilmStrip arrowFilmstrip;
+	private int arrowCoolTime = 8;
+	/** 0:x-axis  */
+	private float direction;
+
 	/**
 	 * Create a new ExitModel with degenerate settings
 	 */	
 	public ExitModel() {
 		super(0,0,1,1);
 		setSensor(false);
+	}
+
+	public void setExitDirection(float dir){
+		direction = (Math.round(dir*100))/100f;
 	}
 	
 	/**
@@ -95,6 +106,27 @@ public class ExitModel extends BoxObstacle {
 
 		texture = JsonAssetManager.getInstance().getEntry("exitIndicator", TextureRegion.class);
 		circleTexture = texture;
+
+		texture = JsonAssetManager.getInstance().getEntry("bluedoor", TextureRegion.class);
+		maxframe = 13;
+		try {
+			filmstrip = new FilmStrip(texture.getTexture(), 1, maxframe);
+		} catch (Exception e) {
+			filmstrip = null;
+		}
+		filmstrip.setFrame(0);
+		defaultExitTexture = filmstrip;
+
+		texture = JsonAssetManager.getInstance().getEntry("exitArrows", TextureRegion.class);
+		try {
+			arrowFilmstrip = new FilmStrip(texture.getTexture(), 1, 4);
+		} catch (Exception e) {
+			arrowFilmstrip = null;
+		}
+		arrowFilmstrip.setFrame(0);
+
+		setTexture(filmstrip);
+		setOrigin(origin.x,0);
 	}
 
 	public boolean isAnimating(){return animationOn;}
@@ -122,6 +154,17 @@ public class ExitModel extends BoxObstacle {
 
 	}
 
+	@Override
+	public void update(float delta) {
+		super.update(delta);
+		if (arrowCoolTime!=0){
+			arrowCoolTime--;
+			return;
+		}
+		arrowFilmstrip.setFrame((arrowFilmstrip.getFrame()+1)%4);
+		arrowCoolTime=9;
+	}
+
 	/**
 	 * Draws the physics object.
 	 *
@@ -130,6 +173,13 @@ public class ExitModel extends BoxObstacle {
 	public void draw(ObstacleCanvas canvas) {
 		if (texture != null) {
 			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f, alpha);
+		}
+		if(direction==3.14f) {
+			canvas.draw(arrowFilmstrip, Color.WHITE, arrowFilmstrip.getRegionWidth() / 2, 0, getX() * drawScale.x, getY() * drawScale.y - getHeight() / 2 * drawScale.y - 5,
+					direction, 1.0f, 1.0f, 1);
+		}else if(direction==0){
+			canvas.draw(arrowFilmstrip, Color.WHITE, arrowFilmstrip.getRegionWidth() / 2, 0, getX() * drawScale.x, getY() * drawScale.y + getHeight()*3/2 * drawScale.y + 5,
+					direction, 1.0f, 1.0f, 1);
 		}
 	}
 }
