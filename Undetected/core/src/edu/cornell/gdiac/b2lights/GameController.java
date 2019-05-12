@@ -1024,8 +1024,13 @@ public class GameController implements Screen, ContactListener {
 			canvas.draw(soundButton, soundTint, 0, soundButton.getRegionHeight() / 2f,
 					cam.position.x + 153*cam.zoom, cam.position.y + 30*cam.zoom, 0, 1f*cam.zoom, 1f*cam.zoom);
 			canvas.drawText("PAUSED",pauseTitle,cam.position.x-120,cam.position.y+115);
+			canvas.drawText(pauseDescription[0],pauseDesc,cam.position.x-220,cam.position.y+46-0*26);
+			canvas.drawText(pauseDescription[2],pauseDesc,cam.position.x-150,cam.position.y+46-1*26);
+			canvas.drawText(pauseDescription[4],pauseDesc,cam.position.x-100,cam.position.y+46-2*26);
+			canvas.drawText(pauseDescription[6],pauseDesc,cam.position.x-99,cam.position.y+46-3*26);
+			canvas.drawText(pauseDescription[8],pauseDesc,cam.position.x-99,cam.position.y+46-4*26);
+			canvas.drawText(pauseDescription[10],pauseDesc,cam.position.x-123,cam.position.y+46-5*26);
 			for (int i=0; i<pauseDescription.length;i+=2){
-				canvas.drawText(pauseDescription[i],pauseDesc,cam.position.x-220,cam.position.y+46-i*26/2);
 				canvas.drawText(pauseDescription[i+1],pauseDesc,cam.position.x-50,cam.position.y+46-i*26/2);
 			}
 //			canvas.draw(continueButton, conTint, continueButton.getRegionWidth() / 2f, continueButton.getRegionHeight() / 2f,
