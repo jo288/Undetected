@@ -69,6 +69,12 @@ public class AIController {
     /** Gets the guard's current Goal Tile */
     public Vector2 getCurrentGoal() {return currentGoal;}
 
+    /** Last Camera */
+    public CameraModel lastCamera;
+
+    /** Queued Goal */
+    public Obstacle queuedGoal = null;
+
     /** Initialize with current Guard */
     public AIController(Board board, GuardModel guard) {
         this.board = board;
@@ -121,8 +127,16 @@ public class AIController {
     /** Sets the object the Guard is protecting */
     public void setProtect(Obstacle item) {
         itemList.add(item);
-        currentGoal = new Vector2(item.getX(), item.getY());
-        pathIndex = path.length - 1;
+        if (!isGrid(guard)) {
+            queuedGoal = item;
+        } else {
+            currentGoal = new Vector2(item.getX(), item.getY());
+            if (item instanceof CameraModel) lastCamera = (CameraModel) item;
+            if (board.getOccupant(board.physicsToBoard(item.getX()), board.physicsToBoard(item.getY())) == 1) {
+                findClosest();
+            }
+            pathIndex = path.length - 1;
+        }
     }
 
     /** Sets the tile the Guard is protecting*/
@@ -133,6 +147,10 @@ public class AIController {
 
     /** Main function to update the guard's velocity */
     public void update(){
+        if (queuedGoal != null) {
+            setProtect(queuedGoal);
+            queuedGoal = null;
+        }
 //        System.out.println(guard.getX() + " " + guard.getY() + " : " + currentGoal);
         switch (state) {
             case SLEEP:
@@ -171,6 +189,7 @@ public class AIController {
                     break;
                 } else {
                     if (goalx == guardx && goaly == guardy) {
+                        if (lastCamera != null) lastCamera = null;
                         if (guard.getAlarmed() && path.length == 1) {
                             if (timer > 200) {
                                 timer = 0;

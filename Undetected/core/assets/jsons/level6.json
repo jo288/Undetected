@@ -93,18 +93,6 @@
 			"door7"
 		],
 		"lasers": []
-	},
-	{
-		"name": "switch",
-		"pos": [ 8, 19 ],
-		"switched": false,
-		"doors": [
-			"door1",
-			"door2",
-			"door3",
-			"door4"
-		],
-		"lasers": []
 	}
 ],
 "doors": [
@@ -112,30 +100,6 @@
 		"name": "door5",
 		"isVertical": true,
 		"pos": [ 24, 34 ],
-		"open": false
-	},
-	{
-		"name": "door1",
-		"isVertical": false,
-		"pos": [ 14, 18 ],
-		"open": false
-	},
-	{
-		"name": "door2",
-		"isVertical": false,
-		"pos": [ 14, 17 ],
-		"open": false
-	},
-	{
-		"name": "door4",
-		"isVertical": false,
-		"pos": [ 27, 18 ],
-		"open": false
-	},
-	{
-		"name": "door3",
-		"isVertical": false,
-		"pos": [ 27, 17 ],
 		"open": false
 	},
 	{
@@ -149,6 +113,30 @@
 		"isVertical": true,
 		"pos": [ 50, 31 ],
 		"open": false
+	},
+	{
+		"name": "door1",
+		"isVertical": false,
+		"pos": [ 14, 18 ],
+		"open": true
+	},
+	{
+		"name": "door2",
+		"isVertical": false,
+		"pos": [ 14, 17 ],
+		"open": true
+	},
+	{
+		"name": "door4",
+		"isVertical": false,
+		"pos": [ 26, 18 ],
+		"open": true
+	},
+	{
+		"name": "door3",
+		"isVertical": false,
+		"pos": [ 26, 17 ],
+		"open": true
 	}
 ],
 "lasers": [
