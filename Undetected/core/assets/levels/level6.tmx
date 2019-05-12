@@ -521,13 +521,10 @@
     <property name="timetolive" type="int" value="0"/>
    </properties>
   </object>
-<<<<<<< HEAD
   <object id="605" template="GreenWall.tx" x="160" y="512"/>
-=======
   <object id="605" template="DoorOpenSide.tx" name="door1" x="448" y="1024"/>
   <object id="606" template="DoorOpenSide.tx" name="door2" x="448" y="1056"/>
   <object id="608" template="DoorOpenSide.tx" name="door4" x="832" y="1024"/>
   <object id="609" template="DoorOpenSide.tx" name="door3" x="832" y="1056"/>
->>>>>>> edfbdbdc658fa5d20fb7439cb96e3ce791dba23d
  </objectgroup>
 </map>

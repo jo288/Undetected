@@ -107,60 +107,6 @@
 		"name": "door6",
 		"isVertical": true,
 		"pos": [ 45, 31 ],
-		"open": true
-	},
-	{
-		"name": "door7",
-		"isVertical": true,
-		"pos": [ 50, 31 ],
-		"open": false
-	},
-	{
-		"name": "door1",
-		"isVertical": false,
-		"pos": [ 14, 18 ],
-<<<<<<< HEAD
-		"open": false,
-		"color": "blue"
-=======
-		"open": true
->>>>>>> edfbdbdc658fa5d20fb7439cb96e3ce791dba23d
-	},
-	{
-		"name": "door2",
-		"isVertical": false,
-		"pos": [ 14, 17 ],
-<<<<<<< HEAD
-		"open": false,
-		"color": "blue"
-=======
-		"open": true
->>>>>>> edfbdbdc658fa5d20fb7439cb96e3ce791dba23d
-	},
-	{
-		"name": "door4",
-		"isVertical": false,
-<<<<<<< HEAD
-		"pos": [ 27, 18 ],
-		"open": false,
-		"color": "blue"
-=======
-		"pos": [ 26, 18 ],
-		"open": true
->>>>>>> edfbdbdc658fa5d20fb7439cb96e3ce791dba23d
-	},
-	{
-		"name": "door3",
-		"isVertical": false,
-<<<<<<< HEAD
-		"pos": [ 27, 17 ],
-		"open": false,
-		"color": "blue"
-	},
-	{
-		"name": "door6",
-		"isVertical": true,
-		"pos": [ 45, 31 ],
 		"open": true,
 		"color": "blue"
 	},
@@ -170,10 +116,34 @@
 		"pos": [ 50, 31 ],
 		"open": false,
 		"color": "blue"
-=======
+	},
+	{
+		"name": "door1",
+		"isVertical": false,
+		"pos": [ 14, 18 ],
+		"open": true,
+		"color": "blue"
+	},
+	{
+		"name": "door2",
+		"isVertical": false,
+		"pos": [ 14, 17 ],
+		"open": true,
+		"color": "blue"
+	},
+	{
+		"name": "door4",
+		"isVertical": false,
+		"pos": [ 26, 18 ],
+		"open": true,
+		"color": "blue"
+	},
+	{
+		"name": "door3",
+		"isVertical": false,
 		"pos": [ 26, 17 ],
-		"open": true
->>>>>>> edfbdbdc658fa5d20fb7439cb96e3ce791dba23d
+		"open": true,
+		"color": "blue"
 	}
 ],
 "lasers": [
