@@ -87,6 +87,7 @@ public class DudeModel extends CharacterModel {
 	private int walkLimit;
 
 	private int deathCool;
+	private int deathDelay = 30;
 
 	/** Texture of character */
 	private TextureRegion defaultCharTexture;
@@ -601,10 +602,14 @@ public class DudeModel extends CharacterModel {
 				if (deathAnimation != null) {
 					deathCool++;
 					if (deathAnimation.getFrame() == deathAnimation.getSize() - 1) {
-						isAlive = false;
-						deathCool = 0;
+						if(deathDelay>0){
+							deathDelay--;
+						}else {
+							isAlive = false;
+							deathCool = 0;
+						}
 					} else {
-						if (deathCool > 10) {
+						if (deathCool > 3) {
 //							System.out.println("dying");
 							int next = (deathAnimation.getFrame() + 1) % deathAnimation.getSize();
 							deathAnimation.setFrame(next);

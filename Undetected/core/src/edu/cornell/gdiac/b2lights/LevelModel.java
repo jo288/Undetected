@@ -1108,12 +1108,19 @@ public class LevelModel {
 							g.draw(canvas);
 						}
 					}
-			} else if (obj.getClass().equals(Laser.class) &&
-					Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(avatar.getX()))<=1 &&
-					board.physicsToBoard(obj.getY()+((Laser) obj).getLaserHeight()/2f) == board.physicsToBoard(avatar.getY())){
-					obj.draw(canvas);
+			} else if (obj.getClass().equals(Laser.class)){
+				obj.draw(canvas);
+				if (Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(avatar.getX()))<=1 &&
+						Math.abs(board.physicsToBoard(obj.getY()+((Laser) obj).getLaserHeight()/2f) - board.physicsToBoard(avatar.getY()))<=((Laser) obj).getLaserHeight()/2f) {
 					avatar.draw(canvas);
 					avatarDrawn = true;
+				}
+				for(GuardModel g: guards){
+					if(Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(g.getX()))<=1.5f &&
+							Math.abs(board.physicsToBoard(obj.getY()+((Laser) obj).getLaserHeight()/2f) - board.physicsToBoard(g.getY()))<=((Laser) obj).getLaserHeight()/2f) {
+						g.draw(canvas);
+					}
+				}
 			} else if (!obj.equals(avatar)||!avatarDrawn){
 				obj.draw(canvas);
 			}

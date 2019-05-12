@@ -914,6 +914,11 @@ public class GameController implements Screen, ContactListener {
 					guardCaught.getX()*32,guardCaught.getY()*32,angle,1f,(length-14)/14);
 			canvas.draw(taseTextures[1][0],Color.WHITE,taseTextures[1][0].getRegionWidth()/2f,0,
 					guardCaught.getX()*32+(avatar.getX() - guardCaught.getX())*32,guardCaught.getY()*32 + (avatar.getY() - guardCaught.getY())*32,angle,1f,1f);
+			if(avatar.getY()-guardCaught.getY()<0){
+				avatar.draw(canvas);
+			}else{
+				guardCaught.draw(canvas);
+			}
 			canvas.end();
 		}
 
