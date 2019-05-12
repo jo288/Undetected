@@ -739,7 +739,7 @@ public class GameController implements Screen, ContactListener {
 				CameraModel cam = lightController.detectedByCameras(cameras);
 				if(cam!=null) {
 					for (AIController ai : level.getControl()) {
-						if (ai.getGuard().sector == cam.sector) {
+						if (ai.getGuard().sector == cam.sector && ai.lastCamera != cam) {
 							ai.setAlarmed();
 							ai.setProtect(cam);
 						}

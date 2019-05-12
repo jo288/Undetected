@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="60" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="606">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="60" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="610">
  <tileset firstgid="1" source="Exit.tsx"/>
  <tileset firstgid="2" source="walls.tsx"/>
  <tileset firstgid="6" source="Door.tsx"/>
@@ -198,8 +198,6 @@
   <object id="181" template="GreenWall.tx" x="640" y="896"/>
   <object id="183" template="GreenWall.tx" x="576" y="1216"/>
   <object id="184" template="GreenWall.tx" x="608" y="1216"/>
-  <object id="187" template="DoorClosedSide.tx" name="door1" x="448" y="1024"/>
-  <object id="188" template="DoorClosedSide.tx" name="door2" x="448" y="1056"/>
   <object id="190" template="GreenWall.tx" x="832" y="1120"/>
   <object id="191" template="GreenWall.tx" x="864" y="1120"/>
   <object id="195" template="GreenWall.tx" x="864" y="992"/>
@@ -227,8 +225,6 @@
   <object id="224" template="GreenWall.tx" x="1024" y="1216"/>
   <object id="225" template="GreenWall.tx" x="1056" y="1216"/>
   <object id="226" template="GreenWall.tx" x="1088" y="1216"/>
-  <object id="228" template="DoorClosedSide.tx" name="door4" x="864" y="1024"/>
-  <object id="229" template="DoorClosedSide.tx" name="door3" x="864" y="1056"/>
   <object id="230" template="GreenWall.tx" x="1120" y="1216"/>
   <object id="231" template="GreenWall.tx" x="1120" y="896"/>
   <object id="232" template="GreenWall.tx" x="992" y="640"/>
@@ -421,11 +417,6 @@
     <property name="doors" value="door6,door7"/>
    </properties>
   </object>
-  <object id="497" template="Switch.tx" x="256" y="992">
-   <properties>
-    <property name="doors" value="door1,door2,door3,door4"/>
-   </properties>
-  </object>
   <object id="523" template="DeskLeft.tx" x="1024" y="160"/>
   <object id="524" template="DeskRight.tx" x="1088" y="160"/>
   <object id="525" template="Laser.tx" name="laser5" x="1312" y="480" width="3" height="96">
@@ -530,6 +521,13 @@
     <property name="timetolive" type="int" value="0"/>
    </properties>
   </object>
+<<<<<<< HEAD
   <object id="605" template="GreenWall.tx" x="160" y="512"/>
+=======
+  <object id="605" template="DoorOpenSide.tx" name="door1" x="448" y="1024"/>
+  <object id="606" template="DoorOpenSide.tx" name="door2" x="448" y="1056"/>
+  <object id="608" template="DoorOpenSide.tx" name="door4" x="832" y="1024"/>
+  <object id="609" template="DoorOpenSide.tx" name="door3" x="832" y="1056"/>
+>>>>>>> edfbdbdc658fa5d20fb7439cb96e3ce791dba23d
  </objectgroup>
 </map>
