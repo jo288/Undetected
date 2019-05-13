@@ -67,6 +67,8 @@ public class LevelModel {
 	/** Exclude bits for raycasting */
 	public static final short LIGHT_COLLIDEBITS = (short)0x1000;
 	public static final short LIGHT_MASKBITS = (short)0xefaf;
+	public static final short CAMERA_LIGHT_COLLIDEBITS = (short)0x2000;
+	public static final short CAMERA_LIGHT_MASKBITS = (short)0xefa7;
 
 	// Physics objects for the game
 	/** Reference to the character avatar */
@@ -496,8 +498,12 @@ public class LevelModel {
             camera.initialize(cameraData);
             camera.setDrawScale(scale);
             activate(camera);
-            camera.addLight(lights.get(cameraData.get("lightIndex").asInt()));
-            System.out.println("CAMERA "+camera);
+			ConeSource camera_light = lights.get(cameraData.get("lightIndex").asInt());
+			Filter f = new Filter();
+			f.categoryBits = CAMERA_LIGHT_COLLIDEBITS;
+			f.maskBits = CAMERA_LIGHT_MASKBITS;
+			camera_light.setContactFilter(f);
+            camera.addLight(camera_light);
             attachLights(camera, lights.get(cameraData.get("lightIndex").asInt()));
             this.cameras.add(camera);
             //switches.get(0).addCamera(camera);
