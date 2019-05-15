@@ -278,6 +278,16 @@ public class Laser extends BoxObstacle {
         }
     }
 
+    public void pauseSound(){
+        if(alarmSound.isPlaying())
+            alarmSound.pause();
+    }
+
+    public void resumeSound(){
+        if(alarmSound.getPosition()!=0)
+            alarmSound.play();
+    }
+
     public void setAlert(boolean value){
         isAlert = value;
         pause();
@@ -291,6 +301,10 @@ public class Laser extends BoxObstacle {
      * //@param delta Number of seconds since last animation frame
      */
     public void update(float dt) {
+        if(alarmSound.isPlaying()&&alarmSound.getPosition()>=5.3f){
+            alarmSound.stop();
+//            alarmSound.setPosition(0);
+        }
         if(alarmSound.isPlaying()){
             animateCool++;
             if (angryfilmstrip.getFrame()<4){

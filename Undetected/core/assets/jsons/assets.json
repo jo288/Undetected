@@ -546,12 +546,10 @@
 		},
 		"questionMark": {
 			"file": 	"textures/questionmark.png",
-			"isLinear": true,
 			"wrap": 	false
 		},
 		"exclamationMark": {
 			"file": 	"textures/exclamationmark.png",
-			"isLinear": true,
 			"wrap": 	false
 		},
 		"exitArrows": {
@@ -579,6 +577,10 @@
 		"pauseDesc": {
 			"file": 	"fonts/slkscr.ttf",
 			"size": 	20
+		},
+		"timerFont": {
+			"file": 	"fonts/prstart1.ttf",
+			"size": 	45
 		}
 	},
 	"sounds": {

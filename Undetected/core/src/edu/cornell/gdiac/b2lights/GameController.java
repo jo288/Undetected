@@ -469,7 +469,7 @@ public class GameController implements Screen, ContactListener {
 			float deltaX = (MathUtils.clamp(playerX * sx, cx - dx, cx + dx) - cam.position.x) * dt * 2.8f;
 			float deltaY = (MathUtils.clamp(playerY * sy, cy - dy, cy + dy) - cam.position.y) * dt * 2.8f;
 			if(panToPlayer){
-				if(Math.abs(deltaX)<=0.09 && Math.abs(deltaY)<=0.09){
+				if(Math.abs(deltaX)<=1 && Math.abs(deltaY)<=1){
 					showExit = false;
 					panToPlayer = false;
 				}
@@ -947,7 +947,6 @@ public class GameController implements Screen, ContactListener {
 			TextureRegion musicButton;
 			TextureRegion soundButton;
 
-
 			if (input.didMusic()) {
 				music = !music;
 			}
@@ -1167,6 +1166,7 @@ public class GameController implements Screen, ContactListener {
 		ArrayList<Laser> lasers = level.getLasers();
 		for (Laser l : lasers) {
 			l.pause();
+			l.pauseSound();
 		}
 		if (!theme.isPlaying()) {
 			currentSong.pause();
@@ -1184,6 +1184,7 @@ public class GameController implements Screen, ContactListener {
 		ArrayList<Laser> lasers = level.getLasers();
 		for (Laser l : lasers) {
 			l.resume();
+			l.resumeSound();
 		}
 		if (!currentFile.equals(levelSelectFile)) {
 			theme.stop();
