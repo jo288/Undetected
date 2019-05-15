@@ -10,7 +10,7 @@
  <tileset firstgid="52" source="FloorTile.tsx"/>
  <tileset firstgid="61" source="Player.tsx"/>
  <tileset firstgid="62" source="switchfront.tsx"/>
- <tileset firstgid="72" source="Laser.tsx"/>
+ <tileset firstgid="69" source="Laser.tsx"/>
  <layer id="1" name="Tile Layer 1" width="42" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -94,13 +94,13 @@
   <object id="90" template="RedWall.tx" x="416" y="736"/>
   <object id="91" template="RedWall.tx" x="416" y="704"/>
   <object id="92" template="RedWall.tx" x="416" y="640"/>
-  <object id="95" template="DoorClosed.tx" name="door1" x="352" y="480"/>
+  <object id="95" template="doors/blue/DoorClosed.tx" name="door1" x="352" y="480"/>
   <object id="112" template="RedWall.tx" x="96" y="1024"/>
   <object id="113" template="RedWall.tx" x="96" y="1056"/>
   <object id="114" template="RedWall.tx" x="96" y="1088"/>
   <object id="115" template="RedWall.tx" x="96" y="1120"/>
   <object id="119" template="RedWall.tx" x="96" y="1152"/>
-  <object id="132" template="DoorClosedSide.tx" name="door2" x="256" y="1088"/>
+  <object id="132" template="doors/blue/DoorSideUpClosed.tx" name="door2" x="256" y="1088"/>
   <object id="134" template="RedWall.tx" x="256" y="1152"/>
   <object id="150" template="RedWall.tx" x="640" y="1184"/>
   <object id="151" template="RedWall.tx" x="416" y="960"/>
@@ -243,8 +243,8 @@
   <object id="316" template="RedWall.tx" x="1120" y="320"/>
   <object id="317" template="RedWall.tx" x="1120" y="352"/>
   <object id="318" template="RedWall.tx" x="1216" y="256"/>
-  <object id="320" template="DoorOpenSide.tx" name="door6" x="1056" y="416"/>
-  <object id="321" template="DoorOpenSide.tx" name="door5" x="1056" y="224"/>
+  <object id="320" template="doors/blue/DoorSideUpOpen.tx" name="door6" x="1056" y="416"/>
+  <object id="321" template="doors/blue/DoorSideUpOpen.tx" name="door5" x="1056" y="224"/>
   <object id="322" template="RedWall.tx" x="1184" y="192"/>
   <object id="323" template="RedWall.tx" x="1184" y="480"/>
   <object id="325" template="BlueKey.tx" x="1184" y="320">

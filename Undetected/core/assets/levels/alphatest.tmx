@@ -55,10 +55,10 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="23" template="DoorOpen.tx" x="288" y="896" width="32" height="64"/>
-  <object id="30" template="DoorClosed.tx" name="door1" x="672" y="704"/>
-  <object id="52" template="DoorOpen.tx" name="door3" x="1184" y="448"/>
-  <object id="53" template="DoorOpen.tx" name="door2" x="1184" y="576"/>
+  <object id="23" template="doors/blue/DoorOpen.tx" x="288" y="896" width="32" height="64"/>
+  <object id="30" template="doors/blue/DoorClosed.tx" name="door1" x="672" y="704"/>
+  <object id="52" template="doors/blue/DoorOpen.tx" name="door3" x="1184" y="448"/>
+  <object id="53" template="doors/blue/DoorOpen.tx" name="door2" x="1184" y="576"/>
   <object id="67" template="Player.tx" x="160" y="1024"/>
   <object id="68" template="Guard.tx" x="64" y="736">
    <properties>

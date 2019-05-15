@@ -3,15 +3,15 @@
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="10" source="walls.tsx"/>
  <tileset firstgid="14" source="wallgreen.tsx"/>
- <tileset firstgid="16" source="Guard.tsx"/>
- <tileset firstgid="17" source="Player.tsx"/>
- <tileset firstgid="18" source="horizontaldoor.tsx"/>
- <tileset firstgid="42" source="Door.tsx"/>
- <tileset firstgid="55" source="keys.tsx"/>
- <tileset firstgid="59" source="switchfront.tsx"/>
- <tileset firstgid="69" source="Laser.tsx"/>
- <tileset firstgid="70" source="Box2.tsx"/>
- <tileset firstgid="71" source="DeskRight.tsx"/>
+ <tileset firstgid="15" source="Guard.tsx"/>
+ <tileset firstgid="16" source="Player.tsx"/>
+ <tileset firstgid="17" source="horizontaldoor.tsx"/>
+ <tileset firstgid="41" source="Door.tsx"/>
+ <tileset firstgid="54" source="keys.tsx"/>
+ <tileset firstgid="58" source="switchfront.tsx"/>
+ <tileset firstgid="65" source="Laser.tsx"/>
+ <tileset firstgid="66" source="Box2.tsx"/>
+ <tileset firstgid="67" source="DeskRight.tsx"/>
  <layer id="1" name="Tile Layer 1" width="40" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -176,7 +176,7 @@
   <object id="291" template="BlueWall.tx" x="448" y="736"/>
   <object id="292" template="BlueWall.tx" x="512" y="736"/>
   <object id="293" template="BlueWall.tx" x="480" y="736"/>
-  <object id="298" template="DoorOpen.tx" name="door2" x="256" y="352"/>
+  <object id="298" template="doors/blue/DoorOpen.tx" name="door2" x="256" y="352"/>
   <object id="299" template="BlueWall.tx" x="512" y="768"/>
   <object id="300" template="BlueWall.tx" x="512" y="800"/>
   <object id="301" template="BlueWall.tx" x="512" y="832"/>
@@ -301,7 +301,7 @@
     <property name="timetolive" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="467" template="DoorClosedSide.tx" name="door1" x="416" y="672"/>
+  <object id="467" template="doors/blue/DoorSideUpClosed.tx" name="door1" x="416" y="672"/>
   <object id="470" template="Box2.tx" x="640" y="672"/>
   <object id="471" template="BlueWall.tx" x="640" y="640"/>
   <object id="474" template="BlueWall.tx" x="672" y="736"/>

@@ -21,43 +21,7 @@
 },
 "boxes": [],
 "switches": [],
-"doors": [
-	{
-		"name": "level1",
-		"isVertical": true,
-		"pos": [ 2, 9 ],
-		"open": false,
-		"color": "blue"
-	},
-	{
-		"name": "level2",
-		"isVertical": true,
-		"pos": [ 6, 9 ],
-		"open": false,
-		"color": "blue"
-	},
-	{
-		"name": "level3",
-		"isVertical": true,
-		"pos": [ 10, 9 ],
-		"open": false,
-		"color": "blue"
-	},
-	{
-		"name": "level4",
-		"isVertical": true,
-		"pos": [ 14, 9 ],
-		"open": false,
-		"color": "blue"
-	},
-	{
-		"name": "level5",
-		"isVertical": true,
-		"pos": [ 18, 9 ],
-		"open": false,
-		"color": "blue"
-	}
-],
+"doors": [],
 "lasers": [],
 "cameras": [],
 "decoratives": [],

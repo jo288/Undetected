@@ -135,14 +135,16 @@
 		"isVertical": true,
 		"pos": [ 8, 29 ],
 		"open": true,
-		"color": "blue"
+		"color": "blue",
+		"type": 0
 	},
 	{
 		"name": "door1",
 		"isVertical": false,
 		"pos": [ 13, 19 ],
 		"open": false,
-		"color": "blue"
+		"color": "blue",
+		"type": 1
 	}
 ],
 "lasers": [

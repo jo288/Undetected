@@ -400,7 +400,7 @@ public class Laser extends BoxObstacle {
             }
             if (isOn) {
                 //canvas.setBlendState(ObstacleCanvas.BlendState.ALPHA_BLEND);
-                canvas.draw(texture, lasercolor, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y - getHeight() / 2 * drawScale.y, getAngle(), laserwidth, getHeight() + 0.5f);
+                canvas.draw(texture, lasercolor, origin.x, origin.y, getX() * drawScale.x-(laserwidth-1), getY() * drawScale.y - getHeight() / 2 * drawScale.y, getAngle(), laserwidth, getHeight() + 0.5f);
             } else {
                 //draw transparent texture instead
 //                canvas.draw(texture, Color.GREEN, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y - getHeight() / 2 * drawScale.y, getAngle(), laserwidth, getHeight() + 0.5f, 0.0f);
@@ -409,7 +409,7 @@ public class Laser extends BoxObstacle {
         }else{
 
             if (isOn) {
-                canvas.draw(texture,lasercolor,origin.x,origin.y,getX()*drawScale.x + getHeight()/2*drawScale.x,getY()*drawScale.y,getAngle(),laserwidth,getHeight());
+                canvas.draw(texture,lasercolor,origin.x,origin.y,getX()*drawScale.x + getHeight()/2*drawScale.x,getY()*drawScale.y-(laserwidth-1),getAngle(),laserwidth,getHeight());
             } else {
                 //draw transparent texture instead
 //                canvas.draw(texture,Color.GREEN,origin.x,origin.y,getX()*drawScale.x + getHeight()/2*drawScale.x,getY()*drawScale.y,getAngle(),laserwidth,getHeight(),0.0f);

@@ -268,18 +268,8 @@
 				"first":	0
 			}
 		},
-		"greendoor": {
-			"file": 	"textures/greendoor.png",
-			"wrap":  	false,
-			"strip":	{
-				"size":		12,
-				"rows":		1,
-				"cols":		12,
-				"first":	0
-			}
-		},
 		"bluedoor": {
-			"file": 	"textures/bluedoor.png",
+			"file": 	"textures/doors/bluedoor.png",
 			"wrap":  	false,
 			"strip":	{
 				"size":		13,
@@ -289,7 +279,7 @@
 			}
 		},
 		"bluedoorside": {
-			"file": 	"textures/bluedoortop.png",
+			"file": 	"textures/doors/bluedoortop.png",
 			"wrap":  	false,
 			"strip":	{
 				"size":		12,
@@ -297,6 +287,26 @@
 				"cols":		12,
 				"first":	0
 			}
+		},
+		"bluedoorside2": {
+			"file": 	"textures/doors/bluedoortop2.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		12,
+				"rows":		1,
+				"cols":		12,
+				"first":	0
+			}
+		},
+		"doors": {
+			"file": 	"textures/doors.png",
+			"wrap":  	false,
+//			"strip":	{
+//				"size":		18,
+//				"rows":		18,
+//				"cols":		1,
+//				"first":	0
+//			}
 		},
 		"question": {
 			"file":		"textures/question_mark.png",

@@ -104,6 +104,7 @@ public class LevelParser {
         private int[] pos = new int[2];
         private boolean open = false;
         private String color = "blue";
+        private int type = 0;
     }
 
     private class Camera{
@@ -222,36 +223,42 @@ public class LevelParser {
             if(e.get("template").equals("Exit.tx")) {
                 testLevel.exit.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
             }
-            if(e.get("template").equals("DoorClosed.tx")){
+            if(e.get("template").substring(0,5).equals("doors")) {
+                String[] darray = e.get("template").split("/");
                 Door d = new Door();
-                d.name = (e.hasAttribute("name")?e.getAttribute("name"):d.name);
-                d.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
-                d.open = false;
-                d.isVertical = true;
-                testLevel.doors.add(d);
-            }
-            if(e.get("template").equals("DoorOpen.tx")){
-                Door d = new Door();
-                d.name = (e.hasAttribute("name")?e.getAttribute("name"):d.name);
-                d.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
-                d.open = true;
-                d.isVertical = true;
-                testLevel.doors.add(d);
-            }
-            if(e.get("template").equals("DoorClosedSide.tx")){
-                Door d = new Door();
-                d.name = (e.hasAttribute("name")?e.getAttribute("name"):d.name);
-                d.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
-                d.open = false;
-                d.isVertical = false;
-                testLevel.doors.add(d);
-            }
-            if(e.get("template").equals("DoorOpenSide.tx")){
-                Door d = new Door();
-                d.name = (e.hasAttribute("name")?e.getAttribute("name"):d.name);
-                d.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
-                d.open = true;
-                d.isVertical = false;
+                d.name = (e.hasAttribute("name") ? e.getAttribute("name") : d.name);
+                d.pos = new int[]{e.getInt("x") / 32, testLevel.boardSize[1] - e.getInt("y") / 32};
+                d.color = darray[1];
+                if (darray[2].equals("DoorClosed.tx")) {
+                    d.open = false;
+                    d.isVertical = true;
+                    d.type = 0;
+                }
+                if (darray[2].equals("DoorOpen.tx")) {
+                    d.open = true;
+                    d.isVertical = true;
+                    d.type = 0;
+                }
+                if (darray[2].equals("DoorSideUpClosed.tx")) {
+                    d.open = false;
+                    d.isVertical = false;
+                    d.type = 1;
+                }
+                if (darray[2].equals("DoorSideUpOpen.tx")) {
+                    d.open = true;
+                    d.isVertical = false;
+                    d.type = 1;
+                }
+                if (darray[2].equals("DoorSideDownClosed.tx")) {
+                    d.open = false;
+                    d.isVertical = false;
+                    d.type = 2;
+                }
+                if (darray[2].equals("DoorSideDownOpen.tx")) {
+                    d.open = true;
+                    d.isVertical = false;
+                    d.type = 2;
+                }
                 testLevel.doors.add(d);
             }
             if(e.get("template").equals("Switch.tx")){

@@ -133,6 +133,24 @@ public class DoorModel extends BoxObstacle{
 //        setName(json.name());
         setName(json.get("name").asString());
         isVertical = json.get("isVertical").asBoolean();
+        String color = json.get("color").asString();
+        int type = 0;
+        switch(color){
+            case "white":
+                type+=3;
+            case "red":
+                type+=3;
+            case "orange":
+                type+=3;
+            case "green":
+                type+=3;
+            case "gold":
+                type+=3;
+            case "blue":
+            default:
+                break;
+        }
+        type += json.get("type").asInt();
         int[] pos  = json.get("pos").asIntArray();
         setPosition(pos[0]+0.5f,pos[1]+0.5f);
         if (isVertical)
@@ -174,21 +192,25 @@ public class DoorModel extends BoxObstacle{
 //        closedDoorTexture = closedTexture;
 //        TextureRegion openTexture = JsonAssetManager.getInstance().getEntry("doorOpen", TextureRegion.class);
 //        openDoorTexture = openTexture;
-        if (isVertical) {
-            texture = JsonAssetManager.getInstance().getEntry("bluedoor", TextureRegion.class);
-            maxframe = 13;
-        }
-        else {
-            texture = JsonAssetManager.getInstance().getEntry("bluedoorside", TextureRegion.class);
-            maxframe = 12;
-        }
-
+//        if (isVertical) {
+//            texture = JsonAssetManager.getInstance().getEntry("bluedoor", TextureRegion.class);
+//            maxframe = 13;
+//        }
+//        else {
+//            texture = JsonAssetManager.getInstance().getEntry("bluedoorside", TextureRegion.class);
+//            maxframe = 12;
+//        }
+        TextureRegion[][] textures = JsonAssetManager.getInstance().getEntry("doors", TextureRegion.class).split(416,72);
+        maxframe = 13;
         try {
-            filmstrip = new FilmStrip(texture.getTexture(), 1, maxframe);
+            filmstrip = new FilmStrip(textures[type][0], 1, maxframe);
+//            filmstrip.setRegion(textures[type][0]);
         } catch (Exception e) {
             filmstrip = null;
         }
-
+        if(type%3!=0){
+            maxframe--;
+        }
         Filter filter = new Filter();
         if (!open) {
 //            setTexture(closedTexture);
@@ -235,9 +257,9 @@ public class DoorModel extends BoxObstacle{
      */
     public void draw(ObstacleCanvas canvas) {
         if (texture != null) {
-            if (isVertical)
-                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
-            else
+//            if (isVertical)
+//                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+//            else
                 canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
         }
     }

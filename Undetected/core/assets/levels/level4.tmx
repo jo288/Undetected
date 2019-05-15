@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="161">
  <tileset firstgid="1" source="FloorTile.tsx"/>
- <tileset firstgid="11" source="Objective.tsx"/>
- <tileset firstgid="12" source="Guard.tsx"/>
- <tileset firstgid="13" source="Laser.tsx"/>
- <tileset firstgid="14" source="Player.tsx"/>
- <tileset firstgid="15" source="wallgreen.tsx"/>
- <tileset firstgid="16" source="horizontaldoor.tsx"/>
- <tileset firstgid="40" source="camera.tsx"/>
- <tileset firstgid="41" source="keys.tsx"/>
- <tileset firstgid="45" source="walls.tsx"/>
+ <tileset firstgid="10" source="Objective.tsx"/>
+ <tileset firstgid="11" source="Guard.tsx"/>
+ <tileset firstgid="12" source="Laser.tsx"/>
+ <tileset firstgid="13" source="Player.tsx"/>
+ <tileset firstgid="14" source="wallgreen.tsx"/>
+ <tileset firstgid="15" source="horizontaldoor.tsx"/>
+ <tileset firstgid="39" source="camera.tsx"/>
+ <tileset firstgid="40" source="keys.tsx"/>
+ <tileset firstgid="44" source="walls.tsx"/>
  <layer id="3" name="Tile Layer 1" width="30" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -35,23 +35,23 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="17" template="Guard.tx" gid="12" x="672" y="576" rotation="360">
+  <object id="17" template="Guard.tx" gid="11" x="672" y="576" rotation="360">
    <properties>
     <property name="path" value=""/>
    </properties>
   </object>
-  <object id="18" template="Guard.tx" gid="12" x="736" y="480" rotation="360">
+  <object id="18" template="Guard.tx" gid="11" x="736" y="480" rotation="360">
    <properties>
     <property name="direction" value="down"/>
     <property name="path" value=""/>
    </properties>
   </object>
-  <object id="22" template="DoorClosed.tx" name="door1" x="544" y="256"/>
-  <object id="23" template="DoorClosed.tx" name="door2" x="544" y="448"/>
+  <object id="22" template="doors/blue/DoorClosed.tx" name="door1" x="544" y="256"/>
+  <object id="23" template="doors/blue/DoorClosed.tx" name="door2" x="544" y="448"/>
   <object id="24" template="GreenWall.tx" x="576" y="256"/>
   <object id="25" template="GreenWall.tx" x="512" y="448"/>
   <object id="26" template="GreenWall.tx" x="576" y="448"/>
-  <object id="28" template="Laser.tx" gid="13" x="512" y="320" width="3" height="96" rotation="90">
+  <object id="28" template="Laser.tx" gid="12" x="512" y="320" width="3" height="96" rotation="90">
    <properties>
     <property name="timetolive" type="int" value="999"/>
    </properties>
@@ -182,9 +182,8 @@
    </properties>
   </object>
   <object id="151" template="PurpleKey.tx" x="800" y="544"/>
-  <object id="155" template="DoorOpenSide.tx" name="door3" x="480" y="544"/>
+  <object id="155" template="doors/blue/DoorSideUpOpen.tx" name="door3" x="480" y="544"/>
   <object id="158" template="GreenWall.tx" x="160" y="128"/>
-  <object id="160" template="GreenWall.tx" x="480" y="576"/>
   <object id="159" template="Camera.tx" x="128" y="544">
    <properties>
     <property name="directionX" type="int" value="1"/>

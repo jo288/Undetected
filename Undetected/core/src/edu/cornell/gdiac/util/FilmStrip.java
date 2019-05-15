@@ -49,6 +49,9 @@ public class FilmStrip extends TextureRegion {
 	
 	/** The active animation frame */
 	private int frame;
+
+	private int rx;
+	private int ry;
 	
 	/**
 	 * Creates a new filmstrip from the given texture.
@@ -58,6 +61,10 @@ public class FilmStrip extends TextureRegion {
 	 * @param cols The number of columns in the filmstrip
 	 */
 	public FilmStrip(Texture texture, int rows, int cols) {
+		this(texture,rows,cols,rows*cols);
+	}
+
+	public FilmStrip(TextureRegion texture, int rows, int cols) {
 		this(texture,rows,cols,rows*cols);
 	}
 	
@@ -83,6 +90,23 @@ public class FilmStrip extends TextureRegion {
 		this.size = size;
 		rwidth  = texture.getWidth()/cols;
 		rheight = texture.getHeight()/rows;
+		rx = 0;
+		ry = 0;
+		setFrame(0);
+	}
+
+	public FilmStrip(TextureRegion texture, int rows, int cols, int size) {
+		super(texture.getTexture());
+		if (size > rows*cols) {
+			Gdx.app.error("FilmStrip", "Invalid strip size", new IllegalArgumentException());
+			return;
+		}
+		this.cols = cols;
+		this.size = size;
+		rwidth  = texture.getRegionWidth()/cols;
+		rheight = texture.getRegionHeight()/rows;
+		rx = texture.getRegionX();
+		ry = texture.getRegionY();
 		setFrame(0);
 	}
 	
@@ -117,8 +141,8 @@ public class FilmStrip extends TextureRegion {
 			return;
 		}
 		this.frame = frame;
-		int x = (frame % cols)*rwidth;
-		int y = (frame / cols)*rheight;
+		int x = rx + (frame % cols)*rwidth;
+		int y = ry + (frame / cols)*rheight;
 		setRegion(x,y,rwidth,rheight);
 	}
 
