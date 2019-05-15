@@ -68,7 +68,9 @@
 ],
 "exit": {
 	"pos": [ 4, 16 ],
-	"size": [ 1, 1 ]
+	"size": [ 1, 1 ],
+	"color": "blue",
+	"isVertical": false
 },
 "boxes": [],
 "switches": [

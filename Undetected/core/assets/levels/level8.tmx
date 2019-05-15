@@ -84,7 +84,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" template="Exit.tx" x="576" y="2176"/>
+  <object id="1" template="exits/blue/Exit.tx" x="576" y="2176"/>
   <object id="4" template="GreenWall.tx" x="544" y="2176"/>
   <object id="5" template="GreenWall.tx" x="544" y="2176"/>
   <object id="7" template="GreenWall.tx" x="512" y="2176"/>

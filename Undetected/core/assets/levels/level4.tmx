@@ -169,7 +169,7 @@
   <object id="135" template="GreenWall.tx" x="512" y="128"/>
   <object id="136" template="GreenWall.tx" x="544" y="128"/>
   <object id="137" template="GreenWall.tx" x="576" y="128"/>
-  <object id="139" template="Exit.tx" x="128" y="128"/>
+  <object id="139" template="exits/blue/Exit.tx" x="128" y="128"/>
   <object id="140" template="GreenWall.tx" x="672" y="640"/>
   <object id="151" template="PurpleKey.tx" x="800" y="544"/>
   <object id="155" template="doors/blue/DoorSideUpOpen.tx" name="door3" x="480" y="544"/>

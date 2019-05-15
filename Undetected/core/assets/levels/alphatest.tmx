@@ -397,7 +397,7 @@
   <object id="396" template="GreenWall.tx" x="320" y="576"/>
   <object id="397" template="GreenWall.tx" x="320" y="608"/>
   <object id="398" template="GreenWall.tx" x="320" y="640"/>
-  <object id="405" template="Exit.tx" x="160" y="1088"/>
+  <object id="405" template="exits/blue/Exit.tx" x="160" y="1088"/>
   <object id="406" template="BlueWall.tx" x="1152" y="448"/>
   <object id="407" template="BlueWall.tx" x="1216" y="448"/>
   <object id="409" template="BlueWall.tx" x="1152" y="576"/>

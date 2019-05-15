@@ -78,7 +78,7 @@
   <object id="57" template="RedWall.tx" x="96" y="416"/>
   <object id="58" template="RedWall.tx" x="96" y="384"/>
   <object id="62" template="RedWall.tx" x="96" y="320"/>
-  <object id="72" template="Exit.tx" x="352" y="320"/>
+  <object id="72" template="exits/blue/Exit.tx" x="352" y="320"/>
   <object id="74" template="RedWall.tx" x="416" y="480"/>
   <object id="75" template="RedWall.tx" x="416" y="512"/>
   <object id="76" template="RedWall.tx" x="416" y="544"/>

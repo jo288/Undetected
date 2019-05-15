@@ -4,10 +4,10 @@
  <tileset firstgid="10" source="Objective.tsx"/>
  <tileset firstgid="11" source="Player.tsx"/>
  <tileset firstgid="12" source="Guard.tsx"/>
- <tileset firstgid="14" source="Laser.tsx"/>
- <tileset firstgid="15" source="DeskRight.tsx"/>
- <tileset firstgid="19" source="wallgreen.tsx"/>
- <tileset firstgid="20" source="walls.tsx"/>
+ <tileset firstgid="13" source="Laser.tsx"/>
+ <tileset firstgid="14" source="DeskRight.tsx"/>
+ <tileset firstgid="18" source="wallgreen.tsx"/>
+ <tileset firstgid="19" source="walls.tsx"/>
  <layer id="6" name="Tile Layer 1" width="13" height="16">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,0,0,0,
@@ -39,7 +39,7 @@
     <property name="path" value="[]"/>
    </properties>
   </object>
-  <object id="23" template="Exit.tx" x="256" y="512"/>
+  <object id="23" template="exits/blue/Exit.tx" x="256" y="512"/>
   <object id="24" template="Laser.tx" x="160" y="160" width="3" height="96"/>
   <object id="25" template="decoratives/DeskLeft.tx" x="320" y="288"/>
   <object id="26" template="GreenWall.tx" x="0" y="64"/>

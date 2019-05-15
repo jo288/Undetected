@@ -19,6 +19,7 @@ import java.lang.reflect.*;
 
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.obstacle.*;
+import javafx.scene.effect.Blend;
 
 /**
  * A sensor obstacle representing the end of the level
@@ -37,10 +38,14 @@ public class ExitModel extends BoxObstacle {
 	private float alpha = 1; //for drawing purposes
 	private int maxframe;
 	private FilmStrip filmstrip;
+	private FilmStrip verticalFilmstrip;
 	private FilmStrip arrowFilmstrip;
 	private int arrowCoolTime = 8;
 	/** 0:x-axis  */
 	private float direction;
+	private boolean isVertical;
+	private int animateCool = 3;
+	private int openCool = 60;
 
 	/**
 	 * Create a new ExitModel with degenerate settings
@@ -68,6 +73,31 @@ public class ExitModel extends BoxObstacle {
 		float[] size = json.get("size").asFloatArray();
 		setPosition(pos[0]+0.5f*(size[0]%2),pos[1]+0.5f*(size[1]%2));
 		setDimension(size[0],size[1]);
+
+		isVertical = json.get("isVertical").asBoolean();
+		String color = json.get("color").asString();
+		int type = (isVertical?1:0);
+		switch(color){
+			case "white":
+				type+=3;
+			case "red":
+				type+=3;
+			case "orange":
+				type+=3;
+			case "green":
+				type+=3;
+			case "gold":
+				type+=3;
+			case "blue":
+			default:
+				break;
+		}
+//		setPosition(pos[0]+0.5f,pos[1]+0.5f);
+		if (!isVertical)
+			setWidth(1);
+		else
+			setWidth(0.3f);
+		setHeight(1);
 		
 		// Technically, we should do error checking here.
 		// A JSON field might accidentally be missing
@@ -98,23 +128,26 @@ public class ExitModel extends BoxObstacle {
 		setDebugColor(debugColor);
 		
 		// Now get the texture from the AssetManager singleton
-//		String key = json.get("texture").asString();
-		TextureRegion texture = JsonAssetManager.getInstance().getEntry("goal", TextureRegion.class);
-		defaultExitTexture = texture;
-		setTexture(texture);
-		setOrigin(origin.x,0);
-
 		texture = JsonAssetManager.getInstance().getEntry("exitIndicator", TextureRegion.class);
 		circleTexture = texture;
 
-		texture = JsonAssetManager.getInstance().getEntry("bluedoor", TextureRegion.class);
+		TextureRegion[][] textures = JsonAssetManager.getInstance().getEntry("doors", TextureRegion.class).split(416,72);
 		maxframe = 13;
 		try {
-			filmstrip = new FilmStrip(texture.getTexture(), 1, maxframe);
+			filmstrip = new FilmStrip(textures[type][0], 1, maxframe);
+			if (isVertical)
+				verticalFilmstrip = new FilmStrip(textures[type+1][0],1,maxframe);
+//            filmstrip.setRegion(textures[type][0]);
 		} catch (Exception e) {
 			filmstrip = null;
+			verticalFilmstrip = null;
+		}
+		if(type%3!=0){
+			maxframe--;
 		}
 		filmstrip.setFrame(0);
+		if(verticalFilmstrip!=null)
+			verticalFilmstrip.setFrame(0);
 		defaultExitTexture = filmstrip;
 
 		texture = JsonAssetManager.getInstance().getEntry("exitArrows", TextureRegion.class);
@@ -139,10 +172,25 @@ public class ExitModel extends BoxObstacle {
 
 	public void animate(float dt){
 		if(animationOn) {
+			openCool --;
+			/*
 			alpha -= dt * 0.6;
 			if (alpha < 0) {
 				animationOn = false;
 			}
+			*/
+			if(filmstrip.getFrame()+1<maxframe) {
+				if(animateCool<=0) {
+					filmstrip.setFrame(filmstrip.getFrame() + 1);
+					animateCool = 2;
+					if(verticalFilmstrip!=null)
+						verticalFilmstrip.setFrame(verticalFilmstrip.getFrame() + 1);
+				}else{
+					animateCool--;
+				}
+			}
+			else if(openCool<=0)
+				animationOn = false;
 		}
 	}
 	public void drawMiniMap(ObstacleCanvas canvas, float alpha){
@@ -174,11 +222,32 @@ public class ExitModel extends BoxObstacle {
 		if (texture != null) {
 			canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f, alpha);
 		}
+		if (isVertical){
+			canvas.draw(verticalFilmstrip,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y-32,getAngle(),1.0f,1.0f, alpha);
+		}
+		if(animationOn){
+			canvas.setBlendState(ObstacleCanvas.BlendState.ADDITIVE);
+			if (texture != null) {
+				canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,
+						getAngle(),1.0f,1.0f, 0.3f);
+			}
+			if (isVertical){
+				canvas.draw(verticalFilmstrip,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y-32,
+						getAngle(),1.0f,1.0f, 0.3f);
+			}
+			canvas.setBlendState(ObstacleCanvas.BlendState.NO_PREMULT);
+		}
 		if(direction==3.14f) {
 			canvas.draw(arrowFilmstrip, Color.WHITE, arrowFilmstrip.getRegionWidth() / 2, 0, getX() * drawScale.x, getY() * drawScale.y - getHeight() / 2 * drawScale.y - 5,
 					direction, 1.0f, 1.0f, 1);
 		}else if(direction==0){
 			canvas.draw(arrowFilmstrip, Color.WHITE, arrowFilmstrip.getRegionWidth() / 2, 0, getX() * drawScale.x, getY() * drawScale.y + getHeight()*3/2 * drawScale.y + 5,
+					direction, 1.0f, 1.0f, 1);
+		}else if(direction == 1.57f){
+			canvas.draw(arrowFilmstrip, Color.WHITE, arrowFilmstrip.getRegionWidth() / 2, 0, getX() * drawScale.x - 25, getY() * drawScale.y,
+					direction, 1.0f, 1.0f, 1);
+		}else if(direction == -1.57f){
+			canvas.draw(arrowFilmstrip, Color.WHITE, arrowFilmstrip.getRegionWidth() / 2, 0, getX() * drawScale.x + 25, getY() * drawScale.y,
 					direction, 1.0f, 1.0f, 1);
 		}
 	}

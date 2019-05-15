@@ -36,7 +36,9 @@
 ],
 "exit": {
 	"pos": [ 2, 0 ],
-	"size": [ 1, 1 ]
+	"size": [ 1, 1 ],
+	"color": "blue",
+	"isVertical": false
 },
 "boxes": [
 	{

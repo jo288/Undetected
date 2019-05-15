@@ -65,7 +65,7 @@
   <object id="46" template="RedWall.tx" x="416" y="480"/>
   <object id="47" template="RedWall.tx" x="416" y="512"/>
   <object id="49" template="RedWall.tx" x="416" y="448"/>
-  <object id="54" template="Exit.tx" x="352" y="576"/>
+  <object id="54" template="exits/blue/Exit.tx" x="352" y="576"/>
   <object id="55" template="doors/blue/DoorSideUpClosed.tx" name="door3" x="224" y="352"/>
   <object id="56" template="doors/blue/DoorSideUpClosed.tx" name="door4" x="224" y="384"/>
   <object id="57" template="RedWall.tx" x="416" y="288"/>

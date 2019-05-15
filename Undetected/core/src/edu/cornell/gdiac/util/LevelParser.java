@@ -65,6 +65,8 @@ public class LevelParser {
     private class Exit{
         protected int[] pos = new int[2];
         protected int[] size = {1,1};
+        protected String color = "blue";
+        protected boolean isVertical = false;
     }
 
     private class Box{
@@ -236,8 +238,13 @@ public class LevelParser {
                 testLevel.objective.textureIndex = 3;
                 parseObjective(e, testLevel);
             }
-            if(e.get("template").equals("Exit.tx")) {
+            if(e.get("template").substring(0,5).equals("exits")) {
+                String[] earray = e.get("template").split("/");
                 testLevel.exit.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                testLevel.exit.color = earray[1];
+                if(earray[2].equals("SideExit.tx")){
+                    testLevel.exit.isVertical = true;
+                }
             }
             if(e.get("template").substring(0,5).equals("doors")) {
                 String[] darray = e.get("template").split("/");
