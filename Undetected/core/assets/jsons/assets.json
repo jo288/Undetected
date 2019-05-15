@@ -108,16 +108,6 @@
 				"first":	0
 			}
 		},
-		"charalert": {
-			"file": 	"textures/character_alert.png",
-			"wrap":  	false,
-			"strip":	{
-				"size":		8,
-				"rows":		1,
-				"cols":		8,
-				"first":	0
-			}
-		},
 		"electrified": {
 			"file": 	"textures/deathanim.png",
 			"wrap":  	false,

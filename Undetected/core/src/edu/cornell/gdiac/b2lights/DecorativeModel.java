@@ -28,6 +28,7 @@ public class DecorativeModel extends BoxObstacle{
     private int animationCount = 0;
     private boolean animationRepeat = false;
     private boolean flip = false;
+    private float offsetY = 0;
 
     public DecorativeModel() {
         super(1,1);
@@ -104,6 +105,7 @@ public class DecorativeModel extends BoxObstacle{
                 setTexture(filmstrip);
                 animationRate = 8;
                 animationRepeat = true;
+                offsetY = 8;
                 break;
             case "experiment2":
                 setWidth(1f);
@@ -119,6 +121,7 @@ public class DecorativeModel extends BoxObstacle{
                 setTexture(filmstrip);
                 animationRate = 8;
                 animationRepeat = true;
+                offsetY = 8;
                 break;
             case "servertower":
                 setWidth(1f);
@@ -172,9 +175,9 @@ public class DecorativeModel extends BoxObstacle{
     public void draw(ObstacleCanvas canvas) {
         if (texture != null) {
             if (!flip)
-                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x-getWidth()/2*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),1.0f,1.0f);
+                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x-getWidth()/2*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y+offsetY,getAngle(),1.0f,1.0f);
             else
-                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+getWidth()/2*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y,getAngle(),-1.0f,1.0f);
+                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+getWidth()/2*drawScale.x,getY()*drawScale.y-getHeight()/2*drawScale.y+offsetY,getAngle(),-1.0f,1.0f);
         }
     }
 
