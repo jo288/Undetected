@@ -322,6 +322,48 @@ public class LevelParser {
                 desku.direction = "up";
                 testLevel.decoratives.add(desku);
             }
+            if (e.get("template").equals("decoratives/Desk2Up.tx")){
+                Decorative desku = new Decorative();
+                desku.type = "desk2";
+                desku.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                desku.direction = "up";
+                testLevel.decoratives.add(desku);
+            }
+            if (e.get("template").equals("decoratives/Desk2Right.tx")){
+                Decorative deskr = new Decorative();
+                deskr.type = "desk2";
+                deskr.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                deskr.direction = "right";
+                testLevel.decoratives.add(deskr);
+            }
+            if (e.get("template").equals("decoratives/Desk2Left.tx")){
+                Decorative deskl = new Decorative();
+                deskl.type = "desk2";
+                deskl.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                deskl.direction = "left";
+                testLevel.decoratives.add(deskl);
+            }
+            if (e.get("template").equals("decoratives/Experiment1.tx")){
+                Decorative exp = new Decorative();
+                exp.type = "experiment1";
+                exp.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                exp.direction = "up";
+                testLevel.decoratives.add(exp);
+            }
+            if (e.get("template").equals("decoratives/Experiment2.tx")){
+                Decorative exp = new Decorative();
+                exp.type = "experiment2";
+                exp.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                exp.direction = "up";
+                testLevel.decoratives.add(exp);
+            }
+            if (e.get("template").equals("decoratives/ServerTower.tx")){
+                Decorative exp = new Decorative();
+                exp.type = "servertower";
+                exp.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                exp.direction = "up";
+                testLevel.decoratives.add(exp);
+            }
             if (e.get("template").equals("Laser.tx")){
                 Laser l = new Laser();
                 l.name = (e.hasAttribute("name")?e.getAttribute("name"):l.name);

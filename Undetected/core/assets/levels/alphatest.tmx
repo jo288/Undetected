@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="430">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="449">
  <tileset firstgid="1" source="FloorTile.tsx"/>
- <tileset firstgid="10" source="Exit.tsx"/>
- <tileset firstgid="11" source="Player.tsx"/>
- <tileset firstgid="12" source="Guard.tsx"/>
- <tileset firstgid="13" source="Box2.tsx"/>
- <tileset firstgid="14" source="Objective.tsx"/>
- <tileset firstgid="15" source="Laser.tsx"/>
- <tileset firstgid="16" source="InteriorWall.tsx"/>
- <tileset firstgid="17" source="DeskRight.tsx"/>
- <tileset firstgid="21" source="deskfront.tsx"/>
- <tileset firstgid="25" source="wallgreen.tsx"/>
- <tileset firstgid="26" source="walls.tsx"/>
+ <tileset firstgid="10" source="Player.tsx"/>
+ <tileset firstgid="11" source="Guard.tsx"/>
+ <tileset firstgid="12" source="Box2.tsx"/>
+ <tileset firstgid="13" source="Objective.tsx"/>
+ <tileset firstgid="14" source="Laser.tsx"/>
+ <tileset firstgid="15" source="InteriorWall.tsx"/>
+ <tileset firstgid="16" source="DeskRight.tsx"/>
+ <tileset firstgid="20" source="deskfront.tsx"/>
+ <tileset firstgid="24" source="wallgreen.tsx"/>
+ <tileset firstgid="25" source="walls.tsx"/>
+ <tileset firstgid="29" source="deskfront2.tsx"/>
+ <tileset firstgid="30" source="desk2side.tsx"/>
+ <tileset firstgid="31" source="experiment1.tsx"/>
+ <tileset firstgid="36" source="experiment2.tsx"/>
+ <tileset firstgid="41" source="servertower.tsx"/>
  <layer id="1" name="Tile Layer 1" width="40" height="34">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -77,7 +81,7 @@
     <property name="sensitiveRadius" type="float" value="1"/>
    </properties>
   </object>
-  <object id="71" template="Guard.tx" gid="12" x="768" y="128">
+  <object id="71" template="Guard.tx" gid="11" x="768" y="128">
    <properties>
     <property name="IsPatrolling" type="bool" value="true"/>
     <property name="path" value="[24,30,34,30]"/>
@@ -91,7 +95,7 @@
     <property name="sector" type="int" value="1"/>
    </properties>
   </object>
-  <object id="73" template="Box2.tx" name="box2" gid="13" x="448" y="544" rotation="0"/>
+  <object id="73" template="Box2.tx" name="box2" gid="12" x="448" y="544" rotation="0"/>
   <object id="74" template="GreenKey.tx" x="928" y="992">
    <properties>
     <property name="doors" value="door2,door3"/>
@@ -114,7 +118,7 @@
     <property name="sector" type="int" value="1"/>
    </properties>
   </object>
-  <object id="84" template="decoratives/DeskLeft.tx" gid="17" x="256" y="832"/>
+  <object id="84" template="decoratives/DeskLeft.tx" gid="16" x="256" y="832"/>
   <object id="85" template="decoratives/DeskRight.tx" x="320" y="832"/>
   <object id="88" template="decoratives/DeskUp.tx" x="32" y="352"/>
   <object id="89" template="GreenWall.tx" x="32" y="320"/>
@@ -416,5 +420,13 @@
   <object id="426" template="OrangeWall.tx" x="256" y="896"/>
   <object id="427" template="OrangeWall.tx" x="320" y="896"/>
   <object id="429" template="GreenWall.tx" x="192" y="1088"/>
+  <object id="434" template="decoratives/Desk2Left.tx" x="640" y="736"/>
+  <object id="435" template="decoratives/Desk2Right.tx" x="704" y="736"/>
+  <object id="437" template="decoratives/Desk2Up.tx" x="416" y="352"/>
+  <object id="438" template="decoratives/Experiment1.tx" x="256" y="928"/>
+  <object id="439" template="decoratives/Experiment2.tx" x="320" y="928"/>
+  <object id="446" template="decoratives/ServerTower.tx" x="64" y="352"/>
+  <object id="447" template="decoratives/ServerTower.tx" x="96" y="352"/>
+  <object id="448" template="decoratives/ServerTower.tx" x="128" y="352"/>
  </objectgroup>
 </map>

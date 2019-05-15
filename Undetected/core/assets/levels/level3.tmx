@@ -3,7 +3,6 @@
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="10" source="Guard.tsx"/>
  <tileset firstgid="11" source="Player.tsx"/>
- <tileset firstgid="12" source="Exit.tsx"/>
  <tileset firstgid="13" source="Box2.tsx"/>
  <tileset firstgid="14" source="Objective.tsx"/>
  <tileset firstgid="15" source="Laser.tsx"/>

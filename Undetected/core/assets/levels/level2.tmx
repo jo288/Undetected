@@ -4,7 +4,6 @@
  <tileset firstgid="10" source="Objective.tsx"/>
  <tileset firstgid="11" source="Player.tsx"/>
  <tileset firstgid="12" source="Guard.tsx"/>
- <tileset firstgid="13" source="Exit.tsx"/>
  <tileset firstgid="14" source="Laser.tsx"/>
  <tileset firstgid="15" source="DeskRight.tsx"/>
  <tileset firstgid="19" source="wallgreen.tsx"/>

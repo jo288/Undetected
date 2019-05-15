@@ -2,7 +2,6 @@
 <map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="42" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="453">
  <tileset firstgid="1" source="walls.tsx"/>
  <tileset firstgid="5" source="horizontaldoor.tsx"/>
- <tileset firstgid="29" source="Exit.tsx"/>
  <tileset firstgid="30" source="Door.tsx"/>
  <tileset firstgid="43" source="Box2.tsx"/>
  <tileset firstgid="44" source="DeskRight.tsx"/>

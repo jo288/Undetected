@@ -408,6 +408,14 @@
 				"first":	0
 			}
 		},
+		"desk2Front": {
+			"file": 	"textures/deskfront2.png",
+			"wrap":  	false,
+		},
+		"desk2Side": {
+			"file": 	"textures/desk2.png",
+			"wrap":  	false,
+		},
 		"servertower": {
 			"file": 	"textures/servertower.png",
 			"wrap":  	false,

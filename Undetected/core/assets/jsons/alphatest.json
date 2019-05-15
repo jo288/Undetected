@@ -189,6 +189,46 @@
 		"pos": [ 1, 23 ],
 		"type": "desk",
 		"direction": "up"
+	},
+	{
+		"pos": [ 20, 11 ],
+		"type": "desk2",
+		"direction": "left"
+	},
+	{
+		"pos": [ 22, 11 ],
+		"type": "desk2",
+		"direction": "right"
+	},
+	{
+		"pos": [ 13, 23 ],
+		"type": "desk2",
+		"direction": "up"
+	},
+	{
+		"pos": [ 8, 5 ],
+		"type": "experiment1",
+		"direction": "up"
+	},
+	{
+		"pos": [ 10, 5 ],
+		"type": "experiment2",
+		"direction": "up"
+	},
+	{
+		"pos": [ 2, 23 ],
+		"type": "servertower",
+		"direction": "up"
+	},
+	{
+		"pos": [ 3, 23 ],
+		"type": "servertower",
+		"direction": "up"
+	},
+	{
+		"pos": [ 4, 23 ],
+		"type": "servertower",
+		"direction": "up"
 	}
 ],
 "objective": {

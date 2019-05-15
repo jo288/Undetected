@@ -297,11 +297,7 @@ public class Laser extends BoxObstacle {
                 isAngry = true;
                 if(animateCool>=2){
                     angryfilmstrip.setFrame(angryfilmstrip.getFrame()+1);
-//                    lasercolor.sub(0,0.2f,0,0f);
                     lasercolor.set(lasercolor.r+0.2f,lasercolor.g-0.2f,0,1);
-//                    lasercolor.g = lasercolor.g-0.2f;
-//                    lasercolor.r = lasercolor.r+0.2f;
-//                    lasercolor = Color.RED;
                     animateCool = 0;
                     laserwidth-=0.2f;
                 }
@@ -324,8 +320,6 @@ public class Laser extends BoxObstacle {
                     angryfilmstrip.setFrame(angryfilmstrip.getFrame()-1);
                     animateCool = 0;
                     lasercolor.set(lasercolor.r-0.2f,lasercolor.g+0.2f,0,1);
-//                    lasercolor.g = lasercolor.g+0.2f;
-//                    lasercolor.r = lasercolor.r-0.2f;
                     laserwidth+=0.2f;
                 }
             }else{

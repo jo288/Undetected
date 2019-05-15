@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="117">
  <tileset firstgid="1" source="walls.tsx"/>
- <tileset firstgid="5" source="Exit.tsx"/>
  <tileset firstgid="6" source="horizontaldoor.tsx"/>
  <tileset firstgid="30" source="keys.tsx"/>
  <tileset firstgid="34" source="DeskRight.tsx"/>

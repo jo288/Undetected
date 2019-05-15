@@ -26,6 +26,7 @@ public class DecorativeModel extends BoxObstacle{
     private int animationFrame = 0;
     private int animationRate = 4;
     private int animationCount = 0;
+    private boolean animationRepeat = false;
     private boolean flip = false;
 
     public DecorativeModel() {
@@ -75,23 +76,92 @@ public class DecorativeModel extends BoxObstacle{
                     filmstrip = null;
                 }
                 animationFrame = 4;
+                setTexture(filmstrip);
                 break;
-            case "experiment":
+            case "desk2":
+                setWidth(1f);
+                setHeight(1f);
+                setFixedRotation(true);
+                texture = (json.get("direction").asString().equals("up")?
+                        JsonAssetManager.getInstance().getEntry("desk2Front", TextureRegion.class):
+                        JsonAssetManager.getInstance().getEntry("desk2Side", TextureRegion.class));
+                if (json.get("direction").asString().equals("right"))
+                    flip = true;
+                setTexture(texture);
+                animationFrame = 0;
+                break;
+            case "experiment1":
+                setWidth(1f);
+                setHeight(1f);
+                setFixedRotation(true);
+                texture = JsonAssetManager.getInstance().getEntry("experiment1", TextureRegion.class);
+                try {
+                    filmstrip = new FilmStrip(texture.getTexture(), 1, 5);
+                } catch (Exception e) {
+                    filmstrip = null;
+                }
+                animationFrame = 5;
+                setTexture(filmstrip);
+                animationRate = 8;
+                animationRepeat = true;
+                break;
+            case "experiment2":
+                setWidth(1f);
+                setHeight(1f);
+                setFixedRotation(true);
+                texture = JsonAssetManager.getInstance().getEntry("experiment2", TextureRegion.class);
+                try {
+                    filmstrip = new FilmStrip(texture.getTexture(), 1, 5);
+                } catch (Exception e) {
+                    filmstrip = null;
+                }
+                animationFrame = 5;
+                setTexture(filmstrip);
+                animationRate = 8;
+                animationRepeat = true;
+                break;
+            case "servertower":
+                setWidth(1f);
+                setHeight(1f);
+                setFixedRotation(true);
+                texture = JsonAssetManager.getInstance().getEntry("servertower", TextureRegion.class);
+                try {
+                    filmstrip = new FilmStrip(texture.getTexture(), 1, 8);
+                } catch (Exception e) {
+                    filmstrip = null;
+                }
+                animationFrame = 8;
+                setTexture(filmstrip);
+                animationRate = 5;
                 break;
             default:
                 break;
         }
 
         // Now get the texture from the AssetManager singleton
-        setTexture(filmstrip);
         setOrigin(0, 0);
+        if(filmstrip!=null){
+            animationCount = (int)(Math.random()*(animationFrame*animationRate-1));
+        }
     }
 
     @Override
     public void update(float delta) {
         super.update(delta);
-        filmstrip.setFrame(animationCount/animationRate);
-        animationCount = (animationCount+1)%(animationFrame*animationRate);
+        if(filmstrip!=null) {
+            int anim = 0;
+            if(animationCount>=2*(animationFrame*animationRate)-1){
+                animationCount = 0;
+            }
+            if(animationRepeat&&animationCount>=(animationFrame*animationRate-1)){
+                this.animationCount++;
+                anim = (animationFrame * animationRate * 2 - this.animationCount - 1) / (animationRate);
+            }else {
+                animationCount = (animationCount + 1) % (animationFrame * animationRate);
+                anim = animationCount/animationRate;
+            }
+            filmstrip.setFrame(anim);
+        }
     }
 
     /**
