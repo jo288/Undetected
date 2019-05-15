@@ -190,19 +190,35 @@ public class LevelParser {
         for (XmlReader.Element e:objects){
             if(e.get("template").equals("GreenWall.tx")){
                 parseWall(e, testLevel);
-                testLevel.exteriorwall.type.add(0);
+                testLevel.exteriorwall.type.add(10);
             }
             if(e.get("template").equals("BlueWall.tx")){
                 parseWall(e, testLevel);
-                testLevel.exteriorwall.type.add(1);
+                testLevel.exteriorwall.type.add(0);
             }
             if(e.get("template").equals("OrangeWall.tx")){
                 parseWall(e, testLevel);
-                testLevel.exteriorwall.type.add(2);
+                testLevel.exteriorwall.type.add(5);
             }
             if(e.get("template").equals("RedWall.tx")){
                 parseWall(e, testLevel);
-                testLevel.exteriorwall.type.add(3);
+                testLevel.exteriorwall.type.add(20);
+            }
+            if(e.get("template").substring(0,5).equals("walls")){
+                String[] warray = e.get("template").split("/");
+                int type = 0;
+                switch(warray[1]){
+                    case "white": type+=5;
+                    case "red": type+=5;
+                    case "grey": type+=5;
+                    case "green": type+=5;
+                    case "yellow": type+=5;
+                    case "blue":
+                    default: break;
+                }
+                parseWall(e, testLevel);
+                type+=Integer.parseInt(warray[2].substring(warray[2].length()-4,warray[2].length()-3))-1;
+                testLevel.exteriorwall.type.add(type);
             }
             if(e.get("template").equals("GreenKey.tx")){
                 testLevel.objective.textureIndex = 0;

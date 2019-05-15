@@ -95,7 +95,6 @@ public class ExteriorWall extends Obstacle{
         TextureRegion texture = JsonAssetManager.getInstance().getEntry("walls", TextureRegion.class);
         textures = texture.split(32,72)[0];
 
-
         for (int i = 0;i<positions.length;i+=2){
             WallBlock wb = new WallBlock();
             wb.initialize(json,positions[i],positions[i+1]);

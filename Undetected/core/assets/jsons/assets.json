@@ -301,12 +301,6 @@
 		"doors": {
 			"file": 	"textures/doors.png",
 			"wrap":  	false,
-//			"strip":	{
-//				"size":		18,
-//				"rows":		18,
-//				"cols":		1,
-//				"first":	0
-//			}
 		},
 		"question": {
 			"file":		"textures/question_mark.png",
@@ -532,6 +526,10 @@
 		},
 		"walls": {
 			"file": 	"textures/walls2.png",
+			"wrap":  	false
+		},
+		"walls2": {
+			"file": 	"textures/walls.png",
 			"wrap":  	false
 		},
 		"keys": {
