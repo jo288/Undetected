@@ -25,6 +25,11 @@
 		"color": [ 1, 0.9019608, 0.14901961, 1 ],
 		"distance": 7,
 		"angle": 30
+	},
+	{
+		"color": [ 1, 0.9019608, 0.14901961, 1 ],
+		"distance": 7,
+		"angle": 30
 	}
 ],
 "avatar": {
@@ -129,6 +134,14 @@
 		"rotationSpeed": 1,
 		"direction": [ 0, -1 ],
 		"lightIndex": 2
+	},
+	{
+		"name": "camera",
+		"pos": [ 4, 3 ],
+		"on": true,
+		"rotationSpeed": 1,
+		"direction": [ 1, 0 ],
+		"lightIndex": 3
 	}
 ],
 "decoratives": [],

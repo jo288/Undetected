@@ -382,9 +382,9 @@
 			"file": 	"textures/groundbutton_final.png",
 			"wrap":  	false,
 			"strip":	{
-				"size":		4,
+				"size":		7,
 				"rows":		1,
-				"cols":		4,
+				"cols":		7,
 				"first":	0
 			}
 		},
@@ -405,6 +405,36 @@
 				"size":		4,
 				"rows":		1,
 				"cols":		4,
+				"first":	0
+			}
+		},
+		"servertower": {
+			"file": 	"textures/servertower.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"experiment1": {
+			"file": 	"textures/experiment1.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		5,
+				"rows":		1,
+				"cols":		5,
+				"first":	0
+			}
+		},
+		"experiment2": {
+			"file": 	"textures/experiment2.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		5,
+				"rows":		1,
+				"cols":		5,
 				"first":	0
 			}
 		},

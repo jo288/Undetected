@@ -176,7 +176,7 @@ public class SwitchModel extends BoxObstacle{
 
         if (!switched) {
 //            setTexture(offTexture);
-            filmstrip.setFrame(6);
+            filmstrip.setFrame(filmstrip.getSize()-1);
         } else {
 //            setTexture(onTexture);
             filmstrip.setFrame(0);
@@ -191,7 +191,7 @@ public class SwitchModel extends BoxObstacle{
             return;
         }
         if (animateOff){
-            if(filmstrip.getFrame()>=6) {
+            if(filmstrip.getFrame()>=filmstrip.getSize()-1) {
                 animateOff = false;
             }else{
                 filmstrip.setFrame(filmstrip.getFrame()+1);

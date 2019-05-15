@@ -186,5 +186,15 @@
   <object id="155" template="DoorOpenSide.tx" name="door3" x="480" y="544"/>
   <object id="158" template="GreenWall.tx" x="160" y="128"/>
   <object id="160" template="GreenWall.tx" x="480" y="576"/>
+  <object id="159" template="Camera.tx" x="128" y="544">
+   <properties>
+    <property name="directionX" type="int" value="1"/>
+    <property name="directionY" type="int" value="0"/>
+    <property name="lightAngle" type="float" value="30"/>
+    <property name="lightColor" type="color" value="#ffffe626"/>
+    <property name="lightRadius" type="float" value="7"/>
+    <property name="rotationSpeed" type="float" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
