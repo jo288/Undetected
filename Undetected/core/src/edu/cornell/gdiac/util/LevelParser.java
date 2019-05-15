@@ -135,6 +135,7 @@ public class LevelParser {
         XmlReader x = new XmlReader();
         XmlReader.Element xmlLevel = x.parse(fh);
         Level testLevel = new Level();
+        int firstTileIndex = 1;
 
         testLevel.boardSize = new int[] {xmlLevel.getInt("width"),xmlLevel.getInt("height")};
         testLevel.graphicSize = new int[]{testLevel.boardSize[0]*32,testLevel.boardSize[1]*32};
@@ -145,6 +146,15 @@ public class LevelParser {
             testLevel.lighting.color[1] = Integer.parseInt(t.substring(5, 7), 16) / 255f;
             testLevel.lighting.color[2] = Integer.parseInt(t.substring(7, 9), 16) / 255f;
         } catch (Exception e){}
+        try {
+            Array<XmlReader.Element> tilesets = xmlLevel.getChildrenByNameRecursively("tileset");
+            for(XmlReader.Element t: tilesets){
+                if (t.get("source").equals("FloorTile.tsx")){
+                    firstTileIndex = t.getInt("firstgid");
+                    System.out.println(firstTileIndex);
+                }
+            }
+        }catch (Exception e){}
 
         try {
             XmlReader.Element tileLayer = xmlLevel.getChildByName("layer");
@@ -163,9 +173,13 @@ public class LevelParser {
                 }
                 if (searchCoordinateArrays(i % testLevel.boardSize[0],testLevel.boardSize[1] - 1 - (i / testLevel.boardSize[0]),testLevel.exteriorwall.pos)
                         || searchCoordinateArrays(i % testLevel.boardSize[0],testLevel.boardSize[1] - 1 - (i / testLevel.boardSize[0]),testLevel.interiorwall.pos)){
-                    testLevel.tiles.add(0);
+                    testLevel.tiles.add(firstTileIndex);
                 }else{
-                    testLevel.tiles.add(Integer.parseInt(String.valueOf(tileDataArray[i])));
+                    int t = Integer.parseInt(String.valueOf(tileDataArray[i]));
+                    if (t>=firstTileIndex)
+                        testLevel.tiles.add(t-firstTileIndex+1);
+                    else
+                        testLevel.tiles.add(0);
                 }
             }
         } catch (Exception e){}
@@ -287,21 +301,21 @@ public class LevelParser {
                 b3.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
                 testLevel.boxes.add(b3);
             }
-            if (e.get("template").equals("DeskLeft.tx")){
+            if (e.get("template").equals("decoratives/DeskLeft.tx")){
                 Decorative deskl = new Decorative();
                 deskl.type = "desk";
                 deskl.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
                 deskl.direction = "left";
                 testLevel.decoratives.add(deskl);
             }
-            if (e.get("template").equals("DeskRight.tx")){
+            if (e.get("template").equals("decoratives/DeskRight.tx")){
                 Decorative deskr = new Decorative();
                 deskr.type = "desk";
                 deskr.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
                 deskr.direction = "right";
                 testLevel.decoratives.add(deskr);
             }
-            if (e.get("template").equals("DeskUp.tx")){
+            if (e.get("template").equals("decoratives/DeskUp.tx")){
                 Decorative desku = new Decorative();
                 desku.type = "desk";
                 desku.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};

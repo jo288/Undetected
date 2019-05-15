@@ -126,7 +126,7 @@ public class Board {
 			if (tiles[i] == 0)
 				getTileState(xindex,yindex).isValid = false;
 			else
-				getTileState(xindex,yindex).textureIndex = (tiles[i] - 1<4?tiles[i]-1:0);
+				getTileState(xindex,yindex).textureIndex = (tiles[i] - 1<9?tiles[i]-1:0);
 		}
 	}
 

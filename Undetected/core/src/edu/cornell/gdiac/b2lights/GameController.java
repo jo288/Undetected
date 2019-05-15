@@ -473,17 +473,17 @@ public class GameController implements Screen, ContactListener {
 					showExit = false;
 					panToPlayer = false;
 				}
-				cam.position.x += deltaX;
-				cam.position.y += deltaY;
+				cam.position.x += Math.round(deltaX);
+				cam.position.y += Math.round(deltaY);
 			}
 			else {
-				cam.position.x += deltaX;
-				cam.position.y += deltaY;
+				cam.position.x += Math.round(deltaX);
+				cam.position.y += Math.round(deltaY);
 			}
 		}
 		else{
-			cam.position.x += (MathUtils.clamp(level.getExit().getX() * sx, cx - dx, cx + dx) - cam.position.x) * dt * 3.2;
-			cam.position.y += (MathUtils.clamp(level.getExit().getY() * sy, cy - dy, cy + dy) - cam.position.y) * dt * 3.2;
+			cam.position.x += Math.round((MathUtils.clamp(level.getExit().getX() * sx, cx - dx, cx + dx) - cam.position.x) * dt * 3.2);
+			cam.position.y += Math.round((MathUtils.clamp(level.getExit().getY() * sy, cy - dy, cy + dy) - cam.position.y) * dt * 3.2);
 		}
 		//pan the rayhandler camera
 		OrthographicCamera rcam = level.raycamera;
@@ -1387,11 +1387,15 @@ public class GameController implements Screen, ContactListener {
 						if (ai.getGuard().sector == ((Laser) bd1).sector) {
 							ai.setAlarmed();
 							ai.setProtect(bd1);
-							if (music) {
-								currentSong.setVolume(DEFAULT_VOL/3);
-							}
-							((Laser) bd1).playAlarm();
 						}
+					}
+
+					if (music) {
+						currentSong.setVolume(DEFAULT_VOL/3);
+					}
+					if(!((Laser) bd1).stillPlaying()) {
+						((Laser) bd1).playAlarm();
+						((Laser) bd1).setAlert(true);
 					}
 					if (!boxes.contains(bd2) && bd2 instanceof MoveableBox) {
 						boxes.add(bd2);
@@ -1411,11 +1415,15 @@ public class GameController implements Screen, ContactListener {
 						if (ai.getGuard().sector == ((Laser) bd2).sector) {
 							ai.setAlarmed();
 							ai.setProtect(bd2);
-							if (music) {
-								currentSong.setVolume(DEFAULT_VOL/3);
-							}
-							((Laser) bd2).playAlarm();
 						}
+					}
+
+					if (music) {
+						currentSong.setVolume(DEFAULT_VOL/3);
+					}
+					if(!((Laser) bd2).stillPlaying()) {
+						((Laser) bd2).playAlarm();
+						((Laser) bd2).setAlert(true);
 					}
 					if (!boxes.contains(bd1) && bd1 instanceof MoveableBox) {
 						boxes.add(bd1);

@@ -405,6 +405,25 @@ public class LevelModel {
 			activate(goalDoor);
 		}
 
+		HashMap<String, DoorModel> doorMap = new HashMap<>();
+		doors = new ArrayList<DoorModel>();
+		JsonValue doordata = levelFormat.getChild("doors");
+		int[] doorPositions;
+		while (doordata!=null){
+			String doorName = doordata.get("name").asString();
+			DoorModel door = new DoorModel();
+			doorMap.put(doorName, door);
+			doors.add(door);
+			door.initialize(doordata);
+			if (door.getTexture().getRegionWidth()<tSize)
+				door.setWidth(door.getTexture().getRegionWidth()/scale.x);
+			if (door.getTexture().getRegionHeight()<tSize)
+				door.setHeight(door.getTexture().getRegionHeight()/scale.y);
+			door.setDrawScale(scale);
+			activate(door);
+			doordata = doordata.next();
+		}
+
 		JsonValue bounds = levelFormat.get("exteriorwall");
 		ExteriorWall ew = new ExteriorWall();
 		ew.initialize(bounds);
@@ -521,25 +540,6 @@ public class LevelModel {
 			activate(l);
 			l.start();
 			laserdata = laserdata.next();
-		}
-
-		HashMap<String, DoorModel> doorMap = new HashMap<>();
-		doors = new ArrayList<DoorModel>();
-		JsonValue doordata = levelFormat.getChild("doors");
-		int[] doorPositions;
-		while (doordata!=null){
-			String doorName = doordata.get("name").asString();
-			DoorModel door = new DoorModel();
-			doorMap.put(doorName, door);
-			doors.add(door);
-			door.initialize(doordata);
-			if (door.getTexture().getRegionWidth()<tSize)
-				door.setWidth(door.getTexture().getRegionWidth()/scale.x);
-			if (door.getTexture().getRegionHeight()<tSize)
-				door.setHeight(door.getTexture().getRegionHeight()/scale.y);
-			door.setDrawScale(scale);
-			activate(door);
-			doordata = doordata.next();
 		}
 
 		switches = new ArrayList<SwitchModel>();

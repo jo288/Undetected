@@ -9,9 +9,9 @@
  <tileset firstgid="48" source="keys.tsx"/>
  <tileset firstgid="52" source="Guard.tsx"/>
  <tileset firstgid="53" source="FloorTile.tsx"/>
- <tileset firstgid="57" source="Player.tsx"/>
- <tileset firstgid="58" source="switchfront.tsx"/>
- <tileset firstgid="68" source="Laser.tsx"/>
+ <tileset firstgid="62" source="Player.tsx"/>
+ <tileset firstgid="63" source="switchfront.tsx"/>
+ <tileset firstgid="73" source="Laser.tsx"/>
  <layer id="1" name="Tile Layer 1" width="42" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -155,7 +155,7 @@
   <object id="209" template="RedWall.tx" x="768" y="864"/>
   <object id="210" template="RedWall.tx" x="768" y="928"/>
   <object id="211" template="RedWall.tx" x="800" y="928"/>
-  <object id="214" template="DeskLeft.tx" x="800" y="864"/>
+  <object id="214" template="decoratives/DeskLeft.tx" x="800" y="864"/>
   <object id="215" template="RedWall.tx" x="1024" y="896"/>
   <object id="216" template="RedWall.tx" x="1024" y="864"/>
   <object id="218" template="RedWall.tx" x="1024" y="832"/>
@@ -168,7 +168,7 @@
   <object id="225" template="RedWall.tx" x="1024" y="736"/>
   <object id="226" template="RedWall.tx" x="1120" y="800"/>
   <object id="228" template="RedWall.tx" x="1120" y="768"/>
-  <object id="230" template="DeskRight.tx" x="1088" y="768"/>
+  <object id="230" template="decoratives/DeskRight.tx" x="1088" y="768"/>
   <object id="231" template="RedWall.tx" x="864" y="832"/>
   <object id="232" template="RedWall.tx" x="864" y="800"/>
   <object id="233" template="RedWall.tx" x="864" y="768"/>
@@ -180,7 +180,7 @@
   <object id="239" template="RedWall.tx" x="768" y="672"/>
   <object id="240" template="RedWall.tx" x="768" y="736"/>
   <object id="241" template="RedWall.tx" x="800" y="736"/>
-  <object id="242" template="DeskLeft.tx" x="800" y="672"/>
+  <object id="242" template="decoratives/DeskLeft.tx" x="800" y="672"/>
   <object id="244" template="RedWall.tx" x="864" y="736"/>
   <object id="245" template="RedWall.tx" x="864" y="640"/>
   <object id="247" template="RedWall.tx" x="416" y="1152"/>
@@ -204,10 +204,10 @@
   <object id="274" template="RedWall.tx" x="864" y="352"/>
   <object id="275" template="RedWall.tx" x="832" y="480"/>
   <object id="276" template="RedWall.tx" x="832" y="576"/>
-  <object id="277" template="DeskLeft.tx" x="864" y="512"/>
+  <object id="277" template="decoratives/DeskLeft.tx" x="864" y="512"/>
   <object id="278" template="RedWall.tx" x="1056" y="480"/>
   <object id="279" template="RedWall.tx" x="1056" y="672"/>
-  <object id="280" template="DeskRight.tx" x="1024" y="608"/>
+  <object id="280" template="decoratives/DeskRight.tx" x="1024" y="608"/>
   <object id="282" template="RedWall.tx" x="896" y="192"/>
   <object id="283" template="RedWall.tx" x="864" y="320"/>
   <object id="284" template="RedWall.tx" x="864" y="192"/>

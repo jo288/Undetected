@@ -677,7 +677,7 @@ public class GuardModel extends CharacterModel {
                 64f*sensitiveRadius/ringTexture.getRegionWidth(), 64f*sensitiveRadius/ringTexture.getRegionHeight(), 0.4f);
 
         if (guardanimation != null) {
-            canvas.draw(guardanimation,Color.WHITE,origin.x,origin.y,getX()*drawScale.x,getY()*drawScale.y-getHeight()/2f*drawScale.y,0f,scale,scale);
+            canvas.draw(guardanimation,Color.WHITE,origin.x,origin.y,Math.round(getX()*drawScale.x),Math.round(getY()*drawScale.y-getHeight()/2f*drawScale.y),0f,scale,scale);
         }
 
 //        if(animateOn){

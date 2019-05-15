@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="24" height="14" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="94">
  <tileset firstgid="1" source="FloorTile.tsx"/>
- <tileset firstgid="5" source="Guard.tsx"/>
- <tileset firstgid="6" source="Player.tsx"/>
- <tileset firstgid="7" source="Exit.tsx"/>
- <tileset firstgid="8" source="Box2.tsx"/>
- <tileset firstgid="9" source="Objective.tsx"/>
- <tileset firstgid="10" source="Laser.tsx"/>
- <tileset firstgid="11" source="DeskRight.tsx"/>
- <tileset firstgid="15" source="wallgreen.tsx"/>
- <tileset firstgid="16" source="keys.tsx"/>
- <tileset firstgid="20" source="walls.tsx"/>
+ <tileset firstgid="10" source="Guard.tsx"/>
+ <tileset firstgid="11" source="Player.tsx"/>
+ <tileset firstgid="12" source="Exit.tsx"/>
+ <tileset firstgid="13" source="Box2.tsx"/>
+ <tileset firstgid="14" source="Objective.tsx"/>
+ <tileset firstgid="15" source="Laser.tsx"/>
+ <tileset firstgid="16" source="DeskRight.tsx"/>
+ <tileset firstgid="20" source="wallgreen.tsx"/>
+ <tileset firstgid="21" source="keys.tsx"/>
+ <tileset firstgid="25" source="walls.tsx"/>
  <layer id="1" name="Tile Layer 1" width="24" height="14">
   <data encoding="csv">
 0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -45,7 +45,7 @@
     <property name="timetolive" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="19" template="DeskLeft.tx" x="32" y="64"/>
+  <object id="19" template="decoratives/DeskLeft.tx" x="32" y="64"/>
   <object id="20" template="GreenWall.tx" x="0" y="32"/>
   <object id="21" template="GreenWall.tx" x="0" y="64"/>
   <object id="22" template="GreenWall.tx" x="0" y="96"/>

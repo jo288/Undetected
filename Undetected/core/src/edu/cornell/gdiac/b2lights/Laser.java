@@ -42,8 +42,16 @@ public class Laser extends BoxObstacle {
 
     /** FilmStrip pointer to the texture region */
     private FilmStrip filmstrip;
-    private FilmStrip sidefilmstrip;
+    private FilmStrip angryfilmstrip;
+    private FilmStrip alertfilmstrip;
     int animateCool;
+
+    private Color lasercolor;
+    private float laserwidth;
+
+    private boolean isAlert = false;
+    private boolean isAngry = false;
+    private boolean animateAngry = false;
 
     private Music alarmSound;
     private long sndcue;
@@ -128,6 +136,8 @@ public class Laser extends BoxObstacle {
     }
 
     public void initialize(JsonValue json) {
+        laserwidth = 2f;
+        lasercolor = new Color(Color.GREEN);
         setName(json.name());
         int[] pos  = json.get("pos").asIntArray();
         float[] size = json.get("size").asFloatArray();
@@ -180,22 +190,54 @@ public class Laser extends BoxObstacle {
         setTexture(texture);
         setOrigin(origin.x, 0);
 
+        setWidth(getTexture().getRegionWidth()*laserwidth/drawScale.x);
+
 
         if (isHorizontal) {
             texture = JsonAssetManager.getInstance().getEntry("sidelaserAnimation", TextureRegion.class);
             try {
-//			filmstrip = (FilmStrip)texture;
-                filmstrip = new FilmStrip(texture.getTexture(), 1, 6);
+                filmstrip = new FilmStrip(texture.getTexture(), 1, 9);
             } catch (Exception e) {
                 filmstrip = null;
             }
         }else {
             texture = JsonAssetManager.getInstance().getEntry("laserAnimation", TextureRegion.class);
             try {
-//			filmstrip = (FilmStrip)texture;
-                filmstrip = new FilmStrip(texture.getTexture(), 1, 6);
+                filmstrip = new FilmStrip(texture.getTexture(), 1, 9);
             } catch (Exception e) {
                 filmstrip = null;
+            }
+        }
+
+        if (isHorizontal) {
+            texture = JsonAssetManager.getInstance().getEntry("sidelaserAngryAnimation", TextureRegion.class);
+            try {
+                angryfilmstrip = new FilmStrip(texture.getTexture(), 1, 5);
+            } catch (Exception e) {
+                angryfilmstrip = null;
+            }
+        }else {
+            texture = JsonAssetManager.getInstance().getEntry("laserAngryAnimation", TextureRegion.class);
+            try {
+                angryfilmstrip = new FilmStrip(texture.getTexture(), 1, 5);
+            } catch (Exception e) {
+                angryfilmstrip = null;
+            }
+        }
+
+        if (isHorizontal) {
+            texture = JsonAssetManager.getInstance().getEntry("sidelaserAlertAnimation", TextureRegion.class);
+            try {
+                alertfilmstrip = new FilmStrip(texture.getTexture(), 1, 5);
+            } catch (Exception e) {
+                alertfilmstrip = null;
+            }
+        }else {
+            texture = JsonAssetManager.getInstance().getEntry("laserAlertAnimation", TextureRegion.class);
+            try {
+                alertfilmstrip = new FilmStrip(texture.getTexture(), 1, 5);
+            } catch (Exception e) {
+                alertfilmstrip = null;
             }
         }
 
@@ -236,6 +278,11 @@ public class Laser extends BoxObstacle {
         }
     }
 
+    public void setAlert(boolean value){
+        isAlert = value;
+        pause();
+    }
+
     /**
      * Updates the object's physics state (NOT GAME LOGIC).
      *
@@ -244,59 +291,80 @@ public class Laser extends BoxObstacle {
      * //@param delta Number of seconds since last animation frame
      */
     public void update(float dt) {
-
-        if (time_to_live == 0) {
-            isOn = false;
-            time_to_live = LIFESPAN;
-        } else if (time_to_live<=60){
-            isOn = false;
-        } else {
-            isOn = true;
-        }
-        time_to_live--;
-
-        //Animate
-        if (time_to_live <= -1) {
-            filmstrip.setFrame(0);
-        }
-        else if (time_to_live <= 8 && time_to_live >= 0) {
-            if (filmstrip != null) {
-//                int next = (filmstrip.getFrame()+1) % filmstrip.getSize();
-                filmstrip.setFrame(5-time_to_live/2);
+        if(alarmSound.isPlaying()){
+            animateCool++;
+            if (angryfilmstrip.getFrame()<4){
+                isAngry = true;
+                if(animateCool>=2){
+                    angryfilmstrip.setFrame(angryfilmstrip.getFrame()+1);
+//                    lasercolor.sub(0,0.2f,0,0f);
+                    lasercolor.set(lasercolor.r+0.2f,lasercolor.g-0.2f,0,1);
+//                    lasercolor.g = lasercolor.g-0.2f;
+//                    lasercolor.r = lasercolor.r+0.2f;
+//                    lasercolor = Color.RED;
+                    animateCool = 0;
+                    laserwidth-=0.2f;
+                }
+            }else{
+                isAngry = false;
+                if(animateCool<=9) {
+                    alertfilmstrip.setFrame(animateCool / 2);
+                }else if(animateCool<=15){
+                    alertfilmstrip.setFrame(8-animateCool/2);
+                }else{
+                    alertfilmstrip.setFrame(0);
+                    animateCool = 0;
+                }
             }
-        }else if (time_to_live>=60 && time_to_live<=68){
-            if (filmstrip != null) {
+        }else if (isAlert){
+            animateCool++;
+            if (angryfilmstrip.getFrame()>0){
+                if(animateCool>=2){
+                    isAngry = true;
+                    angryfilmstrip.setFrame(angryfilmstrip.getFrame()-1);
+                    animateCool = 0;
+                    lasercolor.set(lasercolor.r-0.2f,lasercolor.g+0.2f,0,1);
+//                    lasercolor.g = lasercolor.g+0.2f;
+//                    lasercolor.r = lasercolor.r-0.2f;
+                    laserwidth+=0.2f;
+                }
+            }else{
+                resume();
+                isAlert = false;
+                isAngry = false;
+            }
+        }else {
+            if (time_to_live == 0) {
+                isOn = false;
+                time_to_live = LIFESPAN;
+            } else if (time_to_live <= 60) {
+                isOn = false;
+            } else {
+                isOn = true;
+            }
+            time_to_live--;
+
+            //Animate
+            if (time_to_live <= -1) {
+                filmstrip.setFrame(8);
+            } else if (time_to_live <= 8 && time_to_live >= 0) {
+                if (filmstrip != null) {
+//                int next = (filmstrip.getFrame()+1) % filmstrip.getSize();
+//                filmstrip.setFrame(5-time_to_live/2);
+                    filmstrip.setFrame(time_to_live);
+                }
+            } else if (time_to_live >= 60 && time_to_live <= 68) {
+                if (filmstrip != null) {
 //                int next = (filmstrip.getFrame()+5) % filmstrip.getSize();
 //                filmstrip.setFrame(next);
-                filmstrip.setFrame((time_to_live-59)/2);
-            }
-        }
-        else if (time_to_live<60) {
-            filmstrip.setFrame(0);
-        }
-        else {
-            filmstrip.setFrame(5);
-        }
-
-        /*
-        // Animate if necessary
-        if (animate && animateCool == 0) {
-            if (filmstrip != null) {
-                int next = (filmstrip.getFrame()+1) % filmstrip.getSize();
-                filmstrip.setFrame(next);
-            }
-            animateCool = 6;
-        } else if (walkCool > 0) {
-            walkCool--;
-        } else if (!animate) {
-            if (filmstrip != null) {
+                    filmstrip.setFrame((68 - time_to_live));
+                }
+            } else if (time_to_live < 60) {
+                filmstrip.setFrame(8);
+            } else {
                 filmstrip.setFrame(0);
             }
-            animateCool = 0;
         }
-
-        super.update(dt);
-        */
     }
 
     public void resume() {
@@ -329,25 +397,39 @@ public class Laser extends BoxObstacle {
     @Override
     public void draw(ObstacleCanvas canvas){
         if (!isHorizontal) {
-            canvas.draw(filmstrip, Color.WHITE, 16, origin.y, getX() * drawScale.x, getY() * drawScale.y + getHeight() / 2 * drawScale.y, 0, 1, 1);
+            if(isAngry){
+                canvas.draw(angryfilmstrip, Color.WHITE, 16, origin.y, getX() * drawScale.x, getY() * drawScale.y + getHeight() / 2 * drawScale.y, 0, 1, 1);
+            }else if(alarmSound.isPlaying()){
+                canvas.draw(alertfilmstrip, Color.WHITE, 16, origin.y, getX() * drawScale.x, getY() * drawScale.y + getHeight() / 2 * drawScale.y, 0, 1, 1);
+            }else {
+                canvas.draw(filmstrip, Color.WHITE, 16, origin.y, getX() * drawScale.x, getY() * drawScale.y + getHeight() / 2 * drawScale.y, 0, 1, 1);
+            }
             if (isOn) {
                 //canvas.setBlendState(ObstacleCanvas.BlendState.ALPHA_BLEND);
-                canvas.draw(texture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y - getHeight() / 2 * drawScale.y, getAngle(), 1.0f, getHeight() + 0.5f);
+                canvas.draw(texture, lasercolor, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y - getHeight() / 2 * drawScale.y, getAngle(), laserwidth, getHeight() + 0.5f);
             } else {
                 //draw transparent texture instead
-                canvas.draw(texture, Color.WHITE, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y - getHeight() / 2 * drawScale.y, getAngle(), 1, getHeight() + 0.5f, 0.0f);
+//                canvas.draw(texture, Color.GREEN, origin.x, origin.y, getX() * drawScale.x, getY() * drawScale.y - getHeight() / 2 * drawScale.y, getAngle(), laserwidth, getHeight() + 0.5f, 0.0f);
 
             }
         }else{
+
             if (isOn) {
-                //canvas.setBlendState(ObstacleCanvas.BlendState.ALPHA_BLEND);
-                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x + getHeight()/2*drawScale.x,getY()*drawScale.y,getAngle(),1f,getHeight());
+                canvas.draw(texture,lasercolor,origin.x,origin.y,getX()*drawScale.x + getHeight()/2*drawScale.x,getY()*drawScale.y,getAngle(),laserwidth,getHeight());
             } else {
                 //draw transparent texture instead
-                canvas.draw(texture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x + getHeight()/2*drawScale.x,getY()*drawScale.y,getAngle(),1f,getHeight(),0.0f);
+//                canvas.draw(texture,Color.GREEN,origin.x,origin.y,getX()*drawScale.x + getHeight()/2*drawScale.x,getY()*drawScale.y,getAngle(),laserwidth,getHeight(),0.0f);
             }
-            canvas.draw(filmstrip, Color.WHITE, 16, 16, getX() * drawScale.x + getHeight()/2*drawScale.x, getY() * drawScale.y, 3.1415f, 1, 1);
-            canvas.draw(filmstrip, Color.WHITE, 16, 16, getX() * drawScale.x - getHeight()/2*drawScale.x, getY() * drawScale.y, 0, 1, 1);
+            if(isAngry){
+                canvas.draw(angryfilmstrip, Color.WHITE, 16, 16, getX() * drawScale.x + getHeight()/2*drawScale.x, getY() * drawScale.y, 3.1415f, 1, 1);
+                canvas.draw(angryfilmstrip, Color.WHITE, 16, 16, getX() * drawScale.x - getHeight()/2*drawScale.x, getY() * drawScale.y, 0, 1, 1);
+            }else if(alarmSound.isPlaying()){
+                canvas.draw(alertfilmstrip, Color.WHITE, 16, 16, getX() * drawScale.x + getHeight()/2*drawScale.x, getY() * drawScale.y, 3.1415f, 1, 1);
+                canvas.draw(alertfilmstrip, Color.WHITE, 16, 16, getX() * drawScale.x - getHeight()/2*drawScale.x, getY() * drawScale.y, 0, 1, 1);
+            }else {
+                canvas.draw(filmstrip, Color.WHITE, 16, 16, getX() * drawScale.x + getHeight()/2*drawScale.x, getY() * drawScale.y, 3.1415f, 1, 1);
+                canvas.draw(filmstrip, Color.WHITE, 16, 16, getX() * drawScale.x - getHeight()/2*drawScale.x, getY() * drawScale.y, 0, 1, 1);
+            }
         }
     }
 }

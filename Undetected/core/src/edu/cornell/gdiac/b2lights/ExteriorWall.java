@@ -40,6 +40,11 @@ public class ExteriorWall extends Obstacle{
             setPosition(posx+0.5f,posy+1f);
             setDimension(1,2);
 
+//            if(posx==15&&posy==2){
+//                setDimension(1,1);
+//                setPosition(posx+0.5f,posy+0.5f);
+//            }
+
             setBodyType(BodyDef.BodyType.StaticBody);
             setDensity(0);
             setFriction(0.2f);

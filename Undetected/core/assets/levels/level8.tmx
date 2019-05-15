@@ -9,7 +9,7 @@
  <tileset firstgid="25" source="keys.tsx"/>
  <tileset firstgid="29" source="Box2.tsx"/>
  <tileset firstgid="30" source="FloorTile.tsx"/>
- <tileset firstgid="34" source="Player.tsx"/>
+ <tileset firstgid="39" source="Player.tsx"/>
  <layer id="1" name="Tile Layer 1" width="40" height="70">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -162,7 +162,7 @@
   <object id="106" template="GreenWall.tx" x="800" y="1472"/>
   <object id="107" template="GreenWall.tx" x="864" y="1472"/>
   <object id="111" template="GreenWall.tx" x="832" y="1472"/>
-  <object id="113" template="DeskRight.tx" x="832" y="1504"/>
+  <object id="113" template="decoratives/DeskRight.tx" x="832" y="1504"/>
   <object id="114" template="Guard.tx" x="608" y="1696">
    <properties>
     <property name="IsPatrolling" type="bool" value="true"/>

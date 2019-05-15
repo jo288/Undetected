@@ -31,7 +31,6 @@
     	"charfront": {
     		"file": 	"textures/character_front.png",
     		"wrap":  	false,
-			"isLinear": true,
     		"strip":	{
     			"size":		8,
     			"rows":		1,
@@ -42,7 +41,6 @@
 		"charleft": {
 			"file": 	"textures/character_left.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -53,7 +51,6 @@
 		"charright": {
 			"file": 	"textures/character_right.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -64,7 +61,6 @@
 		"charback": {
 			"file": 	"textures/character_back.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -75,7 +71,6 @@
 		"boxcharfront": {
 			"file": 	"textures/boxdude_front.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -86,7 +81,6 @@
 		"boxcharleft": {
 			"file": 	"textures/boxdude_left.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -97,7 +91,6 @@
 		"boxcharright": {
 			"file": 	"textures/boxdude_right.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -108,7 +101,6 @@
 		"boxcharback": {
 			"file": 	"textures/boxdude_back.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -139,7 +131,6 @@
 		"guardback":{
 			"file": 	"textures/guard_back.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -148,23 +139,63 @@
 			}
 		},
 		"laserAnimation": {
-			"file": 	"textures/laseranimation.png",
+			"file": 	"textures/laserv2.png",
 			"wrap":  	false,
 			"strip":	{
-				"size":		6,
+				"size":		9,
 				"rows":		1,
-				"cols":		6,
+				"cols":		9,
 				"first":	0
 			}
 		},
 		"sidelaserAnimation": {
-			"file": 	"textures/laserside.png",
+			"file": 	"textures/sidelaser.png",
 			"wrap":  	false,
 			"strip":	{
-				"size":		6,
+				"size":		9,
 				"rows":		1,
-				"cols":		6,
+				"cols":		9,
 				"first":	0
+			}
+		},
+		"laserAngryAnimation": {
+			"file": 	"textures/angrylaser.png",
+			"wrap":  	false,
+			"strip": {
+				"size": 5,
+				"rows": 1,
+				"cols": 5,
+				"first": 0
+			}
+		},
+		"sidelaserAngryAnimation": {
+			"file": 	"textures/angrylaserside.png",
+			"wrap":  	false,
+			"strip": {
+				"size": 5,
+				"rows": 1,
+				"cols": 5,
+				"first": 0
+			}
+		},
+		"laserAlertAnimation": {
+			"file": 	"textures/alarmlaser.png",
+			"wrap":  	false,
+			"strip": {
+				"size": 5,
+				"rows": 1,
+				"cols": 5,
+				"first": 0
+			}
+		},
+		"sidelaserAlertAnimation": {
+			"file": 	"textures/sidealarmlaser.png",
+			"wrap":  	false,
+			"strip": {
+				"size": 5,
+				"rows": 1,
+				"cols": 5,
+				"first": 0
 			}
 		},
 		"questionAnimation": {
@@ -190,7 +221,6 @@
 		"hostileFrontAnimation": {
 			"file": 	"textures/hostilefront.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -201,7 +231,6 @@
 		"friendlyFrontAnimation": {
 			"file": 	"textures/friendlyfront.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -212,7 +241,6 @@
 		"hostileLeftAnimation": {
 			"file": 	"textures/hostileleft.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -223,7 +251,6 @@
 		"friendlyLeftAnimation": {
 			"file": 	"textures/friendlyleft.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -234,7 +261,6 @@
 		"hostileRightAnimation": {
 			"file": 	"textures/hostileright.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -245,7 +271,6 @@
 		"friendlyRightAnimation": {
 			"file": 	"textures/friendlyright.png",
 			"wrap":  	false,
-			"isLinear": true,
 			"strip":	{
 				"size":		8,
 				"rows":		1,
@@ -354,7 +379,7 @@
 			}
 		},
 		"switchAnimation": {
-			"file": 	"textures/groundbutton.png",
+			"file": 	"textures/groundbutton_final.png",
 			"wrap":  	false,
 			"strip":	{
 				"size":		4,
@@ -384,7 +409,7 @@
 			}
 		},
 		"laser": {
-			"file": 	"textures/laser.png",
+			"file": 	"textures/lasertest.png",
 			"wrap": 	true
 		},
 		"boxDude": {
@@ -464,11 +489,11 @@
 			"wrap": 	false
 		},
 		"floors": {
-			"file": 	"textures/floors.png",
+			"file": 	"textures/floors2.png",
 			"wrap":  	false
 		},
 		"walls": {
-			"file": 	"textures/walls.png",
+			"file": 	"textures/walls2.png",
 			"wrap":  	false
 		},
 		"keys": {

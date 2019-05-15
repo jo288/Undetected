@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="60" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="610">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="60" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="1" nextobjectid="610">
  <tileset firstgid="1" source="Exit.tsx"/>
  <tileset firstgid="2" source="walls.tsx"/>
  <tileset firstgid="6" source="Door.tsx"/>
@@ -12,7 +12,7 @@
  <tileset firstgid="57" source="switchfront.tsx"/>
  <tileset firstgid="67" source="Box2.tsx"/>
  <tileset firstgid="68" source="FloorTile.tsx"/>
- <tileset firstgid="72" source="Player.tsx"/>
+ <tileset firstgid="77" source="Player.tsx"/>
  <layer id="1" name="Tile Layer 1" width="60" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -399,7 +399,7 @@
   <object id="482" template="GreenWall.tx" x="1280" y="608"/>
   <object id="483" template="GreenWall.tx" x="1248" y="608"/>
   <object id="484" template="GreenWall.tx" x="1312" y="608"/>
-  <object id="485" template="DeskUp.tx" x="1280" y="640"/>
+  <object id="485" template="decoratives/DeskUp.tx" x="1280" y="640"/>
   <object id="488" template="RedKey.tx" x="1536" y="736">
    <properties>
     <property name="doors" value="door1,door2,door5"/>
@@ -417,8 +417,8 @@
     <property name="doors" value="door6,door7"/>
    </properties>
   </object>
-  <object id="523" template="DeskLeft.tx" x="1024" y="160"/>
-  <object id="524" template="DeskRight.tx" x="1088" y="160"/>
+  <object id="523" template="decoratives/DeskLeft.tx" x="1024" y="160"/>
+  <object id="524" template="decoratives/DeskRight.tx" x="1088" y="160"/>
   <object id="525" template="Laser.tx" name="laser5" x="1312" y="480" width="3" height="96">
    <properties>
     <property name="timetolive" type="int" value="-1"/>
@@ -471,11 +471,11 @@
   <object id="566" template="GreenWall.tx" x="928" y="160"/>
   <object id="567" template="GreenWall.tx" x="736" y="384"/>
   <object id="568" template="Guard.tx" x="800" y="192"/>
-  <object id="569" template="DeskUp.tx" x="800" y="160"/>
-  <object id="571" template="DeskLeft.tx" x="544" y="544"/>
-  <object id="572" template="DeskLeft.tx" x="544" y="704"/>
-  <object id="573" template="DeskRight.tx" x="800" y="544"/>
-  <object id="574" template="DeskRight.tx" x="800" y="704"/>
+  <object id="569" template="decoratives/DeskUp.tx" x="800" y="160"/>
+  <object id="571" template="decoratives/DeskLeft.tx" x="544" y="544"/>
+  <object id="572" template="decoratives/DeskLeft.tx" x="544" y="704"/>
+  <object id="573" template="decoratives/DeskRight.tx" x="800" y="544"/>
+  <object id="574" template="decoratives/DeskRight.tx" x="800" y="704"/>
   <object id="575" template="GreenWall.tx" x="1824" y="480"/>
   <object id="576" template="GreenWall.tx" x="1760" y="384"/>
   <object id="577" template="GreenWall.tx" x="1792" y="544"/>
@@ -500,7 +500,7 @@
   <object id="595" template="GreenWall.tx" x="992" y="1280"/>
   <object id="596" template="GreenWall.tx" x="864" y="1248"/>
   <object id="597" template="GreenWall.tx" x="864" y="1280"/>
-  <object id="598" template="DeskRight.tx" x="1792" y="448"/>
+  <object id="598" template="decoratives/DeskRight.tx" x="1792" y="448"/>
   <object id="600" template="Laser.tx" name="laser3" x="1024" y="640" width="3" height="96" rotation="90">
    <properties>
     <property name="timetolive" type="int" value="-1"/>
