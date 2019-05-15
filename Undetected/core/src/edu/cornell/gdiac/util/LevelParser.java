@@ -202,7 +202,7 @@ public class LevelParser {
             }
             if(e.get("template").equals("RedWall.tx")){
                 parseWall(e, testLevel);
-                testLevel.exteriorwall.type.add(20);
+                testLevel.exteriorwall.type.add(10);
             }
             if(e.get("template").substring(0,5).equals("walls")){
                 String[] warray = e.get("template").split("/");
@@ -416,9 +416,27 @@ public class LevelParser {
                 }
                 testLevel.lasers.add(l);
             }
-            if(e.get("template").equals("Camera.tx")){
+            if(e.get("template").substring(0,6).equals("Camera")){
                 Camera c = new Camera();
                 Light l = new Light();
+                switch(e.get("template")){
+                    case "CameraUp.tx":
+                        c.direction[0] = 0;
+                        c.direction[1] = 0;
+                        c.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                        break;
+                    case "CameraRight.tx":
+                        c.direction[0] = -1;
+                        c.direction[1] = 0;
+                        c.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32-1};
+                        break;
+                    case "CameraLeft.tx":
+                        c.direction[0] = 1;
+                        c.direction[1] = 0;
+                        c.pos = new int[] {e.getInt("x")/32-1,testLevel.boardSize[1]-e.getInt("y")/32};
+                        break;
+                    default:
+                }
                 Array<XmlReader.Element> properties = e.getChildrenByNameRecursively("property");
                 for (XmlReader.Element property: properties){
                     try {
@@ -428,12 +446,6 @@ public class LevelParser {
                                 break;
                             case "rotationSpeed":
                                 c.rotationSpeed = property.getFloat("value");
-                                break;
-                            case "directionX":
-                                c.direction[0] = property.getInt("value");
-                                break;
-                            case "directionY":
-                                c.direction[1] = property.getInt("value");
                                 break;
                             case "lightAngle":
                                 l.angle = property.getFloat("value");
@@ -459,7 +471,6 @@ public class LevelParser {
                     } catch (Exception ex) { System.err.println("camera property parsing error"+fh.name()+"\n"+ex.getMessage());}
                 }
                 c.name = (e.hasAttribute("name")?e.getAttribute("name"):c.name);
-                c.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
                 c.lightIndex = testLevel.guards.size + testLevel.cameras.size;
                 testLevel.cameras.add(c);
                 testLevel.lights.add(l);

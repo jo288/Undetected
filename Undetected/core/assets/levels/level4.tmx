@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="161">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="169">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="10" source="Objective.tsx"/>
  <tileset firstgid="11" source="Guard.tsx"/>
@@ -171,28 +171,22 @@
   <object id="137" template="GreenWall.tx" x="576" y="128"/>
   <object id="139" template="Exit.tx" x="128" y="128"/>
   <object id="140" template="GreenWall.tx" x="672" y="640"/>
-  <object id="150" template="Camera.tx" x="288" y="256">
-   <properties>
-    <property name="directionX" type="int" value="0"/>
-    <property name="directionY" type="int" value="-1"/>
-    <property name="lightAngle" type="float" value="30"/>
-    <property name="lightColor" type="color" value="#ffffe626"/>
-    <property name="lightRadius" type="float" value="7"/>
-    <property name="rotationSpeed" type="float" value="1"/>
-   </properties>
-  </object>
   <object id="151" template="PurpleKey.tx" x="800" y="544"/>
   <object id="155" template="doors/blue/DoorSideUpOpen.tx" name="door3" x="480" y="544"/>
   <object id="158" template="GreenWall.tx" x="160" y="128"/>
-  <object id="159" template="Camera.tx" x="128" y="544">
+  <object id="161" template="CameraUp.tx" x="288" y="256">
    <properties>
-    <property name="directionX" type="int" value="1"/>
-    <property name="directionY" type="int" value="0"/>
+    <property name="lightRadius" type="float" value="8"/>
+    <property name="rotationSpeed" type="float" value="0.80000000000000004"/>
+   </properties>
+  </object>
+  <object id="166" template="CameraLeft.tx" x="160" y="544">
+   <properties>
     <property name="lightAngle" type="float" value="30"/>
-    <property name="lightColor" type="color" value="#ffffe626"/>
     <property name="lightRadius" type="float" value="7"/>
     <property name="rotationSpeed" type="float" value="1"/>
    </properties>
   </object>
+  <object id="167" template="CameraRight.tx" x="448" y="352"/>
  </objectgroup>
 </map>

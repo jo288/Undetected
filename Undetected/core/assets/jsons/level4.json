@@ -22,14 +22,19 @@
 		"angle": 25
 	},
 	{
-		"color": [ 1, 0.9019608, 0.14901961, 1 ],
+		"color": [ 1, 1, 0, 1 ],
+		"distance": 8,
+		"angle": 25
+	},
+	{
+		"color": [ 1, 1, 0, 1 ],
 		"distance": 7,
 		"angle": 30
 	},
 	{
-		"color": [ 1, 0.9019608, 0.14901961, 1 ],
-		"distance": 7,
-		"angle": 30
+		"color": [ 1, 1, 0, 1 ],
+		"distance": 9,
+		"angle": 25
 	}
 ],
 "avatar": {
@@ -134,8 +139,8 @@
 		"name": "camera",
 		"pos": [ 9, 12 ],
 		"on": true,
-		"rotationSpeed": 1,
-		"direction": [ 0, -1 ],
+		"rotationSpeed": 0.8,
+		"direction": [ 0, 0 ],
 		"lightIndex": 2
 	},
 	{
@@ -145,6 +150,14 @@
 		"rotationSpeed": 1,
 		"direction": [ 1, 0 ],
 		"lightIndex": 3
+	},
+	{
+		"name": "camera",
+		"pos": [ 14, 8 ],
+		"on": true,
+		"rotationSpeed": 0.8,
+		"direction": [ -1, 0 ],
+		"lightIndex": 4
 	}
 ],
 "decoratives": [],

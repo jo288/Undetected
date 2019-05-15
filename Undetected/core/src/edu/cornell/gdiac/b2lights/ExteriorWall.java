@@ -100,7 +100,8 @@ public class ExteriorWall extends Obstacle{
             wb.initialize(json,positions[i],positions[i+1]);
             if (i/2<types.length)
                 wb.walltype = types[i/2];
-            wb.setWallTexture(textures[wb.walltype]);
+            if (wb.walltype<textures.length)
+                wb.setWallTexture(textures[wb.walltype]);
             bodies.add(wb);
             this.positions.add(positions[i]);
             this.positions.add(positions[i+1]);
