@@ -1011,7 +1011,7 @@ public class GameController implements Screen, ContactListener {
 			String pauseDescription[] = {"Arrow Keys:","Move","Space:","Interact","M:","Minimap","R:","Restart","P:","Pause","Esc:","Exit Game"};
 
 			canvas.draw(overlayTexture, Color.WHITE, overlayTexture.getRegionWidth()/2,
-					overlayTexture.getRegionHeight()/2, cam.position.x, cam.position.y, 0, 1, 1, 1f);
+					overlayTexture.getRegionHeight()/2, cam.position.x, cam.position.y, 0, 1*cam.zoom, 1*cam.zoom, 1f);
 //			canvas.draw(pauseButton, Color.WHITE, pauseButton.getWidth()/2, pauseButton.getHeight()/2,
 //					cam.position.x,cam.position.y, 0, 0.8f*cam.zoom, 0.8f*cam.zoom);
 			canvas.draw(continueButton, conTint, 0, continueButton.getRegionHeight() / 2f,
@@ -1022,15 +1022,17 @@ public class GameController implements Screen, ContactListener {
 					cam.position.x + 85*cam.zoom, cam.position.y + 30*cam.zoom, 0, 1f*cam.zoom, 1f*cam.zoom);
 			canvas.draw(soundButton, soundTint, 0, soundButton.getRegionHeight() / 2f,
 					cam.position.x + 153*cam.zoom, cam.position.y + 30*cam.zoom, 0, 1f*cam.zoom, 1f*cam.zoom);
-			canvas.drawText("PAUSED",pauseTitle,cam.position.x-120,cam.position.y+115);
-			canvas.drawText(pauseDescription[0],pauseDesc,cam.position.x-220,cam.position.y+46-0*26);
-			canvas.drawText(pauseDescription[2],pauseDesc,cam.position.x-150,cam.position.y+46-1*26);
-			canvas.drawText(pauseDescription[4],pauseDesc,cam.position.x-100,cam.position.y+46-2*26);
-			canvas.drawText(pauseDescription[6],pauseDesc,cam.position.x-99,cam.position.y+46-3*26);
-			canvas.drawText(pauseDescription[8],pauseDesc,cam.position.x-99,cam.position.y+46-4*26);
-			canvas.drawText(pauseDescription[10],pauseDesc,cam.position.x-123,cam.position.y+46-5*26);
+			pauseTitle.getData().setScale(cam.zoom);
+			pauseDesc.getData().setScale(cam.zoom);
+			canvas.drawText("PAUSED",pauseTitle,cam.position.x-120*cam.zoom,cam.position.y+115*cam.zoom);
+			canvas.drawText(pauseDescription[0],pauseDesc,cam.position.x-220*cam.zoom,cam.position.y+(46-0*26)*cam.zoom);
+			canvas.drawText(pauseDescription[2],pauseDesc,cam.position.x-150*cam.zoom,cam.position.y+(46-1*26)*cam.zoom);
+			canvas.drawText(pauseDescription[4],pauseDesc,cam.position.x-100*cam.zoom,cam.position.y+(46-2*26)*cam.zoom);
+			canvas.drawText(pauseDescription[6],pauseDesc,cam.position.x-99*cam.zoom,cam.position.y+(46-3*26)*cam.zoom);
+			canvas.drawText(pauseDescription[8],pauseDesc,cam.position.x-99*cam.zoom,cam.position.y+(46-4*26)*cam.zoom);
+			canvas.drawText(pauseDescription[10],pauseDesc,cam.position.x-123*cam.zoom,cam.position.y+(46-5*26)*cam.zoom);
 			for (int i=0; i<pauseDescription.length;i+=2){
-				canvas.drawText(pauseDescription[i+1],pauseDesc,cam.position.x-50,cam.position.y+46-i*26/2);
+				canvas.drawText(pauseDescription[i+1],pauseDesc,cam.position.x-50*cam.zoom,cam.position.y+(46-i*26/2)*cam.zoom);
 			}
 //			canvas.draw(continueButton, conTint, continueButton.getRegionWidth() / 2f, continueButton.getRegionHeight() / 2f,
 //					cam.position.x - 10*cam.zoom, cam.position.y - 62*cam.zoom, 0, 1.6f*cam.zoom, 1.58f*cam.zoom);
@@ -1071,7 +1073,8 @@ public class GameController implements Screen, ContactListener {
 			canvas.begin();
       		levelselectfont.setColor(Color.GOLDENROD);
 //			canvas.drawText("SELECT LEVEL", levelselectfont, cam.position.x-370, cam.position.y-250);
-			canvas.drawText("SELECT LEVEL", levelselectfont, cam.position.x-190, cam.position.y-200);
+			levelselectfont.getData().setScale(cam.zoom);
+			canvas.drawText("SELECT LEVEL", levelselectfont, cam.position.x-190*cam.zoom, cam.position.y-200*cam.zoom);
 
 			levelnumfont.setColor(Color.WHITE);
 			ArrayList<DoorModel> doors = level.getDoors();
