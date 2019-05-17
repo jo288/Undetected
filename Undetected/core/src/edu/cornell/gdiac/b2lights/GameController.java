@@ -80,6 +80,7 @@ public class GameController implements Screen, ContactListener {
 	private MiniMap miniMap;
 	private boolean showMiniMap = false;
 	private boolean showExit = false;
+	private boolean panToExit = false;
 	private boolean panToPlayer = false; //pans back to player after showing exit
 
 	private Music theme;
@@ -465,7 +466,7 @@ public class GameController implements Screen, ContactListener {
 		float dy = Math.abs((level.bounds.height*level.scale.y - effectiveVH)/2);
 		float sx = 32;
 		float sy = 32;
-		if(!showExit || panToPlayer) {
+		if(!panToExit || panToPlayer) {
 			float deltaX = (MathUtils.clamp(playerX * sx, cx - dx, cx + dx) - cam.position.x) * dt * 2.8f;
 			float deltaY = (MathUtils.clamp(playerY * sy, cy - dy, cy + dy) - cam.position.y) * dt * 2.8f;
 			if(panToPlayer){
@@ -482,8 +483,14 @@ public class GameController implements Screen, ContactListener {
 			}
 		}
 		else{
-			cam.position.x += Math.round((MathUtils.clamp(level.getExit().getX() * sx, cx - dx, cx + dx) - cam.position.x) * dt * 3.2);
-			cam.position.y += Math.round((MathUtils.clamp(level.getExit().getY() * sy, cy - dy, cy + dy) - cam.position.y) * dt * 3.2);
+			float deltaX = Math.round((MathUtils.clamp(level.getExit().getX() * sx, cx - dx, cx + dx) - cam.position.x) * dt * 3.2);
+			float deltaY = Math.round((MathUtils.clamp(level.getExit().getY() * sy, cy - dy, cy + dy) - cam.position.y) * dt * 3.2);
+			if(Math.abs(deltaX)<=1 && Math.abs(deltaY)<=1){
+				showExit = true;
+				level.getExit().open();
+			}
+			cam.position.x += deltaX;
+			cam.position.y += deltaY;
 		}
 		//pan the rayhandler camera
 		OrthographicCamera rcam = level.raycamera;
@@ -673,7 +680,7 @@ public class GameController implements Screen, ContactListener {
 		}
 //		System.out.println(dt);
 
-		if (!failed && !complete && !showExit &&!avatar.isElectrocuted()) {
+		if (!failed && !complete && !showExit && !panToExit && !avatar.isElectrocuted()) {
 			angleCache.set(input.getHorizontal(), input.getVertical());
 			if (angleCache.len2() > 0.0f) {
 				float angle = angleCache.angle();
@@ -715,7 +722,7 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		// Turn the physics engine crank.
-		if(!showExit) {
+		if(!showExit && !panToExit) {
 			level.update(dt);
 			if (lightController.detectedByGuards(guards)!=null && !failed && !avatar.isElectrocuted()) {
 				avatar.electrocute();
@@ -752,6 +759,7 @@ public class GameController implements Screen, ContactListener {
 			level.getExit().animate(dt);
 			if(!level.getExit().isAnimating() && !panToPlayer){
 				panToPlayer = true;
+				panToExit = false;
 			}
 		}
 
@@ -807,6 +815,7 @@ public class GameController implements Screen, ContactListener {
 				guardCaught = null;
 				lightController = new LightController(level);
 				showExit = false;
+				panToExit = false;
 
 //			System.out.println(lastFile.name());
 
@@ -928,7 +937,7 @@ public class GameController implements Screen, ContactListener {
 				alarm.turnOn();
 				alarm.start();
 			}
-			if(!showExit) {
+			if(!showExit && !panToExit) {
 				canvas.begin();
 				alarm.draw(canvas);
 				canvas.end();
@@ -1299,8 +1308,9 @@ public class GameController implements Screen, ContactListener {
 				}
 				level.getObjective().playSteal();
 				hasObjective = true;
-				exit.open();
-				showExit = true;
+				panToExit = true;
+				//exit.open();
+				//showExit = true;
 				for(GuardModel g: guards){
 					g.setAlarmed2(true);
 				}
