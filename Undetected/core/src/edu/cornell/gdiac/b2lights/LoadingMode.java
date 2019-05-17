@@ -60,6 +60,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	//private static final String LOGO_FILE = "textures/undetected.png";
 	private static final String TITLE_FILE = "textures/title.png";
 	private static final String PROGRESS_FILE = "textures/progressbar.png";
+	private static final String LOADING_FILE = "textures/loading.png";
 	private static final String PLAY_BTN_FILE = "textures/play.png";
 	private static final String NEWGAME_BTN_FILE = "textures/home_newgame.png";
 	private static final String PAUSE_BTN_FILE = "textures/pause_temp.png";
@@ -72,6 +73,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	private Texture pauseButton;
 	/** Texture atlas to support a progress bar */
 	private Texture statusBar;
+	private Texture loadingText;
 	/** Texture atlas for logo */
 	//private Texture logo;
 	private FilmStrip loading_animation;
@@ -233,6 +235,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 		statusBar  = new Texture(PROGRESS_FILE);
 		//logo = new Texture(LOGO_FILE);
 		title = new Texture(TITLE_FILE);
+		loadingText = new Texture(LOADING_FILE);
 
 		loading_animation = new FilmStrip(title, 1, 62);
 		animateCool = 0;
@@ -347,7 +350,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 		} else {
 			Color tint = (pressState == 1 ? Color.GRAY: Color.WHITE);
 			canvas.draw(playButton, tint, playButton.getWidth()/2, playButton.getHeight()/2,
-						centerX, centerY, 0, BUTTON_SCALE*scale, BUTTON_SCALE*scale);
+						centerX, centerY-50, 0, BUTTON_SCALE*scale, BUTTON_SCALE*scale);
 		}
 		canvas.end();
 	}
@@ -362,18 +365,19 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	 * @param canvas The drawing context
 	 */	
 	private void drawProgress(ObstacleCanvas canvas) {	
-		canvas.draw(statusBkgLeft,   Color.WHITE, centerX-width/2, centerY, scale*PROGRESS_CAP, scale*PROGRESS_HEIGHT);
+		/*canvas.draw(statusBkgLeft,   Color.WHITE, centerX-width/2, centerY, scale*PROGRESS_CAP, scale*PROGRESS_HEIGHT);
 		canvas.draw(statusBkgRight,  Color.WHITE, centerX+width/2-scale*PROGRESS_CAP, centerY, scale*PROGRESS_CAP, scale*PROGRESS_HEIGHT);
 		canvas.draw(statusBkgMiddle, Color.WHITE, centerX-width/2+scale*PROGRESS_CAP, centerY, width-2*scale*PROGRESS_CAP, scale*PROGRESS_HEIGHT);
 
-		canvas.draw(statusFrgLeft,   Color.WHITE, centerX-width/2, centerY, scale*PROGRESS_CAP, scale*PROGRESS_HEIGHT);
-		if (progress > 0) {
+		canvas.draw(statusFrgLeft,   Color.WHITE, centerX-width/2, centerY, scale*PROGRESS_CAP, scale*PROGRESS_HEIGHT);*/
+		canvas.draw(loadingText, Color.WHITE, loadingText.getWidth()/2, loadingText.getHeight()/2,  centerX, centerY-50, 0,0.8f, 0.8f);
+		/*if (progress > 0) {
 			float span = progress*(width-2*scale*PROGRESS_CAP)/2.0f;
 			canvas.draw(statusFrgRight,  Color.WHITE, centerX-width/2+scale*PROGRESS_CAP+span, centerY, scale*PROGRESS_CAP, scale*PROGRESS_HEIGHT);
 			canvas.draw(statusFrgMiddle, Color.WHITE, centerX-width/2+scale*PROGRESS_CAP, centerY, span, scale*PROGRESS_HEIGHT);
 		} else {
 			canvas.draw(statusFrgRight,  Color.WHITE, centerX-width/2+scale*PROGRESS_CAP, centerY, scale*PROGRESS_CAP, scale*PROGRESS_HEIGHT);
-		}
+		}*/
 	}
 
 	// ADDITIONAL SCREEN METHODS
@@ -488,12 +492,12 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 		// TODO: Fix scaling
 		// Play button is a circle.
 		float radius = BUTTON_SCALE*scale*playButton.getWidth()/2.0f;
-		float dist = (screenX-centerX)*(screenX-centerX)+(screenY-centerY)*(screenY-centerY);
+		float dist = (screenX-centerX)*(screenX-centerX)+(screenY-(centerY-50))*(screenY-(centerY-50));
 //		if (dist < radius*radius) {
 //			pressState = 1;
 //		}
 		if (Math.abs(screenX-centerX)<BUTTON_SCALE*scale*playButton.getWidth()/2f &&
-				Math.abs(screenY-centerY)<BUTTON_SCALE*scale*playButton.getHeight()/2f){
+				Math.abs(screenY-(centerY-50))<BUTTON_SCALE*scale*playButton.getHeight()/2f){
 			pressState = 1;
 		}
 
