@@ -286,7 +286,7 @@ public class GameController implements Screen, ContactListener {
 	/**
 	 * Sets the canvas associated with this controller
 	 *
-	 * The canvas is shared across all controllers.  Setting this value will compute
+	 * The canvas is shared across a/ll controllers.  Setting this value will compute
 	 * the drawing scale from the canvas size.
 	 *
 	 * //@param value the canvas associated with this controller

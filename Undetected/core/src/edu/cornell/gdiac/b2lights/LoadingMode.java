@@ -56,7 +56,8 @@ import java.io.FileWriter;
 public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	// Textures necessary to support the loading screen 
 	private static final String BACKGROUND_FILE = "textures/loadingbg.png";
-	private static final String LOGO_FILE = "textures/undetected.png";
+	//private static final String LOGO_FILE = "textures/undetected.png";
+	private static final String TITLE_FILE = "textures/title.png";
 	private static final String PROGRESS_FILE = "textures/progressbar.png";
 	private static final String PLAY_BTN_FILE = "textures/play.png";
 	private static final String NEWGAME_BTN_FILE = "textures/home_newgame.png";
@@ -71,7 +72,9 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	/** Texture atlas to support a progress bar */
 	private Texture statusBar;
 	/** Texture atlas for logo */
-	private Texture logo;
+	//private Texture logo;
+	private FilmStrip loading_animation;
+	private int animateCool;
 	
 	// statusBar is a "texture atlas." Break it up into parts.
 	/** Left cap to the status background (grey region) */
@@ -85,7 +88,9 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	/** Middle portion of the status forground (colored region) */
 	private TextureRegion statusFrgMiddle;
 	/** Right cap to the status forground (colored region) */
-	private TextureRegion statusFrgRight;	
+	private TextureRegion statusFrgRight;
+	/** Title screen */
+	private Texture title;
 
 	/** Default budget for asset loader (do nothing but load 60 fps) */
 	private static int DEFAULT_BUDGET = 15;
@@ -224,9 +229,12 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 		pauseButton = null;
 		background = new Texture(BACKGROUND_FILE);
 		statusBar  = new Texture(PROGRESS_FILE);
-		logo = new Texture(LOGO_FILE);
-		
-		// No progress so far.		
+		//logo = new Texture(LOGO_FILE);
+		title = new Texture(TITLE_FILE);
+
+		loading_animation = new FilmStrip(title, 1, 62);
+		animateCool = 0;
+		// No progress so far.
 		progress   = 0;
 		pressState = 0;
 		active = false;
@@ -264,10 +272,12 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 
 		 background.dispose();
 		 statusBar.dispose();
-		 logo.dispose();
+		 //logo.dispose();
 		 background = null;
 		 statusBar  = null;
-		 logo = null;
+		 //logo = null;
+		title = null;
+		loading_animation = null;
 		 if (playButton != null) {
 			 playButton.dispose();
 			 playButton = null;
@@ -298,6 +308,22 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 				playButton.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 			}
 		}
+		animateCool++;
+		if(loading_animation.getFrame()<loading_animation.getSize()-1){
+			if(animateCool>=5){
+				animateCool = 0;
+				int next = (loading_animation.getFrame()+1)%loading_animation.getSize();
+				loading_animation.setFrame(next);
+			}
+		}
+		else{
+			if(animateCool>=65){
+				animateCool = 0;
+				int next = (loading_animation.getFrame()+1)%loading_animation.getSize();
+				loading_animation.setFrame(next);
+			}
+		}
+
 	}
 
 	/**
@@ -310,14 +336,15 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	private void draw() {
 		canvas.begin();
 //		canvas.draw(background, 0, 0);
-		canvas.draw(background, Color.WHITE, background.getWidth()/2, background.getHeight()/2,
+		canvas.draw(background, Color.BLACK, background.getWidth()/2, background.getHeight()/2,
 		canvas.getWidth()/2, canvas.getHeight()/2, 0, canvas.getWidth()/background.getWidth(), canvas.getWidth()/background.getWidth());
-		canvas.draw(logo, Color.WHITE, logo.getWidth()/2, logo.getHeight()/2, canvas.getWidth()/2, canvas.getWidth()/2, 0, 1.7f, 1.7f);
+		canvas.draw(loading_animation, Color.WHITE, loading_animation.getRegionWidth()/2, loading_animation.getRegionHeight()/2, canvas.getWidth()/2, canvas.getHeight()/2, 0, 3.3f, 3.3f);
+
 		if (playButton == null) {
 			drawProgress(canvas);
 		} else {
 			Color tint = (pressState == 1 ? Color.GRAY: Color.WHITE);
-			canvas.draw(playButton, tint, playButton.getWidth()/2, playButton.getHeight()/2, 
+			canvas.draw(playButton, tint, playButton.getWidth()/2, playButton.getHeight()/2,
 						centerX, centerY, 0, BUTTON_SCALE*scale, BUTTON_SCALE*scale);
 		}
 		canvas.end();

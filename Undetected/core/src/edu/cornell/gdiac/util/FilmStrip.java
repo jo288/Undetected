@@ -127,7 +127,7 @@ public class FilmStrip extends TextureRegion {
 	public int getFrame() {
 		return frame;
 	}
-	
+
 	/**
 	 * Sets the active frame as the given index.
 	 * 
