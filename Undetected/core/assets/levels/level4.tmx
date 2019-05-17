@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="169">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextobjectid="170">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="10" source="Objective.tsx"/>
  <tileset firstgid="11" source="Guard.tsx"/>
@@ -10,7 +10,7 @@
  <tileset firstgid="39" source="camera.tsx"/>
  <tileset firstgid="40" source="keys.tsx"/>
  <tileset firstgid="44" source="walls.tsx"/>
- <layer id="3" name="Tile Layer 1" width="30" height="20">
+ <layer name="Tile Layer 1" width="30" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -34,7 +34,7 @@
 0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0
 </data>
  </layer>
- <objectgroup id="2" name="Object Layer 1">
+ <objectgroup name="Object Layer 1">
   <object id="17" template="Guard.tx" gid="11" x="672" y="576" rotation="360">
    <properties>
     <property name="path" value=""/>
@@ -180,13 +180,5 @@
     <property name="rotationSpeed" type="float" value="0.80000000000000004"/>
    </properties>
   </object>
-  <object id="166" template="CameraLeft.tx" x="160" y="544">
-   <properties>
-    <property name="lightAngle" type="float" value="30"/>
-    <property name="lightRadius" type="float" value="7"/>
-    <property name="rotationSpeed" type="float" value="1"/>
-   </properties>
-  </object>
-  <object id="167" template="CameraRight.tx" x="448" y="352"/>
  </objectgroup>
 </map>
