@@ -30,6 +30,7 @@ public class LevelParser {
         protected Array<Integer> invalidTiles = new Array<Integer>();
         protected ExteriorWall exteriorwall = new ExteriorWall();
         protected InteriorWall interiorwall = new InteriorWall();
+        protected Array<Sign> signs = new Array<Sign>();
     }
 
     private class Lighting{
@@ -122,6 +123,11 @@ public class LevelParser {
         protected int[] pos = new int[2];
         protected String type = "desk";
         protected String direction = "right";
+    }
+
+    private class Sign{
+        protected int[] pos = new int[2];
+        protected String text = "Tutorial";
     }
 
     private class ExteriorWall{
@@ -330,6 +336,17 @@ public class LevelParser {
                 b3.texture = "box3";
                 b3.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
                 testLevel.boxes.add(b3);
+            }
+            if(e.get("template").equals("Tutorial.tx")){
+                Sign t = new Sign();
+                Array<XmlReader.Element> properties = e.getChildrenByNameRecursively("property");
+                for (XmlReader.Element property: properties){
+                    if (property.get("name").equals("text")){
+                        t.text = property.get("value");
+                    }
+                }
+                t.pos = new int[] {e.getInt("x")/32,testLevel.boardSize[1]-e.getInt("y")/32};
+                testLevel.signs.add(t);
             }
             if (e.get("template").equals("decoratives/DeskLeft.tx")){
                 Decorative deskl = new Decorative();

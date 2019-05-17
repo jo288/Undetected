@@ -68,5 +68,15 @@
 "interiorwall": {
 	"pos": [],
 	"type": []
-}
+},
+"signs": [
+	{
+		"pos": [ 10, 7 ],
+		"text": "Take the key!"
+	},
+	{
+		"pos": [ 14, 7 ],
+		"text": "And escape!"
+	}
+]
 }

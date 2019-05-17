@@ -1289,6 +1289,13 @@ public class GameController implements Screen, ContactListener {
 					avatar.setBoxInContact((MoveableBox)bd2);
 				}
 			}
+			if ((bd1 == avatar && bd2 instanceof SignModel) || (bd1 instanceof SignModel && bd2==avatar)){
+				if(bd1 instanceof SignModel){
+					((SignModel) bd1).setDisplay(true);
+				}else{
+					((SignModel) bd2).setDisplay(true);
+				}
+			}
 
 			// Check for objective
 			if (((bd1 == avatar && bd2 == objective) || (bd1 == objective && bd2== avatar)) && !hasObjective){
@@ -1361,6 +1368,13 @@ public class GameController implements Screen, ContactListener {
 
 		if((bd1 == avatar && bd2 instanceof Laser) || (bd1 instanceof Laser && bd2==avatar)){
 			avatarLaserCollision = false;
+		}
+		if ((bd1 == avatar && bd2 instanceof SignModel) || (bd1 instanceof SignModel && bd2==avatar)){
+			if(bd1 instanceof SignModel){
+				((SignModel) bd1).setDisplay(false);
+			}else{
+				((SignModel) bd2).setDisplay(false);
+			}
 		}
 	}
 

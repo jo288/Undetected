@@ -342,6 +342,10 @@
 			"file": "textures/camera.png",
 			"wrap": false
 		},
+		"tutorial": {
+			"file": "textures/tutorialtemp.png",
+			"wrap": false
+		},
 		"camerafront":{
 			"file": 	"textures/camerafront.png",
 			"wrap":  	false,

@@ -648,5 +648,5 @@ public class DudeModel extends CharacterModel {
 		if (texture != null) {
 			canvas.draw(texture,Color.WHITE,((Math.round(direction * 100.0) / 100.0) == -1.57)?origin.x+0.51f:origin.x,origin.y,Math.round(getX()*drawScale.x),Math.round(getY()*drawScale.y-getHeight()/2f*drawScale.y),getAngle(),scale,scale);
 		}
-		}
+	}
 }

@@ -426,6 +426,15 @@ public class LevelModel {
 			doordata = doordata.next();
 		}
 
+        JsonValue signdata = levelFormat.getChild("signs");
+        while (signdata!=null){
+            SignModel sign = new SignModel();
+            sign.initialize(signdata);
+            sign.setDrawScale(scale);
+            activate(sign);
+            signdata = signdata.next();
+        }
+
 		JsonValue bounds = levelFormat.get("exteriorwall");
 		ExteriorWall ew = new ExteriorWall();
 		ew.initialize(bounds);
