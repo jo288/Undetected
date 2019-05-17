@@ -198,19 +198,71 @@ public class LevelParser {
         for (XmlReader.Element e:objects){
             if(e.get("template").equals("GreenWall.tx")){
                 parseWall(e, testLevel);
-                testLevel.exteriorwall.type.add(10);
+                int type=10;
+                double r = Math.random();
+                if(r<=0.5){
+                    type+=0;
+                }else if(r<=0.6){
+                    type+=1;
+                }else if(r<=0.85){
+                    type+=2;
+                }else if(r<=0.9){
+                    type+=3;
+                }else if(r<=1.0){
+                    type+=4;
+                }
+                testLevel.exteriorwall.type.add(type);
             }
             if(e.get("template").equals("BlueWall.tx")){
                 parseWall(e, testLevel);
-                testLevel.exteriorwall.type.add(0);
+                int type=0;
+                double r = Math.random();
+                if(r<=0.5){
+                    type+=0;
+                }else if(r<=0.6){
+                    type+=1;
+                }else if(r<=0.85){
+                    type+=2;
+                }else if(r<=0.9){
+                    type+=3;
+                }else if(r<=1.0){
+                    type+=4;
+                }
+                testLevel.exteriorwall.type.add(type);
             }
             if(e.get("template").equals("OrangeWall.tx")){
                 parseWall(e, testLevel);
-                testLevel.exteriorwall.type.add(5);
+                int type=5;
+                double r = Math.random();
+                if(r<=0.5){
+                    type+=0;
+                }else if(r<=0.6){
+                    type+=1;
+                }else if(r<=0.85){
+                    type+=2;
+                }else if(r<=0.9){
+                    type+=3;
+                }else if(r<=1.0){
+                    type+=4;
+                }
+                testLevel.exteriorwall.type.add(type);
             }
             if(e.get("template").equals("RedWall.tx")){
                 parseWall(e, testLevel);
-                testLevel.exteriorwall.type.add(10);
+                int type=20;
+                double r = Math.random();
+                if(r<=0.5){
+                    type+=0;
+                }else if(r<=0.6){
+                    type+=1;
+                }else if(r<=0.85){
+                    type+=2;
+                }else if(r<=0.9){
+                    type+=3;
+                }else if(r<=1.0){
+                    type+=4;
+                }
+                testLevel.exteriorwall.type.add(type);
             }
             if(e.get("template").substring(0,5).equals("walls")){
                 String[] warray = e.get("template").split("/");
@@ -220,12 +272,24 @@ public class LevelParser {
                     case "red": type+=5;
                     case "grey": type+=5;
                     case "green": type+=5;
-                    case "yellow": type+=5;
+                    case "gold": type+=5;
                     case "blue":
                     default: break;
                 }
                 parseWall(e, testLevel);
-                type+=Integer.parseInt(warray[2].substring(warray[2].length()-4,warray[2].length()-3))-1;
+//                type+=Integer.parseInt(warray[2].substring(warray[2].length()-4,warray[2].length()-3))-1;
+                double r = Math.random();
+                if(r<=0.5){
+                    type+=0;
+                }else if(r<=0.6){
+                    type+=1;
+                }else if(r<=0.85){
+                    type+=2;
+                }else if(r<=0.9){
+                    type+=3;
+                }else if(r<=1.0){
+                    type+=4;
+                }
                 testLevel.exteriorwall.type.add(type);
             }
             if(e.get("template").equals("GreenKey.tx")){
