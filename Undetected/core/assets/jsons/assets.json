@@ -459,7 +459,11 @@
 			"wrap": 	false
 		},
 		"ring": {
-			"file": 	"textures/position_circle.png",
+			"file": 	"textures/awareness.png",
+			"wrap": 	false
+		},
+		"alertring": {
+			"file": 	"textures/awarenessalerted.png",
 			"wrap": 	false
 		},
 		"greenkey": {

@@ -105,6 +105,7 @@ public class GuardModel extends CharacterModel {
     /** The current animation frame of the avatar */
     private int startFrame;
     private TextureRegion ringTexture;
+    private TextureRegion alertringTexture;
 
     private Music walkSound;
 
@@ -529,6 +530,7 @@ public class GuardModel extends CharacterModel {
 
 
         ringTexture = JsonAssetManager.getInstance().getEntry("ring", TextureRegion.class);
+        alertringTexture = JsonAssetManager.getInstance().getEntry("alertring", TextureRegion.class);
 
         texture = JsonAssetManager.getInstance().getEntry("shadow", TextureRegion.class);
         shadowTexture = texture;
@@ -672,10 +674,15 @@ public class GuardModel extends CharacterModel {
     public void draw(ObstacleCanvas canvas) {
         canvas.draw(shadowTexture,Color.WHITE,origin.x,origin.y,getX()*drawScale.x+(-7.5f+origin.x),getY()*drawScale.y-getHeight()/2f*drawScale.y,getAngle(),1.5f,1.5f);
 
-        canvas.draw(ringTexture, Color.RED, ringTexture.getRegionWidth() / 2 , ringTexture.getRegionHeight() / 2,
-                getX() * drawScale.x , getY() * drawScale.y - getHeight() / 2f * drawScale.y, 0,
-                64f*sensitiveRadius/ringTexture.getRegionWidth(), 64f*sensitiveRadius/ringTexture.getRegionHeight(), 0.4f);
-
+        if(isAlarmed){
+            canvas.draw(alertringTexture, Color.WHITE, ringTexture.getRegionWidth() / 2 , ringTexture.getRegionHeight() / 2,
+                    getX() * drawScale.x , getY() * drawScale.y - getHeight() / 2f * drawScale.y, 0,
+                    64f*sensitiveRadius/ringTexture.getRegionWidth(), 64f*sensitiveRadius/ringTexture.getRegionHeight(), 1f);
+        }else {
+            canvas.draw(ringTexture, Color.WHITE, ringTexture.getRegionWidth() / 2, ringTexture.getRegionHeight() / 2,
+                    getX() * drawScale.x, getY() * drawScale.y - getHeight() / 2f * drawScale.y, 0,
+                    64f * sensitiveRadius / ringTexture.getRegionWidth(), 64f * sensitiveRadius / ringTexture.getRegionHeight(), 1f);
+        }
         if (guardanimation != null) {
             canvas.draw(guardanimation,Color.WHITE,origin.x,origin.y,Math.round(getX()*drawScale.x),Math.round(getY()*drawScale.y-getHeight()/2f*drawScale.y),0f,scale,scale);
         }
