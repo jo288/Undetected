@@ -1,0 +1,156 @@
+{
+"graphicSize": [ 640, 480 ],
+"boardSize": [ 20, 15 ],
+"tileSize": 32,
+"fpsRange": [ 20, 60 ],
+"tiles": [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+"lighting": {
+	"color": [ 0.6627451, 0.6627451, 0.6627451, 1 ],
+	"gamma": true,
+	"diffuse": true,
+	"blur": 3
+},
+"lights": [
+	{
+		"color": [ 1, 1, 0, 1 ],
+		"distance": 9,
+		"angle": 25
+	},
+	{
+		"color": [ 1, 1, 0, 1 ],
+		"distance": 9,
+		"angle": 25
+	}
+],
+"avatar": {
+	"pos": [ 1, 13 ]
+},
+"guards": [
+	{
+		"name": "guard",
+		"pos": [ 7, 2 ],
+		"status": "patrol",
+		"force": 40,
+		"sensitiveRadius": 1.6,
+		"path": [ 7, 2, 16, 2, 16, 5, 16, 2 ],
+		"objectivepath": [],
+		"lightIndex": 0,
+		"sector": 0,
+		"direction": "up"
+	},
+	{
+		"name": "guard",
+		"pos": [ 16, 11 ],
+		"status": "sleep",
+		"force": 40,
+		"sensitiveRadius": 0.8,
+		"path": [ 16, 11 ],
+		"objectivepath": [],
+		"lightIndex": 1,
+		"sector": 0,
+		"direction": "up"
+	}
+],
+"exit": {
+	"pos": [ 1, 14 ],
+	"size": [ 1, 1 ]
+},
+"boxes": [
+	{
+		"name": "box",
+		"pos": [ 4, 13 ],
+		"texture": "box1"
+	},
+	{
+		"name": "box",
+		"pos": [ 1, 4 ],
+		"texture": "box2"
+	},
+	{
+		"name": "box",
+		"pos": [ 6, 13 ],
+		"texture": "box3"
+	}
+],
+"switches": [
+	{
+		"name": "switch",
+		"pos": [ 14, 9 ],
+		"switched": false,
+		"doors": [
+			"door1",
+			"door2",
+			"door3",
+			"door4"
+		],
+		"lasers": [
+			"laser1"
+		]
+	}
+],
+"doors": [
+	{
+		"name": "door2",
+		"isVertical": true,
+		"pos": [ 5, 3 ],
+		"open": true,
+		"color": "blue"
+	},
+	{
+		"name": "door3",
+		"isVertical": true,
+		"pos": [ 11, 3 ],
+		"open": true,
+		"color": "blue"
+	},
+	{
+		"name": "door4",
+		"isVertical": true,
+		"pos": [ 12, 3 ],
+		"open": true,
+		"color": "blue"
+	},
+	{
+		"name": "door1",
+		"isVertical": true,
+		"pos": [ 4, 3 ],
+		"open": true,
+		"color": "blue"
+	}
+],
+"lasers": [
+	{
+		"name": "laser1",
+		"pos": [ 8, 4 ],
+		"size": [ 1, 3 ],
+		"timetolive": 2,
+		"sector": 0
+	},
+	{
+		"name": "laser",
+		"pos": [ 14, 7 ],
+		"size": [ 5, 1 ],
+		"timetolive": 3,
+		"sector": 0
+	}
+],
+"cameras": [],
+"decoratives": [],
+"objective": {
+	"pos": [ 16, 3 ],
+	"size": [ 1, 1 ],
+	"textureIndex": 0,
+	"hasAlarm": false,
+	"doors": [],
+	"lasers": []
+},
+"invalidTiles": [ 11, 10, 12, 10, 13, 10, 14, 10, 15, 10, 16, 10, 17, 10, 18, 10, 19, 10, 0, 9, 13, 9, 14, 9, 15, 9, 16, 9, 17, 9, 18, 9, 19, 9, 0, 8, 1, 8, 2, 8, 15, 8, 16, 8, 17, 8, 18, 8, 19, 8, 0, 7, 1, 7, 2, 7, 3, 7, 4, 7, 17, 7, 18, 7, 19, 7, 0, 6, 1, 6, 2, 6, 3, 6, 4, 6, 5, 6, 6, 6, 19, 6, 1, 4, 3, 3, 5, 2, 6, 2, 8, 2, 9, 2, 10, 2, 11, 2, 12, 2, 14, 2 ],
+"exteriorwall": {
+	"pos": [],
+	"type": []
+},
+"interiorwall": {
+	"pos": [],
+	"type": []
+}
+}

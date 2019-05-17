@@ -1,0 +1,620 @@
+{
+    "textures": {
+		"wallvertical": {
+			"file":		"textures/wallgreen.png",
+			"wrap":		false
+		},
+		"wallhorizontal": {
+			"file":		"textures/wallgreen.png",
+			"wrap":		false
+		},
+		"shadow": {
+			"file": 	"textures/shadow.png",
+			"wrap": 	false
+		},
+		"floor": {
+			"file": 	"textures/BG_Tile.png",
+			"wrap": 	true
+		},
+		"greenfloor": {
+			"file": 	"textures/BG_Tile2.png",
+			"wrap": 	true
+		},
+		"redfloor": {
+			"file": 	"textures/BG_Tile3.png",
+			"wrap": 	true
+		},
+		"purplefloor": {
+			"file": 	"textures/BG_Tile4.png",
+			"wrap": 	true
+		},
+    	"charfront": {
+    		"file": 	"textures/character_front.png",
+    		"wrap":  	false,
+    		"strip":	{
+    			"size":		8,
+    			"rows":		1,
+    			"cols":		8,
+    			"first":	0
+    		}
+    	},
+		"charleft": {
+			"file": 	"textures/character_left.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"charright": {
+			"file": 	"textures/character_right.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"charback": {
+			"file": 	"textures/character_back.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"boxcharfront": {
+			"file": 	"textures/boxdude_front.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"boxcharleft": {
+			"file": 	"textures/boxdude_left.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"boxcharright": {
+			"file": 	"textures/boxdude_right.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"boxcharback": {
+			"file": 	"textures/boxdude_back.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"electrified": {
+			"file": 	"textures/deathanim.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		15,
+				"rows":		1,
+				"cols":		15,
+				"first":	0
+			}
+		},
+		"guardback":{
+			"file": 	"textures/guard_back.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"laserAnimation": {
+			"file": 	"textures/laserv2.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		9,
+				"rows":		1,
+				"cols":		9,
+				"first":	0
+			}
+		},
+		"sidelaserAnimation": {
+			"file": 	"textures/sidelaser.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		9,
+				"rows":		1,
+				"cols":		9,
+				"first":	0
+			}
+		},
+		"laserAngryAnimation": {
+			"file": 	"textures/angrylaser.png",
+			"wrap":  	false,
+			"strip": {
+				"size": 5,
+				"rows": 1,
+				"cols": 5,
+				"first": 0
+			}
+		},
+		"sidelaserAngryAnimation": {
+			"file": 	"textures/angrylaserside.png",
+			"wrap":  	false,
+			"strip": {
+				"size": 5,
+				"rows": 1,
+				"cols": 5,
+				"first": 0
+			}
+		},
+		"laserAlertAnimation": {
+			"file": 	"textures/alarmlaser.png",
+			"wrap":  	false,
+			"strip": {
+				"size": 5,
+				"rows": 1,
+				"cols": 5,
+				"first": 0
+			}
+		},
+		"sidelaserAlertAnimation": {
+			"file": 	"textures/sidealarmlaser.png",
+			"wrap":  	false,
+			"strip": {
+				"size": 5,
+				"rows": 1,
+				"cols": 5,
+				"first": 0
+			}
+		},
+		"questionAnimation": {
+			"file": 	"textures/question_mark_on.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"questionAnimationReverse": {
+			"file": 	"textures/question_mark_off.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"hostileFrontAnimation": {
+			"file": 	"textures/hostilefront.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"friendlyFrontAnimation": {
+			"file": 	"textures/friendlyfront.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"hostileLeftAnimation": {
+			"file": 	"textures/hostileleft.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"friendlyLeftAnimation": {
+			"file": 	"textures/friendlyleft.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"hostileRightAnimation": {
+			"file": 	"textures/hostileright.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"friendlyRightAnimation": {
+			"file": 	"textures/friendlyright.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"bluedoor": {
+			"file": 	"textures/doors/bluedoor.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		13,
+				"rows":		1,
+				"cols":		13,
+				"first":	0
+			}
+		},
+		"bluedoorside": {
+			"file": 	"textures/doors/bluedoortop.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		12,
+				"rows":		1,
+				"cols":		12,
+				"first":	0
+			}
+		},
+		"bluedoorside2": {
+			"file": 	"textures/doors/bluedoortop2.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		12,
+				"rows":		1,
+				"cols":		12,
+				"first":	0
+			}
+		},
+		"doors": {
+			"file": 	"textures/doors.png",
+			"wrap":  	false,
+		},
+		"question": {
+			"file":		"textures/question_mark.png",
+			"wrap":		false
+		},
+        "goal": { 
+         	"file":		"textures/exit.png",
+         	"wrap":		false
+         },
+		"defaultDude": {
+			"file": 	"textures/Player.png",
+			"wrap": 	false
+		},
+		"guard": {
+			"file": 	"textures/guardsprite.png",
+			"wrap": 	false
+		},
+		"box1": {
+			"file": 	"textures/BG_Box3.png",
+			"wrap": 	false
+		},
+		"box2": {
+			"file": 	"textures/BG_Box2.png",
+			"wrap": 	false
+		},
+		"box3": {
+			"file": 	"textures/BG_Box4.png",
+			"wrap": 	false
+		},
+		"victory": {
+			"file": 	"textures/victory.png",
+			"wrap": 	false
+		},
+		"defeat": {
+			"file": 	"textures/defeat.png",
+			"wrap": 	false
+		},
+		"camera": {
+			"file": "textures/camera.png",
+			"wrap": false
+		},
+		"camerafront":{
+			"file": 	"textures/camerafront.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		17,
+				"rows":		1,
+				"cols":		17,
+				"first":	0
+			}
+		},
+		"cameraleft":{
+			"file": 	"textures/cameraleft.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		10,
+				"rows":		1,
+				"cols":		10,
+				"first":	0
+			}
+		},
+		"cameraright":{
+			"file": 	"textures/cameraright.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		10,
+				"rows":		1,
+				"cols":		10,
+				"first":	0
+			}
+		},
+		"switchAnimation": {
+			"file": 	"textures/groundbutton_final.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		7,
+				"rows":		1,
+				"cols":		7,
+				"first":	0
+			}
+		},
+		"deskAnimation": {
+			"file": 	"textures/desk.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		4,
+				"rows":		1,
+				"cols":		4,
+				"first":	0
+			}
+		},
+		"deskFrontAnimation": {
+			"file": 	"textures/deskfront.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		4,
+				"rows":		1,
+				"cols":		4,
+				"first":	0
+			}
+		},
+		"desk2Front": {
+			"file": 	"textures/deskfront2.png",
+			"wrap":  	false,
+		},
+		"desk2Side": {
+			"file": 	"textures/desk2.png",
+			"wrap":  	false,
+		},
+		"servertower": {
+			"file": 	"textures/servertower.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		8,
+				"rows":		1,
+				"cols":		8,
+				"first":	0
+			}
+		},
+		"experiment1": {
+			"file": 	"textures/experiment1.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		5,
+				"rows":		1,
+				"cols":		5,
+				"first":	0
+			}
+		},
+		"experiment2": {
+			"file": 	"textures/experiment2.png",
+			"wrap":  	false,
+			"strip":	{
+				"size":		5,
+				"rows":		1,
+				"cols":		5,
+				"first":	0
+			}
+		},
+		"laser": {
+			"file": 	"textures/lasertest.png",
+			"wrap": 	true
+		},
+		"boxDude": {
+			"file": 	"textures/boxdude.png",
+			"wrap": 	false
+		},
+		"ring": {
+			"file": 	"textures/position_circle.png",
+			"wrap": 	false
+		},
+		"greenkey": {
+			"file": 	"textures/greenkey.png",
+			"wrap": 	false
+		},
+		"stealcard": {
+			"file": 	"textures/Steal Card.png",
+			"wrap": 	false
+		},
+		"stolencard": {
+			"file": 	"textures/Stolen Card.png",
+			"wrap": 	false
+		},
+		"objectiveIndicator": {
+			"file": "textures/objectiveIndicator.png",
+			"wrap": false
+		},
+		"exitIndicator": {
+			"file": "textures/exitIndicator.png",
+			"wrap": false
+		},
+		"pause":	{
+			"file":		"textures/paused.png",
+			"wrap": 	false
+		},
+		"pauseMenu":	{
+			"file":		"textures/paused_menu.png",
+			"wrap": 	false
+		},
+		"continue":	{
+			"file":		"textures/pause_menu/pause_continue.png",
+			"wrap": 	false
+		},
+		"abort":	{
+			"file":		"textures/pause_menu/pause_homelong.png",
+			"wrap": 	false
+		},
+		"musicOff":	{
+			"file":		"textures/pause_menu/pause_music_off.png",
+			"wrap": 	false
+		},
+		"musicOn":	{
+			"file":		"textures/pause_menu/pause_music_on.png",
+			"wrap": 	false
+		},
+		"soundOff":	{
+			"file":		"textures/pause_menu/pause_sound_off.png",
+			"wrap": 	false
+		},
+		"soundOn":	{
+			"file":		"textures/pause_menu/pause_sound_on.png",
+			"wrap": 	false
+		},
+		"alarmFlash": {
+			"file": 	"textures/alarmFlash.png",
+			"wrap": 	false
+		},
+		"overlay": {
+			"file": 	"textures/pause_menu/pause_tintbox.png",
+			"wrap": 	false
+		},
+		"restart": {
+			"file": 	"textures/Restart.png",
+			"wrap": 	false
+		},
+		"home": {
+			"file": 	"textures/home.png",
+			"wrap": 	false
+		},
+		"floors": {
+			"file": 	"textures/floors2.png",
+			"wrap":  	false
+		},
+		"walls": {
+			"file": 	"textures/walls2.png",
+			"wrap":  	false
+		},
+		"walls2": {
+			"file": 	"textures/walls.png",
+			"wrap":  	false
+		},
+		"keys": {
+			"file": 	"textures/keys.png",
+			"wrap":  	false
+		},
+		"boxselect": {
+			"file": 	"textures/tileselect.png",
+			"wrap": 	false
+		},
+		"taseLaser": {
+			"file": 	"textures/tase_laser.png",
+			"wrap": 	false
+		},
+		"questionMark": {
+			"file": 	"textures/questionmark.png",
+			"wrap": 	false
+		},
+		"exclamationMark": {
+			"file": 	"textures/exclamationmark.png",
+			"wrap": 	false
+		},
+		"exitArrows": {
+			"file": 	"textures/exitarrows.png",
+			"wrap": 	false
+		}
+	},
+  	"fonts": {
+  		"display": {
+  			"file": 	"fonts/MarkerFelt.ttf",
+  			"size": 	64
+  		},
+		"levelselect": {
+			"file": 	"fonts/RetroGame.ttf",
+			"size": 	40
+		},
+		"levelnumber": {
+			"file": 	"fonts/prstart.ttf",
+			"size": 	20
+		},
+		"pauseTitle": {
+			"file": 	"fonts/slkscrb.ttf",
+			"size": 	54
+		},
+		"pauseDesc": {
+			"file": 	"fonts/slkscr.ttf",
+			"size": 	20
+		},
+		"timerFont": {
+			"file": 	"fonts/prstart1.ttf",
+			"size": 	45
+		}
+	},
+	"sounds": {
+		"openDoor": {
+			"file": 	"sounds/door_open.mp3"
+		},
+		"closeDoor": {
+			"file": 	"sounds/door_close.mp3"
+		},
+		"dropBox": {
+			"file": 	"sounds/drop_box.mp3"
+		},
+		"pickupBox": {
+			"file": 	"sounds/pickup_box.mp3"
+		},
+        "laserAlarm": {
+          "file": 	"sounds/laser_alarm_ext.mp3"
+        },
+		"guardWalk": {
+			"file": 	"sounds/guard_footstep.mp3"
+		},
+		"stealKey": {
+			"file": 	"sounds/grab_key.mp3"
+		}
+	},
+	"music": {
+		"theme": {
+			"file": 	"music/theme.mp3"
+		},
+		"preHeist": {
+			"file": 	"music/pre_heist.mp3"
+		},
+		"postHeist": {
+			"file": 	"music/post_heist.mp3"
+		}
+	}
+}
