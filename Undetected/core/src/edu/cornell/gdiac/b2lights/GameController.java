@@ -665,7 +665,7 @@ public class GameController implements Screen, ContactListener {
 			ArrayList<DoorModel> doors = level.getDoors();
 			//TODO: CHANGE FOR RELEASE, TEMP
 //				for (DoorModel d : doors) {
-			for (int i = 0; i < 12; i++) {
+			for (int i = 0; i < 13; i++) {
 				DoorModel d = doors.get(i);
 				if (d.getPosition().dst(avatar.getPosition())<0.3f){
 					nextFile = Gdx.files.internal("jsons/" + (d.getName()) + ".json");
@@ -825,7 +825,7 @@ public class GameController implements Screen, ContactListener {
 					ArrayList<DoorModel> doors = level.getDoors();
 					//TODO: CHANGE FOR RELEASE, TEMP
 //				for (DoorModel d : doors) {
-					for (int i = 0; i < 12; i++) {
+					for (int i = 0; i < 13; i++) {
 						DoorModel d = doors.get(i);
 						if ((d.getName() + ".json").equals(lastFile.name())) {
 //							System.out.println("level1 door");
@@ -1096,7 +1096,7 @@ public class GameController implements Screen, ContactListener {
 			ArrayList<DoorModel> doors = level.getDoors();
 			//TODO:CHANGE
 //			for(int i=0;i<doors.size();i++){
-			for(int i=0;i<12;i++){
+			for(int i=0;i<13;i++){
 				int f = floatframe/4 + i;
 				int t = (f%10>5)?(10-f%10):f%10;
 				canvas.drawText(""+(i+1),levelnumfont,doors.get(i).getX()*32-10,doors.get(i).getY()*32+85+(t*3));
