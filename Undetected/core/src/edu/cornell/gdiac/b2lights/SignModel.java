@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.utils.JsonValue;
 import edu.cornell.gdiac.physics.obstacle.ObstacleCanvas;
 import edu.cornell.gdiac.physics.obstacle.WheelObstacle;
@@ -37,6 +38,9 @@ public class SignModel extends WheelObstacle {
         signFont = JsonAssetManager.getInstance().getEntry("levelnumber", BitmapFont.class);
         setOrigin(origin.x, origin.y);
         setSensor(true);
+        Filter filter = new Filter();
+        filter.categoryBits = (short)0x0010;
+        setFilterData(filter);
     }
 
 

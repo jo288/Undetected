@@ -492,6 +492,10 @@
 			"file":		"textures/pause_menu/pause_homelong.png",
 			"wrap": 	false
 		},
+		"inGamePause": {
+			"file":		"textures/pause_menu/ingame_pause.png",
+			"wrap": 	false
+		},
 		"musicOff":	{
 			"file":		"textures/pause_menu/pause_music_off.png",
 			"wrap": 	false
