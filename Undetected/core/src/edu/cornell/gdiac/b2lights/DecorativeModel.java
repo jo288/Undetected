@@ -63,22 +63,22 @@ public class DecorativeModel extends BoxObstacle{
         decoType = json.get("type").asString();
         switch (decoType){
             case "desk":
-                setWidth(1f);
-                setHeight(1f);
-                setFixedRotation(true);
-                texture = (json.get("direction").asString().equals("up")?
-                        JsonAssetManager.getInstance().getEntry("deskFrontAnimation", TextureRegion.class):
-                        JsonAssetManager.getInstance().getEntry("deskAnimation", TextureRegion.class));
-                if (json.get("direction").asString().equals("right"))
-                    flip = true;
-                try {
-                    filmstrip = new FilmStrip(texture.getTexture(), 1, 4);
-                } catch (Exception e) {
-                    filmstrip = null;
-                }
-                animationFrame = 4;
-                setTexture(filmstrip);
-                break;
+//                setWidth(1f);
+//                setHeight(1f);
+//                setFixedRotation(true);
+//                texture = (json.get("direction").asString().equals("up")?
+//                        JsonAssetManager.getInstance().getEntry("deskFrontAnimation", TextureRegion.class):
+//                        JsonAssetManager.getInstance().getEntry("deskAnimation", TextureRegion.class));
+//                if (json.get("direction").asString().equals("right"))
+//                    flip = true;
+//                try {
+//                    filmstrip = new FilmStrip(texture.getTexture(), 1, 4);
+//                } catch (Exception e) {
+//                    filmstrip = null;
+//                }
+//                animationFrame = 4;
+//                setTexture(filmstrip);
+//                break;
             case "desk2":
                 setWidth(1f);
                 setHeight(1f);

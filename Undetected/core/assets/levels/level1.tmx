@@ -97,12 +97,12 @@
   <object id="88" template="GreenWall.tx" x="608" y="320"/>
   <object id="89" template="BlueKey.tx" x="576" y="224"/>
   <object id="103" template="GreenWall.tx" x="64" y="352"/>
-  <object id="104" template="Tutorial.tx" x="320" y="128">
+  <object id="104" template="Tutorial.tx" x="320" y="160">
    <properties>
     <property name="text" value="Take the key!"/>
    </properties>
   </object>
-  <object id="107" template="Tutorial.tx" x="448" y="128">
+  <object id="107" template="Tutorial.tx" x="448" y="160">
    <properties>
     <property name="text" value="And escape!"/>
    </properties>

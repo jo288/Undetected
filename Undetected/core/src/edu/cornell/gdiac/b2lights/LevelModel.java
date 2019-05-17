@@ -1008,7 +1008,7 @@ public class LevelModel {
 			avatar.update(dt);
 
 			for (Obstacle o: objects){
-				if(o instanceof DecorativeModel){
+				if(o instanceof DecorativeModel||o instanceof SignModel){
 					o.update(dt);
 				}
 			}

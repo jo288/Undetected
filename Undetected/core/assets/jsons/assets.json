@@ -343,8 +343,14 @@
 			"wrap": false
 		},
 		"tutorial": {
-			"file": "textures/tutorialtemp.png",
-			"wrap": false
+			"file": "textures/terminal.png",
+			"wrap": false,
+			"strip":	{
+				"size":		7,
+				"rows":		1,
+				"cols":		7,
+				"first":	0
+			}
 		},
 		"camerafront":{
 			"file": 	"textures/camerafront.png",
@@ -562,6 +568,10 @@
 		},
 		"exitArrows": {
 			"file": 	"textures/exitarrows.png",
+			"wrap": 	false
+		},
+		"darkoverlay": {
+			"file": 	"textures/overlay_mask.png",
 			"wrap": 	false
 		}
 	},

@@ -324,6 +324,7 @@ public class InputController {
 	public InputController() { 
 		// If we have a game-pad for id, then use it.
 		xbox = new XBox360Controller(0);
+		xbox = new XBox360Controller(1);
 	}
 
 	/**
