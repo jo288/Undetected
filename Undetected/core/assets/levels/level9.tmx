@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" infinite="0" nextobjectid="534">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" infinite="0" nextobjectid="537">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="10" source="walls.tsx"/>
  <tileset firstgid="14" source="wallgreen.tsx"/>
@@ -96,7 +96,6 @@
   <object id="162" template="BlueWall.tx" x="192" y="672"/>
   <object id="163" template="BlueWall.tx" x="192" y="704"/>
   <object id="165" template="BlueWall.tx" x="192" y="736"/>
-  <object id="173" template="exits/blue/Exit.tx" x="256" y="1152"/>
   <object id="175" template="BlueWall.tx" x="288" y="1152"/>
   <object id="176" template="BlueWall.tx" x="320" y="1152"/>
   <object id="177" template="BlueWall.tx" x="320" y="576"/>
@@ -363,5 +362,7 @@
   <object id="530" template="BlueWall.tx" x="224" y="1152"/>
   <object id="532" template="doors/blue/DoorSideUpClosed.tx" name="door1" x="416" y="672"/>
   <object id="533" template="doors/blue/DoorSideDownClosed.tx" name="door0" x="416" y="704"/>
+  <object id="535" template="exits/orange/Exit.tx" x="256" y="1152"/>
+  <object id="536" template="exits/orange/Exit.tx" x="320" y="704"/>
  </objectgroup>
 </map>

@@ -99,7 +99,7 @@
 		"type": 0
 	},
 	{
-		"name": "level10",
+		"name": "level11",
 		"isVertical": true,
 		"pos": [ 57, 7 ],
 		"open": false,
@@ -107,7 +107,7 @@
 		"type": 0
 	},
 	{
-		"name": "level11",
+		"name": "level10",
 		"isVertical": true,
 		"pos": [ 62, 7 ],
 		"open": false,
