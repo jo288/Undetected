@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" infinite="0" nextobjectid="618">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="619">
  <tileset firstgid="1" source="walls.tsx"/>
  <tileset firstgid="5" source="Door.tsx"/>
  <tileset firstgid="18" source="horizontaldoor.tsx"/>
@@ -17,7 +17,7 @@
  <tileset firstgid="332" source="experiment1.tsx"/>
  <tileset firstgid="337" source="servertower.tsx"/>
  <tileset firstgid="345" source="experiment2.tsx"/>
- <layer name="Tile Layer 1" width="40" height="40" opacity="0.9">
+ <layer id="1" name="Tile Layer 1" width="40" height="40" opacity="0.9">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -61,7 +61,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Object Layer 1">
+ <objectgroup id="2" name="Object Layer 1">
   <object id="26" template="RedWall.tx" x="224" y="416"/>
   <object id="27" template="RedWall.tx" x="224" y="448"/>
   <object id="31" template="RedWall.tx" x="96" y="256"/>
@@ -373,6 +373,6 @@
   <object id="613" template="doors/blue/DoorSideUpClosed.tx" name="door3" x="672" y="960"/>
   <object id="614" template="doors/blue/DoorSideDownClosed.tx" name="door2" x="672" y="992"/>
   <object id="616" template="walls/red/Wall1.tx" x="672" y="1024"/>
-  <object id="617" template="exits/orange/Exit.tx" x="512" y="128"/>
+  <object id="618" template="exits/red/Exit.tx" x="512" y="128"/>
  </objectgroup>
 </map>

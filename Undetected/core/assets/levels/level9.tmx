@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" infinite="0" nextobjectid="537">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="539">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="10" source="walls.tsx"/>
  <tileset firstgid="14" source="wallgreen.tsx"/>
@@ -14,7 +14,7 @@
  <tileset firstgid="67" source="DeskRight.tsx"/>
  <tileset firstgid="71" source="doors.tsx"/>
  <tileset firstgid="305" source="walls2.tsx"/>
- <layer name="Tile Layer 1" width="40" height="40">
+ <layer id="1" name="Tile Layer 1" width="40" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -58,7 +58,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Object Layer 1">
+ <objectgroup id="2" name="Object Layer 1">
   <object id="99" template="BlueWall.tx" x="320" y="1120"/>
   <object id="100" template="BlueWall.tx" x="320" y="1024"/>
   <object id="101" template="BlueWall.tx" x="320" y="992"/>
@@ -362,7 +362,7 @@
   <object id="530" template="BlueWall.tx" x="224" y="1152"/>
   <object id="532" template="doors/blue/DoorSideUpClosed.tx" name="door1" x="416" y="672"/>
   <object id="533" template="doors/blue/DoorSideDownClosed.tx" name="door0" x="416" y="704"/>
-  <object id="535" template="exits/orange/Exit.tx" x="256" y="1152"/>
   <object id="536" template="exits/orange/Exit.tx" x="320" y="704"/>
+  <object id="538" template="exits/orange/Exit.tx" x="256" y="1152"/>
  </objectgroup>
 </map>
