@@ -26,6 +26,7 @@
 package edu.cornell.gdiac.b2lights;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.loaders.BitmapFontLoader;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.assets.*;

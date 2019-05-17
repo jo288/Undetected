@@ -1,17 +1,17 @@
 {
-  "platform": "windows64",
-  "jdk": "../../../Downloads/jdk-8u211-windows-x64.exe",
+  "platform": "mac",
+  "jdk": "/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk",
   "executable": "Undetected",
   "classpath": [
     "./classes/artifacts/Undetected_jar/Undetected.jar"
   ],
-  "mainclass": "edu.cornell.gdiac.b2lights.desktop.DesktopLauncher",
+  "mainclass": "edu.cornell.gdiac.b2lights.desktop",
   "vmargs": [
     "Xmx1G"
   ],
   "resources": [
-    "./core/assets/"
+    "core/assets/"
   ],
   "minimizejre": "soft",
-  "output": "out-windows"
+  "output": "out-mac"
 }
