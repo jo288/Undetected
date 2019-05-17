@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="21" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="54">
+ <tileset firstgid="1" source="FloorTile.tsx"/>
+ <tileset firstgid="5" source="wallgreen.tsx"/>
+ <tileset firstgid="6" source="Player.tsx"/>
+ <tileset firstgid="7" source="walls.tsx"/>
+ <layer id="3" name="Tile Layer 1" width="21" height="10">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="4" template="DoorClosed.tx" name="level1" x="64" y="32"/>
+  <object id="5" template="DoorClosed.tx" name="level2" x="192" y="32"/>
+  <object id="6" template="DoorClosed.tx" name="level3" x="320" y="32"/>
+  <object id="7" template="DoorClosed.tx" name="level4" x="448" y="32"/>
+  <object id="8" template="DoorClosed.tx" name="level5" x="576" y="32"/>
+  <object id="14" template="Player.tx" x="320" y="288"/>
+  <object id="16" template="GreenWall.tx" x="0" y="32"/>
+  <object id="17" template="GreenWall.tx" x="32" y="32"/>
+  <object id="18" template="GreenWall.tx" x="96" y="32"/>
+  <object id="19" template="GreenWall.tx" x="128" y="32"/>
+  <object id="20" template="GreenWall.tx" x="160" y="32"/>
+  <object id="21" template="GreenWall.tx" x="224" y="32"/>
+  <object id="22" template="GreenWall.tx" x="256" y="32"/>
+  <object id="23" template="GreenWall.tx" x="288" y="32"/>
+  <object id="24" template="GreenWall.tx" x="384" y="32"/>
+  <object id="25" template="GreenWall.tx" x="352" y="32"/>
+  <object id="26" template="GreenWall.tx" x="416" y="32"/>
+  <object id="27" template="GreenWall.tx" x="480" y="32"/>
+  <object id="28" template="GreenWall.tx" x="512" y="32"/>
+  <object id="29" template="GreenWall.tx" x="544" y="32"/>
+  <object id="30" template="GreenWall.tx" x="608" y="32"/>
+  <object id="31" template="GreenWall.tx" x="640" y="32"/>
+  <object id="35" template="GreenWall.tx" x="640" y="64"/>
+  <object id="36" template="GreenWall.tx" x="640" y="96"/>
+  <object id="37" template="GreenWall.tx" x="640" y="128"/>
+  <object id="38" template="GreenWall.tx" x="640" y="160"/>
+  <object id="39" template="GreenWall.tx" x="640" y="192"/>
+  <object id="40" template="GreenWall.tx" x="640" y="224"/>
+  <object id="41" template="GreenWall.tx" x="640" y="256"/>
+  <object id="42" template="GreenWall.tx" x="640" y="288"/>
+  <object id="43" template="GreenWall.tx" x="640" y="320"/>
+  <object id="44" template="GreenWall.tx" x="0" y="64"/>
+  <object id="45" template="GreenWall.tx" x="0" y="96"/>
+  <object id="46" template="GreenWall.tx" x="0" y="128"/>
+  <object id="48" template="GreenWall.tx" x="0" y="160"/>
+  <object id="49" template="GreenWall.tx" x="0" y="192"/>
+  <object id="50" template="GreenWall.tx" x="0" y="256"/>
+  <object id="51" template="GreenWall.tx" x="0" y="224"/>
+  <object id="52" template="GreenWall.tx" x="0" y="288"/>
+  <object id="53" template="GreenWall.tx" x="0" y="320"/>
+ </objectgroup>
+</map>

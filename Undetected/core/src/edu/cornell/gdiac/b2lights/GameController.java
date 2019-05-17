@@ -747,7 +747,6 @@ public class GameController implements Screen, ContactListener {
 				if(cam!=null) {
 					for (AIController ai : level.getControl()) {
 						if (ai.getGuard().sector == cam.sector && ai.lastCamera != cam) {
-							ai.setAlarmed();
 							ai.setProtect(cam);
 						}
 					}
@@ -890,7 +889,7 @@ public class GameController implements Screen, ContactListener {
 			TextureRegion overlayTexture = JsonAssetManager.getInstance().getEntry("overlay", TextureRegion.class);
 			canvas.begin();
 			canvas.draw(overlayTexture, Color.WHITE, overlayTexture.getRegionWidth()/2,
-					overlayTexture.getRegionHeight()/2, canvas.getWidth(), canvas.getHeight(), 0, 5, 5, 0.8f);
+					overlayTexture.getRegionHeight()/2, canvas.getWidth(), canvas.getHeight(), 0, 10, 10, 0.8f);
 			canvas.end();
 		}
 		// Final message
@@ -1399,7 +1398,6 @@ public class GameController implements Screen, ContactListener {
 					}
 					for (AIController ai : level.getControl()) {
 						if (ai.getGuard().sector == ((Laser) bd1).sector) {
-							ai.setAlarmed();
 							ai.setProtect(bd1);
 						}
 					}
@@ -1427,7 +1425,6 @@ public class GameController implements Screen, ContactListener {
 					}
 					for (AIController ai : level.getControl()) {
 						if (ai.getGuard().sector == ((Laser) bd2).sector) {
-							ai.setAlarmed();
 							ai.setProtect(bd2);
 						}
 					}

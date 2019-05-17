@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="13" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="93">
+ <tileset firstgid="1" source="FloorTile.tsx"/>
+ <tileset firstgid="10" source="Objective.tsx"/>
+ <tileset firstgid="11" source="Player.tsx"/>
+ <tileset firstgid="12" source="Guard.tsx"/>
+ <tileset firstgid="13" source="Laser.tsx"/>
+ <tileset firstgid="14" source="DeskRight.tsx"/>
+ <tileset firstgid="18" source="wallgreen.tsx"/>
+ <tileset firstgid="19" source="walls.tsx"/>
+ <layer id="6" name="Tile Layer 1" width="13" height="16">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,0,0,0,
+1,1,1,1,1,1,1,1,1,1,0,0,0,
+1,1,1,1,1,1,1,1,1,1,0,0,0,
+1,1,1,1,1,1,1,1,1,1,0,0,0,
+1,1,1,1,1,1,1,1,1,1,0,0,0,
+1,1,1,1,1,1,1,1,1,1,1,0,0,
+1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,0,0,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,0,0,
+1,1,1,1,1,1,1,1,1,1,0,0,0,
+1,1,1,1,1,1,1,1,1,1,0,0,0,
+1,1,1,1,1,1,1,1,1,1,0,0,0,
+0,0,0,0,0,1,1,1,1,1,0,0,0,
+0,0,0,0,0,1,1,1,1,1,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="20" template="GreenKey.tx" x="32" y="96"/>
+  <object id="21" template="Player.tx" x="256" y="480"/>
+  <object id="22" template="Guard.tx" x="352" y="288">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="lightAngle" type="float" value="0"/>
+    <property name="objectivepath" value="[8,4]"/>
+    <property name="path" value="[]"/>
+   </properties>
+  </object>
+  <object id="23" template="exits/blue/Exit.tx" x="256" y="512"/>
+  <object id="24" template="Laser.tx" x="160" y="160" width="3" height="96"/>
+  <object id="25" template="decoratives/DeskLeft.tx" x="320" y="288"/>
+  <object id="26" template="GreenWall.tx" x="0" y="64"/>
+  <object id="27" template="GreenWall.tx" x="32" y="64"/>
+  <object id="28" template="GreenWall.tx" x="64" y="64"/>
+  <object id="29" template="GreenWall.tx" x="96" y="64"/>
+  <object id="30" template="GreenWall.tx" x="160" y="64"/>
+  <object id="31" template="GreenWall.tx" x="128" y="64"/>
+  <object id="32" template="GreenWall.tx" x="224" y="64"/>
+  <object id="33" template="GreenWall.tx" x="224" y="64"/>
+  <object id="34" template="GreenWall.tx" x="192" y="64"/>
+  <object id="35" template="GreenWall.tx" x="256" y="64"/>
+  <object id="36" template="GreenWall.tx" x="288" y="64"/>
+  <object id="37" template="GreenWall.tx" x="288" y="96"/>
+  <object id="38" template="GreenWall.tx" x="288" y="128"/>
+  <object id="39" template="GreenWall.tx" x="288" y="160"/>
+  <object id="40" template="GreenWall.tx" x="288" y="192"/>
+  <object id="41" template="GreenWall.tx" x="288" y="224"/>
+  <object id="42" template="GreenWall.tx" x="320" y="224"/>
+  <object id="43" template="GreenWall.tx" x="352" y="224"/>
+  <object id="44" template="GreenWall.tx" x="384" y="224"/>
+  <object id="45" template="GreenWall.tx" x="384" y="256"/>
+  <object id="46" template="GreenWall.tx" x="384" y="288"/>
+  <object id="47" template="GreenWall.tx" x="384" y="320"/>
+  <object id="48" template="GreenWall.tx" x="384" y="352"/>
+  <object id="49" template="GreenWall.tx" x="352" y="352"/>
+  <object id="50" template="GreenWall.tx" x="320" y="352"/>
+  <object id="51" template="GreenWall.tx" x="288" y="352"/>
+  <object id="52" template="GreenWall.tx" x="288" y="384"/>
+  <object id="53" template="GreenWall.tx" x="288" y="416"/>
+  <object id="54" template="GreenWall.tx" x="288" y="448"/>
+  <object id="55" template="GreenWall.tx" x="288" y="480"/>
+  <object id="56" template="GreenWall.tx" x="288" y="320"/>
+  <object id="57" template="GreenWall.tx" x="288" y="512"/>
+  <object id="58" template="GreenWall.tx" x="192" y="512"/>
+  <object id="59" template="GreenWall.tx" x="160" y="512"/>
+  <object id="60" template="GreenWall.tx" x="160" y="448"/>
+  <object id="61" template="GreenWall.tx" x="160" y="480"/>
+  <object id="62" template="GreenWall.tx" x="128" y="448"/>
+  <object id="63" template="GreenWall.tx" x="96" y="448"/>
+  <object id="64" template="GreenWall.tx" x="64" y="448"/>
+  <object id="65" template="GreenWall.tx" x="32" y="448"/>
+  <object id="66" template="GreenWall.tx" x="0" y="448"/>
+  <object id="67" template="GreenWall.tx" x="0" y="96"/>
+  <object id="68" template="GreenWall.tx" x="0" y="128"/>
+  <object id="69" template="GreenWall.tx" x="0" y="160"/>
+  <object id="70" template="GreenWall.tx" x="0" y="192"/>
+  <object id="71" template="GreenWall.tx" x="0" y="224"/>
+  <object id="72" template="GreenWall.tx" x="0" y="256"/>
+  <object id="73" template="GreenWall.tx" x="0" y="320"/>
+  <object id="74" template="GreenWall.tx" x="0" y="288"/>
+  <object id="75" template="GreenWall.tx" x="0" y="352"/>
+  <object id="76" template="GreenWall.tx" x="0" y="384"/>
+  <object id="77" template="GreenWall.tx" x="0" y="416"/>
+  <object id="78" template="GreenWall.tx" x="96" y="256"/>
+  <object id="79" template="GreenWall.tx" x="96" y="224"/>
+  <object id="80" template="GreenWall.tx" x="128" y="224"/>
+  <object id="81" template="GreenWall.tx" x="160" y="224"/>
+  <object id="82" template="GreenWall.tx" x="192" y="224"/>
+  <object id="84" template="GreenWall.tx" x="192" y="224"/>
+  <object id="85" template="GreenWall.tx" x="192" y="256"/>
+  <object id="86" template="GreenWall.tx" x="192" y="288"/>
+  <object id="87" template="GreenWall.tx" x="160" y="288"/>
+  <object id="88" template="GreenWall.tx" x="128" y="288"/>
+  <object id="89" template="GreenWall.tx" x="96" y="288"/>
+  <object id="90" template="GreenWall.tx" x="128" y="256"/>
+  <object id="91" template="GreenWall.tx" x="160" y="256"/>
+  <object id="92" template="GreenWall.tx" x="224" y="512"/>
+ </objectgroup>
+</map>

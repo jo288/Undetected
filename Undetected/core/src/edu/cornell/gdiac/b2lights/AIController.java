@@ -142,8 +142,10 @@ public class AIController {
     public void setProtect(Obstacle item) {
         itemList.add(item);
         if (!isGrid(guard)) {
+            System.out.println("hi");
             queuedGoal = item;
         } else {
+            setAlarmed();
             currentGoal = new Vector2(item.getX(), item.getY());
             if (item instanceof CameraModel) lastCamera = (CameraModel) item;
             if (board.getOccupant(board.physicsToBoard(item.getX()), board.physicsToBoard(item.getY())) == 1) {
@@ -161,6 +163,7 @@ public class AIController {
 
     /** Main function to update the guard's velocity */
     public void update(){
+//        System.out.println(currentGoal);
         switch (state) {
             case SLEEP:
                 // Do Nothing
@@ -168,6 +171,7 @@ public class AIController {
                 guard.applyForce();
                 currentGoal = path[0];
                 pathIndex = 0;
+
                 break;
             case PATROL:
                 guard.walking = true;
@@ -191,6 +195,7 @@ public class AIController {
                 if (queuedGoal != null) {
                     setProtect(queuedGoal);
                     queuedGoal = null;
+                    setAlarmed();
                 }
 
                 if (turning) {

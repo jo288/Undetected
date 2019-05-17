@@ -1,6 +1,6 @@
 {
-  "platform": "mac",
-  "jdk": "/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk",
+  "platform": "windows64",
+  "jdk": "C:\\Program Files\\Java",
   "executable": "Undetected",
   "classpath": [
     "./classes/artifacts/Undetected_jar/Undetected.jar"

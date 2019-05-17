@@ -1,0 +1,29 @@
+{
+  "levels":  {
+      "level1": {
+        "unlocked": 	true,
+        "complete": 	false,
+        "path": 		"levels/level1.json"
+      },
+    "level2": {
+      "unlocked": 	false,
+      "complete": 	false,
+      "path": 		"levels/level2.json"
+    },
+    "level3": {
+      "unlocked": 	false,
+      "complete": 	false,
+      "path": 		"levels/level3.json"
+    },
+    "level4": {
+      "unlocked": 	false,
+      "complete": 	false,
+      "path": 		"levels/level4.json"
+    },
+    "level5": {
+      "unlocked": 	false,
+      "complete": 	false,
+      "path": 		"levels/level5.json"
+    }
+  }
+}
