@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="60" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="616">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="60" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="625">
  <tileset firstgid="1" source="walls.tsx"/>
  <tileset firstgid="5" source="Door.tsx"/>
  <tileset firstgid="18" source="horizontaldoor.tsx"/>
@@ -13,7 +13,7 @@
  <tileset firstgid="64" source="FloorTile.tsx"/>
  <tileset firstgid="73" source="Player.tsx"/>
  <tileset firstgid="74" source="doors.tsx"/>
- <layer name="Tile Layer 1" width="60" height="50">
+ <layer id="1" name="Tile Layer 1" width="60" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -67,8 +67,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Object Layer 1">
-  <object id="1" template="exits/blue/Exit.tx" x="128" y="512"/>
+ <objectgroup id="2" name="Object Layer 1">
   <object id="2" template="GreenWall.tx" x="192" y="512"/>
   <object id="3" template="GreenWall.tx" x="224" y="512"/>
   <object id="4" template="GreenWall.tx" x="256" y="512"/>
@@ -403,7 +402,7 @@
   <object id="488" template="RedKey.tx" x="1536" y="736">
    <properties>
     <property name="doors" value="door1,door2,door5"/>
-    <property name="lasers" value="laser1,laser2,laser3,laser4,laser5"/>
+    <property name="lasers" value="laser1,laser2,laser3,laser4,laser5,laser11,laser10,laser9,laser8,laser7"/>
    </properties>
   </object>
   <object id="492" template="Guard.tx" x="1280" y="672"/>
@@ -429,12 +428,12 @@
     <property name="timetolive" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="528" template="Laser.tx" name="laser3" x="1024" y="576" width="3" height="96" rotation="90">
+  <object id="528" template="Laser.tx" name="laser10" x="1024" y="576" width="3" height="96" rotation="90">
    <properties>
     <property name="timetolive" type="int" value="0"/>
    </properties>
   </object>
-  <object id="529" template="Laser.tx" name="laser2" x="1024" y="704" width="3" height="96" rotation="90">
+  <object id="529" template="Laser.tx" name="laser8" x="1024" y="704" width="3" height="96" rotation="90">
    <properties>
     <property name="sector" type="int" value="0"/>
     <property name="timetolive" type="int" value="-1"/>
@@ -501,7 +500,7 @@
   <object id="596" template="GreenWall.tx" x="864" y="1248"/>
   <object id="597" template="GreenWall.tx" x="864" y="1280"/>
   <object id="598" template="decoratives/DeskRight.tx" x="1792" y="448"/>
-  <object id="600" template="Laser.tx" name="laser3" x="1024" y="640" width="3" height="96" rotation="90">
+  <object id="600" template="Laser.tx" name="laser9" x="1024" y="640" width="3" height="96" rotation="90">
    <properties>
     <property name="timetolive" type="int" value="-1"/>
    </properties>
@@ -511,7 +510,7 @@
     <property name="timetolive" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="603" template="Laser.tx" name="laser3" x="1024" y="768" width="3" height="96" rotation="90">
+  <object id="603" template="Laser.tx" name="laser7" x="1024" y="768" width="3" height="96" rotation="90">
    <properties>
     <property name="timetolive" type="int" value="-1"/>
    </properties>
@@ -528,5 +527,26 @@
   <object id="613" template="doors/blue/DoorSideDownOpen.tx" name="door1" x="448" y="1056"/>
   <object id="614" template="GreenWall.tx" x="832" y="1088"/>
   <object id="615" template="GreenWall.tx" x="448" y="1088"/>
+  <object id="620" template="Laser.tx" name="laser2" x="992" y="1056" width="3" height="64">
+   <properties>
+    <property name="timetolive" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="621" template="Laser.tx" name="laser6" x="1024" y="832" width="3" height="96" rotation="90">
+   <properties>
+    <property name="timetolive" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="622" template="Laser.tx" name="laser11" x="1024" y="896" width="3" height="128" rotation="90">
+   <properties>
+    <property name="timetolive" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="623" template="Laser.tx" name="laser3" x="1024" y="960" width="3" height="128" rotation="90">
+   <properties>
+    <property name="timetolive" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="624" template="exits/orange/Exit.tx" x="128" y="512"/>
  </objectgroup>
 </map>
