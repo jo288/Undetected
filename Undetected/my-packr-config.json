@@ -1,11 +1,11 @@
 {
-  "platform": "windows64",
-  "jdk": "C:\\Program Files\\Java",
+  "platform": "mac",
+  "jdk": "/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk",
   "executable": "Undetected",
   "classpath": [
     "./classes/artifacts/Undetected_jar/Undetected.jar"
   ],
-  "mainclass": "edu.cornell.gdiac.b2lights.desktop",
+  "mainclass": "edu.cornell.gdiac.b2lights.desktop.DesktopLauncher",
   "vmargs": [
     "Xmx1G"
   ],

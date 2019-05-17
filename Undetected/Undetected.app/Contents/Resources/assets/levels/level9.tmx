@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="531">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="539">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="10" source="walls.tsx"/>
  <tileset firstgid="14" source="wallgreen.tsx"/>
@@ -12,6 +12,8 @@
  <tileset firstgid="65" source="Laser.tsx"/>
  <tileset firstgid="66" source="Box2.tsx"/>
  <tileset firstgid="67" source="DeskRight.tsx"/>
+ <tileset firstgid="71" source="doors.tsx"/>
+ <tileset firstgid="305" source="walls2.tsx"/>
  <layer id="1" name="Tile Layer 1" width="40" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -94,7 +96,6 @@
   <object id="162" template="BlueWall.tx" x="192" y="672"/>
   <object id="163" template="BlueWall.tx" x="192" y="704"/>
   <object id="165" template="BlueWall.tx" x="192" y="736"/>
-  <object id="173" template="exits/blue/Exit.tx" x="256" y="1152"/>
   <object id="175" template="BlueWall.tx" x="288" y="1152"/>
   <object id="176" template="BlueWall.tx" x="320" y="1152"/>
   <object id="177" template="BlueWall.tx" x="320" y="576"/>
@@ -293,7 +294,7 @@
   </object>
   <object id="451" template="Switch.tx" x="704" y="1056">
    <properties>
-    <property name="doors" value="door1,"/>
+    <property name="doors" value="door1,door0"/>
    </properties>
   </object>
   <object id="461" template="Laser.tx" name="laser1" x="544" y="704" width="3" height="128" rotation="90">
@@ -301,7 +302,6 @@
     <property name="timetolive" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="467" template="doors/blue/DoorSideUpClosed.tx" name="door1" x="416" y="672"/>
   <object id="470" template="Box2.tx" x="640" y="672"/>
   <object id="471" template="BlueWall.tx" x="640" y="640"/>
   <object id="474" template="BlueWall.tx" x="672" y="736"/>
@@ -360,5 +360,9 @@
    </properties>
   </object>
   <object id="530" template="BlueWall.tx" x="224" y="1152"/>
+  <object id="532" template="doors/blue/DoorSideUpClosed.tx" name="door1" x="416" y="672"/>
+  <object id="533" template="doors/blue/DoorSideDownClosed.tx" name="door0" x="416" y="704"/>
+  <object id="536" template="exits/orange/Exit.tx" x="320" y="704"/>
+  <object id="538" template="exits/orange/Exit.tx" x="256" y="1152"/>
  </objectgroup>
 </map>

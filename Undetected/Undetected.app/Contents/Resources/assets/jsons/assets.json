@@ -342,6 +342,16 @@
 			"file": "textures/camera.png",
 			"wrap": false
 		},
+		"tutorial": {
+			"file": "textures/terminal.png",
+			"wrap": false,
+			"strip":	{
+				"size":		7,
+				"rows":		1,
+				"cols":		7,
+				"first":	0
+			}
+		},
 		"camerafront":{
 			"file": 	"textures/camerafront.png",
 			"wrap":  	false,
@@ -449,7 +459,11 @@
 			"wrap": 	false
 		},
 		"ring": {
-			"file": 	"textures/position_circle.png",
+			"file": 	"textures/awareness.png",
+			"wrap": 	false
+		},
+		"alertring": {
+			"file": 	"textures/awarenessalerted.png",
 			"wrap": 	false
 		},
 		"greenkey": {
@@ -486,6 +500,10 @@
 		},
 		"abort":	{
 			"file":		"textures/pause_menu/pause_homelong.png",
+			"wrap": 	false
+		},
+		"inGamePause": {
+			"file":		"textures/pause_menu/ingame_pause.png",
 			"wrap": 	false
 		},
 		"musicOff":	{
@@ -554,6 +572,10 @@
 		},
 		"exitArrows": {
 			"file": 	"textures/exitarrows.png",
+			"wrap": 	false
+		},
+		"darkoverlay": {
+			"file": 	"textures/overlay_mask.png",
 			"wrap": 	false
 		}
 	},

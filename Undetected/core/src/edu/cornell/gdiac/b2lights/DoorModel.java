@@ -48,6 +48,9 @@ public class DoorModel extends BoxObstacle{
     public boolean getOpen() {
         return open;
     }
+    public boolean getVertical() {
+        return isVertical;
+    }
 
     public void setOpen(boolean val) {
         open = val;

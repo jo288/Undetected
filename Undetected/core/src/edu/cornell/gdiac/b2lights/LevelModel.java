@@ -1111,27 +1111,47 @@ public class LevelModel {
 //			}
 //			if(!obj.equals(avatar) && !obj.getClass().equals(GuardModel.class)){
 			if(obj.getClass().equals(SwitchModel.class)||obj.getClass().equals(DoorModel.class)||obj.getClass().equals(CameraModel.class)){
-				obj.draw(canvas);
-					if(Math.abs(board.physicsToBoard(obj.getX())-board.physicsToBoard(avatar.getX()))<=1 &&
-					board.physicsToBoard(obj.getY())==board.physicsToBoard(avatar.getY())) {
+				if (obj.getClass().equals(DoorModel.class)){
+					if(!((DoorModel)obj).getVertical()){
+						obj.draw(canvas);
+						if (Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(avatar.getX())) <= 1 &&
+								board.physicsToBoard(obj.getY()) == board.physicsToBoard(avatar.getY())) {
+							avatar.draw(canvas);
+							avatarDrawn = true;
+						}
+						for (GuardModel g : guards) {
+							if (Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(g.getX())) <= 1 &&
+									board.physicsToBoard(obj.getY()) == board.physicsToBoard(g.getY())) {
+								g.draw(canvas);
+							}
+						}
+					}else{
+						obj.draw(canvas);
+					}
+
+				}else {
+					obj.draw(canvas);
+					if (Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(avatar.getX())) <= 1 &&
+							board.physicsToBoard(obj.getY()) == board.physicsToBoard(avatar.getY())) {
 						avatar.draw(canvas);
 						avatarDrawn = true;
 					}
-					for(GuardModel g: guards){
-						if(Math.abs(board.physicsToBoard(obj.getX())-board.physicsToBoard(g.getX()))<=1 &&
-								board.physicsToBoard(obj.getY())==board.physicsToBoard(g.getY())) {
+					for (GuardModel g : guards) {
+						if (Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(g.getX())) <= 1 &&
+								board.physicsToBoard(obj.getY()) == board.physicsToBoard(g.getY())) {
 							g.draw(canvas);
 						}
 					}
+				}
 			} else if (obj.getClass().equals(Laser.class)){
 				obj.draw(canvas);
-				if (Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(avatar.getX()))<=1 &&
-						Math.abs(board.physicsToBoard(obj.getY()+((Laser) obj).getLaserHeight()/2f) - board.physicsToBoard(avatar.getY()))<=((Laser) obj).getLaserHeight()/2f) {
+				if (Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(avatar.getX()))<=0f &&
+						Math.abs(board.physicsToBoard(obj.getY()+((Laser) obj).getLaserHeight()/2f) - board.physicsToBoard(avatar.getY()))<=((Laser) obj).getLaserHeight()/4f) {
 					avatar.draw(canvas);
 					avatarDrawn = true;
 				}
 				for(GuardModel g: guards){
-					if(Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(g.getX()))<=1.5f &&
+					if(Math.abs(board.physicsToBoard(obj.getX()) - board.physicsToBoard(g.getX()))<=1f &&
 							Math.abs(board.physicsToBoard(obj.getY()+((Laser) obj).getLaserHeight()/2f) - board.physicsToBoard(g.getY()))<=((Laser) obj).getLaserHeight()/2f) {
 						g.draw(canvas);
 					}

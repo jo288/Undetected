@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="24" height="14" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="94">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="24" height="14" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="99">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="10" source="Guard.tsx"/>
  <tileset firstgid="11" source="Player.tsx"/>
@@ -10,6 +10,8 @@
  <tileset firstgid="19" source="wallgreen.tsx"/>
  <tileset firstgid="20" source="keys.tsx"/>
  <tileset firstgid="24" source="walls.tsx"/>
+ <tileset firstgid="28" source="doors.tsx"/>
+ <tileset firstgid="262" source="tutorialtemp.tsx"/>
  <layer id="1" name="Tile Layer 1" width="24" height="14">
   <data encoding="csv">
 0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -37,7 +39,6 @@
    </properties>
   </object>
   <object id="12" template="Player.tx" x="64" y="384"/>
-  <object id="13" template="exits/blue/Exit.tx" x="64" y="448"/>
   <object id="15" template="Box2.tx" x="32" y="288"/>
   <object id="18" template="Laser.tx" name="laser1" x="512" y="224" width="3" height="96">
    <properties>
@@ -118,5 +119,16 @@
    </properties>
   </object>
   <object id="93" template="GreenWall.tx" x="96" y="448"/>
+  <object id="94" template="exits/green/Exit.tx" x="64" y="448"/>
+  <object id="95" template="Tutorial.tx" x="128" y="384">
+   <properties>
+    <property name="text" value="Press space to pick up the box!"/>
+   </properties>
+  </object>
+  <object id="97" template="Tutorial.tx" x="416" y="160">
+   <properties>
+    <property name="text" value="Boxes can block the guards' view!"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
