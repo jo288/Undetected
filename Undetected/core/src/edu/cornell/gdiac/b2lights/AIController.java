@@ -142,7 +142,6 @@ public class AIController {
     public void setProtect(Obstacle item) {
         itemList.add(item);
         if (!isGrid(guard)) {
-            System.out.println("hi");
             queuedGoal = item;
         } else {
             setAlarmed();

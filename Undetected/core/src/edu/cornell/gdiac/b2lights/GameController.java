@@ -731,14 +731,14 @@ public class GameController implements Screen, ContactListener {
 						avatar.getX()-guardCaught.getX(),
 						avatar.getY()-guardCaught.getY()
 				)/(Math.PI/2))*Math.PI/2));
-				System.out.println((float)(Math.round(Math.atan2(
-						avatar.getX()-guardCaught.getX(),
-						avatar.getY()-guardCaught.getY()
-				)/(Math.PI/2))*Math.PI/2));
-				System.out.println("Raw:"+Math.atan2(
-						avatar.getX()-guardCaught.getX(),
-						avatar.getY()-guardCaught.getY()
-				));
+//				System.out.println((float)(Math.round(Math.atan2(
+//						avatar.getX()-guardCaught.getX(),
+//						avatar.getY()-guardCaught.getY()
+//				)/(Math.PI/2))*Math.PI/2));
+//				System.out.println("Raw:"+Math.atan2(
+//						avatar.getX()-guardCaught.getX(),
+//						avatar.getY()-guardCaught.getY()
+//				));
 				guardCaught.getLight().setConeDegree(0f);
 				guardCaught.setHasCaught(true);
 			}
@@ -830,7 +830,7 @@ public class GameController implements Screen, ContactListener {
 					for (int i = 0; i < 10; i++) {
 						DoorModel d = doors.get(i);
 						if ((d.getName() + ".json").equals(lastFile.name())) {
-							System.out.println("level1 door");
+//							System.out.println("level1 door");
 							avatar = level.getAvatar();
 							avatar.setPosition(d.getPosition().x, d.getPosition().y - 1);
 							avatar.setDirection(3.14f);
