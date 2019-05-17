@@ -890,7 +890,7 @@ public class GameController implements Screen, ContactListener {
 			TextureRegion overlayTexture = JsonAssetManager.getInstance().getEntry("overlay", TextureRegion.class);
 			canvas.begin();
 			canvas.draw(overlayTexture, Color.WHITE, overlayTexture.getRegionWidth()/2,
-					overlayTexture.getRegionHeight()/2, canvas.getWidth(), canvas.getHeight(), 0, 5, 5, 0.8f);
+					overlayTexture.getRegionHeight()/2, canvas.getWidth(), canvas.getHeight(), 0, 10, 10, 0.8f);
 			canvas.end();
 		}
 		// Final message

@@ -1,6 +1,6 @@
 {
   "platform": "windows64",
-  "jdk": "../../../Downloads/jdk-8u211-windows-x64.exe",
+  "jdk": "C:\\Program Files\\Java",
   "executable": "Undetected",
   "classpath": [
     "./classes/artifacts/Undetected_jar/Undetected.jar"

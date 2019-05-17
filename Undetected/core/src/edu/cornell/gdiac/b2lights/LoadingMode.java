@@ -62,7 +62,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	private static final String PLAY_BTN_FILE = "textures/play.png";
 	private static final String NEWGAME_BTN_FILE = "textures/home_newgame.png";
 	private static final String PAUSE_BTN_FILE = "textures/pause_temp.png";
-	
+
 	/** Background texture for start-up */
 	private Texture background;
 	/** Play button to display when done */
@@ -91,6 +91,7 @@ public class LoadingMode implements Screen, InputProcessor, ControllerListener {
 	private TextureRegion statusFrgRight;
 	/** Title screen */
 	private Texture title;
+	private BitmapFont levelnumfont;
 
 	/** Default budget for asset loader (do nothing but load 60 fps) */
 	private static int DEFAULT_BUDGET = 15;
