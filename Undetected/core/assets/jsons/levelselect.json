@@ -51,7 +51,7 @@
 		"type": 0
 	},
 	{
-		"name": "alphatest",
+		"name": "level12",
 		"isVertical": true,
 		"pos": [ 27, 7 ],
 		"open": false,
@@ -59,7 +59,7 @@
 		"type": 0
 	},
 	{
-		"name": "level6",
+		"name": "alphatest",
 		"isVertical": true,
 		"pos": [ 32, 7 ],
 		"open": false,
@@ -67,7 +67,7 @@
 		"type": 0
 	},
 	{
-		"name": "level7",
+		"name": "level6",
 		"isVertical": true,
 		"pos": [ 37, 7 ],
 		"open": false,
@@ -75,7 +75,7 @@
 		"type": 0
 	},
 	{
-		"name": "level8",
+		"name": "level7",
 		"isVertical": true,
 		"pos": [ 42, 7 ],
 		"open": false,
@@ -83,7 +83,7 @@
 		"type": 0
 	},
 	{
-		"name": "level9",
+		"name": "level8",
 		"isVertical": true,
 		"pos": [ 47, 7 ],
 		"open": false,
@@ -91,7 +91,7 @@
 		"type": 0
 	},
 	{
-		"name": "level10",
+		"name": "level9",
 		"isVertical": true,
 		"pos": [ 52, 7 ],
 		"open": false,
@@ -99,7 +99,7 @@
 		"type": 0
 	},
 	{
-		"name": "level",
+		"name": "level10",
 		"isVertical": true,
 		"pos": [ 57, 7 ],
 		"open": false,
@@ -107,7 +107,7 @@
 		"type": 0
 	},
 	{
-		"name": "level",
+		"name": "level11",
 		"isVertical": true,
 		"pos": [ 62, 7 ],
 		"open": false,

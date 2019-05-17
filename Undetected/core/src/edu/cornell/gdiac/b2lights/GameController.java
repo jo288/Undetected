@@ -525,24 +525,24 @@ public class GameController implements Screen, ContactListener {
 		}
 
 		// Toggle debug
-		if (input.didDebug()) {
-			level.setDebug(!level.getDebug());
-		}
-		if(input.zoomIn()){
-			canvas.getCamera().zoom = MathUtils.clamp(canvas.getCamera().zoom-0.01f, 0.4f, 1f);
-			level.raycamera.zoom = MathUtils.clamp(level.raycamera.zoom-0.01f, 0.4f, 1f);
-			level.raycamera.update();
-			level.rayhandler.setCombinedMatrix(level.raycamera);
-			level.rayhandler.updateAndRender();
-		}
-		else if(input.zoomOut()){
-			canvas.getCamera().zoom = MathUtils.clamp(canvas.getCamera().zoom+0.01f, 1f, 1.2f);
-			level.raycamera.zoom = MathUtils.clamp(level.raycamera.zoom+0.01f, 1f, 1.2f);
-
-			level.raycamera.update();
-			level.rayhandler.setCombinedMatrix(level.raycamera);
-			level.rayhandler.updateAndRender();
-		}
+//		if (input.didDebug()) {
+//			level.setDebug(!level.getDebug());
+//		}
+//		if(input.zoomIn()){
+//			canvas.getCamera().zoom = MathUtils.clamp(canvas.getCamera().zoom-0.01f, 0.4f, 1f);
+//			level.raycamera.zoom = MathUtils.clamp(level.raycamera.zoom-0.01f, 0.4f, 1f);
+//			level.raycamera.update();
+//			level.rayhandler.setCombinedMatrix(level.raycamera);
+//			level.rayhandler.updateAndRender();
+//		}
+//		else if(input.zoomOut()){
+//			canvas.getCamera().zoom = MathUtils.clamp(canvas.getCamera().zoom+0.01f, 1f, 1.2f);
+//			level.raycamera.zoom = MathUtils.clamp(level.raycamera.zoom+0.01f, 1f, 1.2f);
+//
+//			level.raycamera.update();
+//			level.rayhandler.setCombinedMatrix(level.raycamera);
+//			level.rayhandler.updateAndRender();
+//		}
 
 //		GuardModel guard = level.getGuards().get(0);
 //		float degree = guard.getLight().getConeDegree();
@@ -559,18 +559,16 @@ public class GameController implements Screen, ContactListener {
 		}
 
 
-		if (input.didLoad()){
-			loadLevel();
-		}
-		if (input.didLoadX()){
-			loadXMLLevel();
-		}
+//		if (input.didLoad()){
+//			loadLevel();
+//		}
 
 		// Now it is time to maybe switch screens.
-		if (input.didExit()) {
-			listener.exitScreen(this, EXIT_QUIT);
-			return false;
-		} else if (countdown > 0) {
+//		if (input.didExit()) {
+//			listener.exitScreen(this, EXIT_QUIT);
+//			return false;
+//		} else
+		if (countdown > 0) {
 			countdown--;
 		} else if (countdown == 0) {
 //			reset();
@@ -601,11 +599,11 @@ public class GameController implements Screen, ContactListener {
 		ArrayList<CameraModel> cameras = level.getCameras();
 		InputController input = InputController.getInstance();
 
-		if (input.didInvinc()) {
-			avatar.changeInvinc(); //MAKES THE PLAYER ABLE TO WALK THROUGH WALLS, WE MUST REMOVE THIS LATER
-		}
+//		if (input.didInvinc()) {
+//			avatar.changeInvinc(); //MAKES THE PLAYER ABLE TO WALK THROUGH WALLS, WE MUST REMOVE THIS LATER
+//		}
 
-		if (input.didPause() && !paused) {
+		if ((input.didExit() || input.didPause()) && !paused) {
 			pause();
 		}
 
@@ -667,7 +665,7 @@ public class GameController implements Screen, ContactListener {
 			ArrayList<DoorModel> doors = level.getDoors();
 			//TODO: CHANGE FOR RELEASE, TEMP
 //				for (DoorModel d : doors) {
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 12; i++) {
 				DoorModel d = doors.get(i);
 				if (d.getPosition().dst(avatar.getPosition())<0.3f){
 					nextFile = Gdx.files.internal("jsons/" + (d.getName()) + ".json");
@@ -827,7 +825,7 @@ public class GameController implements Screen, ContactListener {
 					ArrayList<DoorModel> doors = level.getDoors();
 					//TODO: CHANGE FOR RELEASE, TEMP
 //				for (DoorModel d : doors) {
-					for (int i = 0; i < 10; i++) {
+					for (int i = 0; i < 12; i++) {
 						DoorModel d = doors.get(i);
 						if ((d.getName() + ".json").equals(lastFile.name())) {
 //							System.out.println("level1 door");
@@ -1096,8 +1094,9 @@ public class GameController implements Screen, ContactListener {
 
 			levelnumfont.setColor(Color.WHITE);
 			ArrayList<DoorModel> doors = level.getDoors();
+			//TODO:CHANGE
 //			for(int i=0;i<doors.size();i++){
-			for(int i=0;i<10;i++){
+			for(int i=0;i<12;i++){
 				int f = floatframe/4 + i;
 				int t = (f%10>5)?(10-f%10):f%10;
 				canvas.drawText(""+(i+1),levelnumfont,doors.get(i).getX()*32-10,doors.get(i).getY()*32+85+(t*3));
@@ -1140,7 +1139,7 @@ public class GameController implements Screen, ContactListener {
 			}
 			else {
 				input.readInput();
-				if (input.didPause() || input.didContinue()) {
+				if ((input.didExit() || input.didPause()) || input.didContinue()) {
 					resume();
 				} else if (input.didAbort()) {
 					input.resetAbort();
