@@ -192,8 +192,9 @@ public class AIController {
                 }
 
                 if (queuedGoal != null) {
-                    setProtect(queuedGoal);
+                    Obstacle temp = queuedGoal;
                     queuedGoal = null;
+                    setProtect(temp);
                     setAlarmed();
                 }
 
