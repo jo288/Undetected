@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="224">
+ <tileset firstgid="1" source="walls2.tsx"/>
+ <tileset firstgid="31" source="deskfront2.tsx"/>
+ <tileset firstgid="32" source="experiment1.tsx"/>
+ <tileset firstgid="37" source="experiment2.tsx"/>
+ <tileset firstgid="42" source="servertower.tsx"/>
+ <tileset firstgid="50" source="Guard.tsx"/>
+ <tileset firstgid="51" source="Box2.tsx"/>
+ <tileset firstgid="52" source="camera.tsx"/>
+ <tileset firstgid="53" source="doors.tsx"/>
+ <tileset firstgid="287" source="Player.tsx"/>
+ <tileset firstgid="288" source="switchfront.tsx"/>
+ <tileset firstgid="295" source="desk2side.tsx"/>
+ <tileset firstgid="296" source="deskfront.tsx"/>
+ <tileset firstgid="300" source="Laser.tsx"/>
+ <tileset firstgid="301" source="keys.tsx"/>
+ <tileset firstgid="305" source="FloorTile.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="50" height="50">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,305,0,0,0,0,0,305,305,305,305,305,305,305,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,305,0,0,0,0,0,305,305,305,305,305,305,305,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,305,0,0,0,0,0,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,305,0,0,0,0,0,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,305,305,305,305,305,0,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,305,305,305,305,305,0,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,305,305,305,305,305,0,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,0,0,0,0,0,0,305,305,305,0,0,0,0,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,0,0,0,0,0,0,305,305,305,305,305,305,305,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,0,0,0,0,0,0,305,305,305,305,305,305,305,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,0,0,0,0,0,0,305,305,305,0,0,0,0,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,305,305,305,305,305,305,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,305,305,305,305,305,305,305,305,305,305,305,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="3" template="walls/white/Wall1.tx" x="96" y="224"/>
+  <object id="4" template="walls/white/Wall1.tx" x="96" y="192"/>
+  <object id="5" template="walls/white/Wall1.tx" x="96" y="288"/>
+  <object id="6" template="walls/white/Wall1.tx" x="96" y="256"/>
+  <object id="7" template="walls/white/Wall1.tx" x="96" y="320"/>
+  <object id="8" template="walls/white/Wall1.tx" x="96" y="352"/>
+  <object id="9" template="walls/white/Wall1.tx" x="224" y="192"/>
+  <object id="10" template="walls/white/Wall1.tx" x="224" y="224"/>
+  <object id="11" template="walls/white/Wall1.tx" x="224" y="256"/>
+  <object id="13" template="walls/white/Wall1.tx" x="224" y="288"/>
+  <object id="14" template="walls/white/Wall1.tx" x="224" y="320"/>
+  <object id="15" template="walls/white/Wall1.tx" x="224" y="352"/>
+  <object id="16" template="walls/white/Wall1.tx" x="256" y="352"/>
+  <object id="17" template="walls/white/Wall1.tx" x="288" y="352"/>
+  <object id="18" template="walls/white/Wall1.tx" x="320" y="352"/>
+  <object id="19" template="walls/white/Wall1.tx" x="384" y="384"/>
+  <object id="20" template="walls/white/Wall1.tx" x="384" y="416"/>
+  <object id="26" template="walls/white/Wall1.tx" x="320" y="512"/>
+  <object id="27" template="walls/white/Wall1.tx" x="288" y="512"/>
+  <object id="28" template="walls/white/Wall1.tx" x="256" y="512"/>
+  <object id="29" template="walls/white/Wall1.tx" x="224" y="512"/>
+  <object id="30" template="walls/white/Wall1.tx" x="352" y="352"/>
+  <object id="31" template="walls/white/Wall1.tx" x="384" y="352"/>
+  <object id="32" template="walls/white/Wall1.tx" x="384" y="512"/>
+  <object id="33" template="walls/white/Wall1.tx" x="352" y="512"/>
+  <object id="34" template="decoratives/Desk2Up.tx" x="256" y="448"/>
+  <object id="35" template="decoratives/Experiment1.tx" x="352" y="384"/>
+  <object id="36" template="decoratives/Experiment2.tx" x="320" y="448"/>
+  <object id="37" template="decoratives/ServerTower.tx" x="320" y="384"/>
+  <object id="38" template="decoratives/ServerTower.tx" x="288" y="384"/>
+  <object id="39" template="decoratives/ServerTower.tx" x="256" y="384"/>
+  <object id="40" template="Guard.tx" x="288" y="416">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object id="41" template="walls/white/Wall1.tx" x="96" y="384"/>
+  <object id="42" template="walls/white/Wall1.tx" x="96" y="416"/>
+  <object id="43" template="walls/white/Wall1.tx" x="96" y="448"/>
+  <object id="44" template="walls/white/Wall1.tx" x="96" y="480"/>
+  <object id="45" template="walls/white/Wall1.tx" x="96" y="512"/>
+  <object id="46" template="walls/white/Wall1.tx" x="96" y="544"/>
+  <object id="47" template="walls/white/Wall1.tx" x="96" y="576"/>
+  <object id="48" template="walls/white/Wall1.tx" x="96" y="608"/>
+  <object id="49" template="walls/white/Wall1.tx" x="96" y="640"/>
+  <object id="50" template="walls/white/Wall1.tx" x="224" y="544"/>
+  <object id="51" template="walls/white/Wall1.tx" x="224" y="576"/>
+  <object id="52" template="walls/white/Wall1.tx" x="256" y="576"/>
+  <object id="55" template="walls/white/Wall1.tx" x="352" y="576"/>
+  <object id="57" template="walls/white/Wall1.tx" x="96" y="672"/>
+  <object id="60" template="walls/white/Wall1.tx" x="96" y="704"/>
+  <object id="61" template="walls/white/Wall1.tx" x="128" y="704"/>
+  <object id="62" template="walls/white/Wall1.tx" x="160" y="704"/>
+  <object id="63" template="walls/white/Wall1.tx" x="192" y="704"/>
+  <object id="64" template="walls/white/Wall1.tx" x="224" y="704"/>
+  <object id="65" template="walls/white/Wall1.tx" x="256" y="704"/>
+  <object id="66" template="walls/white/Wall1.tx" x="288" y="704"/>
+  <object id="67" template="walls/white/Wall1.tx" x="320" y="704"/>
+  <object id="68" template="walls/white/Wall1.tx" x="352" y="704"/>
+  <object id="70" template="walls/white/Wall1.tx" x="384" y="544"/>
+  <object id="71" template="walls/white/Wall1.tx" x="352" y="544"/>
+  <object id="72" template="walls/white/Wall1.tx" x="320" y="544"/>
+  <object id="74" template="walls/white/Wall1.tx" x="288" y="544"/>
+  <object id="75" template="walls/white/Wall1.tx" x="256" y="544"/>
+  <object id="78" template="Box2.tx" x="192" y="288"/>
+  <object id="79" template="CameraLeft.tx" x="160" y="416"/>
+  <object id="80" template="exits/white/Exit.tx" x="160" y="160"/>
+  <object id="81" template="walls/white/Wall4.tx" x="128" y="160"/>
+  <object id="82" template="walls/white/Wall4.tx" x="192" y="160"/>
+  <object id="83" template="walls/white/Wall4.tx" x="224" y="160"/>
+  <object id="84" template="walls/white/Wall4.tx" x="96" y="160"/>
+  <object id="85" template="walls/white/Wall4.tx" x="288" y="576"/>
+  <object id="87" template="walls/white/Wall1.tx" x="320" y="576"/>
+  <object id="88" template="Player.tx" x="160" y="192"/>
+  <object id="96" template="walls/white/Wall1.tx" x="512" y="640"/>
+  <object id="97" template="walls/white/Wall1.tx" x="512" y="608"/>
+  <object id="143" template="doors/gold/DoorSideUpOpen.tx" name="door3" x="384" y="608"/>
+  <object id="144" template="doors/gold/DoorSideDownOpen.tx" name="" x="384" y="640"/>
+  <object id="145" template="walls/gold/Wall1.tx" x="416" y="704"/>
+  <object id="146" template="walls/gold/Wall1.tx" x="448" y="704"/>
+  <object id="147" template="walls/gold/Wall1.tx" x="480" y="704"/>
+  <object id="148" template="walls/gold/Wall1.tx" x="512" y="704"/>
+  <object id="149" template="walls/gold/Wall1.tx" x="512" y="672"/>
+  <object id="150" template="walls/gold/Wall1.tx" x="384" y="704"/>
+  <object id="152" template="walls/gold/Wall1.tx" x="384" y="576"/>
+  <object id="153" template="walls/gold/Wall1.tx" x="544" y="608"/>
+  <object id="154" template="walls/gold/Wall1.tx" x="576" y="608"/>
+  <object id="155" template="walls/gold/Wall1.tx" x="608" y="608"/>
+  <object id="156" template="walls/gold/Wall1.tx" x="608" y="640"/>
+  <object id="158" template="walls/gold/Wall1.tx" x="640" y="640"/>
+  <object id="159" template="walls/gold/Wall1.tx" x="672" y="640"/>
+  <object id="160" template="walls/gold/Wall1.tx" x="704" y="640"/>
+  <object id="163" template="walls/gold/Wall1.tx" x="736" y="640"/>
+  <object id="164" template="walls/gold/Wall1.tx" x="736" y="608"/>
+  <object id="165" template="walls/gold/Wall1.tx" x="736" y="576"/>
+  <object id="166" template="walls/gold/Wall1.tx" x="736" y="544"/>
+  <object id="167" template="walls/gold/Wall1.tx" x="512" y="480"/>
+  <object id="169" template="walls/gold/Wall1.tx" x="576" y="480"/>
+  <object id="170" template="walls/gold/Wall1.tx" x="608" y="480"/>
+  <object id="171" template="walls/gold/Wall1.tx" x="608" y="448"/>
+  <object id="173" template="walls/gold/Wall1.tx" x="640" y="448"/>
+  <object id="174" template="walls/gold/Wall1.tx" x="672" y="448"/>
+  <object id="175" template="walls/gold/Wall1.tx" x="704" y="448"/>
+  <object id="178" template="walls/gold/Wall1.tx" x="736" y="448"/>
+  <object id="179" template="walls/gold/Wall1.tx" x="736" y="480"/>
+  <object id="180" template="walls/gold/Wall1.tx" x="736" y="512"/>
+  <object id="181" template="Switch.tx" x="704" y="512">
+   <properties>
+    <property name="doors" value="door1,door2"/>
+   </properties>
+  </object>
+  <object id="182" template="decoratives/Desk2Right.tx" x="704" y="544"/>
+  <object id="183" template="decoratives/DeskUp.tx" x="640" y="480"/>
+  <object id="184" template="decoratives/DeskUp.tx" x="704" y="480"/>
+  <object id="185" template="decoratives/ServerTower.tx" x="672" y="480"/>
+  <object id="186" template="walls/gold/Wall1.tx" x="512" y="448"/>
+  <object id="187" template="walls/gold/Wall1.tx" x="512" y="416"/>
+  <object id="188" template="walls/gold/Wall1.tx" x="512" y="384"/>
+  <object id="189" template="walls/gold/Wall1.tx" x="544" y="352"/>
+  <object id="190" template="walls/gold/Wall1.tx" x="512" y="352"/>
+  <object id="191" template="walls/gold/Wall1.tx" x="576" y="352"/>
+  <object id="192" template="walls/gold/Wall1.tx" x="608" y="352"/>
+  <object id="193" template="walls/gold/Wall1.tx" x="640" y="352"/>
+  <object id="194" template="walls/gold/Wall1.tx" x="672" y="352"/>
+  <object id="195" template="walls/gold/Wall1.tx" x="704" y="352"/>
+  <object id="196" template="Laser.tx" name="laser1" x="320" y="640" width="3" height="64">
+   <properties>
+    <property name="timetolive" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="197" template="walls/gold/Wall2.tx" x="544" y="480"/>
+  <object id="198" template="doors/gold/DoorSideUpClosed.tx" name="door1" x="384" y="448"/>
+  <object id="199" template="Box2.tx" x="416" y="576"/>
+  <object id="200" template="walls/gold/Wall1.tx" x="384" y="288"/>
+  <object id="201" template="walls/gold/Wall1.tx" x="384" y="320"/>
+  <object id="202" template="walls/gold/Wall1.tx" x="384" y="256"/>
+  <object id="203" template="walls/gold/Wall1.tx" x="384" y="224"/>
+  <object id="204" template="walls/gold/Wall1.tx" x="416" y="224"/>
+  <object id="205" template="walls/gold/Wall1.tx" x="448" y="224"/>
+  <object id="206" template="walls/gold/Wall1.tx" x="480" y="224"/>
+  <object id="207" template="walls/gold/Wall1.tx" x="512" y="224"/>
+  <object id="208" template="walls/gold/Wall1.tx" x="544" y="224"/>
+  <object id="209" template="walls/gold/Wall1.tx" x="576" y="224"/>
+  <object id="210" template="walls/gold/Wall1.tx" x="608" y="224"/>
+  <object id="211" template="walls/gold/Wall1.tx" x="640" y="224"/>
+  <object id="212" template="walls/gold/Wall1.tx" x="672" y="224"/>
+  <object id="213" template="walls/gold/Wall1.tx" x="704" y="224"/>
+  <object id="214" template="walls/gold/Wall1.tx" x="736" y="224"/>
+  <object id="215" template="walls/gold/Wall1.tx" x="736" y="256"/>
+  <object id="216" template="walls/gold/Wall1.tx" x="736" y="288"/>
+  <object id="218" template="walls/gold/Wall1.tx" x="736" y="320"/>
+  <object id="219" template="walls/gold/Wall1.tx" x="736" y="352"/>
+  <object id="220" template="RedKey.tx" x="704" y="256">
+   <properties>
+    <property name="lasers" value="laser1"/>
+   </properties>
+  </object>
+  <object id="223" template="doors/gold/DoorSideDownClosed.tx" name="door2" x="384" y="480"/>
+ </objectgroup>
+</map>
