@@ -40,7 +40,7 @@ public class SignModel extends WheelObstacle {
 
         TextureRegion texture = JsonAssetManager.getInstance().getEntry("tutorial", TextureRegion.class);
         setTexture(texture);
-        signFont = JsonAssetManager.getInstance().getEntry("levelnumber", BitmapFont.class);
+        signFont = JsonAssetManager.getInstance().getEntry("pauseDesc", BitmapFont.class);
         setOrigin(origin.x, origin.y);
         setSensor(true);
         Filter filter = new Filter();
@@ -85,7 +85,7 @@ public class SignModel extends WheelObstacle {
         }
         if(display){
             canvas.draw(overlaytexture,Color.WHITE, overlaytexture.getRegionWidth()/2,overlaytexture.getRegionHeight()/2,
-                    getX()*drawScale.x,getY()*drawScale.y+70,getAngle(),0.05f*(displayText.length()),0.1f);
+                    getX()*drawScale.x,getY()*drawScale.y+70,getAngle(),0.2f*(displayText.length()),0.07f);
             canvas.drawText(displayText,signFont,getX()*drawScale.x-100, getY()*drawScale.y+70);
         }
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="20" height="11" tilewidth="32" tileheight="32" infinite="0" nextobjectid="110">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="20" height="11" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="110">
  <tileset firstgid="1" source="FloorTile.tsx"/>
  <tileset firstgid="10" source="Objective.tsx"/>
  <tileset firstgid="11" source="Player.tsx"/>
@@ -10,7 +10,7 @@
  <tileset firstgid="22" source="walls.tsx"/>
  <tileset firstgid="26" source="tutorialtemp.tsx"/>
  <tileset firstgid="27" source="doors.tsx"/>
- <layer name="Tile Layer 1" width="20" height="11">
+ <layer id="1" name="Tile Layer 1" width="20" height="11">
   <data encoding="csv">
 0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -25,7 +25,7 @@
 0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Object Layer 1">
+ <objectgroup id="2" name="Object Layer 1">
   <object id="19" template="Player.tx" x="32" y="288"/>
   <object id="20" template="Guard.tx" x="160" y="64">
    <properties>
