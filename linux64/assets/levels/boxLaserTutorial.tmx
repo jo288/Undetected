@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="118">
+ <tileset firstgid="1" source="walls.tsx"/>
+ <tileset firstgid="5" source="horizontaldoor.tsx"/>
+ <tileset firstgid="29" source="keys.tsx"/>
+ <tileset firstgid="33" source="DeskRight.tsx"/>
+ <tileset firstgid="37" source="Guard.tsx"/>
+ <tileset firstgid="38" source="Laser.tsx"/>
+ <tileset firstgid="39" source="switchfront.tsx"/>
+ <tileset firstgid="46" source="Player.tsx"/>
+ <tileset firstgid="47" source="FloorTile.tsx"/>
+ <tileset firstgid="56" source="Box2.tsx"/>
+ <layer id="4" name="Tile Layer 1" width="20" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,47,47,47,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,47,47,47,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,47,47,47,47,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,47,47,47,47,47,47,47,47,47,0,0,0,0,0,0,0,
+0,0,0,0,47,47,47,47,47,47,47,47,47,0,0,0,0,0,0,0,
+0,0,0,0,47,47,47,47,47,47,47,47,47,0,0,0,0,0,0,0,
+0,0,0,0,47,47,47,47,47,47,47,47,47,0,0,0,0,0,0,0,
+0,0,0,0,47,47,47,47,47,47,47,47,47,47,47,47,47,0,0,0,
+0,0,0,0,47,47,47,47,47,47,47,47,47,47,47,47,47,0,0,0,
+0,0,0,0,47,47,47,47,47,47,47,47,47,0,0,0,0,0,0,0,
+0,0,0,0,47,47,47,47,47,47,47,47,47,0,0,0,0,0,0,0,
+0,0,0,0,47,47,47,47,47,47,47,47,47,0,0,0,0,0,0,0,
+0,0,0,0,47,47,47,47,47,47,47,47,47,0,0,0,0,0,0,0,
+0,0,0,0,0,0,47,47,47,47,47,47,47,47,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="13" template="RedWall.tx" x="160" y="320"/>
+  <object id="14" template="RedWall.tx" x="128" y="320"/>
+  <object id="15" template="RedWall.tx" x="128" y="320"/>
+  <object id="16" template="RedWall.tx" x="96" y="320"/>
+  <object id="17" template="RedWall.tx" x="96" y="352"/>
+  <object id="18" template="RedWall.tx" x="96" y="384"/>
+  <object id="19" template="RedWall.tx" x="96" y="384"/>
+  <object id="20" template="RedWall.tx" x="96" y="416"/>
+  <object id="22" template="RedWall.tx" x="96" y="448"/>
+  <object id="23" template="RedWall.tx" x="128" y="448"/>
+  <object id="24" template="RedWall.tx" x="160" y="448"/>
+  <object id="25" template="RedWall.tx" x="224" y="448"/>
+  <object id="26" template="RedWall.tx" x="192" y="448"/>
+  <object id="27" template="RedWall.tx" x="192" y="320"/>
+  <object id="28" template="RedWall.tx" x="224" y="320"/>
+  <object id="31" template="RedWall.tx" x="96" y="480"/>
+  <object id="32" template="RedWall.tx" x="96" y="512"/>
+  <object id="33" template="RedWall.tx" x="96" y="544"/>
+  <object id="36" template="RedWall.tx" x="128" y="576"/>
+  <object id="38" template="RedWall.tx" x="160" y="576"/>
+  <object id="39" template="RedWall.tx" x="192" y="576"/>
+  <object id="40" template="RedWall.tx" x="224" y="576"/>
+  <object id="41" template="RedWall.tx" x="288" y="576"/>
+  <object id="42" template="RedWall.tx" x="256" y="576"/>
+  <object id="43" template="RedWall.tx" x="320" y="576"/>
+  <object id="44" template="RedWall.tx" x="416" y="576"/>
+  <object id="45" template="RedWall.tx" x="416" y="544"/>
+  <object id="46" template="RedWall.tx" x="416" y="480"/>
+  <object id="47" template="RedWall.tx" x="416" y="512"/>
+  <object id="49" template="RedWall.tx" x="416" y="448"/>
+  <object id="54" template="exits/blue/Exit.tx" x="352" y="576"/>
+  <object id="55" template="doors/blue/DoorSideUpClosed.tx" name="door3" x="224" y="352"/>
+  <object id="56" template="doors/blue/DoorSideUpClosed.tx" name="door4" x="224" y="384"/>
+  <object id="57" template="RedWall.tx" x="416" y="288"/>
+  <object id="58" template="RedWall.tx" x="416" y="256"/>
+  <object id="59" template="RedWall.tx" x="416" y="224"/>
+  <object id="60" template="RedWall.tx" x="416" y="192"/>
+  <object id="61" template="RedWall.tx" x="384" y="192"/>
+  <object id="62" template="RedWall.tx" x="352" y="192"/>
+  <object id="63" template="RedWall.tx" x="320" y="192"/>
+  <object id="64" template="RedWall.tx" x="288" y="192"/>
+  <object id="65" template="RedWall.tx" x="256" y="192"/>
+  <object id="66" template="RedWall.tx" x="224" y="96"/>
+  <object id="67" template="RedWall.tx" x="128" y="192"/>
+  <object id="69" template="RedWall.tx" x="96" y="192"/>
+  <object id="70" template="RedWall.tx" x="96" y="192"/>
+  <object id="79" template="RedWall.tx" x="96" y="224"/>
+  <object id="80" template="RedWall.tx" x="96" y="256"/>
+  <object id="83" template="RedWall.tx" x="96" y="288"/>
+  <object id="84" template="RedWall.tx" x="128" y="160"/>
+  <object id="85" template="RedWall.tx" x="128" y="128"/>
+  <object id="86" template="RedWall.tx" x="256" y="160"/>
+  <object id="87" template="RedWall.tx" x="256" y="128"/>
+  <object id="88" template="RedWall.tx" x="192" y="96"/>
+  <object id="89" template="RedWall.tx" x="160" y="96"/>
+  <object id="90" template="RedWall.tx" x="128" y="96"/>
+  <object id="91" template="RedWall.tx" x="256" y="96"/>
+  <object id="92" template="BlueKey.tx" x="192" y="160">
+   <properties>
+    <property name="doors" value="door1,door2"/>
+    <property name="lasers" value="laser1"/>
+   </properties>
+  </object>
+  <object id="93" template="RedWall.tx" x="96" y="576"/>
+  <object id="94" template="RedWall.tx" x="448" y="448"/>
+  <object id="95" template="RedWall.tx" x="480" y="448"/>
+  <object id="96" template="RedWall.tx" x="512" y="448"/>
+  <object id="97" template="RedWall.tx" x="544" y="448"/>
+  <object id="98" template="RedWall.tx" x="544" y="416"/>
+  <object id="99" template="RedWall.tx" x="544" y="416"/>
+  <object id="100" template="RedWall.tx" x="544" y="384"/>
+  <object id="101" template="RedWall.tx" x="544" y="320"/>
+  <object id="102" template="RedWall.tx" x="544" y="352"/>
+  <object id="104" template="RedWall.tx" x="512" y="320"/>
+  <object id="105" template="RedWall.tx" x="480" y="320"/>
+  <object id="106" template="RedWall.tx" x="448" y="320"/>
+  <object id="107" template="RedWall.tx" x="416" y="320"/>
+  <object id="108" template="decoratives/DeskRight.tx" x="512" y="384"/>
+  <object id="109" template="doors/blue/DoorSideUpClosed.tx" name="door1" x="416" y="352"/>
+  <object id="110" template="doors/blue/DoorSideUpClosed.tx" name="door2" x="416" y="384"/>
+  <object id="111" template="Guard.tx" x="480" y="384">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="objectivepath" value="[12,8]"/>
+   </properties>
+  </object>
+  <object id="112" template="decoratives/DeskRight.tx" x="512" y="352"/>
+  <object id="113" template="Laser.tx" name="laser1" x="160" y="384" width="3" height="64">
+   <properties>
+    <property name="timetolive" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="114" template="Switch.tx" x="128" y="224">
+   <properties>
+    <property name="doors" value="door3,door4"/>
+   </properties>
+  </object>
+  <object id="115" template="Player.tx" x="384" y="512"/>
+  <object id="116" template="Box2.tx" x="192" y="512"/>
+  <object id="117" template="RedWall.tx" x="384" y="576"/>
+ </objectgroup>
+</map>

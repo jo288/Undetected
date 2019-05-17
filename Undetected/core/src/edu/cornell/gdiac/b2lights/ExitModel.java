@@ -19,7 +19,7 @@ import java.lang.reflect.*;
 
 import edu.cornell.gdiac.util.*;
 import edu.cornell.gdiac.physics.obstacle.*;
-import javafx.scene.effect.Blend;
+//import javafx.scene.effect.Blend;
 
 /**
  * A sensor obstacle representing the end of the level

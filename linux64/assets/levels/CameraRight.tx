@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="camera.tsx"/>
+ <object gid="1" width="14" height="28" rotation="90">
+  <properties>
+   <property name="lightAngle" type="float" value="25"/>
+   <property name="lightColor" type="color" value="#ffffff00"/>
+   <property name="lightRadius" type="float" value="8"/>
+   <property name="on" type="bool" value="true"/>
+   <property name="rotationSpeed" type="float" value="0.80000000000000004"/>
+  </properties>
+ </object>
+</template>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="Guard.tsx"/>
+ <object type="guard" gid="1" width="32" height="48">
+  <properties>
+   <property name="IsPatrolling" type="bool" value="false"/>
+   <property name="direction" value="up"/>
+   <property name="force" type="float" value="50"/>
+   <property name="lightAngle" type="float" value="25"/>
+   <property name="lightColor" type="color" value="#fffeba09"/>
+   <property name="lightRadius" type="float" value="9"/>
+   <property name="objectivepath" value="[]"/>
+   <property name="path" value="[]"/>
+   <property name="sector" type="int" value="0"/>
+   <property name="sensitiveRadius" type="float" value="1.6000000000000001"/>
+  </properties>
+ </object>
+</template>

@@ -1,0 +1,14 @@
+ {
+    "platform": "linux64",
+    "jdk": "/usr/lib/jvm/java-8-oracle/",
+    "executable": "Undetected",
+    "classpath": [
+        "/home/matt/Documents/3152/undetected-prototype/Undetected/classes/artifacts/Undetected_jar/Undetected.jar"
+    ],
+    "mainclass": "edu.cornell.gdiac.b2lights.desktop",
+    "resources": [
+        "~/Documents/3152/undetected-prototype/Undetected/core/assets/"
+    ],
+    "output": "out-lin"
+}
+
