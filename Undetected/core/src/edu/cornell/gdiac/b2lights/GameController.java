@@ -1053,6 +1053,16 @@ public class GameController implements Screen, ContactListener {
 			canvas.end();
 		}
 
+		if (!paused) {
+			canvas.begin();
+			TextureRegion inGamePause = JsonAssetManager.getInstance().getEntry("inGamePause", TextureRegion.class);
+			InputController input = InputController.getInstance();
+			Color tint = input.didPauseHover() ? Color.GRAY : Color.WHITE;
+			canvas.draw(inGamePause, tint, inGamePause.getRegionWidth() / 2f, inGamePause.getRegionHeight() / 2f,
+					cam.position.x + 355*cam.zoom, cam.position.y + 255*cam.zoom, 0, 1.5f*cam.zoom, 1.5f*cam.zoom);
+			canvas.end();
+		}
+
 
 		if ((currentFile==null) || !currentFile.equals(levelSelectFile) && !paused) {
 			canvas.begin();
@@ -1063,9 +1073,9 @@ public class GameController implements Screen, ContactListener {
 			Color tint2 = input.didHomeHover() ? Color.GRAY : Color.WHITE;
 //		Drawable drawable = new TextureRegionDrawable(texture);
 			canvas.draw(restartButton, tint, restartButton.getRegionWidth() / 2f, restartButton.getRegionHeight() / 2f,
-					cam.position.x + 350*cam.zoom, cam.position.y + 275*cam.zoom, 0, 1.5f*cam.zoom, 1.5f*cam.zoom);
+					cam.position.x + 260*cam.zoom, cam.position.y + 275*cam.zoom, 0, 1.5f*cam.zoom, 1.5f*cam.zoom);
 			canvas.draw(homeButton, tint2, homeButton.getRegionWidth() / 2f, homeButton.getRegionHeight() / 2f,
-					cam.position.x + 250*cam.zoom, cam.position.y + 275*cam.zoom, 0, 1.5f*cam.zoom, 1.5f*cam.zoom);
+					cam.position.x + 160*cam.zoom, cam.position.y + 275*cam.zoom, 0, 1.5f*cam.zoom, 1.5f*cam.zoom);
 //		ImageButton button = new ImageButton(drawable);
 //		button.setPosition(cam.position.x+350, cam.position.y+275);
 //		button.setSize(texture.getRegionWidth(), texture.getRegionHeight());

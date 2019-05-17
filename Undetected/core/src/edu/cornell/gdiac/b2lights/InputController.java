@@ -202,12 +202,25 @@ public class InputController {
 	}
 
 	/**
+	 * Returns true if the home button is being hovered.
+	 *
+	 * @return
+	 */
+	public boolean didHomeHover() {
+		return Gdx.input.getX() >= 510 && Gdx.input.getX() <= 600 && Gdx.input.getY() >= 5 && Gdx.input.getY() <= 45;
+	}
+
+	/**
 	 * Returns true if the reset button is being hovered.
 	 *
 	 * @return true if the reset button is being hovered.
 	 */
 	public boolean didResetHover() {
-		return Gdx.input.getX() >= 710 && Gdx.input.getX() <= 800 && Gdx.input.getY() >= 5 && Gdx.input.getY() <= 45;
+		return Gdx.input.getX() >= 615 && Gdx.input.getX() <= 705 && Gdx.input.getY() >= 5 && Gdx.input.getY() <= 45;
+	}
+
+	public boolean didPauseHover() {
+		return Gdx.input.getX() >= 715 && Gdx.input.getX() <= 795 && Gdx.input.getY() >= 5 && Gdx.input.getY() <= 87;
 	}
 
 	/**
@@ -260,15 +273,6 @@ public class InputController {
 	public void resetMusic() {musicPressed = false;}
 
 	public void resetSound() {soundPressed = false;}
-
-	/**
-	 * Returns true if the home button is being hovered.
-	 *
-	 * @return
-	 */
-	public boolean didHomeHover() {
-		return Gdx.input.getX() >= 605 && Gdx.input.getX() <= 695 && Gdx.input.getY() >= 5 && Gdx.input.getY() <= 45;
-	}
 
 	/**
 	 * Returns whether the space key is being held down or not.
@@ -435,6 +439,10 @@ public class InputController {
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.S)) {
 			verticalG -= 1.0f;
+		}
+
+		if (didPauseHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.justTouched()) {
+			pausePressed = true;
 		}
 
 		if (didResetHover() && Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.justTouched()) {
