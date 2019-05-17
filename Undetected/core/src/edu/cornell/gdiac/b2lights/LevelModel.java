@@ -967,7 +967,7 @@ public class LevelModel {
 					board.setOccupiedTiles(board.physicsToBoard(o.getX()), board.physicsToBoard(o.getY()), 7);
 				}
 			}
-			if(o instanceof SwitchModel){
+			if(o instanceof SwitchModel || o instanceof CameraModel || o instanceof SignModel){
 				board.setOccupiedTiles(board.physicsToBoard(o.getX()),board.physicsToBoard(o.getY()),8);
 			}
 			if(o instanceof Laser){
