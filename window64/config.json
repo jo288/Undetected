@@ -1,9 +1,0 @@
-{
-  "classPath": [
-    "Undetected.jar"
-  ],
-  "mainClass": "edu.cornell.gdiac.b2lights.desktop",
-  "vmArgs": [
-    "-Xmx1G"
-  ]
-}
